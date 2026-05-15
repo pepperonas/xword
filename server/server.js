@@ -285,6 +285,44 @@ app.get('/api/daily', (req, res) => {
   res.json({ puzzle_id: dailyPuzzle(), date: new Date().toISOString().slice(0, 10) });
 });
 
+/* ------- Leaderboard per puzzle ------- */
+app.get('/api/leaderboard/:puzzleId', (req, res) => {
+  const rows = db.leaderboardForPuzzle.all(req.params.puzzleId);
+  // Get caller's own user id (if logged in) so we can mark "you" in the list.
+  let meId = null;
+  try {
+    const payload = verify(req.cookies[SESSION_COOKIE], SESSION_SECRET);
+    if (payload && payload.uid) meId = payload.uid;
+  } catch {}
+  // Anonymise: only display name (first segment to keep it short).
+  const top = rows.slice(0, 5).map((r, idx) => ({
+    rank: idx + 1,
+    name: (r.name || 'Anonym').split(' ')[0],
+    picture: r.picture,
+    elapsed_ms: r.elapsed_ms,
+    hint_count: r.hint_count,
+    hardcore: !!r.solved_in_hardcore,
+    is_you: r.user_id === meId,
+  }));
+  let mine = null;
+  if (meId) {
+    const idx = rows.findIndex(r => r.user_id === meId);
+    if (idx >= 0 && idx >= 5) {
+      const r = rows[idx];
+      mine = {
+        rank: idx + 1,
+        name: (r.name || 'Anonym').split(' ')[0],
+        picture: r.picture,
+        elapsed_ms: r.elapsed_ms,
+        hint_count: r.hint_count,
+        hardcore: !!r.solved_in_hardcore,
+        is_you: true,
+      };
+    }
+  }
+  res.json({ puzzle_id: req.params.puzzleId, top, mine, total: rows.length });
+});
+
 /* ------- Admin endpoints (read-only) ------- */
 app.get('/api/admin/users', requireAdmin, (req, res) => {
   res.json({ items: db.adminListUsers.all() });

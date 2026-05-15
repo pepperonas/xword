@@ -230,6 +230,14 @@
         <div class="settings-account" id="settingsAccount"></div>
       </div>
       <div class="settings-section">
+        <div class="settings-label">Erscheinungsbild</div>
+        <div class="theme-switcher" id="themeSwitcher" role="radiogroup" aria-label="Erscheinungsbild">
+          <button class="theme-option" data-theme="light" role="radio">☀ Hell</button>
+          <button class="theme-option" data-theme="dark"  role="radio">☾ Dunkel</button>
+          <button class="theme-option" data-theme="auto"  role="radio">⚙ System</button>
+        </div>
+      </div>
+      <div class="settings-section">
         <div class="settings-label">Daten</div>
         <button class="btn" id="settingsResetProgress">
           <span class="ico">⟲</span>Alle Spielstände zurücksetzen
@@ -261,6 +269,7 @@
           <div class="win-stat-lbl">Wörter</div>
         </div>
       </div>
+      <div class="win-leaderboard" id="winLeaderboard"></div>
       <div class="btn-row">
         <button class="btn" id="btnShareWin"><span class="ico">↗</span>Teilen</button>
         <button class="btn" id="btnPlayAgain">Nochmal</button>

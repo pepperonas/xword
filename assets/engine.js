@@ -646,26 +646,44 @@
       refs.winTime.textContent = refs.statTime.textContent;
       refs.winHints.textContent = state.hintCount;
       refs.winWords.textContent = state.words.length;
+      // Solve-wave: animate each filled cell, staggered by manhattan distance from top-left
+      const cells = refs.root.querySelectorAll('.cell:not(.block)');
+      cells.forEach(cellEl => {
+        const r = +cellEl.dataset.r, c = +cellEl.dataset.c;
+        const delay = (r + c) * 35;
+        setTimeout(() => {
+          cellEl.classList.add('solve-wave');
+          setTimeout(() => cellEl.classList.remove('solve-wave'), 800);
+        }, delay);
+      });
+      const lastDelay = (state.size * 2) * 35;
       setTimeout(() => {
         refs.overlay.classList.add('show');
         launchConfetti();
-      }, 400);
+      }, Math.min(lastDelay + 350, 1400));
     }
 
     function launchConfetti() {
       const wrap = refs.confetti;
       wrap.replaceChildren();
-      const colors = ['#c8a96a', '#f5c842', '#6b4ea0', '#2d6e4e', '#b03030', '#1a1a1a'];
-      for (let i = 0; i < 80; i++) {
+      const colors = ['#c8a96a', '#f5c842', '#d4b878', '#6b4ea0', '#a890d4', '#2d6e4e', '#5ec896', '#b03030', '#1a1a1a', '#faf7f0'];
+      const total = 140;
+      for (let i = 0; i < total; i++) {
         const piece = el('span');
         piece.style.left = (Math.random() * 100) + '%';
         piece.style.background = colors[Math.floor(Math.random() * colors.length)];
-        piece.style.animationDelay = (Math.random() * 0.6) + 's';
-        piece.style.animationDuration = (2.5 + Math.random() * 2) + 's';
-        piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+        piece.style.animationDelay = (Math.random() * 0.8) + 's';
+        piece.style.animationDuration = (2.5 + Math.random() * 2.5) + 's';
+        piece.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
+        // Vary sizes for depth
+        const scale = 0.6 + Math.random() * 0.8;
+        piece.style.width  = (8 * scale) + 'px';
+        piece.style.height = (14 * scale) + 'px';
+        // Some pieces drift sideways
+        piece.style.setProperty('--drift', (Math.random() * 200 - 100) + 'px');
         wrap.appendChild(piece);
       }
-      setTimeout(() => { wrap.replaceChildren(); }, 5000);
+      setTimeout(() => { wrap.replaceChildren(); }, 6000);
     }
 
     function bindUI() {

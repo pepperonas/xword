@@ -1,4 +1,5 @@
 :root {
+  /* Light theme (default) */
   --bg: #f4f1ea;
   --bg-paper: #faf7f0;
   --ink: #1a1a1a;
@@ -23,6 +24,40 @@
   --font-body: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 }
+
+/* Dark theme — engaged via <html data-theme="dark"> (set by app.js).
+   On systems with prefers-color-scheme: dark, the JS sets data-theme
+   to dark unless the user has explicitly chosen otherwise. */
+html[data-theme="dark"] {
+  --bg: #1a1a1a;
+  --bg-paper: #252525;
+  --ink: #f4f1ea;
+  --ink-soft: #b8b5ae;
+  --ink-faint: #7a7770;
+  --line: #4a4a4a;
+  --block: #0a0a0a;
+  --cell: #3a3a3a;
+  --accent: #d4b878;
+  --accent-soft: #4a3f24;
+  --active: #5a4520;
+  --active-strong: #8a6b30;
+  --correct: #6ec896;
+  --correct-soft: #2a4538;
+  --error: #e07474;
+  --error-soft: #4a2222;
+  --hint: #c0a8e8;
+  --hint-soft: #38284f;
+  --shadow: 0 1px 0 rgba(0,0,0,0.4), 0 8px 24px -8px rgba(0,0,0,0.55);
+  --shadow-lg: 0 4px 0 rgba(0,0,0,0.45), 0 24px 48px -12px rgba(0,0,0,0.7);
+}
+
+/* Background ambient gradient also needs a swap so it stays subtle */
+html[data-theme="dark"] body {
+  background-image:
+    radial-gradient(at 15% 10%, rgba(212,184,120,0.06) 0%, transparent 50%),
+    radial-gradient(at 85% 90%, rgba(192,168,232,0.04) 0%, transparent 50%);
+}
+html[data-theme="dark"] body::before { opacity: 0.15; }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -1107,6 +1142,77 @@ body::before {
   .win-card .btn-row { grid-template-columns: 1fr; }
 }
 
+.win-leaderboard {
+  text-align: left;
+  margin-bottom: 18px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+.win-leaderboard:empty { display: none; }
+.win-leaderboard-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--ink-faint);
+}
+.win-leaderboard-row {
+  display: grid;
+  grid-template-columns: 24px 22px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--ink-faint);
+}
+.win-leaderboard-row:last-child { border-bottom: none; }
+.win-leaderboard-row.you {
+  background: var(--accent-soft);
+  margin: 2px -8px;
+  padding: 6px 8px;
+  border-radius: 2px;
+}
+.win-leaderboard-rank {
+  font-weight: 700;
+  color: var(--ink-faint);
+  text-align: right;
+}
+.win-leaderboard-rank.podium-1 { color: var(--accent); }
+.win-leaderboard-rank.podium-2 { color: #b0b0b0; }
+.win-leaderboard-rank.podium-3 { color: #cd7f32; }
+.win-leaderboard-avatar {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--ink);
+  background: var(--accent) center/cover;
+}
+.win-leaderboard-name {
+  text-align: left;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.win-leaderboard-time {
+  font-weight: 700;
+  color: var(--ink);
+}
+.win-leaderboard-empty {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--ink-faint);
+  text-align: center;
+  padding: 8px 0;
+}
+
 /* ============ ADMIN VIEW ============ */
 .admin-tabs {
   display: flex;
@@ -1633,6 +1739,34 @@ body::before {
   display: block;
   margin-bottom: 2px;
 }
+.theme-switcher {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.theme-option {
+  background: var(--bg);
+  border: none;
+  padding: 12px 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.theme-option.active {
+  background: var(--ink);
+  color: var(--bg-paper);
+}
+.theme-option:hover:not(.active) { background: var(--bg-paper); color: var(--ink); }
+
 .btn-danger {
   border-color: var(--error);
   color: var(--error);
@@ -1671,7 +1805,10 @@ body::before {
   animation: fall 3.5s linear forwards;
 }
 @keyframes fall {
-  to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  to {
+    transform: translateY(110vh) translateX(var(--drift, 0)) rotate(720deg);
+    opacity: 0;
+  }
 }
 
 /* ============ FOOTER ============ */
@@ -1779,6 +1916,16 @@ body::before {
 }
 .cell.error-flash { animation: shake 0.3s ease; }
 
+/* Solve wave: stagger correct-color flashes across rows */
+@keyframes solveWave {
+  0%   { transform: scale(1);    background: var(--cell); }
+  40%  { transform: scale(1.18); background: var(--accent); }
+  100% { transform: scale(1);    background: var(--correct-soft); }
+}
+.cell.solve-wave {
+  animation: solveWave 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 .masthead, .stats-bar, .progress-track, .board-wrap, .clues-panel, .puzzle-grid, .filter-bar {
   animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards;
 }
@@ -1791,4 +1938,59 @@ body::before {
 @keyframes rise {
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============ PRINT ============ */
+@media print {
+  /* Strip everything except the active game view */
+  body { background: #fff !important; padding: 0; }
+  body::before, .confetti, .overlay, .toast-container { display: none !important; }
+  .user-bar, .back-bar, .stats-bar, .progress-track,
+  .current-clue, .controls, .toggle-row, .clues-tabs,
+  .footer, #view-selector, #view-admin, #view-profile,
+  .puzzle-meta-pills, .sync-indicator,
+  .board-header, #hiddenInput, #appVersion { display: none !important; }
+  .masthead { border-bottom: 1px solid #000; padding-bottom: 12px; margin-bottom: 16px; }
+  .masthead .eyebrow, .subtitle { display: none; }
+  .masthead h1 { color: #000 !important; }
+  .masthead h1 em { color: #444 !important; font-style: italic; }
+  .app { max-width: 100%; padding: 12px; }
+  .main {
+    grid-template-columns: 1fr !important;
+    gap: 24px;
+  }
+  .board-wrap {
+    box-shadow: none !important;
+    border: 2px solid #000 !important;
+    padding: 8px;
+    page-break-inside: avoid;
+  }
+  .board-wrap::before { display: none; }
+  .grid {
+    background: #000 !important;
+    border-color: #000 !important;
+    width: 100% !important;
+    aspect-ratio: 1 / 1 !important;
+  }
+  .cell {
+    background: #fff !important;
+    color: #000 !important;
+    border: none;
+  }
+  .cell.block { background: #000 !important; }
+  .cell .letter { display: none; }     /* blank grid for solving on paper */
+  .cell .num { font-size: 7px; color: #000 !important; }
+  .clues-panel {
+    box-shadow: none !important;
+    border: 2px solid #000 !important;
+    max-height: none !important;
+    position: static !important;
+    page-break-inside: avoid;
+  }
+  .clues-section { display: block !important; }
+  .clue-item { background: none !important; border-left: none !important; padding: 4px 8px; }
+  .clue-item.active { background: none !important; }
+  .clue-item.solved { text-decoration: none !important; color: #000 !important; }
+  .clue-text { color: #000 !important; }
+  .clues-legend { display: none; }
 }

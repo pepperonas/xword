@@ -143,6 +143,14 @@
     } catch { return false; }
   }
 
+  async function fetchLeaderboard(puzzleId) {
+    try {
+      const res = await fetch(API + '/leaderboard/' + encodeURIComponent(puzzleId), { credentials: 'same-origin' });
+      if (!res.ok) return null;
+      return await res.json();
+    } catch { return null; }
+  }
+
   async function fetchDaily() {
     try {
       const res = await fetch(API + '/daily', { cache: 'no-store' });
@@ -187,5 +195,6 @@
     adminFetch,
     fetchProfile,
     fetchDaily,
+    fetchLeaderboard,
   };
 })(typeof window !== 'undefined' ? window : globalThis);

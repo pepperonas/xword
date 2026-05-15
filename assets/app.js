@@ -88,7 +88,42 @@
     adminTab: 'users',
     daily: null,                   // { puzzle_id, date }
     streak: { current: 0, longest: 0 },
+    theme: 'auto',                 // 'auto' | 'light' | 'dark'
   };
+
+  /* ---------- Theme ---------- */
+  const THEME_KEY = 'xword.theme';
+
+  function effectiveTheme(pref) {
+    if (pref === 'light' || pref === 'dark') return pref;
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function applyTheme(pref) {
+    state.theme = pref;
+    document.documentElement.setAttribute('data-theme', effectiveTheme(pref));
+    try { localStorage.setItem(THEME_KEY, pref); } catch {}
+    // Highlight active option in settings modal if present
+    document.querySelectorAll('#themeSwitcher .theme-option').forEach(opt => {
+      opt.classList.toggle('active', opt.dataset.theme === pref);
+    });
+    // Update theme-color meta tag too (used by mobile browsers for the address bar)
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = effectiveTheme(pref) === 'dark' ? '#1a1a1a' : '#1a1a1a';
+  }
+
+  function initTheme() {
+    let pref = 'auto';
+    try { pref = localStorage.getItem(THEME_KEY) || 'auto'; } catch {}
+    applyTheme(pref);
+    // React to OS-theme changes while in 'auto' mode.
+    if (window.matchMedia) {
+      const mq = window.matchMedia('(prefers-color-scheme: dark)');
+      const handler = () => { if (state.theme === 'auto') applyTheme('auto'); };
+      mq.addEventListener ? mq.addEventListener('change', handler) : mq.addListener(handler);
+    }
+  }
+  initTheme();
 
   function el(tag, className, text) {
     const e = document.createElement(tag);
@@ -251,6 +286,10 @@
     text.appendChild(document.createTextNode(state.user.email));
     refs.settingsAccount.appendChild(avatar);
     refs.settingsAccount.appendChild(text);
+    // Refresh theme-switcher active state when opening
+    document.querySelectorAll('#themeSwitcher .theme-option').forEach(opt => {
+      opt.classList.toggle('active', opt.dataset.theme === state.theme);
+    });
     refs.settingsOverlay.classList.add('show');
   }
   function closeSettings() { refs.settingsOverlay.classList.remove('show'); }
@@ -650,6 +689,39 @@
     }, 4500);
   }
 
+  /* ---------- Win-overlay leaderboard ---------- */
+  function renderWinLeaderboard(lb) {
+    const container = document.getElementById('winLeaderboard');
+    if (!container) return;
+    container.replaceChildren();
+    if (!lb || !lb.top || lb.top.length === 0) {
+      container.appendChild(el('div', 'win-leaderboard-title', 'Bestenliste'));
+      container.appendChild(el('div', 'win-leaderboard-empty', 'Du bist die erste Lösung — Glückwunsch!'));
+      return;
+    }
+    container.appendChild(el('div', 'win-leaderboard-title', 'Bestenliste · Top ' + lb.top.length + ' von ' + lb.total));
+    for (const row of lb.top) {
+      container.appendChild(buildLeaderboardRow(row));
+    }
+    if (lb.mine) {
+      const sep = el('div', 'win-leaderboard-empty', '… weitere …');
+      sep.style.padding = '4px 0';
+      container.appendChild(sep);
+      container.appendChild(buildLeaderboardRow(lb.mine));
+    }
+  }
+  function buildLeaderboardRow(row) {
+    const r = el('div', 'win-leaderboard-row' + (row.is_you ? ' you' : ''));
+    const rank = el('div', 'win-leaderboard-rank' + (row.rank <= 3 ? ' podium-' + row.rank : ''), '#' + row.rank);
+    r.appendChild(rank);
+    const av = el('div', 'win-leaderboard-avatar');
+    if (row.picture) av.style.backgroundImage = 'url(' + JSON.stringify(row.picture) + ')';
+    r.appendChild(av);
+    r.appendChild(el('div', 'win-leaderboard-name', (row.is_you ? 'Du · ' : '') + row.name));
+    r.appendChild(el('div', 'win-leaderboard-time', formatHms(row.elapsed_ms)));
+    return r;
+  }
+
   /* ---------- Share ---------- */
   async function shareCurrentWin() {
     if (!state.currentPuzzleId || !state.manifest) return;
@@ -895,6 +967,10 @@
                 checkAndToastNewAchievements(profile.achievements, false);
               }
             });
+            // Load and render the puzzle's leaderboard inside the win overlay.
+            window.XwordAuth.fetchLeaderboard(puzzleMeta.id).then(lb => {
+              renderWinLeaderboard(lb);
+            });
           }
         });
       };
@@ -1037,6 +1113,11 @@
     if (refs.btnShareWin) {
       refs.btnShareWin.addEventListener('click', () => shareCurrentWin());
     }
+
+    // Theme switcher inside settings modal
+    document.querySelectorAll('#themeSwitcher .theme-option').forEach(btn => {
+      btn.addEventListener('click', () => applyTheme(btn.dataset.theme));
+    });
 
     refs.settingsClose.addEventListener('click', closeSettings);
     refs.settingsOverlay.addEventListener('click', (e) => {

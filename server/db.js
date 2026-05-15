@@ -136,6 +136,17 @@ export function openDb(path) {
       ORDER BY p.updated_at DESC
       LIMIT 100
     `),
+    /* ---------- Leaderboard ---------- */
+    leaderboardForPuzzle: db.prepare(`
+      SELECT u.id AS user_id, u.name, u.picture,
+             p.elapsed_ms, p.hint_count, p.solved_at, p.solved_in_hardcore
+      FROM progress p
+      JOIN users u ON u.id = p.user_id
+      WHERE p.puzzle_id = ? AND p.solved = 1
+      ORDER BY p.elapsed_ms ASC, p.solved_at ASC
+      LIMIT 50
+    `),
+
     /* ---------- Profile / achievements ---------- */
     listSolved: db.prepare(`
       SELECT puzzle_id, elapsed_ms, hint_count, solved_at,
