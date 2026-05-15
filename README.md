@@ -1,5 +1,7 @@
 <div align="center">
 
+![Kreuzworträtsel](xword.png)
+
 # Kreuzworträtsel Framework
 
 **Ein selbstständiges Kreuzworträtsel-Framework mit KI-gestützter Rätselgenerierung.**
