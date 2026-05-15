@@ -4,7 +4,7 @@
 
 # Kreuzworträtsel Framework
 
-**Ein selbstständiges Kreuzworträtsel-Framework mit KI-gestützter Rätselgenerierung.**
+**Ein selbstständiges Kreuzworträtsel-Framework mit KI-gestützter Rätselgenerierung, Google-Login, Erfolgssystem und Offline-Modus.**
 
 <!-- Repo stats -->
 [![GitHub stars](https://img.shields.io/github/stars/pepperonas/xword?style=for-the-badge&logo=github&color=c8a96a&labelColor=1a1a1a)](https://github.com/pepperonas/xword/stargazers)
@@ -12,21 +12,24 @@
 [![GitHub issues](https://img.shields.io/github/issues/pepperonas/xword?style=for-the-badge&logo=github&color=c8a96a&labelColor=1a1a1a)](https://github.com/pepperonas/xword/issues)
 [![GitHub last commit](https://img.shields.io/github/last-commit/pepperonas/xword?style=for-the-badge&logo=git&color=c8a96a&labelColor=1a1a1a)](https://github.com/pepperonas/xword/commits/main)
 
-<!-- License & language -->
+<!-- License & tech stack -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-c8a96a.svg?style=for-the-badge&labelColor=1a1a1a)](LICENSE)
 [![Made with Vanilla JS](https://img.shields.io/badge/Vanilla-JS-f7df1e.svg?style=for-the-badge&logo=javascript&logoColor=black&labelColor=1a1a1a)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white&labelColor=1a1a1a)](https://developer.mozilla.org/en-US/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white&labelColor=1a1a1a)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 [![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white&labelColor=1a1a1a)](https://nodejs.org)
+[![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white&labelColor=1a1a1a)](https://sqlite.org)
+[![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white&labelColor=1a1a1a)](https://expressjs.com)
 
-<!-- AI & tooling -->
+<!-- AI -->
 [![Powered by Claude](https://img.shields.io/badge/Powered_by-Claude-6b4ea0?style=for-the-badge&logo=anthropic&logoColor=white&labelColor=1a1a1a)](https://www.anthropic.com/)
 [![Anthropic SDK](https://img.shields.io/badge/Anthropic-SDK-d97757?style=for-the-badge&logo=anthropic&logoColor=white&labelColor=1a1a1a)](https://github.com/anthropics/anthropic-sdk-typescript)
-[![Claude Code](https://img.shields.io/badge/Built_with-Claude_Code-c8a96a?style=for-the-badge&logoColor=white&labelColor=1a1a1a)](https://claude.com/claude-code)
+[![Built with Claude Code](https://img.shields.io/badge/Built_with-Claude_Code-c8a96a?style=for-the-badge&logoColor=white&labelColor=1a1a1a)](https://claude.com/claude-code)
 
 <!-- Quality -->
 [![Tests](https://github.com/pepperonas/xword/actions/workflows/test.yml/badge.svg)](https://github.com/pepperonas/xword/actions/workflows/test.yml)
-[![No Dependencies (frontend)](https://img.shields.io/badge/Frontend-Zero_Dependencies-2d6e4e?style=for-the-badge&labelColor=1a1a1a)](#)
+[![Frontend Zero-Deps](https://img.shields.io/badge/Frontend-Zero_Dependencies-2d6e4e?style=for-the-badge&labelColor=1a1a1a)](#)
+[![PWA Ready](https://img.shields.io/badge/PWA-Ready-c8a96a?style=for-the-badge&labelColor=1a1a1a)](#)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-2d6e4e.svg?style=for-the-badge&labelColor=1a1a1a)](https://github.com/pepperonas/xword/pulls)
 [![Maintained](https://img.shields.io/badge/Maintained-yes-2d6e4e.svg?style=for-the-badge&labelColor=1a1a1a)](https://github.com/pepperonas/xword/commits/main)
 
@@ -43,100 +46,143 @@
 [![Sport (1)](https://img.shields.io/badge/Sport-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
 [![Musik (1)](https://img.shields.io/badge/Musik-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
 
-<!-- Repo metadata -->
-[![Code size](https://img.shields.io/github/languages/code-size/pepperonas/xword?style=for-the-badge&labelColor=1a1a1a&color=c8a96a)](https://github.com/pepperonas/xword)
-[![Repo size](https://img.shields.io/github/repo-size/pepperonas/xword?style=for-the-badge&labelColor=1a1a1a&color=c8a96a)](https://github.com/pepperonas/xword)
-[![Top language](https://img.shields.io/github/languages/top/pepperonas/xword?style=for-the-badge&labelColor=1a1a1a&color=c8a96a)](https://github.com/pepperonas/xword)
-[![Languages count](https://img.shields.io/github/languages/count/pepperonas/xword?style=for-the-badge&labelColor=1a1a1a&color=c8a96a)](https://github.com/pepperonas/xword)
-[![Open PRs](https://img.shields.io/github/issues-pr/pepperonas/xword?style=for-the-badge&labelColor=1a1a1a&color=c8a96a)](https://github.com/pepperonas/xword/pulls)
-[![Contributors](https://img.shields.io/github/contributors/pepperonas/xword?style=for-the-badge&labelColor=1a1a1a&color=c8a96a)](https://github.com/pepperonas/xword/graphs/contributors)
-
 <!-- Misc -->
 [![Made in Germany](https://img.shields.io/badge/Made_in-Germany-000000?style=for-the-badge&labelColor=dd0000)](#)
 [![Sprache: Deutsch](https://img.shields.io/badge/Sprache-Deutsch-c8a96a?style=for-the-badge&labelColor=1a1a1a)](#)
 [![Responsive](https://img.shields.io/badge/Mobile-Responsive-c8a96a?style=for-the-badge&labelColor=1a1a1a)](#)
-[![No Build Step](https://img.shields.io/badge/Build_Step-None-2d6e4e?style=for-the-badge&labelColor=1a1a1a)](#)
+[![Dark Mode](https://img.shields.io/badge/Dark_Mode-Yes-1a1a1a?style=for-the-badge&labelColor=c8a96a)](#)
 
 </div>
 
 ---
 
-- **Browser-Spiel**: Statische SPA mit Auswahl-Bildschirm und allen klassischen Mechaniken (Hinweise, Live-Validierung, Timer, Lösungs-Reveal).
-- **Auto-Layout**: Du lieferst nur Wörter + Hinweise — der Algorithmus platziert sie auf dem Gitter.
-- **KI-Generator**: Node-CLI ruft die Claude-API, validiert die Antwort und schreibt fertige Puzzle-JSONs.
-- **Prompt-Templates**: Markdown-Vorlagen für eigene Themen — auch ohne API-Key nutzbar.
+## ✨ Features
 
-## Quick Start
+- 🧩 **12 kuratierte Rätsel** in drei Schwierigkeiten und zehn Themen — von Tech über Allgemeinwissen bis Klassische Bildung, Mythologie, Wissenschaft, Kunst, Geographie, Architektur, Sport und Musik
+- 🤖 **Auto-Layout-Algorithmus** — du lieferst Wörter + Hinweise, der Algorithmus baut das Gitter (Standard-Kreuzwort-Regeln, multi-crossing-bevorzugend)
+- 🪶 **Editorialer Zeitungsstil** — Fraunces-Display-Schrift, JetBrains-Mono-UI, papierweißer Hintergrund mit Goldakzenten
+- 🔐 **Google-Login** (optional) — OAuth 2.0 mit serverseitigem Auth-Code-Flow, HttpOnly-Session-Cookies
+- 💾 **Spielstand-Sync** pro Nutzer — jeder Tastenanschlag wird live gesichert, `sendBeacon`-Fallback beim Tab-Close
+- 🌗 **Dark Mode** — Hell / Dunkel / System-Auto, persistiert in localStorage
+- 📱 **PWA / Offline-Mode** — Web-App-Manifest + Service Worker, „Zum Home-Bildschirm" funktioniert
+- ⚡ **Hardcore-Modus** — keine Highlights für korrekte Wörter, keine Live-Validierung, mutually exclusive zum Live-Modus
+- 🏆 **Erfolgssystem** — 12 Erfolge in Bronze/Silber/Gold, Toast-Benachrichtigungen
+- 🎖 **Rang-System** — 7 Stufen im Verlagsstil (Lesefuchs → Eminenz), basierend auf XP
+- 🔥 **Streak-Counter** + ⭐ **Rätsel des Tages** — wiederkehrende Spieler werden belohnt
+- 📊 **Bestenliste pro Rätsel** — Top-5 mit Avataren und Podium-Farben
+- 👤 **Profil-Seite** — Rang, XP-Balken, Erfolge, persönliche Statistiken
+- ⚙️ **Admin-Panel** für autorisierte E-Mails — User-Verwaltung, Aktivität, Rätsel-Stats, System
+- 🖨 **Print-View** — `Cmd+P` druckt sauberes A4 mit Leer-Gitter + nummerierten Hinweisen
+- 📤 **Share-Button** — Web Share API + Zwischenablage-Fallback
+- 🔢 **Auto-Versionierung** — `git rev-list --count HEAD` als Versionsnummer in der Masthead-Eyebrow
+
+---
+
+## 🚀 Quick Start
+
+### Spielen
+Öffne https://xword.celox.io im Browser. Anmeldung optional — ohne Login spielst du, ohne dass etwas gespeichert wird. Mit Google-Login werden Spielstände serverseitig pro Nutzer persistiert.
+
+### Selbst hosten / entwickeln
 
 ```bash
-# 1. Server starten (im Projektroot)
-npm run serve                  # oder: python3 -m http.server 8000
+# Repo klonen
+git clone https://github.com/pepperonas/xword.git
+cd xword
 
-# 2. Im Browser öffnen
+# Frontend lokal starten (Server nötig — fetch() funktioniert nicht auf file://)
+npm run serve                  # python3 -m http.server 8000
 open http://localhost:8000/
 
-# 3. Tests ausführen (optional)
-npm test                       # Unit-Tests für Layout-Algorithmus
+# Tests ausführen
+npm test                       # node --test tests/
 
-# 4. Versionsnummer aktualisieren (vor Deploy)
-npm run version:bump           # erzeugt version.json aus git rev-list
+# Versionsnummer aktualisieren (für Anzeige in der Masthead)
+npm run version:bump
 ```
 
-Es erscheint der Auswahlbildschirm mit allen Rätseln aus `puzzles/`.
+> Ohne Backend funktioniert die App im **Anonym-Modus**: keine Spielstand-Speicherung, kein Profil. Für Login + Speichern muss `server/` deployt sein (siehe unten).
 
-## Features
+### Backend lokal
 
-- **Editorialer Zeitungs-Stil** mit Fraunces-Display-Schrift, JetBrains-Mono-UI
-- **Auto-Layout-Algorithmus**: liefere nur Wörter + Hinweise, der Algorithmus baut das Gitter
-- **9 Rätsel** in 4 Kategorien (easy/medium/hard, sieben Themen)
-- **Google Login** (optional) — Spielstände werden serverseitig pro User gespeichert
-- **Hardcore-Modus** — keine Highlights, keine Live-Validierung
-- **Live-Save** mit `sendBeacon`-Fallback beim Tab-Schließen
-- **Admin-Panel** (für autorisierte E-Mails): User, Aktivität, Rätsel-Stats, System
-- **Versionierung** automatisch aus Git-Commit-Count
+```bash
+cd server
+cp .env.example .env           # fülle GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, SESSION_SECRET aus
+npm install
+node server.js                 # läuft auf localhost:4242
+```
 
-> **Warum ein Server?** Die App lädt die JSON-Manifeste per `fetch()`.
-> Direkt per `file://` blockieren Browser solche Requests aus Sicherheitsgründen.
+Konfiguriere die Google Cloud Console mit OAuth-Client-ID und gib `http://localhost/api/auth/callback` als Redirect-URI an, wenn du auch Login lokal testen willst.
 
-## Projektstruktur
+---
+
+## 📁 Projektstruktur
 
 ```
 xword/
-├── index.html              SPA-Shell (Auswahl / Spiel / Admin)
-├── package.json            Scripts: test, serve, version:bump
-├── version.json            (gitignored) git-rev-count → Ver. N
+├── index.html                  Single-Page-Shell mit 4 Views
+├── manifest.webmanifest        PWA Manifest
+├── sw.js                       Service Worker (offline + cache)
+├── favicon.svg                 4×4 Mini-Crossword als App-Icon
+├── xword.png                   Open-Graph-Thumbnail (1024×540)
+├── impressum.html              Pflicht-Impressum
+├── datenschutz.html            DSGVO-Datenschutzerklärung
+├── package.json                Scripts: test, serve, version:bump
+├── version.json                (gitignored) Auto-generiert aus git rev-list
+├── LICENSE                     MIT
+│
 ├── assets/
-│   ├── styles.css          Komplettes Theme
-│   ├── layout.js           Auto-Layout-Algorithmus (browser + node)
-│   ├── engine.js           Spiel-Engine (Grid, Eingabe, Stats, Hardcore)
-│   ├── auth.js             Login-Wrapper, immediate-Save, sendBeacon-Flush
-│   └── app.js              View-Routing, Settings, Admin-Panel
+│   ├── styles.css              Light + Dark Theme, alle UI-Komponenten
+│   ├── layout.js               Auto-Layout-Algorithmus (browser + node)
+│   ├── engine.js               Spiel-Engine: Grid, Eingabe, Hardcore, Timer
+│   ├── auth.js                 API-Wrapper, sendBeacon, makeSaver
+│   └── app.js                  View-Routing, State, Theme-Manager, alle UI-Renderings
+│
 ├── puzzles/
-│   ├── index.json          Manifest (welche Rätsel existieren)
-│   └── *.json              Einzelne Rätsel
+│   ├── index.json              Manifest: id, theme, difficulty, wordCount, size
+│   ├── tech-easy-01.json       …
+│   └── musik-hard-01.json      Pro Rätsel ein JSON mit Wörtern + Hinweisen + Layout
+│
 ├── tests/
-│   └── layout.test.js      Unit-Tests (node:test, keine Deps)
-├── server/
-│   ├── server.js           Express + Google OAuth + Progress + Admin
-│   ├── db.js               SQLite-Schema + Queries
-│   ├── session.js          HMAC-signed cookies
-│   └── xword-api.service   systemd unit
+│   └── layout.test.js          27 Unit-Tests (node:test, keine Deps)
+│
+├── server/                     Backend (Node + Express + SQLite, ES Modules)
+│   ├── server.js               Express-App, Routes, Env-Loading
+│   ├── db.js                   SQLite-Schema + prepared statements + Migrationen
+│   ├── session.js              HMAC-signierte Cookie-Helpers
+│   ├── rate-limit.js           Per-IP fixed-window counter middleware
+│   ├── manifest.js             TTL-Cache für puzzles/index.json
+│   ├── achievements.js         Rang-Tiers + Achievement-Defs + computeProfile
+│   ├── scripts/backup.sh       Tägliche SQLite-Snapshots, gzip, 14d-Rotation
+│   ├── xword-api.service       systemd-Unit für das Backend
+│   ├── xword-backup.service    Oneshot für das Backup-Skript
+│   ├── xword-backup.timer      Tägliche Auslösung 03:00
+│   ├── nginx-snippet.conf      Vorlage für den /api/ Proxy-Block
+│   └── .env.example            Env-Variablen-Vorlage
+│
+├── generator/                  KI-Generator (CLI, läuft lokal)
+│   ├── generate.js             CLI: Claude API → Wörter → Layout → JSON → Manifest
+│   ├── package.json
+│   └── prompts/
+│       ├── tech.md
+│       ├── allgemein.md
+│       ├── wissenschaft.md
+│       └── film.md
+│
 ├── scripts/
-│   └── bump-version.sh     git rev-list → version.json
-├── .github/workflows/
-│   └── test.yml            GitHub Actions: npm test on push + PR
-└── generator/
-    ├── generate.js         CLI: Claude → Wörter → Layout → JSON
-    ├── package.json
-    └── prompts/            Markdown-Templates pro Thema
+│   └── bump-version.sh         Erzeugt version.json aus git rev-list
+│
+└── .github/workflows/
+    └── test.yml                GitHub Actions: npm test auf push + PR
 ```
 
-## Eigene Rätsel hinzufügen
+---
 
-### Variante A — Manuell (Hand-kuratiert)
+## 🛠 Adding a new puzzle
 
-1. Lege eine neue Datei in `puzzles/` an, z.B. `puzzles/musik-easy-01.json`:
+### Variante A — Manuell
 
+1. Lege eine neue Datei in `puzzles/` an:
    ```json
    {
      "id": "musik-easy-01",
@@ -150,143 +196,139 @@ xword/
      ]
    }
    ```
+2. Layout zur Laufzeit (browser): einfach Manifest-Eintrag setzen — Engine berechnet die Positionen on-load
+3. Layout vorab backen (deterministisch und performant):
+   ```bash
+   node -e "
+   require('./assets/layout.js');
+   const fs = require('fs');
+   const p = require('./puzzles/musik-easy-01.json');
+   const r = globalThis.XwordLayout.layout(p.words);
+   p.size = r.size;
+   p.words = r.words.map(w => ({ answer: w.answer, clue: w.clue, row: w.row, col: w.col, direction: w.direction }));
+   fs.writeFileSync('./puzzles/musik-easy-01.json', JSON.stringify(p, null, 2));
+   "
+   ```
+4. Manifest-Eintrag in `puzzles/index.json` hinzufügen
+5. Regression-Test in `tests/layout.test.js` ergänzen
 
-2. Füge einen Eintrag zu `puzzles/index.json` hinzu.
-3. Lade die Seite neu — das Auto-Layout berechnet die Positionen.
-
-**Optional**: Wenn du das Layout fixieren willst (z.B. um es zu prüfen), kannst du `row`, `col`, `direction` pro Wort selbst angeben. Das Framework benutzt dann diese Werte und überspringt das Auto-Layout.
-
-### Variante B — KI-generiert (mit Prompt-Template, manuell)
-
-Du willst kein API-Key konfigurieren? Kopiere einfach den Prompt:
+### Variante B — Mit KI (Prompt-Vorlage, manuell)
 
 ```bash
-# Prompt für Claude vorbereiten und in die Zwischenablage:
 cat generator/prompts/allgemein.md | sed \
   -e 's/{{count}}/16/g' \
   -e 's/{{difficulty}}/medium/g' \
   -e 's/{{difficultyDe}}/mittel/g' | pbcopy
 ```
-
-In Claude einfügen, die JSON-Antwort kopieren, und manuell in `puzzles/<id>.json` einbauen:
-
-```json
-{
-  "id": "allgemein-medium-02",
-  "title": "…",
-  "theme": "allgemein",
-  "difficulty": "medium",
-  "description": "…",
-  "words": [ … aus Claude … ]
-}
-```
-
-Manifest aktualisieren, Seite neu laden — fertig.
+In Claude einfügen, die JSON-Antwort kopieren, in `puzzles/<id>.json` einbauen, Manifest aktualisieren.
 
 ### Variante C — Voll automatisch (Generator-CLI)
 
 ```bash
 cd generator
-npm install   # einmalig: lädt @anthropic-ai/sdk
-
+npm install                    # einmalig: lädt @anthropic-ai/sdk
 export ANTHROPIC_API_KEY=sk-ant-…
 
 node generate.js --theme allgemein --difficulty medium --words 16
 ```
 
-Das Skript:
-1. Lädt das passende Prompt-Template (`prompts/<theme>.md`)
-2. Ruft Claude (Standard: `claude-opus-4-7`)
-3. Extrahiert + validiert die Wörter
-4. Berechnet das Layout
-5. Schreibt `puzzles/<theme>-<difficulty>-<NN>.json`
-6. Aktualisiert `puzzles/index.json`
+Das Skript ruft Claude (`claude-opus-4-7`), parst die Antwort, validiert, layoutet, schreibt JSON und aktualisiert das Manifest.
 
 **Optionen:**
-
 ```
 --theme tech|allgemein|wissenschaft|film|<eigenes>
 --difficulty easy|medium|hard       (default: medium)
---words N                            (default: 16)
---title "Mein Titel"                 (default: aus theme/difficulty)
+--words N                           (default: 16)
+--title "Mein Titel"                (default: aus theme/difficulty)
 --description "Kurztext"
---output ../puzzles/datei.json       (default: auto-nummeriert)
---model claude-opus-4-7              (default)
---dry                                (kein API-Call, Stub-Wörter — Test-Modus)
+--output ../puzzles/datei.json      (default: auto-nummeriert)
+--model claude-opus-4-7             (default)
+--dry                               (kein API-Call, Stub-Wörter — Test-Modus)
 ```
 
-**Test ohne API-Key:**
-```bash
-node generate.js --theme tech --difficulty easy --words 10 --dry --output /tmp/test.json
-```
+---
 
-## Eigenes Thema anlegen
+## 🎯 Auto-Layout
 
-Lege ein neues Prompt-Template an: `generator/prompts/<theme>.md`.
+`assets/layout.js` enthält den Algorithmus. Browser + Node beide. Standard-Kreuzwort-Regeln:
 
-Verwende die Platzhalter:
-- `{{count}}` — Anzahl Wörter
-- `{{difficulty}}` — `easy` / `medium` / `hard`
-- `{{difficultyDe}}` — `leicht` / `mittel` / `schwer`
-- `{{theme}}` — Thema-Name
+- Kreuzungen müssen denselben Buchstaben teilen
+- Nicht-Kreuzungs-Zellen dürfen keine parallel-benachbarten besetzten Zellen haben
+- Wort-Endpunkte: Zellen davor und danach müssen leer sein
+- T-Verzweigungen sind legal (zwei Down-Wörter kreuzen dasselbe Across-Wort)
 
-Das Template soll Claude anweisen, **ein reines JSON-Array** mit `{answer, clue}`-Objekten zu liefern. Vorlage: siehe `prompts/tech.md`.
+Score: `crossings² × 500 + crossings × 50 − distance_to_center` — Mehrfach-Kreuzungen schlagen Einzelkreuzungen quadratisch.
 
-## Auto-Layout — wie es funktioniert
+Bis zu ~80–120 randomisierte Durchläufe; der kompakteste Versuch mit den meisten platzierten Wörtern gewinnt.
 
-1. Wörter werden nach Länge sortiert (längstes zuerst).
-2. Erstes Wort liegt horizontal in der Gittermitte.
-3. Für jedes weitere Wort:
-   - Suche alle Stellen, an denen es ein bereits platziertes Wort kreuzt (gleicher Buchstabe, senkrechte Richtung).
-   - Prüfe die Standard-Kreuzwort-Bedingungen (kein paralleles Berühren an Nicht-Kreuzungs-Zellen, keine ungewollte Wort-Verlängerung).
-   - **Score**: `crossings² × 500 + crossings × 50 − distance_to_center`. Mehrfach-Kreuzungen schlagen Einzelkreuzungen quadratisch.
-4. Bis zu 80 Durchläufe mit unterschiedlicher Reihenfolge — der kompakteste Lösungsversuch gewinnt.
+---
 
-## Tests
+## 🧪 Tests
 
 ```bash
 npm test
 ```
 
-20 Unit-Tests decken `layout.js` ab:
-- **`normaliseAnswer`**: Umlaute (ÄÖÜß → AE/OE/UE/SS), Filter, leere Eingaben
-- **Platzierung**: Einzelwort, Kreuzungen, Normalisierung, Größenberechnung, leere/degenerierte Eingaben
-- **Integrität**: keine Buchstaben-Konflikte, keine Parallel-Berührungen an Nicht-Kreuzungs-Zellen, keine Wort-Verlängerungen
-- **Dichte**: Mindestens 1.5 Kreuzungen pro Wort bei 20+ Wörtern
-- **Regression**: Alle gelieferten Puzzles platzieren beim Re-Layout vollständig
+**27 Unit-Tests** decken den Layout-Algorithmus ab:
 
-Wenn du das Ergebnis fixieren willst (damit jedes Laden dasselbe Layout zeigt), bake es in die JSON:
+- `normaliseAnswer` — Umlaute, Filter, leere Eingaben
+- Platzierung — Einzelwort, Kreuzungen, Normalisierung, leere/degenerierte Eingaben
+- Integrität — keine Buchstaben-Konflikte, keine Parallel-Berührungen, keine Wort-Verlängerungen
+- Dichte — ≥ 1.5 Kreuzungen pro Wort bei 20+ Wörtern
+- Regression — alle 12 gelieferten Puzzles platzieren beim Re-Layout
 
-```bash
-# einmalig auf einer JSON ohne row/col ausführen — danach enthält sie das Layout
-node -e "
-require('./assets/layout.js');
-const fs = require('fs');
-const p = require('./puzzles/musik-easy-01.json');
-const r = globalThis.XwordLayout.layout(p.words);
-p.size = r.size;
-p.words = r.words.map(w => ({ answer: w.answer, clue: w.clue, row: w.row, col: w.col, direction: w.direction }));
-fs.writeFileSync('./puzzles/musik-easy-01.json', JSON.stringify(p, null, 2));
-"
-```
+GitHub Actions führt die Tests bei jedem Push auf `main` und bei PRs aus.
 
-## Bedienung im Spiel
+---
 
-- **Maus**: Zelle klicken → Wort aktivieren. Erneut klicken → Richtung wechseln.
-- **Klicken einer Hinweis-Zeile**: aktiviert das Wort.
-- **Pfeiltasten**: Navigation. Erste Richtungstaste wechselt nur die Eingaberichtung.
-- **Tab / Shift+Tab**: zum nächsten/vorigen Wort.
-- **Enter**: Richtung des aktiven Wortes umschalten.
-- **Buchstaben tippen**: ans aktive Feld schreiben, springt zum nächsten leeren Feld im Wort.
-- **Backspace**: Buchstabe löschen, dann ein Feld zurück.
-- **Live-Validierung-Toggle**: jede Eingabe wird sofort gegen die Lösung geprüft.
+## 🔐 Sicherheit
 
-## Bekannte Eigenheiten
+- **HSTS** mit `includeSubDomains`, Preload-fähig
+- **CSP**: strict `script-src 'self'`, kontrolliertes `style-src 'unsafe-inline'` (nötig für JS-Style-Mutations), Google-Fonts + Google-Avatar-Hosts whitelisted, keine Frames
+- **X-Frame-Options: DENY** + **Permissions-Policy** sperrt Kamera/Mikro/Geo/Payment/USB/Sensoren
+- **Rate-Limits**: `/api/auth/*` 20/min, `/api/progress*` 300/min, catch-all 240/min
+- **OAuth-State-Cookie** + Token-Verifikation via Google `tokeninfo`-Endpoint
+- **Session-Cookies** HttpOnly + Secure + SameSite=Lax, HMAC-signiert
+- **Tägliche DB-Backups** mit 14-Tage-Rotation via systemd-Timer
+- **Hooks bei jedem Build** verhindern unsicheres `innerHTML` mit interpoliertem Inhalt
 
-- Umlaute werden auf `AE / OE / UE` normalisiert (das Gitter zeigt also `STRASSE`, nicht `STRAßE`). Hinweise dürfen Umlaute enthalten.
-- Auf `file://` (ohne Server) bleibt der Auswahl-Bildschirm leer. Immer `python3 -m http.server` o.ä. nutzen.
-- Wenn der Generator zu wenige platzierbare Wörter liefert (`⚠ N Wörter konnten nicht platziert werden`), erhöhe `--words` oder versuche es nochmal — anderer Seed, anderes Layout.
+Keine Secrets im Repo:
+- `.env`-Dateien gitignored
+- `version.json` gitignored
+- `*.db` gitignored
+- Generator-`package-lock.json` gitignored (verhindert Token-Leaks aus Caches)
 
-## Lizenz / Credits
+---
 
-Basis-Design und -Mechanik: aus dem Original-Prototyp **„Kreuzworträtsel — Tech Edition"** von Martin Pfeffer.
+## 🎮 Bedienung im Spiel
+
+| | |
+|---|---|
+| **Maus** | Zelle klicken → Wort aktivieren; erneut klicken → Richtung wechseln |
+| **Hinweis-Zeile klicken** | aktiviert das Wort |
+| **Pfeiltasten** | Navigation; erster Richtungswechsel wechselt nur die Eingaberichtung |
+| **Tab / Shift+Tab** | nächstes / voriges Wort |
+| **Enter** | Richtung des aktiven Wortes umschalten |
+| **Buchstaben tippen** | ans aktive Feld; springt zum nächsten leeren Feld |
+| **Backspace** | Buchstabe löschen; bei leerem Feld: ein Feld zurück |
+| **Live-Validierung** | jede Eingabe wird sofort gegen die Lösung geprüft |
+| **Hardcore-Modus** | keine Highlights, keine Live-Val — beide Toggles mutually exclusive |
+
+---
+
+## 📜 Lizenz
+
+[MIT](LICENSE) — frei kopierbar mit Namensnennung.
+
+Inhalt der Rätsel (Wörter + Hinweise) ist ebenso unter MIT. Die Schrift-Familien Fraunces, JetBrains Mono und Inter sind Open-Source-Schriften unter SIL Open Font License.
+
+---
+
+## 🙋 Credits
+
+- Konzeption + Design: Martin Pfeffer (celox.io)
+- Implementierung: gemeinsam mit Claude (Anthropic)
+- Schriften: [Fraunces](https://fonts.google.com/specimen/Fraunces) · [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) · [Inter](https://fonts.google.com/specimen/Inter)
+- Inspiration: NYT, Süddeutsche, FAZ Kreuzworträtsel-Sektionen
+
+Issues und Pull Requests willkommen.
