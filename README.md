@@ -63,6 +63,7 @@
 ## ✨ Features
 
 - 🎨 **Material Design 3** — komplette M3-Implementation mit Color-Roles, Type-Scale, Shape-System und Tonal-Surfaces. Source-Color **#0B57D0** (Deep Indigo Blue). Beide Modi voll spezifiziert.
+- ✨ **Dezente Animationen** — M3-State-Layer auf Buttons/Chips, Letter-Type-In Pop, Hint-Drop, sliding Tab-Underline, sanfter Sync-Pulse, Cell-Hover-Tint
 - 🌗 **Dark Mode** mit **maximaler Lesbarkeit** — Letter Cells bleiben hell wie ein Papier auf dunklem Tisch, aktive Zelle in sattem Blau für unmissverständlichen Cursor-Kontrast
 - 🧩 **15 kuratierte Rätsel** in drei Schwierigkeiten und 13 Themen — von Tech über Allgemeinwissen bis Klassische Bildung, Mythologie, Wissenschaft, Kunst, Geographie, Architektur, Sport, Musik, Geschichte, Film und Natur
 - 🤖 **Auto-Layout-Algorithmus** — du lieferst Wörter + Hinweise, der Algorithmus baut das Gitter (Standard-Kreuzwort-Regeln, multi-crossing-bevorzugend, gleichgerichtete Wort-Überlappung verhindert)
@@ -80,6 +81,7 @@
 - 🖨 **Print-View** — `Cmd+P` druckt sauberes A4 mit Leer-Gitter + nummerierten Hinweisen
 - 📤 **Share-Button** — Web Share API + Zwischenablage-Fallback
 - 🔢 **Auto-Versionierung** — `git rev-list --count HEAD` als Versionsnummer in der Masthead-Eyebrow
+- 🔎 **SEO-optimiert** — strukturierte Daten (JSON-LD `@graph` mit WebSite + WebApplication/Game + Person), `robots.txt` mit expliziter AI-Crawler-Allowlist, `sitemap.xml`, Canonical-Tags + Hreflang, dual `theme-color` per Color-Scheme, vollständige OG- + Twitter-Card-Tags
 
 ## 🎨 Design-System
 
@@ -170,7 +172,7 @@ xword/
 │   └── musik-hard-01.json      Pro Rätsel ein JSON mit Wörtern + Hinweisen + Layout
 │
 ├── tests/
-│   ├── layout.test.js          27 Tests für den Layout-Algorithmus
+│   ├── layout.test.js          30 Tests für den Layout-Algorithmus
 │   └── server/                 34 Tests für Backend (session, db, rate-limit, achievements)
 │
 ├── server/                     Backend (Node + Express + SQLite, ES Modules)
@@ -296,7 +298,7 @@ Bis zu ~80–120 randomisierte Durchläufe; der kompakteste Versuch mit den meis
 npm test
 ```
 
-**61 Unit-Tests** (27 Layout + 34 Backend):
+**64 Unit-Tests** (30 Layout + 34 Backend):
 
 **Layout** (`tests/layout.test.js`):
 - `normaliseAnswer` — Umlaute, Filter, leere Eingaben
@@ -314,6 +316,28 @@ npm test
 GitHub Actions führt alle Tests bei jedem Push auf `main` und bei PRs aus.
 
 ---
+
+## 🔎 SEO
+
+Die App ist vollständig auf Auffindbarkeit optimiert:
+
+**Meta-Tags**: keyword-dichter Title (60 Zeichen), Description (155 Zeichen), Canonical-Link, Hreflang (`de` + `x-default`), dual `theme-color` per `prefers-color-scheme`, vollständige Apple-PWA-Meta-Tags, MS-Tile-Color, `format-detection: telephone=no`.
+
+**Structured Data (JSON-LD `@graph`)** mit drei Entitäten:
+- `WebSite` — Top-Level mit Publisher-Verweis
+- `WebApplication` + `Game` (multi-type) — `applicationCategory: GameApplication`, `isAccessibleForFree: true`, kostenlose Offer in EUR, ausführliche `featureList`, Screenshot-URL, Browser-Requirements
+- `Person` (Martin Pfeffer)
+
+**Open Graph + Twitter Cards**: vollständig, mit `image:alt`.
+
+**Crawling**:
+- `/robots.txt` — Allow all (außer `/api/`), expliziter Allow für GPTBot, ChatGPT-User, PerplexityBot, ClaudeBot, Google-Extended
+- `/sitemap.xml` — Root + Legal-Pages
+
+**Validierung**:
+- [Google Rich Results Test](https://search.google.com/test/rich-results?url=https%3A%2F%2Fxword.celox.io%2F)
+- [Schema.org Validator](https://validator.schema.org/#url=https%3A%2F%2Fxword.celox.io%2F)
+- [Facebook OG Debugger](https://developers.facebook.com/tools/debug/?q=https%3A%2F%2Fxword.celox.io%2F)
 
 ## 🔐 Sicherheit
 

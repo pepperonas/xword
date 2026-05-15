@@ -298,9 +298,67 @@ sqlite3 xword-YYYY-MM-DD.db ".tables"
 
 ## Theming
 
-CSS variables defined under `:root` (light) and `html[data-theme="dark"]` (dark). `app.js` reads `localStorage['xword.theme']` (`light` / `dark` / `auto`) and sets the attribute on `<html>` at startup. `'auto'` honours `prefers-color-scheme` and reacts to OS changes mid-session.
+Material Design 3 token system. Source color **#0B57D0** (deep indigo).
+The full M3 color-role set (primary, secondary, tertiary, error, plus
+surface containers lowest..highest) lives under `:root` (light) and
+`html[data-theme="dark"]` (dark). `app.js` reads
+`localStorage['xword.theme']` (`light` / `dark` / `auto`) and sets the
+attribute on `<html>` at startup. `'auto'` honours `prefers-color-scheme`
+and reacts to OS changes mid-session.
+
+**Crossword cells use decoupled tokens** (`--xword-cell-bg`,
+`--xword-cell-fg`, `--xword-active-bg`, `--xword-active-word-bg`,
+`--xword-correct-bg`, ...). They intentionally keep cells *light* in
+both modes — dark mode reads as "paper on a dark desk" rather than
+inverting the grid, because letter cells remaining bright is the
+strongest signal of where the player can type.
+
+**Typography**: Roboto Serif (display, variable opsz/wght), Roboto Flex
+(body, variable wght), Roboto Mono (code/stats). Material Symbols
+Outlined is loaded for future icon swaps.
+
+**Subtle animations**:
+- M3 state-layer on buttons + filter chips (8/10/14% opacity overlays
+  on hover/focus/press; +`scale(0.97-0.98)` on press)
+- Letter `.type-in` (180ms scale-bounce on keystroke; engine.js applies
+  the class via requestAnimationFrame after `paint()`)
+- Letter `.hint-drop` (400ms drop+bounce when a hint reveals a letter)
+- Active cell: persistent outer ring + soft glow shadow (no pulse)
+- Cell hover tint (mouse-only via `(hover: hover) and (pointer: fine)`)
+- Tab underline slides via `scaleX` between Horizontal/Vertikal
+- `.sync-indicator.saving` pulses opacity 1↔0.55 at 1.2s
 
 ---
+
+## SEO
+
+The HTML head includes a complete SEO stack:
+
+- **Title + description**: keyword-rich, ~155 char description
+- **Standard tags**: `keywords`, `author`, `publisher`, `robots`
+  (`max-image-preview:large`), `googlebot`, `referrer`,
+  dual `theme-color` keyed to `prefers-color-scheme`, `color-scheme`
+- **Canonical**: `<link rel="canonical">` plus `hreflang="de"` + `x-default`
+- **Mobile/PWA**: Apple webapp meta (`apple-mobile-web-app-*`),
+  MS tile color, `format-detection: telephone=no`
+- **OG + Twitter**: full set with image:alt for both
+- **JSON-LD `@graph`** with three nodes:
+  1. `WebSite` with publisher → Person
+  2. `WebApplication` + `Game` multi-type (applicationCategory
+     `GameApplication`, `isAccessibleForFree: true`, full `featureList`,
+     screenshot, browser requirements)
+  3. `Person` (Martin Pfeffer) referenced by both
+
+Files in the web root:
+- `robots.txt` — allow all except `/api/`, sitemap reference, explicit
+  allow for GPTBot/ChatGPT-User/PerplexityBot/ClaudeBot/Google-Extended
+- `sitemap.xml` — root (priority 1.0, weekly) plus legal pages
+  (priority 0.3, yearly)
+
+Validation tools:
+- Google Rich Results: https://search.google.com/test/rich-results?url=https%3A%2F%2Fxword.celox.io%2F
+- Schema.org Validator: https://validator.schema.org/#url=https%3A%2F%2Fxword.celox.io%2F
+- OG Debugger: https://developers.facebook.com/tools/debug/?q=https%3A%2F%2Fxword.celox.io%2F
 
 ## CI
 
