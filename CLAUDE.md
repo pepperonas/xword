@@ -36,7 +36,11 @@ The algorithm enforces standard crossword rules:
 - Non-crossing cells of a new word must not have parallel-adjacent filled cells (would create unintended 2-letter words).
 - The cells immediately before/after a word's endpoints must be empty (no unintended word extension).
 
+Scoring (`scoreCandidate`): `crossings² × 500 + crossings × 50 − distance_to_center` — multi-crossing placements are quadratically preferred over single-crossing ones, falling back to centrality as tiebreaker.
+
 If too many words remain unplaced, the issue is usually low vowel content or many words of the same length without good crossing letters — `attemptLayout` runs ~80 randomised passes with different seed orderings; if all fail, the best partial layout wins.
+
+T-junctions are legal: two parallel down-words may both cross the same across-word in adjacent columns. The "no parallel touch" rule applies only at *non-crossing* cells.
 
 ## Generator workflow
 
@@ -62,8 +66,11 @@ The selector's filter bar enumerates themes from the manifest dynamically — no
 ## Development commands
 
 ```bash
+# Run tests (no deps — uses node:test built into Node ≥ 18)
+npm test                       # or: node --test tests/
+
 # Run the SPA locally (required — fetch() needs http:// not file://)
-python3 -m http.server 8000
+npm run serve                  # or: python3 -m http.server 8000
 
 # Bake auto-layout into an existing words-only JSON (deterministic positions afterwards)
 node -e "

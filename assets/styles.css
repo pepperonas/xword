@@ -638,6 +638,22 @@ body::before {
   font-weight: 400;
 }
 
+.clues-legend {
+  padding: 10px 16px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--ink-faint);
+  border-bottom: 1px solid var(--ink-faint);
+  background: var(--bg);
+}
+.clues-legend em {
+  font-style: italic;
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+
 .clues-lists {
   overflow-y: auto;
   flex: 1;

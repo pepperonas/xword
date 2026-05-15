@@ -24,6 +24,7 @@
 
 <!-- Quality -->
 [![No Dependencies (frontend)](https://img.shields.io/badge/Frontend-Zero_Dependencies-2d6e4e?style=for-the-badge&labelColor=1a1a1a)](#)
+[![Tests](https://img.shields.io/badge/Tests-20%2F20_passing-2d6e4e?style=for-the-badge&labelColor=1a1a1a)](tests/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-2d6e4e.svg?style=for-the-badge&labelColor=1a1a1a)](https://github.com/pepperonas/xword/pulls)
 [![Maintained](https://img.shields.io/badge/Maintained-yes-2d6e4e.svg?style=for-the-badge&labelColor=1a1a1a)](https://github.com/pepperonas/xword/commits/main)
 
@@ -54,10 +55,13 @@
 
 ```bash
 # 1. Server starten (im Projektroot)
-python3 -m http.server 8000
+npm run serve                  # oder: python3 -m http.server 8000
 
 # 2. Im Browser öffnen
 open http://localhost:8000/
+
+# 3. Tests ausführen (optional)
+npm test                       # 20 Unit-Tests für Layout-Algorithmus
 ```
 
 Es erscheint der Auswahlbildschirm mit allen Rätseln aus `puzzles/`.
@@ -70,6 +74,7 @@ Es erscheint der Auswahlbildschirm mit allen Rätseln aus `puzzles/`.
 ```
 xword/
 ├── index.html              SPA-Shell (Auswahl + Spiel)
+├── package.json            Scripts: test, serve
 ├── assets/
 │   ├── styles.css          Komplettes Theme
 │   ├── layout.js           Auto-Layout-Algorithmus (browser + node)
@@ -78,6 +83,8 @@ xword/
 ├── puzzles/
 │   ├── index.json          Manifest (welche Rätsel existieren)
 │   └── *.json              Einzelne Rätsel
+├── tests/
+│   └── layout.test.js      Unit-Tests (node:test, keine Deps)
 └── generator/
     ├── generate.js         CLI: Claude → Wörter → Layout → JSON
     ├── package.json
@@ -191,9 +198,22 @@ Das Template soll Claude anweisen, **ein reines JSON-Array** mit `{answer, clue}
 2. Erstes Wort liegt horizontal in der Gittermitte.
 3. Für jedes weitere Wort:
    - Suche alle Stellen, an denen es ein bereits platziertes Wort kreuzt (gleicher Buchstabe, senkrechte Richtung).
-   - Prüfe die Standard-Kreuzwort-Bedingungen (kein paralleles Berühren, keine ungewollte Wort-Verlängerung).
-   - Wähle den Kandidaten mit den meisten Kreuzungen und der zentralsten Lage.
-4. Mehrere Durchläufe mit unterschiedlicher Reihenfolge — der kompakteste Lösungsversuch gewinnt.
+   - Prüfe die Standard-Kreuzwort-Bedingungen (kein paralleles Berühren an Nicht-Kreuzungs-Zellen, keine ungewollte Wort-Verlängerung).
+   - **Score**: `crossings² × 500 + crossings × 50 − distance_to_center`. Mehrfach-Kreuzungen schlagen Einzelkreuzungen quadratisch.
+4. Bis zu 80 Durchläufe mit unterschiedlicher Reihenfolge — der kompakteste Lösungsversuch gewinnt.
+
+## Tests
+
+```bash
+npm test
+```
+
+20 Unit-Tests decken `layout.js` ab:
+- **`normaliseAnswer`**: Umlaute (ÄÖÜß → AE/OE/UE/SS), Filter, leere Eingaben
+- **Platzierung**: Einzelwort, Kreuzungen, Normalisierung, Größenberechnung, leere/degenerierte Eingaben
+- **Integrität**: keine Buchstaben-Konflikte, keine Parallel-Berührungen an Nicht-Kreuzungs-Zellen, keine Wort-Verlängerungen
+- **Dichte**: Mindestens 1.5 Kreuzungen pro Wort bei 20+ Wörtern
+- **Regression**: Alle gelieferten Puzzles platzieren beim Re-Layout vollständig
 
 Wenn du das Ergebnis fixieren willst (damit jedes Laden dasselbe Layout zeigt), bake es in die JSON:
 
