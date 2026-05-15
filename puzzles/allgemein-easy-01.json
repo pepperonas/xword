@@ -1,0 +1,108 @@
+{
+  "id": "allgemein-easy-01",
+  "title": "Quer durchs Allgemeinwissen",
+  "theme": "allgemein",
+  "difficulty": "easy",
+  "description": "Klassische Begriffe aus Welt, Natur und Alltag.",
+  "words": [
+    {
+      "answer": "ROM",
+      "clue": "Hauptstadt Italiens",
+      "row": 4,
+      "col": 8,
+      "direction": "across"
+    },
+    {
+      "answer": "LOEWE",
+      "clue": "König der Tiere",
+      "row": 3,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "APFEL",
+      "clue": "Obst, oft rot oder grün",
+      "row": 7,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "PARIS",
+      "clue": "Hauptstadt Frankreichs",
+      "row": 6,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "SONNE",
+      "clue": "Stern, der die Erde wärmt",
+      "row": 10,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "TEE",
+      "clue": "Heißgetränk aus Blättern",
+      "row": 9,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "MEER",
+      "clue": "Großes Salzwasser",
+      "row": 8,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "KAFFEE",
+      "clue": "Schwarzes Heißgetränk mit Koffein",
+      "row": 3,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "ZEBRA",
+      "clue": "Gestreiftes afrikanisches Säugetier",
+      "row": 4,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "BIRNE",
+      "clue": "Süßes Kernobst, leuchtet auch",
+      "row": 0,
+      "col": 1,
+      "direction": "down"
+    },
+    {
+      "answer": "BUCH",
+      "clue": "Bedrucktes Papier zum Lesen",
+      "row": 0,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "MOND",
+      "clue": "Erdtrabant",
+      "row": 8,
+      "col": 3,
+      "direction": "down"
+    },
+    {
+      "answer": "RAD",
+      "clue": "Rundes Fortbewegungsmittel mit Pedalen",
+      "row": 2,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "BERG",
+      "clue": "Hohe Erhebung im Gelände",
+      "row": 4,
+      "col": 2,
+      "direction": "down"
+    }
+  ],
+  "size": 12
+}

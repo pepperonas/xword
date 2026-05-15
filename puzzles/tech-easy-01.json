@@ -1,0 +1,94 @@
+{
+  "id": "tech-easy-01",
+  "title": "Erste Schritte im Code",
+  "theme": "tech",
+  "difficulty": "easy",
+  "description": "Basiswissen für angehende Programmierer.",
+  "words": [
+    {
+      "answer": "DATEI",
+      "clue": "Gespeicherter Datenblock auf der Festplatte",
+      "row": 4,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "LINUX",
+      "clue": "Freies Betriebssystem mit Pinguin-Maskottchen",
+      "row": 8,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "EMAIL",
+      "clue": "Elektronische Nachricht",
+      "row": 5,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "ROUTER",
+      "clue": "Verteilt das Internet im Haus",
+      "row": 1,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "MAUS",
+      "clue": "Eingabegerät zum Klicken",
+      "row": 3,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "PIXEL",
+      "clue": "Bildpunkt auf dem Monitor",
+      "row": 6,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "MENUE",
+      "clue": "Liste von Auswahloptionen",
+      "row": 3,
+      "col": 3,
+      "direction": "down"
+    },
+    {
+      "answer": "HTML",
+      "clue": "Auszeichnungssprache für Webseiten",
+      "row": 2,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "WLAN",
+      "clue": "Drahtloses Netzwerk",
+      "row": 10,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "BYTE",
+      "clue": "Acht Bits zusammen",
+      "row": 7,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "CHAT",
+      "clue": "Unterhaltung in Echtzeit per Text",
+      "row": 2,
+      "col": 8,
+      "direction": "across"
+    },
+    {
+      "answer": "BIT",
+      "clue": "Kleinste Informationseinheit",
+      "row": 0,
+      "col": 11,
+      "direction": "down"
+    }
+  ],
+  "size": 13
+}

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Kreuzworträtsel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700;9..144,900&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- =========== SELECTOR VIEW =========== -->
+  <section class="view active" id="view-selector">
+    <header class="masthead">
+      <div class="eyebrow">
+        <span>Vol. I</span>
+        <span class="dot"></span>
+        <span>Bibliothek</span>
+        <span class="dot"></span>
+        <span>Wähle dein Rätsel</span>
+      </div>
+      <h1>Kreuz<em>worträtsel</em></h1>
+      <p class="subtitle">— Eine kuratierte Sammlung —</p>
+    </header>
+
+    <div class="filter-bar" id="filterBar">
+      <!-- filter chips inserted by JS -->
+    </div>
+
+    <div id="puzzleSections">
+      <!-- sections inserted by JS, grouped by difficulty -->
+    </div>
+  </section>
+
+  <!-- =========== GAME VIEW =========== -->
+  <section class="view" id="view-game">
+    <header class="masthead">
+      <div class="eyebrow">
+        <span id="gameTheme">—</span>
+        <span class="dot"></span>
+        <span id="gameDifficulty">—</span>
+        <span class="dot"></span>
+        <span>Edition</span>
+      </div>
+      <h1 id="gameTitle">Kreuz<em>worträtsel</em></h1>
+      <p class="subtitle" id="gameDescription">—</p>
+    </header>
+
+    <div class="back-bar">
+      <button class="back-link" id="btnBack">← Zur Bibliothek</button>
+      <div class="puzzle-meta-pills" id="gamePills"></div>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat">
+        <div class="stat-label">Fortschritt</div>
+        <div class="stat-value"><span id="statPercent">0</span><span class="sub">%</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Wörter</div>
+        <div class="stat-value"><span id="statSolved">0</span><span class="sub">/<span id="statTotal">0</span></span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Zeit</div>
+        <div class="stat-value" id="statTime">00:00</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Hinweise</div>
+        <div class="stat-value" id="statHints">0</div>
+      </div>
+    </div>
+
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+    <main class="main">
+      <section class="board-wrap">
+        <div class="board-header">
+          <span class="board-title">Das Rätsel</span>
+          <span class="board-meta" id="boardMeta">—</span>
+        </div>
+        <div class="grid" id="grid"></div>
+        <input type="text" class="hidden-input" id="hiddenInput" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" />
+
+        <div class="current-clue">
+          <span class="badge" id="currentBadge">—</span>
+          <span class="text" id="currentText">Wähle ein Wort, um zu beginnen.</span>
+        </div>
+
+        <div class="controls">
+          <button class="btn" id="btnCheck"><span class="ico">✓</span>Prüfen</button>
+          <button class="btn" id="btnHint"><span class="ico">★</span>Hinweis</button>
+          <button class="btn" id="btnReveal"><span class="ico">↻</span>Lösung</button>
+          <button class="btn primary" id="btnReset"><span class="ico">⟲</span>Neu starten</button>
+        </div>
+
+        <div class="toggle-row">
+          <label for="liveToggle">Live-Validierung</label>
+          <div class="switch" id="liveToggle" role="switch" tabindex="0"></div>
+        </div>
+      </section>
+
+      <aside class="clues-panel">
+        <div class="clues-tabs">
+          <button class="clues-tab active" data-dir="across">Horizontal <span class="count" id="countAcross">0</span></button>
+          <button class="clues-tab" data-dir="down">Vertikal <span class="count" id="countDown">0</span></button>
+        </div>
+        <div class="clues-lists">
+          <div class="clues-section visible visible-mobile" data-dir="across" id="cluesAcross"></div>
+          <div class="clues-section" data-dir="down" id="cluesDown"></div>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="footer">© 2026 · Kreuzworträtsel Framework</footer>
+  </section>
+
+  <!-- Win Overlay -->
+  <div class="overlay" id="overlay">
+    <div class="win-card">
+      <div class="eyebrow"><span class="dot"></span><span>Vollendet</span><span class="dot"></span></div>
+      <h2>Brillant<em>!</em></h2>
+      <p>Du hast das Rätsel gelöst.</p>
+      <div class="win-stats">
+        <div class="win-stat">
+          <div class="win-stat-val" id="winTime">00:00</div>
+          <div class="win-stat-lbl">Zeit</div>
+        </div>
+        <div class="win-stat">
+          <div class="win-stat-val" id="winHints">0</div>
+          <div class="win-stat-lbl">Hinweise</div>
+        </div>
+        <div class="win-stat">
+          <div class="win-stat-val" id="winWords">0</div>
+          <div class="win-stat-lbl">Wörter</div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn" id="btnPlayAgain">Nochmal</button>
+        <button class="btn primary" id="btnBackFromWin">Andere wählen</button>
+      </div>
+    </div>
+  </div>
+  <div class="confetti" id="confetti"></div>
+</div>
+
+<script src="assets/layout.js"></script>
+<script src="assets/engine.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+{
+  "puzzles": [
+    {
+      "id": "tech-medium-01",
+      "file": "tech-medium-01.json",
+      "title": "Programmier-Klassiker",
+      "theme": "tech",
+      "difficulty": "medium",
+      "description": "Begriffe aus dem Entwickleralltag — von Async bis Vim.",
+      "wordCount": 19,
+      "size": 13
+    },
+    {
+      "id": "tech-easy-01",
+      "file": "tech-easy-01.json",
+      "title": "Erste Schritte im Code",
+      "theme": "tech",
+      "difficulty": "easy",
+      "description": "Basiswissen für angehende Programmierer.",
+      "wordCount": 12,
+      "size": 13
+    },
+    {
+      "id": "allgemein-easy-01",
+      "file": "allgemein-easy-01.json",
+      "title": "Quer durchs Allgemeinwissen",
+      "theme": "allgemein",
+      "difficulty": "easy",
+      "description": "Klassische Begriffe aus Welt, Natur und Alltag.",
+      "wordCount": 14,
+      "size": 12
+    },
+    {
+      "id": "allgemein-medium-01",
+      "file": "allgemein-medium-01.json",
+      "title": "Welt & Wissen",
+      "theme": "allgemein",
+      "difficulty": "medium",
+      "description": "Geografie, Geschichte und ein bisschen Kunst.",
+      "wordCount": 16,
+      "size": 15
+    }
+  ]
+}

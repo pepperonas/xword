@@ -1,0 +1,16 @@
+{
+  "name": "xword-generator",
+  "version": "1.0.0",
+  "description": "Generates crossword puzzles via Claude API",
+  "type": "commonjs",
+  "main": "generate.js",
+  "bin": {
+    "xword-generate": "./generate.js"
+  },
+  "scripts": {
+    "generate": "node generate.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0"
+  }
+}

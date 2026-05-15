@@ -1,0 +1,122 @@
+{
+  "id": "allgemein-medium-01",
+  "title": "Welt & Wissen",
+  "theme": "allgemein",
+  "difficulty": "medium",
+  "description": "Geografie, Geschichte und ein bisschen Kunst.",
+  "words": [
+    {
+      "answer": "EVEREST",
+      "clue": "Höchster Berg der Erde",
+      "row": 4,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "AMAZONAS",
+      "clue": "Längster Fluss Südamerikas",
+      "row": 9,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "ATLANTIK",
+      "clue": "Ozean zwischen Europa und Amerika",
+      "row": 5,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "SAHARA",
+      "clue": "Größte Trockenwüste der Welt",
+      "row": 5,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "GOETHE",
+      "clue": "Autor von Faust",
+      "row": 1,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "PICASSO",
+      "clue": "Spanischer Maler des Kubismus",
+      "row": 1,
+      "col": 0,
+      "direction": "down"
+    },
+    {
+      "answer": "MAIN",
+      "clue": "Fluss durch Frankfurt",
+      "row": 11,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "NIL",
+      "clue": "Fluss durch Ägypten",
+      "row": 7,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "BERLIN",
+      "clue": "Hauptstadt Deutschlands",
+      "row": 4,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "RENAISSANCE",
+      "clue": "Kulturepoche nach dem Mittelalter",
+      "row": 0,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "VENUS",
+      "clue": "Zweiter Planet von der Sonne",
+      "row": 10,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "MOZART",
+      "clue": "Komponist aus Salzburg",
+      "row": 9,
+      "col": 1,
+      "direction": "down"
+    },
+    {
+      "answer": "OPER",
+      "clue": "Musiktheaterwerk mit Gesang",
+      "row": 2,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "TOKIO",
+      "clue": "Hauptstadt Japans",
+      "row": 14,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "EINSTEIN",
+      "clue": "Physiker mit der Relativitätstheorie",
+      "row": 6,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "MADRID",
+      "clue": "Hauptstadt Spaniens",
+      "row": 2,
+      "col": 13,
+      "direction": "down"
+    }
+  ],
+  "size": 15
+}

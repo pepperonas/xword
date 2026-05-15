@@ -1,0 +1,29 @@
+{
+  "id": "tech-medium-01",
+  "title": "Programmier-Klassiker",
+  "theme": "tech",
+  "difficulty": "medium",
+  "description": "Begriffe aus dem Entwickleralltag — von Async bis Vim.",
+  "size": 13,
+  "words": [
+    { "answer": "ASYNC",      "clue": "Schlüsselwort für nicht-blockierende Funktionen",   "row": 0,  "col": 2,  "direction": "down"   },
+    { "answer": "SQL",        "clue": "Datenbankabfrage-Sprache",                          "row": 1,  "col": 2,  "direction": "across" },
+    { "answer": "CHAR",       "clue": "Einzelnes Zeichen",                                 "row": 1,  "col": 7,  "direction": "down"   },
+    { "answer": "CODE",       "clue": "Was Programmierer schreiben",                       "row": 2,  "col": 0,  "direction": "down"   },
+    { "answer": "REACT",      "clue": "Komponenten-Library von Meta",                      "row": 2,  "col": 10, "direction": "down"   },
+    { "answer": "CACHE",      "clue": "Zwischenspeicher für schnellen Zugriff",            "row": 3,  "col": 6,  "direction": "across" },
+    { "answer": "DOCKER",     "clue": "Container-Plattform mit Wal-Logo",                  "row": 4,  "col": 0,  "direction": "across" },
+    { "answer": "RUST",       "clue": "Sichere Systemsprache von Mozilla",                 "row": 4,  "col": 5,  "direction": "down"   },
+    { "answer": "JSON",       "clue": "Datenformat mit geschweiften Klammern",             "row": 4,  "col": 12, "direction": "down"   },
+    { "answer": "GITHUB",     "clue": "Code-Hosting-Plattform mit Octocat",                "row": 5,  "col": 8,  "direction": "down"   },
+    { "answer": "CSS",        "clue": "Stylesheet-Sprache fürs Web",                       "row": 5,  "col": 10, "direction": "across" },
+    { "answer": "JAVASCRIPT", "clue": "Programmiersprache für Webbrowser",                 "row": 6,  "col": 1,  "direction": "across" },
+    { "answer": "VIM",        "clue": "Modaler Texteditor von Bram Moolenaar",             "row": 6,  "col": 3,  "direction": "down"   },
+    { "answer": "NPM",        "clue": "Node-Paketmanager",                                 "row": 8,  "col": 1,  "direction": "across" },
+    { "answer": "PROXY",      "clue": "Vermittler zwischen Client und Server",             "row": 8,  "col": 2,  "direction": "down"   },
+    { "answer": "REGEX",      "clue": "Mustervergleich mit Sonderzeichen",                 "row": 8,  "col": 6,  "direction": "down"   },
+    { "answer": "DEBUG",      "clue": "Fehler im Programm suchen",                         "row": 9,  "col": 5,  "direction": "across" },
+    { "answer": "CLOUD",      "clue": "Server bei Amazon, Google, Microsoft & Co.",        "row": 10, "col": 0,  "direction": "across" },
+    { "answer": "TYPE",       "clue": "Datenart in Programmiersprachen",                   "row": 12, "col": 1,  "direction": "across" }
+  ]
+}
