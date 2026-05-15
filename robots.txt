@@ -1,0 +1,26 @@
+# robots.txt for xword.celox.io
+# https://xword.celox.io/robots.txt
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://xword.celox.io/sitemap.xml
+
+# Common AI / scraping bots — explicit allow for indexing,
+# disallow training (where the bot honours these tokens).
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
