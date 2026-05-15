@@ -19,6 +19,7 @@ import { readFileSync, existsSync, statSync } from 'node:fs';
 import { openDb } from './db.js';
 import { sign, verify } from './session.js';
 import { computeProfile, dailyPuzzle } from './achievements.js';
+import { createLimiter } from './rate-limit.js';
 
 /* ------- Env loading (minimal dotenv) ------- */
 function loadEnv() {
@@ -69,6 +70,18 @@ const app = express();
 app.set('trust proxy', 1);
 app.use(express.json({ limit: '256kb' }));
 app.use(cookieParser());
+
+/* ------- Rate limiting ------- */
+// Catch-all baseline so an aggressive client can't hammer any endpoint.
+const limitAll = createLimiter({ windowMs: 60_000, max: 240 });
+// Stricter limit on auth endpoints to slow brute force / OAuth-spam.
+const limitAuth = createLimiter({ windowMs: 60_000, max: 20 });
+// Save-progress fires every keystroke when typing fast — be generous but bounded.
+const limitProgress = createLimiter({ windowMs: 60_000, max: 300 });
+
+app.use('/api/', limitAll);
+app.use('/api/auth/', limitAuth);
+app.use('/api/progress', limitProgress);
 
 /* ------- Auth middleware ------- */
 function requireUser(req, res, next) {

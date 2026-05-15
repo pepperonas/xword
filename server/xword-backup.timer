@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily SQLite backup for xword-api
+
+[Timer]
+# Run daily at 03:00 server time. Persist if the system was off at that time.
+OnCalendar=*-*-* 03:00:00
+Persistent=true
+RandomizedDelaySec=300
+
+[Install]
+WantedBy=timers.target
