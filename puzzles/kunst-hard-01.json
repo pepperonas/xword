@@ -1,0 +1,220 @@
+{
+  "id": "kunst-hard-01",
+  "title": "Pinsel & Marmor",
+  "theme": "kunst",
+  "difficulty": "hard",
+  "description": "Maler, Stile, Werke, Bauwerke — von der Renaissance bis Pop Art.",
+  "words": [
+    {
+      "answer": "VANGOGH",
+      "clue": "Niederländer mit 'Sternennacht' und 'Sonnenblumen'",
+      "row": 13,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "RENOIR",
+      "clue": "Impressionist farbenfroher Genreszenen",
+      "row": 10,
+      "col": 11,
+      "direction": "down"
+    },
+    {
+      "answer": "GUERNICA",
+      "clue": "Picassos schwarz-weißes Antikriegsgemälde",
+      "row": 9,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "MICHELANGELO",
+      "clue": "Schöpfer der Sixtinischen Decke und des David",
+      "row": 10,
+      "col": 13,
+      "direction": "down"
+    },
+    {
+      "answer": "REMBRANDT",
+      "clue": "Holländischer Meister der 'Nachtwache'",
+      "row": 10,
+      "col": 11,
+      "direction": "across"
+    },
+    {
+      "answer": "ROKOKO",
+      "clue": "Verspielter Spätbarock mit Schnörkeln",
+      "row": 10,
+      "col": 15,
+      "direction": "down"
+    },
+    {
+      "answer": "KUBISMUS",
+      "clue": "Stil der zerlegten Perspektiven",
+      "row": 12,
+      "col": 15,
+      "direction": "across"
+    },
+    {
+      "answer": "MONET",
+      "clue": "Impressionist der Seerosen-Serie",
+      "row": 17,
+      "col": 11,
+      "direction": "across"
+    },
+    {
+      "answer": "LEONARDO",
+      "clue": "Universalgenie der Renaissance (Mona Lisa, Abendmahl)",
+      "row": 15,
+      "col": 13,
+      "direction": "across"
+    },
+    {
+      "answer": "CARAVAGGIO",
+      "clue": "Barock-Meister des Helldunkels",
+      "row": 9,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "KANDINSKY",
+      "clue": "Russischer Pionier der abstrakten Malerei",
+      "row": 14,
+      "col": 17,
+      "direction": "down"
+    },
+    {
+      "answer": "GOTIK",
+      "clue": "Stil der Spitzbögen und Kathedralen",
+      "row": 18,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "DALI",
+      "clue": "Surrealist der zerfließenden Uhren",
+      "row": 20,
+      "col": 11,
+      "direction": "across"
+    },
+    {
+      "answer": "BAUHAUS",
+      "clue": "Designschule aus Weimar und Dessau",
+      "row": 7,
+      "col": 21,
+      "direction": "down"
+    },
+    {
+      "answer": "CEZANNE",
+      "clue": "Post-Impressionist der Stillleben und Sainte-Victoire",
+      "row": 4,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "GAUGUIN",
+      "clue": "Post-Impressionist, der nach Tahiti zog",
+      "row": 7,
+      "col": 11,
+      "direction": "across"
+    },
+    {
+      "answer": "MUNCH",
+      "clue": "Norweger des verzweifelten 'Schrei'",
+      "row": 19,
+      "col": 15,
+      "direction": "across"
+    },
+    {
+      "answer": "MATISSE",
+      "clue": "Fauvist mit ausgeschnittenen Formen",
+      "row": 5,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "RAFFAEL",
+      "clue": "Renaissance-Maler der 'Schule von Athen'",
+      "row": 1,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "LOUVRE",
+      "clue": "Pariser Kunstmuseum mit Glaspyramide",
+      "row": 1,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "DADAISMUS",
+      "clue": "Anti-Kunst-Bewegung aus Zürich",
+      "row": 0,
+      "col": 15,
+      "direction": "down"
+    },
+    {
+      "answer": "VERMEER",
+      "clue": "'Mädchen mit dem Perlenohrring'",
+      "row": 11,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "FRESKE",
+      "clue": "Wandmalerei auf nassem Putz",
+      "row": 9,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "GOYA",
+      "clue": "Spanischer Hofmaler ('Die nackte Maja')",
+      "row": 18,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "MONALISA",
+      "clue": "Leonardos berühmtes Porträt mit dem rätselhaften Lächeln",
+      "row": 21,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "PICASSO",
+      "clue": "Erfinder des Kubismus",
+      "row": 15,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "KLIMT",
+      "clue": "Wiener Jugendstil-Maler des goldenen 'Kuss'",
+      "row": 3,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "BAROCK",
+      "clue": "Stilepoche von Pomp und Pracht",
+      "row": 13,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "DEGAS",
+      "clue": "Maler der tanzenden Ballerinen",
+      "row": 17,
+      "col": 17,
+      "direction": "across"
+    },
+    {
+      "answer": "WARHOL",
+      "clue": "Pop-Art mit Marilyn und Suppendosen",
+      "row": 9,
+      "col": 3,
+      "direction": "down"
+    }
+  ],
+  "size": 23
+}

@@ -1,0 +1,220 @@
+{
+  "id": "geographie-hard-01",
+  "title": "Erde von Pol zu Pol",
+  "theme": "geographie",
+  "difficulty": "hard",
+  "description": "Gebirge, Flüsse, Wüsten, Inseln — Geographie für Atlas-Fans.",
+  "words": [
+    {
+      "answer": "KILIMANJARO",
+      "clue": "Höchster Berg Afrikas — schneebedeckt am Äquator",
+      "row": 5,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "ISTANBUL",
+      "clue": "Großstadt auf zwei Kontinenten am Bosporus",
+      "row": 11,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "MADAGASKAR",
+      "clue": "Große Insel vor der Ostküste Afrikas",
+      "row": 13,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "MISSISSIPPI",
+      "clue": "Längster Fluss der USA",
+      "row": 8,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "ALPEN",
+      "clue": "Europas zentrales Hochgebirge",
+      "row": 6,
+      "col": 14,
+      "direction": "down"
+    },
+    {
+      "answer": "ANTARKTIS",
+      "clue": "Eiskontinent rund um den Südpol",
+      "row": 6,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "PAZIFIK",
+      "clue": "Größter Ozean der Erde",
+      "row": 5,
+      "col": 16,
+      "direction": "down"
+    },
+    {
+      "answer": "GOBI",
+      "clue": "Trockenwüste in Zentralasien",
+      "row": 15,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "JANGTSE",
+      "clue": "Längster Fluss Chinas",
+      "row": 4,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "PATAGONIEN",
+      "clue": "Wind- und kältereiche Südspitze Südamerikas",
+      "row": 6,
+      "col": 13,
+      "direction": "across"
+    },
+    {
+      "answer": "MATTERHORN",
+      "clue": "Markanter Schweizer Berg mit Pyramidenform",
+      "row": 13,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "KARPATEN",
+      "clue": "Osteuropäisches Gebirge im weiten Bogen",
+      "row": 15,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "MITTELMEER",
+      "clue": "Binnenmeer zwischen drei Kontinenten",
+      "row": 17,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "HIMALAYA",
+      "clue": "Höchstes Gebirge der Erde",
+      "row": 19,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "ISLAND",
+      "clue": "Atlantik-Insel mit Geysiren und Vulkanen",
+      "row": 10,
+      "col": 16,
+      "direction": "across"
+    },
+    {
+      "answer": "KORSIKA",
+      "clue": "Geburtsinsel Napoleons",
+      "row": 13,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "ANDEN",
+      "clue": "Längstes Gebirge der Welt — durchzieht Südamerika",
+      "row": 10,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "SAHEL",
+      "clue": "Übergangszone zwischen Sahara und Savanne",
+      "row": 9,
+      "col": 19,
+      "direction": "down"
+    },
+    {
+      "answer": "ATACAMA",
+      "clue": "Trockenste Wüste der Welt — in Chile",
+      "row": 0,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "BORNEO",
+      "clue": "Drittgrößte Insel der Welt",
+      "row": 1,
+      "col": 18,
+      "direction": "down"
+    },
+    {
+      "answer": "GANGES",
+      "clue": "Heiliger Fluss Indiens",
+      "row": 2,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "TIBET",
+      "clue": "Hochland südlich des Himalaya",
+      "row": 8,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "RHEIN",
+      "clue": "Fluss von den Alpen zur Nordsee",
+      "row": 13,
+      "col": 14,
+      "direction": "down"
+    },
+    {
+      "answer": "URAL",
+      "clue": "Gebirge, das Europa von Asien trennt",
+      "row": 17,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "KALAHARI",
+      "clue": "Trockensavanne im südlichen Afrika",
+      "row": 3,
+      "col": 12,
+      "direction": "across"
+    },
+    {
+      "answer": "DONAU",
+      "clue": "Längster Fluss in der Europäischen Union",
+      "row": 0,
+      "col": 13,
+      "direction": "down"
+    },
+    {
+      "answer": "SIBIRIEN",
+      "clue": "Riesiges, dünn besiedeltes Gebiet im Norden Russlands",
+      "row": 16,
+      "col": 13,
+      "direction": "across"
+    },
+    {
+      "answer": "HAWAII",
+      "clue": "Pazifik-Inselgruppe — Aloha und Surfer-Paradies",
+      "row": 3,
+      "col": 1,
+      "direction": "down"
+    },
+    {
+      "answer": "WOLGA",
+      "clue": "Längster Fluss Europas",
+      "row": 13,
+      "col": 17,
+      "direction": "across"
+    },
+    {
+      "answer": "KRETA",
+      "clue": "Größte griechische Insel — Wiege der Minoer",
+      "row": 0,
+      "col": 9,
+      "direction": "down"
+    }
+  ],
+  "size": 23
+}

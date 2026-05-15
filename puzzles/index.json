@@ -69,6 +69,26 @@
       "description": "Physik, Chemie, Biologie — von Quark bis Quasar. Wissen aus dem Studium.",
       "wordCount": 30,
       "size": 23
+    },
+    {
+      "id": "kunst-hard-01",
+      "file": "kunst-hard-01.json",
+      "title": "Pinsel & Marmor",
+      "theme": "kunst",
+      "difficulty": "hard",
+      "description": "Maler, Stile, Werke, Bauwerke — von der Renaissance bis Pop Art.",
+      "wordCount": 30,
+      "size": 23
+    },
+    {
+      "id": "geographie-hard-01",
+      "file": "geographie-hard-01.json",
+      "title": "Erde von Pol zu Pol",
+      "theme": "geographie",
+      "difficulty": "hard",
+      "description": "Gebirge, Flüsse, Wüsten, Inseln — Geographie für Atlas-Fans.",
+      "wordCount": 30,
+      "size": 23
     }
   ]
 }
