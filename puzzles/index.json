@@ -119,6 +119,36 @@
       "description": "Komponisten, Werke, Instrumente — von der Fuge bis zur Spätromantik.",
       "wordCount": 30,
       "size": 22
+    },
+    {
+      "id": "geschichte-hard-01",
+      "file": "geschichte-hard-01.json",
+      "title": "Aus den Annalen",
+      "theme": "geschichte",
+      "difficulty": "hard",
+      "description": "Persönlichkeiten, Epochen, Schlachten — Geschichte von der Antike bis zum Kalten Krieg.",
+      "wordCount": 30,
+      "size": 24
+    },
+    {
+      "id": "film-hard-01",
+      "file": "film-hard-01.json",
+      "title": "Leinwand & Schwarzbild",
+      "theme": "film",
+      "difficulty": "hard",
+      "description": "Regisseure, Schauspieler, Klassiker, Genres — vom Stummfilm bis Marvel.",
+      "wordCount": 30,
+      "size": 22
+    },
+    {
+      "id": "natur-hard-01",
+      "file": "natur-hard-01.json",
+      "title": "Flora & Fauna",
+      "theme": "natur",
+      "difficulty": "hard",
+      "description": "Tiere, Pflanzen, Lebensräume — Naturkunde für Beobachter.",
+      "wordCount": 30,
+      "size": 19
     }
   ]
 }

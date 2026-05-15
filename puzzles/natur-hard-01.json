@@ -1,0 +1,220 @@
+{
+  "id": "natur-hard-01",
+  "title": "Flora & Fauna",
+  "theme": "natur",
+  "difficulty": "hard",
+  "description": "Tiere, Pflanzen, Lebensräume — Naturkunde für Beobachter.",
+  "words": [
+    {
+      "answer": "SCHLANGE",
+      "clue": "Reptil ohne Beine, häutet sich regelmäßig",
+      "row": 10,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "GIRAFFE",
+      "clue": "Säugetier mit dem längsten Hals",
+      "row": 7,
+      "col": 11,
+      "direction": "down"
+    },
+    {
+      "answer": "SAVANNE",
+      "clue": "Afrikanische Graslandschaft mit Akazien",
+      "row": 4,
+      "col": 14,
+      "direction": "down"
+    },
+    {
+      "answer": "BIRKE",
+      "clue": "Laubbaum mit weißer Rinde",
+      "row": 13,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "PAPAGEI",
+      "clue": "Bunter Tropenvogel, manche können sprechen",
+      "row": 8,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "HIRSCH",
+      "clue": "Geweihtragender Waldbewohner",
+      "row": 12,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "PINGUIN",
+      "clue": "Frackträger in der Antarktis",
+      "row": 8,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "DELFIN",
+      "clue": "Intelligenter Zahnwal mit Echolot",
+      "row": 10,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "AMEISE",
+      "clue": "Bildet Staaten, trägt Vielfaches ihres Gewichts",
+      "row": 4,
+      "col": 10,
+      "direction": "across"
+    },
+    {
+      "answer": "SPINNE",
+      "clue": "Achtbeinige Räuberin in Netzen",
+      "row": 15,
+      "col": 8,
+      "direction": "across"
+    },
+    {
+      "answer": "EICHE",
+      "clue": "Laubbaum mit Eicheln, Symbol für Stärke",
+      "row": 0,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "ELEFANT",
+      "clue": "Größtes Landtier mit Rüssel",
+      "row": 0,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "SPECHT",
+      "clue": "Trommelt mit dem Schnabel an Baumstämmen",
+      "row": 6,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "ORCHIDEE",
+      "clue": "Exotische Zierblume mit auffälligen Blüten",
+      "row": 17,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "KAKTUS",
+      "clue": "Wüstenpflanze mit Stacheln",
+      "row": 7,
+      "col": 13,
+      "direction": "across"
+    },
+    {
+      "answer": "EFEU",
+      "clue": "Immergrüne Kletterpflanze",
+      "row": 0,
+      "col": 10,
+      "direction": "across"
+    },
+    {
+      "answer": "BIENE",
+      "clue": "Sammelt Nektar, lebt im Stock, produziert Honig",
+      "row": 2,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "FARN",
+      "clue": "Urtümliche Pflanze, vermehrt sich durch Sporen",
+      "row": 12,
+      "col": 11,
+      "direction": "across"
+    },
+    {
+      "answer": "ROSE",
+      "clue": "Stachelige 'Königin der Blumen'",
+      "row": 12,
+      "col": 13,
+      "direction": "down"
+    },
+    {
+      "answer": "STORCH",
+      "clue": "Klappervogel, soll Babys bringen",
+      "row": 6,
+      "col": 16,
+      "direction": "down"
+    },
+    {
+      "answer": "TANNE",
+      "clue": "Klassischer Weihnachtsbaum",
+      "row": 14,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "EULE",
+      "clue": "Nachtaktiver Greifvogel mit großen Augen",
+      "row": 4,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "KROKODIL",
+      "clue": "Großes Reptil aus Afrika und Australien",
+      "row": 3,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "TULPE",
+      "clue": "Niederländische Frühlingsblume",
+      "row": 0,
+      "col": 15,
+      "direction": "down"
+    },
+    {
+      "answer": "ADLER",
+      "clue": "König der Lüfte, scharfer Blick",
+      "row": 1,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "PFAU",
+      "clue": "Männchen mit prächtigem Augenrad",
+      "row": 12,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "TIGER",
+      "clue": "Größte Großkatze, gestreift",
+      "row": 14,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "BUCHE",
+      "clue": "Laubbaum mit glatter Rinde und Bucheckern",
+      "row": 1,
+      "col": 14,
+      "direction": "across"
+    },
+    {
+      "answer": "FUCHS",
+      "clue": "Listiger rotbrauner Räuber im Märchen",
+      "row": 3,
+      "col": 18,
+      "direction": "down"
+    },
+    {
+      "answer": "WOLF",
+      "clue": "Stammvater unserer Haushunde",
+      "row": 7,
+      "col": 1,
+      "direction": "across"
+    }
+  ],
+  "size": 19
+}

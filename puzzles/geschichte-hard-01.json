@@ -1,0 +1,220 @@
+{
+  "id": "geschichte-hard-01",
+  "title": "Aus den Annalen",
+  "theme": "geschichte",
+  "difficulty": "hard",
+  "description": "Persönlichkeiten, Epochen, Schlachten — Geschichte von der Antike bis zum Kalten Krieg.",
+  "words": [
+    {
+      "answer": "APARTHEID",
+      "clue": "System der Rassentrennung in Südafrika",
+      "row": 5,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "MITTELALTER",
+      "clue": "Zeitalter der Burgen und Klöster",
+      "row": 11,
+      "col": 8,
+      "direction": "across"
+    },
+    {
+      "answer": "GUTENBERG",
+      "clue": "Erfand den Buchdruck mit beweglichen Lettern",
+      "row": 9,
+      "col": 10,
+      "direction": "across"
+    },
+    {
+      "answer": "WELTKRIEG",
+      "clue": "1914–1918 oder 1939–1945",
+      "row": 8,
+      "col": 16,
+      "direction": "down"
+    },
+    {
+      "answer": "ALEXANDER",
+      "clue": "Makedonischer Eroberer mit dem Pferd Bukephalos",
+      "row": 13,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "HASTINGS",
+      "clue": "1066 — Normannen siegen über die Angelsachsen",
+      "row": 5,
+      "col": 11,
+      "direction": "across"
+    },
+    {
+      "answer": "REFORMATION",
+      "clue": "Spaltung der westlichen Kirche im 16. Jahrhundert",
+      "row": 7,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "PHARAO",
+      "clue": "Altägyptischer Herrscher",
+      "row": 7,
+      "col": 10,
+      "direction": "across"
+    },
+    {
+      "answer": "GANDHI",
+      "clue": "Vater der indischen Unabhängigkeitsbewegung",
+      "row": 0,
+      "col": 15,
+      "direction": "down"
+    },
+    {
+      "answer": "STALINGRAD",
+      "clue": "Wendeschlacht des Zweiten Weltkriegs an der Wolga",
+      "row": 16,
+      "col": 10,
+      "direction": "across"
+    },
+    {
+      "answer": "FRIEDRICH",
+      "clue": "Preußischer König 'der Große' aus Sanssouci",
+      "row": 3,
+      "col": 11,
+      "direction": "across"
+    },
+    {
+      "answer": "PERIKLES",
+      "clue": "Athener Staatsmann des Goldenen Zeitalters",
+      "row": 8,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "NERO",
+      "clue": "Römischer Kaiser, dem der Brand Roms angelastet wird",
+      "row": 10,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "KENNEDY",
+      "clue": "Erschossen 1963 in Dallas",
+      "row": 17,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "NAPOLEON",
+      "clue": "Korsikanischer Feldherr, Kaiser der Franzosen 1804–1815",
+      "row": 15,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "RICHARD",
+      "clue": "'Löwenherz' im Dritten Kreuzzug",
+      "row": 14,
+      "col": 15,
+      "direction": "across"
+    },
+    {
+      "answer": "KOLUMBUS",
+      "clue": "Genuese, erreichte 1492 die Karibik",
+      "row": 18,
+      "col": 11,
+      "direction": "across"
+    },
+    {
+      "answer": "BISMARCK",
+      "clue": "'Eiserner Kanzler', schmiedete das Deutsche Reich",
+      "row": 1,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "CHURCHILL",
+      "clue": "Britischer Premier mit Zigarre und V-Zeichen",
+      "row": 15,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "MANDELA",
+      "clue": "Erster schwarzer Präsident Südafrikas, 27 Jahre inhaftiert",
+      "row": 5,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "CLEOPATRA",
+      "clue": "Letzte Pharaonin Ägyptens",
+      "row": 15,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "WATERLOO",
+      "clue": "Napoleons letzte Schlacht 1815",
+      "row": 0,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "ATTILA",
+      "clue": "'Gottesgeißel', Hunnen-König",
+      "row": 1,
+      "col": 10,
+      "direction": "across"
+    },
+    {
+      "answer": "HIROSHIMA",
+      "clue": "6. August 1945 — erste Atombombe im Krieg",
+      "row": 21,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "STALIN",
+      "clue": "Sowjetischer Diktator von 1924 bis 1953",
+      "row": 2,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "LUTHER",
+      "clue": "Reformator, schlug 1517 seine Thesen an",
+      "row": 9,
+      "col": 20,
+      "direction": "down"
+    },
+    {
+      "answer": "WILHELM",
+      "clue": "Letzter deutscher Kaiser, dankte 1918 ab",
+      "row": 12,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "JEANNE",
+      "clue": "Französische Volksheldin, in Rouen verbrannt",
+      "row": 20,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "ANTIKE",
+      "clue": "Epoche der Griechen und Römer",
+      "row": 0,
+      "col": 1,
+      "direction": "down"
+    },
+    {
+      "answer": "KARL",
+      "clue": "Großer Frankenkönig, am Heiligabend 800 in Rom gekrönt",
+      "row": 6,
+      "col": 2,
+      "direction": "down"
+    }
+  ],
+  "size": 24
+}

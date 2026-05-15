@@ -1,0 +1,220 @@
+{
+  "id": "film-hard-01",
+  "title": "Leinwand & Schwarzbild",
+  "theme": "film",
+  "difficulty": "hard",
+  "description": "Regisseure, Schauspieler, Klassiker, Genres — vom Stummfilm bis Marvel.",
+  "words": [
+    {
+      "answer": "KOMOEDIE",
+      "clue": "Filmgenre des Lachens",
+      "row": 7,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "SPIELBERG",
+      "clue": "Regisseur von 'Jurassic Park' und 'E.T.'",
+      "row": 11,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "TARANTINO",
+      "clue": "Regisseur von 'Pulp Fiction' und 'Kill Bill'",
+      "row": 13,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "CANNES",
+      "clue": "Filmfestival an der Côte d'Azur",
+      "row": 7,
+      "col": 15,
+      "direction": "down"
+    },
+    {
+      "answer": "CASINO",
+      "clue": "Las-Vegas-Mafia-Epos von Scorsese mit De Niro",
+      "row": 8,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "BRANDO",
+      "clue": "Marlon … in 'Der Pate' und 'Endstation Sehnsucht'",
+      "row": 12,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "NOLAN",
+      "clue": "Regisseur von 'Inception' und 'Interstellar'",
+      "row": 13,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "HOLLYWOOD",
+      "clue": "Filmmetropole in Los Angeles",
+      "row": 16,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "PACINO",
+      "clue": "Al … als Michael Corleone",
+      "row": 6,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "INCEPTION",
+      "clue": "Traum-in-Traum-Thriller von Nolan mit DiCaprio",
+      "row": 6,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "ROCKY",
+      "clue": "Boxer-Sage aus Philadelphia mit Stallone",
+      "row": 4,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "EASTWOOD",
+      "clue": "Clint …, Cowboy und 'Dirty Harry'",
+      "row": 8,
+      "col": 14,
+      "direction": "across"
+    },
+    {
+      "answer": "CRUISE",
+      "clue": "Tom … in 'Top Gun' und 'Mission Impossible'",
+      "row": 4,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "HITCHCOCK",
+      "clue": "'Master of Suspense', drehte 'Psycho'",
+      "row": 2,
+      "col": 19,
+      "direction": "down"
+    },
+    {
+      "answer": "OSCAR",
+      "clue": "Goldene Trophäe von der Academy",
+      "row": 13,
+      "col": 14,
+      "direction": "down"
+    },
+    {
+      "answer": "SCORSESE",
+      "clue": "Regisseur von 'Goodfellas' und 'Taxi Driver'",
+      "row": 15,
+      "col": 13,
+      "direction": "across"
+    },
+    {
+      "answer": "AVENGERS",
+      "clue": "Marvel-Superhelden-Ensemble",
+      "row": 13,
+      "col": 18,
+      "direction": "down"
+    },
+    {
+      "answer": "THRILLER",
+      "clue": "Genre der Hochspannung",
+      "row": 13,
+      "col": 16,
+      "direction": "down"
+    },
+    {
+      "answer": "KUBRICK",
+      "clue": "Regisseur von '2001' und 'Clockwork Orange'",
+      "row": 5,
+      "col": 14,
+      "direction": "across"
+    },
+    {
+      "answer": "WESTERN",
+      "clue": "Filmgenre mit Cowboys und Revolvern",
+      "row": 10,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "CHAPLIN",
+      "clue": "Stummfilm-Komiker mit Melone und Schnurrbart",
+      "row": 0,
+      "col": 11,
+      "direction": "down"
+    },
+    {
+      "answer": "HORROR",
+      "clue": "Filmgenre des Gruselns",
+      "row": 15,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "ALIEN",
+      "clue": "Ridley Scotts Weltraum-Horror mit Sigourney Weaver",
+      "row": 18,
+      "col": 15,
+      "direction": "across"
+    },
+    {
+      "answer": "HANKS",
+      "clue": "Tom … in 'Forrest Gump' und 'Cast Away'",
+      "row": 2,
+      "col": 14,
+      "direction": "down"
+    },
+    {
+      "answer": "TITANIC",
+      "clue": "Cameron-Schiffsdrama mit DiCaprio und Winslet",
+      "row": 0,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "STREEP",
+      "clue": "Meryl …, dreifache Oscar-Preisträgerin",
+      "row": 9,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "PSYCHO",
+      "clue": "Hitchcock-Klassiker mit der berüchtigten Duschszene",
+      "row": 19,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "JAWS",
+      "clue": "Spielbergs Hai-Klassiker am Strand",
+      "row": 3,
+      "col": 13,
+      "direction": "across"
+    },
+    {
+      "answer": "REGIE",
+      "clue": "Verantwortliche Filmleitung",
+      "row": 11,
+      "col": 20,
+      "direction": "down"
+    },
+    {
+      "answer": "AVATAR",
+      "clue": "Cameron-Sci-Fi auf dem Mond Pandora",
+      "row": 20,
+      "col": 11,
+      "direction": "across"
+    }
+  ],
+  "size": 22
+}

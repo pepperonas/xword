@@ -34,7 +34,7 @@
 [![Maintained](https://img.shields.io/badge/Maintained-yes-2d6e4e.svg?style=for-the-badge&labelColor=1a1a1a)](https://github.com/pepperonas/xword/commits/main)
 
 <!-- Puzzle catalog -->
-[![Puzzles total (12)](https://img.shields.io/badge/Puzzles_total-12-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
+[![Puzzles total (15)](https://img.shields.io/badge/Puzzles_total-15-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
 [![Tech (2)](https://img.shields.io/badge/Tech-2-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
 [![Allgemein (2)](https://img.shields.io/badge/Allgemein-2-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
 [![Klassik (1)](https://img.shields.io/badge/Klassik-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
@@ -45,6 +45,9 @@
 [![Architektur (1)](https://img.shields.io/badge/Architektur-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
 [![Sport (1)](https://img.shields.io/badge/Sport-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
 [![Musik (1)](https://img.shields.io/badge/Musik-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
+[![Geschichte (1)](https://img.shields.io/badge/Geschichte-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
+[![Film (1)](https://img.shields.io/badge/Film-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
+[![Natur (1)](https://img.shields.io/badge/Natur-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
 
 <!-- Misc -->
 [![Made in Germany](https://img.shields.io/badge/Made_in-Germany-000000?style=for-the-badge&labelColor=dd0000)](#)
@@ -144,7 +147,8 @@ xword/
 │   └── musik-hard-01.json      Pro Rätsel ein JSON mit Wörtern + Hinweisen + Layout
 │
 ├── tests/
-│   └── layout.test.js          27 Unit-Tests (node:test, keine Deps)
+│   ├── layout.test.js          27 Tests für den Layout-Algorithmus
+│   └── server/                 34 Tests für Backend (session, db, rate-limit, achievements)
 │
 ├── server/                     Backend (Node + Express + SQLite, ES Modules)
 │   ├── server.js               Express-App, Routes, Env-Loading
@@ -269,15 +273,22 @@ Bis zu ~80–120 randomisierte Durchläufe; der kompakteste Versuch mit den meis
 npm test
 ```
 
-**27 Unit-Tests** decken den Layout-Algorithmus ab:
+**61 Unit-Tests** (27 Layout + 34 Backend):
 
+**Layout** (`tests/layout.test.js`):
 - `normaliseAnswer` — Umlaute, Filter, leere Eingaben
 - Platzierung — Einzelwort, Kreuzungen, Normalisierung, leere/degenerierte Eingaben
 - Integrität — keine Buchstaben-Konflikte, keine Parallel-Berührungen, keine Wort-Verlängerungen
 - Dichte — ≥ 1.5 Kreuzungen pro Wort bei 20+ Wörtern
-- Regression — alle 12 gelieferten Puzzles platzieren beim Re-Layout
+- Regression — alle gelieferten Puzzles platzieren beim Re-Layout
 
-GitHub Actions führt die Tests bei jedem Push auf `main` und bei PRs aus.
+**Backend** (`tests/server/*.test.js`):
+- `session.test.js` — HMAC-Sign/Verify-Roundtrip, Tampering, Expiry, malformed Input
+- `rate-limit.test.js` — Limits, 429 mit Retry-After, X-RateLimit-Header, Per-IP-Isolation
+- `db.test.js` — Migrationen, idempotente Re-Runs, Upsert mit COALESCE, CASCADE-Delete
+- `achievements.test.js` — Rang-Schwellen, computeProfile, Streak-Berechnung
+
+GitHub Actions führt alle Tests bei jedem Push auf `main` und bei PRs aus.
 
 ---
 

@@ -306,6 +306,12 @@ CSS variables defined under `:root` (light) and `html[data-theme="dark"]` (dark)
 
 GitHub Actions (`.github/workflows/test.yml`) runs `npm test` on push to `main` and PRs. The README Tests-Badge points at the workflow.
 
+Tests live in two directories:
+- `tests/layout.test.js` — layout algorithm coverage (27 tests, browser-loadable module via globalThis)
+- `tests/server/*.test.js` — backend coverage (34 tests, dynamic `import()` of ES modules into CommonJS test files): session, rate-limit, db (migrations + upsert behavior), achievements (ranks + streaks + computeProfile).
+
+Run all: `npm test`. Run only one suite: `node --test tests/server/session.test.js`.
+
 ---
 
 ## Conventions
