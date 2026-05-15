@@ -18,6 +18,7 @@ import { randomBytes } from 'node:crypto';
 import { readFileSync, existsSync, statSync } from 'node:fs';
 import { openDb } from './db.js';
 import { sign, verify } from './session.js';
+import { computeProfile } from './achievements.js';
 
 /* ------- Env loading (minimal dotenv) ------- */
 function loadEnv() {
@@ -257,6 +258,13 @@ app.delete('/api/auth/me', requireUser, (req, res) => {
   db.raw.prepare('DELETE FROM users WHERE id = ?').run(req.user.id);
   res.clearCookie(SESSION_COOKIE, { path: '/' });
   res.json({ ok: true });
+});
+
+/* ------- Profile (rank + achievements) ------- */
+app.get('/api/profile', requireUser, (req, res) => {
+  const solvedRows = db.listSolved.all(req.user.id);
+  const profile = computeProfile(solvedRows);
+  res.json(profile);
 });
 
 /* ------- Admin endpoints (read-only) ------- */

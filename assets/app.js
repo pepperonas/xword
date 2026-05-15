@@ -17,6 +17,12 @@
     viewSelector: document.getElementById('view-selector'),
     viewGame: document.getElementById('view-game'),
     viewAdmin: document.getElementById('view-admin'),
+    viewProfile: document.getElementById('view-profile'),
+    profileContent: document.getElementById('profileContent'),
+    profileGreeting: document.getElementById('profileGreeting'),
+    userBarProfile: document.getElementById('userBarProfile'),
+    btnProfileBack: document.getElementById('btnProfileBack'),
+    toastContainer: document.getElementById('toastContainer'),
     filterBar: document.getElementById('filterBar'),
     puzzleSections: document.getElementById('puzzleSections'),
     btnBack: document.getElementById('btnBack'),
@@ -161,6 +167,15 @@
       syncRow.textContent = '✓ Fortschritt wird gespeichert';
       menu.appendChild(syncRow);
 
+      const profileBtn = document.createElement('button');
+      profileBtn.textContent = 'Profil';
+      profileBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menu.classList.remove('open');
+        navigateToProfile();
+      });
+      menu.appendChild(profileBtn);
+
       const settingsBtn = document.createElement('button');
       settingsBtn.textContent = 'Einstellungen';
       settingsBtn.addEventListener('click', (e) => {
@@ -218,6 +233,7 @@
     renderUserBar(refs.userBarSelector);
     renderUserBar(refs.userBarGame);
     if (refs.userBarAdmin) renderUserBar(refs.userBarAdmin);
+    if (refs.userBarProfile) renderUserBar(refs.userBarProfile);
   }
 
   /* ---------- Settings modal ---------- */
@@ -470,6 +486,166 @@
     return root;
   }
 
+  /* ---------- Profile view ---------- */
+  function navigateToProfile() { window.location.hash = 'profile'; }
+
+  async function showProfile() {
+    if (!state.user) { navigateToSelector(); return; }
+    if (state.currentGame) {
+      state.currentGame.destroy();
+      state.currentGame = null;
+    }
+    refs.viewSelector.classList.remove('active');
+    refs.viewGame.classList.remove('active');
+    if (refs.viewAdmin) refs.viewAdmin.classList.remove('active');
+    refs.viewProfile.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    renderUserBar(refs.userBarProfile);
+
+    refs.profileGreeting.textContent = state.user.name ? state.user.name + 's Buch' : 'Dein Buch';
+    refs.profileContent.replaceChildren(el('div', 'admin-loading', 'Lade Profil…'));
+
+    const profile = await window.XwordAuth.fetchProfile();
+    if (!profile) {
+      refs.profileContent.replaceChildren(el('div', 'admin-error', 'Profil konnte nicht geladen werden.'));
+      return;
+    }
+    state.profile = profile;
+    refs.profileContent.replaceChildren(buildProfileView(profile));
+    // Reconcile achievements with localStorage and fire toasts for new ones
+    checkAndToastNewAchievements(profile.achievements, false);
+  }
+
+  function buildProfileView(profile) {
+    const frag = document.createDocumentFragment();
+
+    // Rank banner
+    const banner = el('div', 'rank-banner');
+    const head = el('div', 'rank-banner-head');
+    const left = document.createElement('div');
+    left.appendChild(el('div', 'rank-banner-label', 'Aktueller Rang'));
+    const name = document.createElement('div');
+    name.className = 'rank-banner-name';
+    name.appendChild(document.createTextNode(profile.rank.label));
+    left.appendChild(name);
+    head.appendChild(left);
+    const right = document.createElement('div');
+    right.className = 'rank-banner-xp';
+    right.appendChild(document.createTextNode(profile.xp + ' XP'));
+    const subXp = document.createElement('span');
+    subXp.className = 'sub';
+    subXp.textContent = profile.xp_from_puzzles + ' aus Rätseln · ' + profile.xp_from_achievements + ' aus Erfolgen';
+    right.appendChild(subXp);
+    head.appendChild(right);
+    banner.appendChild(head);
+
+    const bar = el('div', 'rank-bar');
+    const fill = document.createElement('span');
+    fill.style.right = (100 - (profile.rank.progress || 0)) + '%';
+    bar.appendChild(fill);
+    banner.appendChild(bar);
+
+    const barLabels = el('div', 'rank-bar-labels');
+    barLabels.appendChild(el('span', null, profile.rank.label + ' · ' + profile.rank.min + ' XP'));
+    if (profile.rank.next) {
+      barLabels.appendChild(el('span', null, profile.rank.next.label + ' · ' + profile.rank.next.min + ' XP'));
+    } else {
+      barLabels.appendChild(el('span', null, 'Max'));
+    }
+    banner.appendChild(barLabels);
+    frag.appendChild(banner);
+
+    // Stats grid
+    const s = profile.stats || {};
+    const stats = el('div', 'profile-stats');
+    stats.appendChild(buildStatCell('Gelöste Rätsel',  s.solvedCount));
+    stats.appendChild(buildStatCell('Davon schwer',    s.hardSolvedCount));
+    stats.appendChild(buildStatCell('Themen abgedeckt', s.distinctThemesSolved + ' / ' + s.totalThemesCount));
+    stats.appendChild(buildStatCell('Spielzeit',       formatDuration(s.totalPlayMs)));
+    stats.appendChild(buildStatCell('Schnellste Lösung', s.fastestMs ? formatDuration(s.fastestMs) : '—'));
+    stats.appendChild(buildStatCell('Ohne Hinweise',   s.noHintSolvedCount));
+    frag.appendChild(stats);
+
+    // Achievements
+    const unlockedCount = profile.achievements.filter(a => a.unlocked).length;
+    const header = el('div', 'profile-section-head');
+    const h = el('h2', null, 'Erfolge');
+    header.appendChild(h);
+    header.appendChild(el('span', 'count', unlockedCount + ' / ' + profile.achievements.length + ' freigeschaltet'));
+    frag.appendChild(header);
+
+    const grid = el('div', 'achievement-grid');
+    for (const a of profile.achievements) {
+      grid.appendChild(buildAchievementCard(a));
+    }
+    frag.appendChild(grid);
+
+    return frag;
+  }
+
+  function buildAchievementCard(a) {
+    const card = el('div', 'achievement-card tier-' + a.tier + ' ' + (a.unlocked ? 'unlocked' : 'locked'));
+    const ico = el('div', 'achievement-icon', a.icon || '·');
+    card.appendChild(ico);
+    const body = el('div', 'achievement-body');
+    body.appendChild(el('div', 'achievement-name', a.name));
+    body.appendChild(el('div', 'achievement-desc', a.description));
+    body.appendChild(el('div', 'achievement-xp', '+' + a.tier_xp + ' XP'));
+    card.appendChild(body);
+    card.appendChild(el('div', 'achievement-tier', a.tier));
+    return card;
+  }
+
+  /* ---------- Achievement toast ---------- */
+  const SEEN_KEY = 'xword.seenAchievements';
+
+  function loadSeenAchievements() {
+    try {
+      return new Set(JSON.parse(localStorage.getItem(SEEN_KEY) || '[]'));
+    } catch { return new Set(); }
+  }
+  function saveSeenAchievements(set) {
+    try { localStorage.setItem(SEEN_KEY, JSON.stringify([...set])); } catch {}
+  }
+
+  /**
+   * Compare freshly fetched achievements against what we already showed.
+   * `isInitial` is true on the very first fetch after page load — we then
+   * baseline-fill the seen set without toasting, so users don't get spammed
+   * with toasts for old achievements every time they open the page.
+   */
+  function checkAndToastNewAchievements(achievements, isInitial) {
+    const seen = loadSeenAchievements();
+    const newly = [];
+    for (const a of achievements) {
+      if (a.unlocked && !seen.has(a.key)) {
+        newly.push(a);
+        seen.add(a.key);
+      }
+    }
+    saveSeenAchievements(seen);
+    if (!isInitial) {
+      newly.forEach((a, i) => setTimeout(() => showToast(a), i * 400));
+    }
+  }
+
+  function showToast(a) {
+    const c = refs.toastContainer;
+    if (!c) return;
+    const t = el('div', 'toast tier-' + a.tier);
+    t.appendChild(el('div', 'toast-icon', a.icon || '★'));
+    const body = el('div', 'toast-body');
+    body.appendChild(el('div', 'toast-eyebrow', 'Erfolg freigeschaltet'));
+    body.appendChild(el('div', 'toast-name', a.name));
+    t.appendChild(body);
+    c.appendChild(t);
+    requestAnimationFrame(() => t.classList.add('visible'));
+    setTimeout(() => {
+      t.classList.remove('visible');
+      setTimeout(() => t.remove(), 500);
+    }, 4500);
+  }
+
   function showSyncIndicator(status) {
     if (!state.syncIndicator) return;
     state.syncIndicator.classList.remove('saving', 'saved');
@@ -648,7 +824,20 @@
       state.saver = window.XwordAuth.makeSaver();
       callbacks.onProgressChange = (payload) => {
         showSyncIndicator('saving');
-        state.saver.save(puzzleMeta.id, payload, () => showSyncIndicator('saved'));
+        const wasSolved = !!(initialState && initialState.solved);
+        state.saver.save(puzzleMeta.id, payload, () => {
+          showSyncIndicator('saved');
+          // After a save that flips the puzzle to solved, refresh profile
+          // so achievement toasts fire and the user gets immediate feedback.
+          if (payload.solved && !wasSolved) {
+            window.XwordAuth.fetchProfile().then(profile => {
+              if (profile) {
+                state.profile = profile;
+                checkAndToastNewAchievements(profile.achievements, false);
+              }
+            });
+          }
+        });
       };
       callbacks.initialState = initialState;
     }
@@ -675,6 +864,7 @@
     state.currentPuzzleId = null;
     refs.viewGame.classList.remove('active');
     if (refs.viewAdmin) refs.viewAdmin.classList.remove('active');
+    if (refs.viewProfile) refs.viewProfile.classList.remove('active');
     refs.viewSelector.classList.add('active');
     refs.overlay.classList.remove('show');
     // Refresh progress map so cards reflect latest state from the just-left game
@@ -697,6 +887,14 @@
     if (hash === 'admin') {
       if (state.user && state.user.is_admin) {
         showAdmin();
+      } else {
+        window.location.hash = '';
+      }
+      return;
+    }
+    if (hash === 'profile') {
+      if (state.user) {
+        showProfile();
       } else {
         window.location.hash = '';
       }
@@ -746,10 +944,22 @@
     // Pre-load progress so cards show percentages on first paint
     if (state.user) await refreshProgressMap();
 
+    // Baseline-fill the toast 'seen' set on first load so we don't spam
+    // notifications for achievements that were unlocked in a previous session.
+    if (state.user) {
+      window.XwordAuth.fetchProfile().then(p => {
+        if (p) {
+          state.profile = p;
+          checkAndToastNewAchievements(p.achievements, /* isInitial = */ true);
+        }
+      });
+    }
+
     renderFilters();
     renderPuzzleList();
     refs.btnBack.addEventListener('click', () => navigateToSelector());
     if (refs.btnAdminBack) refs.btnAdminBack.addEventListener('click', () => navigateToSelector());
+    if (refs.btnProfileBack) refs.btnProfileBack.addEventListener('click', () => navigateToSelector());
 
     // Admin tabs
     if (refs.adminTabs) {

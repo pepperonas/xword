@@ -39,9 +39,12 @@ function migrateProgress(db) {
   const missing = (name, sql) => {
     if (!cols.includes(name)) db.prepare(sql).run();
   };
-  missing('percent',       'ALTER TABLE progress ADD COLUMN percent INTEGER NOT NULL DEFAULT 0');
-  missing('hardcore',      'ALTER TABLE progress ADD COLUMN hardcore INTEGER NOT NULL DEFAULT 0');
-  missing('live_validate', 'ALTER TABLE progress ADD COLUMN live_validate INTEGER NOT NULL DEFAULT 0');
+  missing('percent',            'ALTER TABLE progress ADD COLUMN percent INTEGER NOT NULL DEFAULT 0');
+  missing('hardcore',           'ALTER TABLE progress ADD COLUMN hardcore INTEGER NOT NULL DEFAULT 0');
+  missing('live_validate',      'ALTER TABLE progress ADD COLUMN live_validate INTEGER NOT NULL DEFAULT 0');
+  // Captured ONCE at first solve — preserves the mode at the moment of victory.
+  missing('solved_in_hardcore', 'ALTER TABLE progress ADD COLUMN solved_in_hardcore INTEGER');
+  missing('solved_no_hints',    'ALTER TABLE progress ADD COLUMN solved_no_hints INTEGER');
 }
 
 export function openDb(path) {
@@ -67,8 +70,17 @@ export function openDb(path) {
     `),
     getUserById: db.prepare(`SELECT id, google_sub, email, name, picture FROM users WHERE id = ?`),
     upsertProgress: db.prepare(`
-      INSERT INTO progress (user_id, puzzle_id, grid_state, hinted_cells, hint_count, elapsed_ms, solved, solved_at, updated_at, percent, hardcore, live_validate)
-      VALUES (@user_id, @puzzle_id, @grid_state, @hinted_cells, @hint_count, @elapsed_ms, @solved, @solved_at, @now, @percent, @hardcore, @live_validate)
+      INSERT INTO progress (
+        user_id, puzzle_id, grid_state, hinted_cells, hint_count, elapsed_ms,
+        solved, solved_at, updated_at, percent, hardcore, live_validate,
+        solved_in_hardcore, solved_no_hints
+      )
+      VALUES (
+        @user_id, @puzzle_id, @grid_state, @hinted_cells, @hint_count, @elapsed_ms,
+        @solved, @solved_at, @now, @percent, @hardcore, @live_validate,
+        CASE WHEN @solved = 1 THEN @hardcore END,
+        CASE WHEN @solved = 1 THEN CASE WHEN @hint_count = 0 THEN 1 ELSE 0 END END
+      )
       ON CONFLICT(user_id, puzzle_id) DO UPDATE SET
         grid_state = excluded.grid_state,
         hinted_cells = excluded.hinted_cells,
@@ -79,7 +91,10 @@ export function openDb(path) {
         updated_at = excluded.updated_at,
         percent = excluded.percent,
         hardcore = excluded.hardcore,
-        live_validate = excluded.live_validate
+        live_validate = excluded.live_validate,
+        -- Capture solve-time state once; never overwrite.
+        solved_in_hardcore = COALESCE(progress.solved_in_hardcore, excluded.solved_in_hardcore),
+        solved_no_hints    = COALESCE(progress.solved_no_hints,    excluded.solved_no_hints)
     `),
     getProgress: db.prepare(`
       SELECT puzzle_id, grid_state, hinted_cells, hint_count, elapsed_ms, solved, solved_at, updated_at,
@@ -121,6 +136,15 @@ export function openDb(path) {
       ORDER BY p.updated_at DESC
       LIMIT 100
     `),
+    /* ---------- Profile / achievements ---------- */
+    listSolved: db.prepare(`
+      SELECT puzzle_id, elapsed_ms, hint_count, solved_at,
+             solved_in_hardcore, solved_no_hints
+      FROM progress
+      WHERE user_id = ? AND solved = 1
+      ORDER BY solved_at ASC
+    `),
+
     adminPuzzleStats: db.prepare(`
       SELECT puzzle_id,
              COUNT(*) AS attempts,

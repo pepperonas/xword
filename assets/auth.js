@@ -143,6 +143,18 @@
     } catch { return false; }
   }
 
+  async function fetchProfile() {
+    try {
+      const res = await fetch(API + '/profile', { credentials: 'same-origin' });
+      if (res.status === 401) return null;
+      if (!res.ok) throw new Error('profile ' + res.status);
+      return await res.json();
+    } catch (e) {
+      console.warn('Profile fetch failed:', e);
+      return null;
+    }
+  }
+
   async function adminFetch(path) {
     try {
       const res = await fetch(API + '/admin/' + path, { credentials: 'same-origin' });
@@ -165,5 +177,6 @@
     resetAllProgress,
     deleteAccount,
     adminFetch,
+    fetchProfile,
   };
 })(typeof window !== 'undefined' ? window : globalThis);

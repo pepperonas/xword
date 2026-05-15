@@ -1173,6 +1173,270 @@ body::before {
   color: var(--ink);
 }
 
+/* ============ PROFILE VIEW ============ */
+.rank-banner {
+  background: var(--bg-paper);
+  border: 2px solid var(--ink);
+  padding: 28px 32px;
+  border-radius: 2px;
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 24px;
+  position: relative;
+}
+.rank-banner::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border: 1px solid var(--ink);
+  transform: translate(6px, 6px);
+  z-index: -1;
+  pointer-events: none;
+}
+.rank-banner-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.rank-banner-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.rank-banner-name {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(32px, 5vw, 56px);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  font-variation-settings: "opsz" 120;
+}
+.rank-banner-name em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent);
+}
+.rank-banner-xp {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-align: right;
+}
+.rank-banner-xp .sub {
+  display: block;
+  font-weight: 400;
+  font-size: 10px;
+  color: var(--ink-faint);
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+}
+.rank-bar {
+  height: 8px;
+  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+.rank-bar > span {
+  position: absolute;
+  inset: 0 100% 0 0;
+  background: linear-gradient(90deg, var(--accent), #d4b878);
+  transition: right 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.rank-bar-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.profile-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1px;
+  background: var(--ink);
+  border: 2px solid var(--ink);
+  margin-bottom: 32px;
+}
+
+.profile-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--ink);
+}
+.profile-section-head h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.profile-section-head .count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  letter-spacing: 0.1em;
+}
+
+.achievement-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.achievement-card {
+  background: var(--bg-paper);
+  border: 2px solid var(--ink);
+  padding: 16px 18px;
+  border-radius: 2px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+}
+.achievement-card.unlocked {
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.achievement-card.locked {
+  opacity: 0.45;
+  background: var(--bg);
+}
+.achievement-icon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-family: var(--font-display);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--ink);
+}
+.achievement-card.unlocked.tier-bronze .achievement-icon { background: #cd7f32; color: #fff; border-color: #8a5520; }
+.achievement-card.unlocked.tier-silver .achievement-icon { background: #c0c0c0; color: var(--ink); border-color: #8a8a8a; }
+.achievement-card.unlocked.tier-gold .achievement-icon { background: var(--accent); color: var(--ink); border-color: #8a6b30; }
+.achievement-body {
+  flex: 1;
+  min-width: 0;
+}
+.achievement-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.15;
+  margin-bottom: 4px;
+}
+.achievement-desc {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 12px;
+  color: var(--ink-soft);
+  line-height: 1.3;
+}
+.achievement-tier {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.achievement-card.unlocked.tier-bronze .achievement-tier { color: #8a5520; }
+.achievement-card.unlocked.tier-silver .achievement-tier { color: #6a6a6a; }
+.achievement-card.unlocked.tier-gold   .achievement-tier { color: #8a6b30; }
+.achievement-xp {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+  margin-top: 6px;
+}
+
+/* ============ TOASTS ============ */
+.toast-container {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+.toast {
+  background: var(--bg-paper);
+  border: 2px solid var(--ink);
+  padding: 14px 18px;
+  border-radius: 2px;
+  box-shadow: 4px 4px 0 var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 280px;
+  max-width: 360px;
+  pointer-events: auto;
+  transform: translateX(120%);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.toast.visible { transform: translateX(0); }
+.toast-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-family: var(--font-display);
+  background: var(--accent);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  flex-shrink: 0;
+}
+.toast.tier-bronze .toast-icon { background: #cd7f32; color: #fff; }
+.toast.tier-silver .toast-icon { background: #c0c0c0; }
+.toast.tier-gold .toast-icon { background: var(--accent); }
+.toast-body {
+  flex: 1;
+  min-width: 0;
+}
+.toast-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 2px;
+}
+.toast-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.2;
+}
+
 /* ============ SETTINGS MODAL ============ */
 .settings-card {
   background: var(--bg-paper);
