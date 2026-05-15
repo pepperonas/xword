@@ -149,6 +149,36 @@
       "description": "Tiere, Pflanzen, Lebensräume — Naturkunde für Beobachter.",
       "wordCount": 30,
       "size": 19
+    },
+    {
+      "id": "literatur-hard-01",
+      "file": "literatur-hard-01.json",
+      "title": "Eminenz der Lettern",
+      "theme": "literatur",
+      "difficulty": "hard",
+      "description": "Weltliteratur auf 1-Mio-Niveau — Daten, Werke, Schulen aus drei Jahrtausenden.",
+      "wordCount": 14,
+      "size": 15
+    },
+    {
+      "id": "geschichte-hard-02",
+      "file": "geschichte-hard-02.json",
+      "title": "Aus den Schattenarchiven",
+      "theme": "geschichte",
+      "difficulty": "hard",
+      "description": "Geschichte auf 1-Mio-Niveau — Daten, Schlachten, Vertragsorte, die niemand zufällig kennt.",
+      "wordCount": 14,
+      "size": 19
+    },
+    {
+      "id": "wissenschaft-hard-02",
+      "file": "wissenschaft-hard-02.json",
+      "title": "Aus den Notizbüchern",
+      "theme": "wissenschaft",
+      "difficulty": "hard",
+      "description": "Wissenschaft auf 1-Mio-Niveau — Konstanten, Pioniere, Anekdoten, die nur Spezialisten kennen.",
+      "wordCount": 14,
+      "size": 17
     }
   ]
 }

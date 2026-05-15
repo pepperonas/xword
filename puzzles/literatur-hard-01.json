@@ -1,0 +1,108 @@
+{
+  "id": "literatur-hard-01",
+  "title": "Eminenz der Lettern",
+  "theme": "literatur",
+  "difficulty": "hard",
+  "description": "Weltliteratur auf 1-Mio-Niveau — Daten, Werke, Schulen aus drei Jahrtausenden.",
+  "words": [
+    {
+      "answer": "HEKABE",
+      "clue": "Trojanische Königin und Witwe des Priamos in Euripides' Tragödie",
+      "row": 6,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "ELEATEN",
+      "clue": "Vorsokratische Philosophenschule um Parmenides in der lukanischen Stadt",
+      "row": 3,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "CANDIDE",
+      "clue": "Voltaires Satire von 1759 mit dem Optimisten Pangloss",
+      "row": 0,
+      "col": 3,
+      "direction": "down"
+    },
+    {
+      "answer": "WIELAND",
+      "clue": "Erster vollständiger deutscher Shakespeare-Übersetzer (1762 bis 1766)",
+      "row": 4,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "ZARATHUSTRA",
+      "clue": "Nietzsches Verkünder des Übermenschen in vier Büchern (1883 bis 1885)",
+      "row": 1,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "ANAMNESE",
+      "clue": "Platons Begriff für das vorgeburtliche Schauen der ewigen Ideen",
+      "row": 8,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "NAUSIKAA",
+      "clue": "Phäakenprinzessin, die Odysseus im 6. Gesang am Strand findet",
+      "row": 0,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "RIMBAUD",
+      "clue": "Sechzehnjähriger Verfasser des Gedichts 'Le Bateau ivre' (1871)",
+      "row": 4,
+      "col": 0,
+      "direction": "down"
+    },
+    {
+      "answer": "PHAEDON",
+      "clue": "Platon-Dialog vom letzten Tag des Sokrates im Gefängnis",
+      "row": 7,
+      "col": 8,
+      "direction": "across"
+    },
+    {
+      "answer": "MONADE",
+      "clue": "Leibniz' fensterloses metaphysisches Grundelement",
+      "row": 8,
+      "col": 3,
+      "direction": "down"
+    },
+    {
+      "answer": "HEBBEL",
+      "clue": "Norddeutscher Dramatiker des bürgerlichen Trauerspiels 'Maria Magdalena' (1844)",
+      "row": 7,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "KALEVALA",
+      "clue": "Finnisches Nationalepos, 1835 von Lönnrot aus Runen kompiliert",
+      "row": 13,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "SALAMMBO",
+      "clue": "Flauberts Roman von 1862 über Hamilkars Tochter im belagerten Karthago",
+      "row": 0,
+      "col": 13,
+      "direction": "down"
+    },
+    {
+      "answer": "HYPERION",
+      "clue": "Hölderlins zweibändiger Briefroman von 1797 bis 1799",
+      "row": 11,
+      "col": 6,
+      "direction": "across"
+    }
+  ],
+  "size": 15
+}

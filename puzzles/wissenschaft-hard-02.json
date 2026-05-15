@@ -1,0 +1,108 @@
+{
+  "id": "wissenschaft-hard-02",
+  "title": "Aus den Notizbüchern",
+  "theme": "wissenschaft",
+  "difficulty": "hard",
+  "description": "Wissenschaft auf 1-Mio-Niveau — Konstanten, Pioniere, Anekdoten, die nur Spezialisten kennen.",
+  "words": [
+    {
+      "answer": "LINNAEUS",
+      "clue": "Schwed. Botaniker, führte 1735 die binäre Nomenklatur ein",
+      "row": 6,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "ASTROLABIUM",
+      "clue": "Mittelalterliches Instrument für die Höhenwinkel-Messung von Gestirnen",
+      "row": 0,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "PRIESTLEY",
+      "clue": "Engländer, isolierte 1774 das Gas, das später Sauerstoff genannt wurde",
+      "row": 2,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "LAVOISIER",
+      "clue": "Franz. Begründer der Stöchiometrie, 1794 in Paris guillotiniert",
+      "row": 4,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "PASTEUR",
+      "clue": "Franz. Mikrobiologe, dessen Tollwut-Impfung 1885 an Joseph Meister gelang",
+      "row": 9,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "ENTROPIE",
+      "clue": "Clausius' 1865 eingeführtes Maß der Irreversibilität",
+      "row": 2,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "MARGULIS",
+      "clue": "US-Biologin Lynn, formulierte 1967 die Endosymbiontentheorie",
+      "row": 0,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "TURBULENZ",
+      "clue": "Strömungszustand mit Reynoldszahl ab etwa 4000",
+      "row": 7,
+      "col": 8,
+      "direction": "across"
+    },
+    {
+      "answer": "LYSENKO",
+      "clue": "Sowj. Pseudobiologe, dessen Lehre 1948 zur Staatsdoktrin erhoben wurde",
+      "row": 10,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "AVOGADRO",
+      "clue": "Ital. Chemiker, dessen Konstante etwa 6,022 mal 10 hoch 23 beträgt",
+      "row": 9,
+      "col": 1,
+      "direction": "down"
+    },
+    {
+      "answer": "BOSON",
+      "clue": "Teilchenklasse mit ganzzahligem Spin, nach Satyendra Nath benannt",
+      "row": 11,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "VENERA",
+      "clue": "Sowj. Sondenreihe, deren Nr. 7 (1970) erstmals weich auf der Venus landete",
+      "row": 9,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "KEKULE",
+      "clue": "Bonner Chemiker, erkannte 1865 im Tagtraum die Ringstruktur des Benzols",
+      "row": 12,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "CHANDRA",
+      "clue": "Indisch-am. Astrophysiker, dessen Massengrenze für Weiße Zwerge gilt",
+      "row": 14,
+      "col": 4,
+      "direction": "across"
+    }
+  ],
+  "size": 17
+}

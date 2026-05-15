@@ -299,7 +299,7 @@ Bis zu ~80–120 randomisierte Durchläufe; der kompakteste Versuch mit den meis
 npm test
 ```
 
-**75 Unit-Tests** (30 Layout + 11 Input-Dedupe + 34 Backend):
+**78 Unit-Tests** (33 Layout + 11 Input-Dedupe + 34 Backend):
 
 **Layout** (`tests/layout.test.js`):
 - `normaliseAnswer` — Umlaute, Filter, leere Eingaben

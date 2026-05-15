@@ -1,0 +1,108 @@
+{
+  "id": "geschichte-hard-02",
+  "title": "Aus den Schattenarchiven",
+  "theme": "geschichte",
+  "difficulty": "hard",
+  "description": "Geschichte auf 1-Mio-Niveau — Daten, Schlachten, Vertragsorte, die niemand zufällig kennt.",
+  "words": [
+    {
+      "answer": "LECHFELD",
+      "clue": "Ort der Schlacht 955, in der Otto I. die ungarischen Reiter schlug",
+      "row": 6,
+      "col": 13,
+      "direction": "down"
+    },
+    {
+      "answer": "ROBESPIERRE",
+      "clue": "Der 'Unbestechliche' der Jakobiner, am 28. Juli 1794 guillotiniert",
+      "row": 11,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "MEMELLAND",
+      "clue": "1923 von Litauen annektiertes, 1939 von Hitler heim ins Reich geholtes Gebiet",
+      "row": 7,
+      "col": 10,
+      "direction": "across"
+    },
+    {
+      "answer": "HADRIAN",
+      "clue": "Röm. Kaiser, ließ ab 122 n. Chr. den nach ihm benannten britischen Limes errichten",
+      "row": 13,
+      "col": 11,
+      "direction": "across"
+    },
+    {
+      "answer": "VERSAILLES",
+      "clue": "Schloss, in dem 1871 das Kaiserreich und 1919 der Friedensvertrag verkündet wurden",
+      "row": 0,
+      "col": 15,
+      "direction": "down"
+    },
+    {
+      "answer": "MAQUIS",
+      "clue": "Bewaffnete französische Widerstandskämpfer im Bergland ab 1942",
+      "row": 3,
+      "col": 10,
+      "direction": "across"
+    },
+    {
+      "answer": "TEMUDSCHIN",
+      "clue": "Bürgerlicher Name des Mongolenführers, der 1206 zum Dschingis Khan ausgerufen wurde",
+      "row": 3,
+      "col": 18,
+      "direction": "down"
+    },
+    {
+      "answer": "PIRENNE",
+      "clue": "Belgischer Mediävist, formulierte die These vom Bruch der Spätantike im 7. Jh.",
+      "row": 8,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "THEODORA",
+      "clue": "Gemahlin Justinians I., einst Schauspielerin, mitregierende Augusta von 527 bis 548",
+      "row": 6,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "ABBASIDEN",
+      "clue": "Kalifendynastie, die 750 in der Schlacht am Großen Zab die Umayyaden ablöste",
+      "row": 0,
+      "col": 11,
+      "direction": "down"
+    },
+    {
+      "answer": "SARAJEVO",
+      "clue": "Stadt, in der Gavrilo Princip am 28. Juni 1914 Franz Ferdinand erschoss",
+      "row": 9,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "TANNENBERG",
+      "clue": "Schlacht August 1914, in der Hindenburg die russische Narev-Armee einkesselte",
+      "row": 8,
+      "col": 3,
+      "direction": "down"
+    },
+    {
+      "answer": "WORMS",
+      "clue": "Reichstagsort 1521, vor dem Luther seine Lehren nicht widerrief",
+      "row": 16,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "CANOSSA",
+      "clue": "Burg in der Emilia, vor der Heinrich IV. im Januar 1077 büßte",
+      "row": 13,
+      "col": 1,
+      "direction": "across"
+    }
+  ],
+  "size": 19
+}
