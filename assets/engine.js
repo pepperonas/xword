@@ -191,10 +191,51 @@
       fillList(refs.cluesDown, dWords);
     }
 
+    /**
+     * "Protected" = a cell holds a letter that's part of a different word
+     * which is currently fully solved. Deleting or overwriting it would
+     * destroy the other word's correctness, so we skip past it on input
+     * and on backspace.
+     */
+    function isProtectedCell(r, c) {
+      const cell = state.grid[r] && state.grid[r][c];
+      if (!cell || cell.isBlock || !cell.letter) return false;
+      const activeKey = state.active ? state.active.wordId : null;
+      for (const dir of ['across', 'down']) {
+        const otherKey = cell.words[dir];
+        if (!otherKey || otherKey === activeKey) continue;
+        const otherWord = state.words.find(w => w.key === otherKey);
+        if (otherWord && isWordCorrect(otherWord)) return true;
+      }
+      return false;
+    }
+
+    function wordCells(w) {
+      const cells = [];
+      for (let i = 0; i < w.answer.length; i++) {
+        const r = w.direction === 'across' ? w.row : w.row + i;
+        const c = w.direction === 'across' ? w.col + i : w.col;
+        cells.push({ r, c });
+      }
+      return cells;
+    }
+
+    /** First empty cell of a word, or the word's start if everything is filled. */
+    function firstEmptyInWord(w) {
+      for (const cell of wordCells(w)) {
+        if (!state.grid[cell.r][cell.c].letter) return cell;
+      }
+      return { r: w.row, c: w.col };
+    }
+
     function activateWord(key, scrollIntoView = false) {
       const word = state.words.find(w => w.key === key);
       if (!word) return;
-      state.active = { wordId: word.key, dir: word.direction, row: word.row, col: word.col };
+      // Snap the cursor to the first empty cell — that's where the user
+      // wants to start typing. Cells already filled by solved crossings get
+      // skipped automatically because they aren't "empty".
+      const start = firstEmptyInWord(word);
+      state.active = { wordId: word.key, dir: word.direction, row: start.r, col: start.c };
       paint();
       setActiveTab(word.direction);
       if (scrollIntoView) {
@@ -419,6 +460,18 @@
 
     function typeLetter(ch) {
       if (!state.active) return;
+
+      // If the cursor is sitting on a cell that's already correctly filled
+      // by a solved crossing word, don't overwrite it — advance past first.
+      if (isProtectedCell(state.active.row, state.active.col)) {
+        const beforeKey = state.active.row + ',' + state.active.col;
+        nextCellInWord();
+        const afterKey = state.active.row + ',' + state.active.col;
+        if (beforeKey === afterKey || isProtectedCell(state.active.row, state.active.col)) {
+          return; // no typable position available
+        }
+      }
+
       const { row, col } = state.active;
       const cell = state.grid[row][col];
       if (cell.isBlock) return;
@@ -429,20 +482,46 @@
       emitProgress();
     }
 
+    /**
+     * Backspace behaviour:
+     *   - If the current cell has the user's own letter (not protected by a
+     *     solved crossing), clear it. Cursor stays.
+     *   - Otherwise walk backward through the word, skipping protected cells
+     *     and empty gaps, until we find a cell holding a user-deletable letter.
+     *     Clear that one and place the cursor there.
+     * One keypress = one user letter removed.
+     */
     function deleteLetter() {
       if (!state.active) return;
-      const { row, col } = state.active;
-      const cell = state.grid[row][col];
-      if (cell.letter) {
-        cell.letter = '';
+      const a = state.active;
+      const here = state.grid[a.row][a.col];
+
+      if (here.letter && !isProtectedCell(a.row, a.col)) {
+        here.letter = '';
         paint();
-      } else {
-        prevCellInWord();
-        const a = state.active;
-        state.grid[a.row][a.col].letter = '';
-        paint();
+        emitProgress();
+        return;
       }
-      emitProgress();
+
+      // Walk backward to find the previous deletable cell.
+      const w = state.words.find(x => x.key === a.wordId);
+      if (!w) return;
+      const cells = wordCells(w);
+      const idx = cells.findIndex(p => p.r === a.row && p.c === a.col);
+
+      for (let i = idx - 1; i >= 0; i--) {
+        const { r, c } = cells[i];
+        const cell = state.grid[r][c];
+        if (cell.letter && !isProtectedCell(r, c)) {
+          cell.letter = '';
+          a.row = r;
+          a.col = c;
+          paint();
+          emitProgress();
+          return;
+        }
+      }
+      // No deletable cell found behind us — leave the state unchanged.
     }
 
     function liveCheckCell(r, c) {
