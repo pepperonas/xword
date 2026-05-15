@@ -24,6 +24,7 @@
     btnProfileBack: document.getElementById('btnProfileBack'),
     toastContainer: document.getElementById('toastContainer'),
     filterBar: document.getElementById('filterBar'),
+    dailyCardSlot: document.getElementById('dailyCardSlot'),
     puzzleSections: document.getElementById('puzzleSections'),
     btnBack: document.getElementById('btnBack'),
     btnAdminBack: document.getElementById('btnAdminBack'),
@@ -55,6 +56,7 @@
     btnReset: document.getElementById('btnReset'),
     btnPlayAgain: document.getElementById('btnPlayAgain'),
     btnBackFromWin: document.getElementById('btnBackFromWin'),
+    btnShareWin: document.getElementById('btnShareWin'),
     liveToggle: document.getElementById('liveToggle'),
     hardcoreToggle: document.getElementById('hardcoreToggle'),
     statPercent: document.getElementById('statPercent'),
@@ -84,6 +86,8 @@
     syncIndicator: null,           // DOM element shown while saving
     progressMap: {},               // puzzle_id -> { percent, solved, hint_count, elapsed_ms, ... }
     adminTab: 'users',
+    daily: null,                   // { puzzle_id, date }
+    streak: { current: 0, longest: 0 },
   };
 
   function el(tag, className, text) {
@@ -646,6 +650,38 @@
     }, 4500);
   }
 
+  /* ---------- Share ---------- */
+  async function shareCurrentWin() {
+    if (!state.currentPuzzleId || !state.manifest) return;
+    const puzzle = state.manifest.puzzles.find(p => p.id === state.currentPuzzleId);
+    if (!puzzle) return;
+    const time = document.getElementById('winTime').textContent;
+    const hints = document.getElementById('winHints').textContent;
+    const url = window.location.origin + '/#play=' + puzzle.id;
+    const text = '🧩 ' + puzzle.title + ' gelöst in ' + time + ' mit ' + hints + ' Hinweisen.\n' + url;
+    // Use Web Share API on mobile/supported browsers
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: 'Kreuzworträtsel', text, url });
+        return;
+      } catch (e) {
+        if (e.name === 'AbortError') return;
+        // fall through to clipboard
+      }
+    }
+    try {
+      await navigator.clipboard.writeText(text);
+      refs.btnShareWin.textContent = '✓ Kopiert';
+      setTimeout(() => {
+        refs.btnShareWin.replaceChildren();
+        refs.btnShareWin.appendChild(el('span', 'ico', '↗'));
+        refs.btnShareWin.appendChild(document.createTextNode('Teilen'));
+      }, 1800);
+    } catch (e) {
+      alert('Konnte nicht in die Zwischenablage kopieren.\n\n' + text);
+    }
+  }
+
   function showSyncIndicator(status) {
     if (!state.syncIndicator) return;
     state.syncIndicator.classList.remove('saving', 'saved');
@@ -755,6 +791,28 @@
     return `${m}:${s}`;
   }
 
+  function renderDailyCard() {
+    if (!refs.dailyCardSlot) return;
+    refs.dailyCardSlot.replaceChildren();
+    if (!state.daily || !state.daily.puzzle_id || !state.manifest) return;
+    const puzzle = state.manifest.puzzles.find(p => p.id === state.daily.puzzle_id);
+    if (!puzzle) return;
+    const card = el('div', 'daily-card');
+    card.addEventListener('click', () => navigateToGame(puzzle.id));
+    const body = el('div', 'daily-card-body');
+    body.appendChild(el('div', 'daily-card-eyebrow', '★ Rätsel des Tages · ' + new Date().toLocaleDateString('de-DE')));
+    body.appendChild(el('div', 'daily-card-title', puzzle.title));
+    body.appendChild(el('div', 'daily-card-meta', puzzle.theme + ' · ' + DIFFICULTY_LABELS[puzzle.difficulty] + ' · ' + puzzle.wordCount + ' Wörter'));
+    card.appendChild(body);
+    if (state.user && state.streak && (state.streak.current > 0 || state.streak.longest > 0)) {
+      const streakBox = el('div', 'daily-card-streak');
+      streakBox.appendChild(el('span', 'daily-card-streak-value', String(state.streak.current)));
+      streakBox.appendChild(document.createTextNode(state.streak.current === 1 ? 'Tag Serie' : 'Tage Serie'));
+      card.appendChild(streakBox);
+    }
+    refs.dailyCardSlot.appendChild(card);
+  }
+
   async function refreshProgressMap() {
     if (!state.user) { state.progressMap = {}; return; }
     const items = await window.XwordAuth.listProgress();
@@ -833,6 +891,7 @@
             window.XwordAuth.fetchProfile().then(profile => {
               if (profile) {
                 state.profile = profile;
+                if (profile.streak) state.streak = profile.streak;
                 checkAndToastNewAchievements(profile.achievements, false);
               }
             });
@@ -914,14 +973,16 @@
 
   /* ---------- Init ---------- */
   async function init() {
-    // Fetch user + manifest + version in parallel
-    const [user, manifest, version] = await Promise.all([
+    // Fetch user + manifest + version + daily in parallel
+    const [user, manifest, version, daily] = await Promise.all([
       window.XwordAuth.fetchMe(),
       loadManifest().catch(err => { console.error(err); return null; }),
       loadVersion(),
+      window.XwordAuth.fetchDaily(),
     ]);
     state.user = user;
     state.manifest = manifest;
+    state.daily = daily;
 
     const versionEl = document.getElementById('appVersion');
     if (versionEl) {
@@ -950,11 +1011,14 @@
       window.XwordAuth.fetchProfile().then(p => {
         if (p) {
           state.profile = p;
+          if (p.streak) state.streak = p.streak;
+          renderDailyCard();
           checkAndToastNewAchievements(p.achievements, /* isInitial = */ true);
         }
       });
     }
 
+    renderDailyCard();
     renderFilters();
     renderPuzzleList();
     refs.btnBack.addEventListener('click', () => navigateToSelector());
@@ -969,6 +1033,11 @@
     }
 
     // Settings modal handlers
+    // Share button in win overlay
+    if (refs.btnShareWin) {
+      refs.btnShareWin.addEventListener('click', () => shareCurrentWin());
+    }
+
     refs.settingsClose.addEventListener('click', closeSettings);
     refs.settingsOverlay.addEventListener('click', (e) => {
       if (e.target === refs.settingsOverlay) closeSettings();
@@ -1018,4 +1087,11 @@
   }
 
   document.addEventListener('DOMContentLoaded', init);
+
+  // Register service worker for offline play. Skipped on file:// and during dev.
+  if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(err => console.warn('SW registration failed:', err));
+    });
+  }
 })();

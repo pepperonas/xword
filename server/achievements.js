@@ -148,6 +148,55 @@ export const ACHIEVEMENTS = [
 ];
 
 /**
+ * Day-streak: count consecutive days (UTC) up to today with at least one solve.
+ */
+export function computeStreak(solvedRows) {
+  if (!solvedRows.length) return { current: 0, longest: 0 };
+  const dayKeys = new Set();
+  for (const row of solvedRows) {
+    if (!row.solved_at) continue;
+    const d = new Date(row.solved_at * 1000);
+    dayKeys.add(`${d.getUTCFullYear()}-${d.getUTCMonth()}-${d.getUTCDate()}`);
+  }
+  if (!dayKeys.size) return { current: 0, longest: 0 };
+
+  const today = new Date();
+  let cursor = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()));
+  let current = 0;
+  while (true) {
+    const k = `${cursor.getUTCFullYear()}-${cursor.getUTCMonth()}-${cursor.getUTCDate()}`;
+    if (dayKeys.has(k)) {
+      current++;
+      cursor = new Date(cursor.getTime() - 86400000);
+    } else if (current === 0) {
+      // Allow yesterday-only streak (today not yet solved is still a "live" streak).
+      const yesterday = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()) - 86400000);
+      const yk = `${yesterday.getUTCFullYear()}-${yesterday.getUTCMonth()}-${yesterday.getUTCDate()}`;
+      if (k === `${today.getUTCFullYear()}-${today.getUTCMonth()}-${today.getUTCDate()}` && dayKeys.has(yk)) {
+        cursor = yesterday;
+        continue;
+      }
+      break;
+    } else {
+      break;
+    }
+  }
+
+  // Longest streak: walk through sorted days.
+  const sorted = [...dayKeys].map(k => k.split('-').map(Number)).map(([y, m, d]) => Date.UTC(y, m, d)).sort((a, b) => a - b);
+  let longest = 1, run = 1;
+  for (let i = 1; i < sorted.length; i++) {
+    if (sorted[i] - sorted[i - 1] === 86400000) {
+      run++;
+      if (run > longest) longest = run;
+    } else if (sorted[i] !== sorted[i - 1]) {
+      run = 1;
+    }
+  }
+  return { current, longest };
+}
+
+/**
  * Compute stats + XP + unlocked achievements for a user.
  * solvedRows: rows from db.listSolved.all(userId).
  */
@@ -228,6 +277,26 @@ export function computeProfile(solvedRows) {
 
   const xp = xpFromPuzzles + xpFromAchievements;
   const rank = rankForXp(xp);
+  const streak = computeStreak(solvedRows);
 
-  return { xp, xp_from_puzzles: xpFromPuzzles, xp_from_achievements: xpFromAchievements, rank, achievements, stats };
+  return { xp, xp_from_puzzles: xpFromPuzzles, xp_from_achievements: xpFromAchievements, rank, achievements, stats, streak };
+}
+
+/**
+ * Deterministic puzzle-of-the-day selection.
+ * Returns puzzleId for today, based on UTC date hash + manifest.
+ */
+export function dailyPuzzle() {
+  const m = metaIndex();
+  const ids = [...m.keys()];
+  if (!ids.length) return null;
+  const today = new Date();
+  const yyyymmdd = today.getUTCFullYear() * 10000 + (today.getUTCMonth() + 1) * 100 + today.getUTCDate();
+  // simple deterministic hash → index
+  let h = yyyymmdd;
+  h = ((h >>> 16) ^ h) * 0x45d9f3b;
+  h = ((h >>> 16) ^ h) * 0x45d9f3b;
+  h = (h >>> 16) ^ h;
+  const idx = Math.abs(h) % ids.length;
+  return ids[idx];
 }

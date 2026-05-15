@@ -1,0 +1,27 @@
+{
+  "name": "Kreuzworträtsel",
+  "short_name": "xword",
+  "description": "Eine kuratierte Sammlung deutscher Kreuzworträtsel — vom Tech-Quiz bis zur klassischen Bildung.",
+  "lang": "de-DE",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f4f1ea",
+  "theme_color": "#1a1a1a",
+  "categories": ["games", "puzzles", "education"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/xword.png",
+      "sizes": "1024x540",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

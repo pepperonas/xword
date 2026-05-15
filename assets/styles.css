@@ -135,6 +135,21 @@ body::before {
   position: static;
   margin-left: auto;
 }
+
+/* On narrower screens, the absolute user bar collides with the
+   centered masthead. Move it into normal flow above the masthead
+   and right-align. Shrink to just the avatar (the menu still opens
+   on click and shows email/menu items). */
+@media (max-width: 760px) {
+  .user-bar {
+    position: static;
+    justify-content: flex-end;
+    margin: 0 0 12px;
+  }
+  .user-bar .user-name { display: none; }
+  .user-chip { padding: 4px; }
+  .user-menu { right: 0; }
+}
 .user-chip {
   display: flex;
   align-items: center;
@@ -263,6 +278,82 @@ body::before {
   font-size: 18px;
 }
 
+.daily-card {
+  background: var(--bg-paper);
+  border: 2px solid var(--ink);
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  border-radius: 2px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.daily-card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 80px; height: 80px;
+  background: var(--accent);
+  transform: translate(40px, -40px) rotate(45deg);
+  opacity: 0.4;
+  pointer-events: none;
+}
+.daily-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+.daily-card-body { min-width: 0; }
+.daily-card-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.daily-card-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.daily-card-meta {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.daily-card-streak {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.daily-card-streak-value {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 38px;
+  line-height: 1;
+  color: var(--ink);
+  font-variation-settings: "opsz" 72;
+}
+@media (max-width: 480px) {
+  .daily-card { grid-template-columns: 1fr; padding: 16px; }
+  .daily-card-streak { text-align: left; }
+  .daily-card-streak-value { font-size: 28px; }
+}
+
 .filter-bar {
   display: flex;
   gap: 8px;
@@ -323,9 +414,35 @@ body::before {
 
 .puzzle-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 16px;
   margin-bottom: 32px;
+}
+@media (max-width: 480px) {
+  .puzzle-grid { grid-template-columns: 1fr; gap: 12px; }
+  body { padding: 16px 12px 60px; }
+}
+
+/* Mobile touch optimisations */
+@media (max-width: 700px) {
+  .board-wrap { padding: 12px; }
+  .cell .letter {
+    /* Slightly larger letters because the cells are slightly bigger */
+    font-size: clamp(14px, 4.2vw, 22px);
+  }
+  .controls .btn {
+    padding: 14px 12px;
+    font-size: 12px;
+    min-height: 44px;
+  }
+  .clue-item {
+    padding: 14px 16px;       /* taller tap target */
+  }
+  .filter-chip {
+    padding: 10px 14px;
+    font-size: 12px;
+  }
+  .back-link, .btn { min-height: 36px; }
 }
 .puzzle-card {
   background: var(--bg-paper);
@@ -983,8 +1100,11 @@ body::before {
 
 .win-card .btn-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px;
+}
+@media (max-width: 460px) {
+  .win-card .btn-row { grid-template-columns: 1fr; }
 }
 
 /* ============ ADMIN VIEW ============ */

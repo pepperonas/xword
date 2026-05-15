@@ -143,6 +143,14 @@
     } catch { return false; }
   }
 
+  async function fetchDaily() {
+    try {
+      const res = await fetch(API + '/daily', { cache: 'no-store' });
+      if (!res.ok) return null;
+      return await res.json();
+    } catch { return null; }
+  }
+
   async function fetchProfile() {
     try {
       const res = await fetch(API + '/profile', { credentials: 'same-origin' });
@@ -178,5 +186,6 @@
     deleteAccount,
     adminFetch,
     fetchProfile,
+    fetchDaily,
   };
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -7,9 +7,10 @@
 <meta name="description" content="Eine kuratierte Sammlung deutscher Kreuzworträtsel — von Tech über Allgemeinwissen bis Klassische Bildung. Mit KI-gestützter Rätselgenerierung.">
 <meta name="theme-color" content="#1a1a1a">
 
-<!-- Favicon -->
+<!-- Favicon + PWA -->
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="favicon.svg">
+<link rel="manifest" href="/manifest.webmanifest">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -53,6 +54,8 @@
       <h1>Kreuz<em>worträtsel</em></h1>
       <p class="subtitle">— Eine kuratierte Sammlung —</p>
     </header>
+
+    <div id="dailyCardSlot"></div>
 
     <div class="filter-bar" id="filterBar">
       <!-- filter chips inserted by JS -->
@@ -259,6 +262,7 @@
         </div>
       </div>
       <div class="btn-row">
+        <button class="btn" id="btnShareWin"><span class="ico">↗</span>Teilen</button>
         <button class="btn" id="btnPlayAgain">Nochmal</button>
         <button class="btn primary" id="btnBackFromWin">Andere wählen</button>
       </div>

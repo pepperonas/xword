@@ -18,7 +18,7 @@ import { randomBytes } from 'node:crypto';
 import { readFileSync, existsSync, statSync } from 'node:fs';
 import { openDb } from './db.js';
 import { sign, verify } from './session.js';
-import { computeProfile } from './achievements.js';
+import { computeProfile, dailyPuzzle } from './achievements.js';
 
 /* ------- Env loading (minimal dotenv) ------- */
 function loadEnv() {
@@ -265,6 +265,11 @@ app.get('/api/profile', requireUser, (req, res) => {
   const solvedRows = db.listSolved.all(req.user.id);
   const profile = computeProfile(solvedRows);
   res.json(profile);
+});
+
+/* ------- Daily challenge ------- */
+app.get('/api/daily', (req, res) => {
+  res.json({ puzzle_id: dailyPuzzle(), date: new Date().toISOString().slice(0, 10) });
 });
 
 /* ------- Admin endpoints (read-only) ------- */
