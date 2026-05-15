@@ -120,7 +120,24 @@
           <span class="badge" id="currentBadge">—</span>
           <span class="text" id="currentText">Wähle ein Wort, um zu beginnen.</span>
         </div>
+      </section>
 
+      <aside class="clues-panel">
+        <div class="clues-tabs">
+          <button class="clues-tab active" data-dir="across">Horizontal <span class="count" id="countAcross">0</span></button>
+          <button class="clues-tab" data-dir="down">Vertikal <span class="count" id="countDown">0</span></button>
+        </div>
+        <div class="clues-legend">
+          Felder, die <em>Horizontal</em> und <em>Vertikal</em> zugleich beginnen, teilen sich eine Nummer.<br>
+          Umlaute werden ohne Punkte geschrieben: <em>Ä → AE</em>, <em>Ö → OE</em>, <em>Ü → UE</em>, <em>ß → SS</em>.
+        </div>
+        <div class="clues-lists">
+          <div class="clues-section visible visible-mobile" data-dir="across" id="cluesAcross"></div>
+          <div class="clues-section" data-dir="down" id="cluesDown"></div>
+        </div>
+      </aside>
+
+      <section class="board-controls">
         <div class="controls">
           <button class="btn" id="btnCheck"><span class="ico">✓</span>Prüfen</button>
           <button class="btn" id="btnHint"><span class="ico">★</span>Hinweis</button>
@@ -140,21 +157,6 @@
           <div class="switch" id="hardcoreToggle" role="switch" tabindex="0"></div>
         </div>
       </section>
-
-      <aside class="clues-panel">
-        <div class="clues-tabs">
-          <button class="clues-tab active" data-dir="across">Horizontal <span class="count" id="countAcross">0</span></button>
-          <button class="clues-tab" data-dir="down">Vertikal <span class="count" id="countDown">0</span></button>
-        </div>
-        <div class="clues-legend">
-          Felder, die <em>Horizontal</em> und <em>Vertikal</em> zugleich beginnen, teilen sich eine Nummer.<br>
-          Umlaute werden ohne Punkte geschrieben: <em>Ä → AE</em>, <em>Ö → OE</em>, <em>Ü → UE</em>, <em>ß → SS</em>.
-        </div>
-        <div class="clues-lists">
-          <div class="clues-section visible visible-mobile" data-dir="across" id="cluesAcross"></div>
-          <div class="clues-section" data-dir="down" id="cluesDown"></div>
-        </div>
-      </aside>
     </main>
 
     <footer class="footer">© 2026 · <a href="/impressum.html">Impressum</a> · <a href="/datenschutz.html">Datenschutz</a> · <a href="https://github.com/pepperonas/xword" target="_blank" rel="noopener">GitHub</a></footer>

@@ -650,14 +650,30 @@ body::before {
 }
 
 /* ============ MAIN GRID ============ */
+/* Desktop: left column = board card + controls card stacked; right column = clues panel spanning both rows. */
 .main {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 360px;
-  gap: 32px;
+  grid-template-areas:
+    "board    clues"
+    "controls clues";
+  gap: 24px 32px;
   align-items: start;
 }
+.board-wrap     { grid-area: board; }
+.board-controls { grid-area: controls; }
+.clues-panel    { grid-area: clues; }
+
+/* Mobile: stack vertically — board, then clues, then controls. */
 @media (max-width: 900px) {
-  .main { grid-template-columns: 1fr; }
+  .main {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "board"
+      "clues"
+      "controls";
+    gap: 16px;
+  }
 }
 
 /* ============ BACK BAR ============ */
@@ -720,6 +736,18 @@ body::before {
   z-index: -1;
   pointer-events: none;
 }
+
+/* Controls card mirrors the board-wrap style so the left column reads as
+   two stacked editorial cards. On mobile it slips to the very bottom. */
+.board-controls {
+  background: var(--bg-paper);
+  border: 2px solid var(--ink);
+  padding: 16px 20px;
+  box-shadow: var(--shadow);
+  border-radius: 2px;
+  position: relative;
+}
+.board-controls > .toggle-row:first-of-type { margin-top: 0; }
 
 .board-header {
   display: flex;
@@ -844,8 +872,8 @@ body::before {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
-  margin-top: 16px;
 }
+.board-controls > .controls { margin-top: 0; }
 .btn {
   font-family: var(--font-mono);
   font-size: 11px;

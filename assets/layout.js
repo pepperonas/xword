@@ -94,11 +94,14 @@
       } else {
         // occupied — must match the letter (crossing)
         if (existing !== cell.letter) return { ok: false };
-        // and the existing cell must be from a word in the perpendicular direction only
+        // existing cell must NOT be owned by a word running in the same direction.
+        // Otherwise a short word can slip into the tail of a long word and
+        // look like a sequence of "crossings" while actually overlapping it.
         const owners = ownership[cell.r][cell.c];
-        for (const idx of owners) {
-          // we don't know placed words here; the caller handles direction-uniqueness
-          // We treat any letter-match as a crossing.
+        if (owners) {
+          for (const o of owners) {
+            if (o.direction === word.direction) return { ok: false };
+          }
         }
         crossings++;
       }
@@ -108,11 +111,11 @@
     return { ok: true, crossings };
   }
 
-  function applyPlacement(word, wordIndex, grid, ownership) {
+  function applyPlacement(word, grid, ownership) {
     for (const cell of getCells(word)) {
       grid[cell.r][cell.c] = cell.letter;
       if (!ownership[cell.r][cell.c]) ownership[cell.r][cell.c] = new Set();
-      ownership[cell.r][cell.c].add(wordIndex);
+      ownership[cell.r][cell.c].add(word);
     }
   }
 
@@ -229,7 +232,7 @@
     const first = firstDir === 'across'
       ? { ...sorted[0], direction: 'across', row: Math.floor(size / 2), col: Math.floor((size - sorted[0].answer.length) / 2) }
       : { ...sorted[0], direction: 'down',   row: Math.floor((size - sorted[0].answer.length) / 2), col: Math.floor(size / 2) };
-    applyPlacement(first, 0, grid, ownership);
+    applyPlacement(first, grid, ownership);
 
     const placed = [first];
     let queue = sorted.slice(1);
@@ -248,7 +251,7 @@
         candidates.sort((a, b) => scoreCandidate(b, placed, size) - scoreCandidate(a, placed, size));
         const chosen = candidates[0];
         const placedWord = { ...word, row: chosen.row, col: chosen.col, direction: chosen.direction };
-        applyPlacement(placedWord, placed.length, grid, ownership);
+        applyPlacement(placedWord, grid, ownership);
         placed.push(placedWord);
         progressed = true;
       }
