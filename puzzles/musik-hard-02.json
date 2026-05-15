@@ -1,0 +1,108 @@
+{
+  "id": "musik-hard-02",
+  "title": "Aus den Partituren",
+  "theme": "musik",
+  "difficulty": "hard",
+  "description": "Musikgeschichte auf 1-Mio-Niveau — Komponisten, Werke, Anekdoten aus tausend Jahren Notation.",
+  "words": [
+    {
+      "answer": "MONTEVERDI",
+      "clue": "Komponist von 'L'Orfeo' (1607), Wegbereiter der Barockoper",
+      "row": 10,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "MACHAUT",
+      "clue": "Spätmittelalterlicher Komponist der 'Messe de Nostre Dame' um 1365",
+      "row": 4,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "HINDEMITH",
+      "clue": "Komponist der Sinfonie 'Mathis der Maler' (1934)",
+      "row": 6,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "BUXTEHUDE",
+      "clue": "Lübecker Marienkirchen-Organist, den Bach 1705 zu Fuß besuchte",
+      "row": 3,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "SCHOENBERG",
+      "clue": "Begründer der Zwölftonmethode um 1923, 'Pierrot lunaire' (1912)",
+      "row": 7,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "HILDEGARD",
+      "clue": "Äbtissin von Bingen, Komponistin des liturgischen 'Ordo Virtutum'",
+      "row": 5,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "JANACEK",
+      "clue": "Mähr. Komponist, Oper 'Jenufa' (1904), Sinfonietta (1926)",
+      "row": 14,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "COUPERIN",
+      "clue": "François, vier Bücher Cembalo-Pièces zwischen 1713 und 1730",
+      "row": 7,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "TARTINI",
+      "clue": "Italiener des 18. Jh., Komponist der 'Teufelstriller-Sonate'",
+      "row": 12,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "VARESE",
+      "clue": "Edgard, 'Ionisation' für 13 Perkussionisten (1931)",
+      "row": 0,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "WEBERN",
+      "clue": "Anton, Zwölfton-Miniaturist der Zweiten Wiener Schule",
+      "row": 3,
+      "col": 10,
+      "direction": "across"
+    },
+    {
+      "answer": "SCRIABIN",
+      "clue": "Russ. Mystiker, ließ sein 'Mysterium' für den Berg Kailash unvollendet",
+      "row": 1,
+      "col": 14,
+      "direction": "down"
+    },
+    {
+      "answer": "GESUALDO",
+      "clue": "Spätrenaissance-Madrigalist und Gattenmörder von 1590",
+      "row": 16,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "LIGETI",
+      "clue": "Ungar, 'Lux Aeterna' in Kubricks '2001'",
+      "row": 7,
+      "col": 9,
+      "direction": "across"
+    }
+  ],
+  "size": 17
+}

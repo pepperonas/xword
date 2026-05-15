@@ -1,0 +1,108 @@
+{
+  "id": "philosophie-hard-01",
+  "title": "Aus den Schulgängen",
+  "theme": "philosophie",
+  "difficulty": "hard",
+  "description": "Philosophie auf 1-Mio-Niveau — Schulen, Werke, Anekdoten aus zwei Jahrtausenden Denken.",
+  "words": [
+    {
+      "answer": "PARMENIDES",
+      "clue": "Eleate des frühen 5. Jh. v. Chr., Lehrgedicht 'Über die Natur'",
+      "row": 6,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "FICHTE",
+      "clue": "Idealist, hielt 1808 in Berlin die 'Reden an die deutsche Nation'",
+      "row": 1,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "HUSSERL",
+      "clue": "Begründer der Phänomenologie, Lehrer Heideggers in Freiburg",
+      "row": 2,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "ABAELARD",
+      "clue": "Pariser Frühscholastiker des 12. Jh., Liebhaber der Heloise",
+      "row": 0,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "SPINOZA",
+      "clue": "Amsterdamer Brillenschleifer, dessen Ethica 1677 postum erschien",
+      "row": 4,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "AVERROES",
+      "clue": "Andalusischer Kommentator des Aristoteles im 12. Jh., latinisierter Name von Ibn Ruschd",
+      "row": 10,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "WITTGENSTEIN",
+      "clue": "Verfasser des Tractatus 1922 und postum der Untersuchungen 1953",
+      "row": 1,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "BERKELEY",
+      "clue": "Irischer Bischof des Immaterialismus, Lehrsatz 'esse est percipi'",
+      "row": 8,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "KIERKEGAARD",
+      "clue": "Dänischer Vater der Existenz-Philosophie, 'Entweder-Oder' (1843)",
+      "row": 14,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "ARENDT",
+      "clue": "Hannah, Berichterstatterin des Eichmann-Prozesses und Autorin der 'Vita Activa'",
+      "row": 12,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "MAIMONIDES",
+      "clue": "Sephardischer Aristoteliker des 12. Jh., 'Führer der Unschlüssigen'",
+      "row": 16,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "SCHOPENHAUER",
+      "clue": "Frankfurter Pessimist, 'Die Welt als Wille und Vorstellung' (1819)",
+      "row": 2,
+      "col": 0,
+      "direction": "down"
+    },
+    {
+      "answer": "STAGIRIT",
+      "clue": "Beiname des Aristoteles nach seinem makedonischen Geburtsort",
+      "row": 10,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "ANSELM",
+      "clue": "Erzbischof von Canterbury, formulierte den ontologischen Gottesbeweis",
+      "row": 7,
+      "col": 11,
+      "direction": "across"
+    }
+  ],
+  "size": 18
+}

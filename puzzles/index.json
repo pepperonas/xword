@@ -179,6 +179,36 @@
       "description": "Wissenschaft auf 1-Mio-Niveau — Konstanten, Pioniere, Anekdoten, die nur Spezialisten kennen.",
       "wordCount": 14,
       "size": 17
+    },
+    {
+      "id": "philosophie-hard-01",
+      "file": "philosophie-hard-01.json",
+      "title": "Aus den Schulgängen",
+      "theme": "philosophie",
+      "difficulty": "hard",
+      "description": "Philosophie auf 1-Mio-Niveau — Schulen, Werke, Anekdoten aus zwei Jahrtausenden Denken.",
+      "wordCount": 14,
+      "size": 18
+    },
+    {
+      "id": "kunst-hard-02",
+      "file": "kunst-hard-02.json",
+      "title": "Pinselgeflüster",
+      "theme": "kunst",
+      "difficulty": "hard",
+      "description": "Kunstgeschichte auf 1-Mio-Niveau — abseits der Postkartenmotive.",
+      "wordCount": 14,
+      "size": 18
+    },
+    {
+      "id": "musik-hard-02",
+      "file": "musik-hard-02.json",
+      "title": "Aus den Partituren",
+      "theme": "musik",
+      "difficulty": "hard",
+      "description": "Musikgeschichte auf 1-Mio-Niveau — Komponisten, Werke, Anekdoten aus tausend Jahren Notation.",
+      "wordCount": 14,
+      "size": 17
     }
   ]
 }

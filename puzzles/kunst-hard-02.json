@@ -1,0 +1,108 @@
+{
+  "id": "kunst-hard-02",
+  "title": "Pinselgeflüster",
+  "theme": "kunst",
+  "difficulty": "hard",
+  "description": "Kunstgeschichte auf 1-Mio-Niveau — abseits der Postkartenmotive.",
+  "words": [
+    {
+      "answer": "SPITZWEG",
+      "clue": "Münchner Biedermeier-Maler, 'Der arme Poet' (1839)",
+      "row": 11,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "RIEMENSCHNEIDER",
+      "clue": "Würzburger Bildschnitzer, Heiligblutaltar von Rothenburg (1505)",
+      "row": 1,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "TINTORETTO",
+      "clue": "Venezianischer Manierist, 'Sklavenwunder' (1548) in der Accademia",
+      "row": 8,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "KOKOSCHKA",
+      "clue": "Österr. Expressionist, 'Die Windsbraut' (1913) mit Alma Mahler",
+      "row": 7,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "BRUEGEL",
+      "clue": "Pieter d. Ä., 'Bauernhochzeit' und 'Jäger im Schnee' (1565)",
+      "row": 5,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "WHISTLER",
+      "clue": "Am. Maler, 'Arrangement in Grau und Schwarz' (1871) — Mutterporträt",
+      "row": 9,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "HOLBEIN",
+      "clue": "Hans d. J., Hofmaler Heinrichs VIII., 'Die Gesandten' (1533)",
+      "row": 7,
+      "col": 14,
+      "direction": "down"
+    },
+    {
+      "answer": "BRANCUSI",
+      "clue": "Rumän. Bildhauer, 'Unendliche Säule' in Tirgu Jiu",
+      "row": 15,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "POUSSIN",
+      "clue": "Franz. Klassizist in Rom, 'Et in Arcadia ego' (1638)",
+      "row": 17,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "CIMABUE",
+      "clue": "Vorgiotteske Florentiner Maler, Lehrer Giottos",
+      "row": 0,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "KIRCHNER",
+      "clue": "Brücke-Mitbegründer, 'Potsdamer Platz' (1914)",
+      "row": 13,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "CHIRICO",
+      "clue": "Italienischer Pittura-metafisica-Mitbegründer, Säulenarkaden mit Schatten",
+      "row": 10,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "WATTEAU",
+      "clue": "Franz. Rokokomaler, 'Einschiffung nach Kythera' (1717)",
+      "row": 3,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "PRADO",
+      "clue": "Madrider Museum mit den 'Schwarzen Bildern' Goyas",
+      "row": 8,
+      "col": 0,
+      "direction": "across"
+    }
+  ],
+  "size": 18
+}
