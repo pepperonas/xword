@@ -39,6 +39,16 @@
       "description": "Geografie, Geschichte und ein bisschen Kunst.",
       "wordCount": 16,
       "size": 15
+    },
+    {
+      "id": "klassik-hard-01",
+      "file": "klassik-hard-01.json",
+      "title": "Klassische Bildung",
+      "theme": "klassik",
+      "difficulty": "hard",
+      "description": "Philosophen, Dichter, Epochen — wer schwitzt, der weiß. Für Geübte.",
+      "wordCount": 30,
+      "size": 24
     }
   ]
 }

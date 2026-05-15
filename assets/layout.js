@@ -146,13 +146,14 @@
   }
 
   function scoreCandidate(c, placed, gridSize) {
-    // Prefer more crossings; prefer central placement.
+    // Strongly prefer multi-crossings (quadratic); fall back to single
+    // crossings; tiebreak on central placement.
     const cellsInWord = c.answer.length;
     const center = gridSize / 2;
     const wordCenterR = c.direction === 'across' ? c.row : c.row + cellsInWord / 2;
     const wordCenterC = c.direction === 'across' ? c.col + cellsInWord / 2 : c.col;
     const dist = Math.hypot(wordCenterR - center, wordCenterC - center);
-    return c.crossings * 100 - dist;
+    return c.crossings * c.crossings * 500 + c.crossings * 50 - dist;
   }
 
   function getBounds(placed) {

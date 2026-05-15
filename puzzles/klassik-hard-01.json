@@ -1,0 +1,220 @@
+{
+  "id": "klassik-hard-01",
+  "title": "Klassische Bildung",
+  "theme": "klassik",
+  "difficulty": "hard",
+  "description": "Philosophen, Dichter, Epochen — wer schwitzt, der weiß. Für Geübte.",
+  "words": [
+    {
+      "answer": "NIETZSCHE",
+      "clue": "Schnauzbärtiger Philosoph mit Zarathustra",
+      "row": 7,
+      "col": 11,
+      "direction": "down"
+    },
+    {
+      "answer": "ARISTOTELES",
+      "clue": "Begründer der Logik und Lehrer Alexanders des Großen",
+      "row": 10,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "AUFKLAERUNG",
+      "clue": "Epoche der Vernunft im 18. Jahrhundert",
+      "row": 6,
+      "col": 13,
+      "direction": "down"
+    },
+    {
+      "answer": "SHAKESPEARE",
+      "clue": "Dramatiker aus Stratford — Hamlet, Macbeth, Lear",
+      "row": 12,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "PYTHAGORAS",
+      "clue": "Sein Satz gilt im rechtwinkligen Dreieck",
+      "row": 3,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "PROMETHEUS",
+      "clue": "Titan, der den Menschen das Feuer brachte",
+      "row": 14,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "EVOLUTION",
+      "clue": "Stetige Anpassung des Lebens an die Umwelt",
+      "row": 12,
+      "col": 16,
+      "direction": "down"
+    },
+    {
+      "answer": "PLATON",
+      "clue": "Verfasser der Politeia und des Höhlengleichnisses",
+      "row": 7,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "KANT",
+      "clue": "Königsberger Aufklärer mit kategorischem Imperativ",
+      "row": 5,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "KOPERNIKUS",
+      "clue": "Setzte die Sonne ins Zentrum des Weltbilds",
+      "row": 1,
+      "col": 15,
+      "direction": "down"
+    },
+    {
+      "answer": "AKROPOLIS",
+      "clue": "Athener Burgberg mit Parthenon",
+      "row": 18,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "SOKRATES",
+      "clue": "Athener Lehrer Platons — wusste, dass er nichts wusste",
+      "row": 16,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "KOLOSSEUM",
+      "clue": "Flavisches Amphitheater im Herzen Roms",
+      "row": 8,
+      "col": 15,
+      "direction": "across"
+    },
+    {
+      "answer": "ROMANTIK",
+      "clue": "Epoche der blauen Blume und der Nachtigall",
+      "row": 7,
+      "col": 18,
+      "direction": "down"
+    },
+    {
+      "answer": "EPIKUR",
+      "clue": "Antiker Philosoph der maßvollen Lebensfreude",
+      "row": 13,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "BAROCK",
+      "clue": "Stilepoche zwischen Renaissance und Klassik",
+      "row": 20,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "VERGIL",
+      "clue": "Römischer Dichter der Aeneis",
+      "row": 4,
+      "col": 14,
+      "direction": "across"
+    },
+    {
+      "answer": "SCHILLER",
+      "clue": "Schöpfer der 'Räuber' und der 'Ode an die Freude'",
+      "row": 8,
+      "col": 20,
+      "direction": "down"
+    },
+    {
+      "answer": "RENAISSANCE",
+      "clue": "Kulturepoche der Wiedergeburt der Antike",
+      "row": 22,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "KEPLER",
+      "clue": "Astronom mit drei Planetengesetzen",
+      "row": 3,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "NEWTON",
+      "clue": "Begründer der klassischen Mechanik (Apfel fällt vom Baum)",
+      "row": 2,
+      "col": 11,
+      "direction": "across"
+    },
+    {
+      "answer": "HEGEL",
+      "clue": "Philosoph der Dialektik (These, Antithese, Synthese)",
+      "row": 1,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "CAESAR",
+      "clue": "'Veni, vidi, vici' — und ein Brutus",
+      "row": 18,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "HOMER",
+      "clue": "Verfasser von Ilias und Odyssee",
+      "row": 0,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "ODYSSEE",
+      "clue": "Zehnjährige Heimkehr nach Ithaka",
+      "row": 14,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "STOA",
+      "clue": "Antike Philosophenschule der Gelassenheit",
+      "row": 15,
+      "col": 1,
+      "direction": "down"
+    },
+    {
+      "answer": "GOETHE",
+      "clue": "Weimarer Dichter des Faust",
+      "row": 13,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "EUKLID",
+      "clue": "Antiker Mathematiker — Verfasser der 'Elemente'",
+      "row": 7,
+      "col": 22,
+      "direction": "down"
+    },
+    {
+      "answer": "CICERO",
+      "clue": "Römischer Redner und Konsul ('O tempora, o mores')",
+      "row": 8,
+      "col": 1,
+      "direction": "down"
+    },
+    {
+      "answer": "DARWIN",
+      "clue": "Begründer der Evolutionstheorie ('Origin of Species')",
+      "row": 0,
+      "col": 18,
+      "direction": "down"
+    }
+  ],
+  "size": 24
+}
