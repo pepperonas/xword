@@ -456,12 +456,25 @@ a:hover { text-decoration-thickness: 2px; }
   font-weight: 500;
   color: var(--md-sys-color-on-surface-variant);
   cursor: pointer;
-  transition: all 0.15s ease;
   white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.18s cubic-bezier(0.2, 0, 0, 1),
+              color      0.18s cubic-bezier(0.2, 0, 0, 1),
+              border-color 0.18s cubic-bezier(0.2, 0, 0, 1),
+              transform  0.15s cubic-bezier(0.2, 0, 0, 1);
 }
-.filter-chip:hover {
-  background: color-mix(in srgb, var(--md-sys-color-on-surface-variant) 8%, transparent);
+.filter-chip::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  opacity: 0;
+  transition: opacity 0.15s cubic-bezier(0.2, 0, 0, 1);
+  pointer-events: none;
 }
+.filter-chip:hover::after { opacity: 0.08; }
+.filter-chip:active { transform: scale(0.97); }
 .filter-chip.active {
   background: var(--md-sys-color-secondary-container);
   color: var(--md-sys-color-on-secondary-container);
@@ -719,7 +732,23 @@ a:hover { text-decoration-thickness: 2px; }
   cursor: pointer;
   user-select: none;
   -webkit-user-select: none;
-  transition: background 0.12s ease;
+  transition: background 0.15s cubic-bezier(0.2, 0, 0, 1),
+              box-shadow 0.18s cubic-bezier(0.2, 0, 0, 1);
+}
+/* Mouse-only subtle hover — pointer:fine excludes touch devices to avoid
+   the "stuck" highlight after tapping. */
+@media (hover: hover) and (pointer: fine) {
+  .cell:not(.block):not(.active):not(.active-word):hover {
+    background: color-mix(in srgb, var(--xword-active-bg) 6%, var(--xword-cell-bg));
+  }
+}
+/* Active cell glow — quiet outer ring so the cursor reads even in the
+   periphery of vision. No animation, just a tasteful aura. */
+.cell.active {
+  z-index: 2;
+  box-shadow:
+    0 0 0 2px var(--xword-active-bg),
+    0 4px 12px -3px color-mix(in srgb, var(--xword-active-bg) 55%, transparent);
 }
 .cell.block {
   background: var(--xword-cell-block);
@@ -846,26 +875,36 @@ a:hover { text-decoration-thickness: 2px; }
   font-weight: 500;
   letter-spacing: 0.1px;
   cursor: pointer;
-  transition: all 0.15s ease;
   text-decoration: none;
   position: relative;
   white-space: nowrap;
+  overflow: hidden;
+  transition: box-shadow 0.2s cubic-bezier(0.2, 0, 0, 1),
+              transform   0.15s cubic-bezier(0.2, 0, 0, 1);
 }
-.btn:hover {
-  background: color-mix(in srgb, var(--md-sys-color-on-secondary-container) 8%, var(--md-sys-color-secondary-container));
-  box-shadow: var(--md-elev-1);
+/* M3 state layer — a tinted overlay that intensifies on interaction.
+   Lives inside the button via ::after so it doesn't fight the
+   background-color (which is the actual filled/tonal color). */
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  opacity: 0;
+  transition: opacity 0.15s cubic-bezier(0.2, 0, 0, 1);
+  pointer-events: none;
+  border-radius: inherit;
 }
-.btn:active {
-  background: color-mix(in srgb, var(--md-sys-color-on-secondary-container) 12%, var(--md-sys-color-secondary-container));
-}
+.btn:hover::after  { opacity: 0.08; }
+.btn:focus-visible::after { opacity: 0.10; }
+.btn:active::after { opacity: 0.14; }
+.btn:hover { box-shadow: var(--md-elev-1); }
+.btn:active { transform: scale(0.98); }
 .btn.primary {
   background: var(--md-sys-color-primary);
   color: var(--md-sys-color-on-primary);
 }
-.btn.primary:hover {
-  background: color-mix(in srgb, var(--md-sys-color-on-primary) 8%, var(--md-sys-color-primary));
-  box-shadow: var(--md-elev-2);
-}
+.btn.primary:hover { box-shadow: var(--md-elev-2); }
 .btn-danger {
   background: var(--md-sys-color-error-container);
   color: var(--md-sys-color-on-error-container);
@@ -995,16 +1034,20 @@ a:hover { text-decoration-thickness: 2px; }
 .clues-tab.active {
   color: var(--md-sys-color-primary);
 }
-.clues-tab.active::after {
+.clues-tab::after {
   content: '';
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 16px;
+  right: 16px;
   bottom: 0;
   height: 3px;
   background: var(--md-sys-color-primary);
   border-radius: 3px 3px 0 0;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1);
 }
+.clues-tab.active::after { transform: scaleX(1); }
 .clues-tab .count {
   margin-left: 6px;
   font-weight: 400;
@@ -2081,8 +2124,15 @@ a:hover { text-decoration-thickness: 2px; }
   opacity: 0;
 }
 .sync-indicator.visible { opacity: 1; }
-.sync-indicator.saving { color: var(--md-sys-color-primary); }
-.sync-indicator.saved  { color: var(--md-sys-color-success); }
+.sync-indicator.saving {
+  color: var(--md-sys-color-primary);
+  animation: syncPulse 1.2s ease-in-out infinite;
+}
+.sync-indicator.saved  { color: var(--md-sys-color-success); animation: none; }
+@keyframes syncPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
 
 /* ============ ANIMATIONS ============ */
 @keyframes pulse {
@@ -2090,6 +2140,27 @@ a:hover { text-decoration-thickness: 2px; }
   50% { transform: scale(1.06); }
 }
 .cell.correct-flash { animation: pulse 0.4s ease; }
+
+/* Letter type-in — gentle scale-bounce when a letter lands in a cell.
+   Triggered by engine.js adding the .type-in class to .letter for ~200ms. */
+@keyframes typeIn {
+  0% { transform: scale(0.55); opacity: 0; }
+  60% { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); }
+}
+.cell .letter.type-in {
+  animation: typeIn 0.18s cubic-bezier(0.2, 1.2, 0.4, 1) both;
+}
+
+/* Hint drop-in — the placed letter falls into the cell with a small bounce. */
+@keyframes hintDrop {
+  0% { transform: translateY(-12px) scale(0.6); opacity: 0; }
+  70% { transform: translateY(2px) scale(1.05); opacity: 1; }
+  100% { transform: translateY(0) scale(1); }
+}
+.cell .letter.hint-drop {
+  animation: hintDrop 0.4s cubic-bezier(0.2, 1, 0.3, 1) both;
+}
 
 @keyframes shake {
   0%, 100% { transform: translateX(0); }

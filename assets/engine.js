@@ -479,6 +479,17 @@
       if (state.liveValidate) liveCheckCell(row, col);
       nextCellInWord();
       paint();
+      // Re-locate the letter element after paint() and trigger the type-in
+      // animation. Using requestAnimationFrame so the class is applied on
+      // the next render tick — guarantees the animation always re-plays.
+      requestAnimationFrame(() => {
+        const letterEl = refs.root.querySelector(`.cell[data-r="${row}"][data-c="${col}"] .letter`);
+        if (letterEl) {
+          letterEl.classList.remove('type-in');
+          void letterEl.offsetWidth;
+          letterEl.classList.add('type-in');
+        }
+      });
       emitProgress();
     }
 
@@ -671,6 +682,14 @@
       state.grid[pick.r][pick.c].hinted = true;
       state.hintCount++;
       paint();
+      requestAnimationFrame(() => {
+        const letterEl = refs.root.querySelector(`.cell[data-r="${pick.r}"][data-c="${pick.c}"] .letter`);
+        if (letterEl) {
+          letterEl.classList.remove('hint-drop');
+          void letterEl.offsetWidth;
+          letterEl.classList.add('hint-drop');
+        }
+      });
       emitProgress();
     }
 
