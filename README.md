@@ -173,6 +173,7 @@ xword/
 │
 ├── tests/
 │   ├── layout.test.js          30 Tests für den Layout-Algorithmus
+│   ├── input-dedupe.test.js    11 Tests für den Mobile-Keyboard-Dedupe
 │   └── server/                 34 Tests für Backend (session, db, rate-limit, achievements)
 │
 ├── server/                     Backend (Node + Express + SQLite, ES Modules)
@@ -298,7 +299,7 @@ Bis zu ~80–120 randomisierte Durchläufe; der kompakteste Versuch mit den meis
 npm test
 ```
 
-**64 Unit-Tests** (30 Layout + 34 Backend):
+**75 Unit-Tests** (30 Layout + 11 Input-Dedupe + 34 Backend):
 
 **Layout** (`tests/layout.test.js`):
 - `normaliseAnswer` — Umlaute, Filter, leere Eingaben
@@ -306,6 +307,13 @@ npm test
 - Integrität — keine Buchstaben-Konflikte, keine Parallel-Berührungen, keine Wort-Verlängerungen
 - Dichte — ≥ 1.5 Kreuzungen pro Wort bei 20+ Wörtern
 - Regression — alle gelieferten Puzzles platzieren beim Re-Layout
+
+**Input-Dedupe** (`tests/input-dedupe.test.js`):
+- Erstes Event passiert, Duplikat im 60-ms-Fenster wird verworfen
+- Verschiedene Keys passieren parallel (z.B. `type:A`, `type:B`, `delete:`)
+- Regression — S24-Ultra-Backspace-Double-Fire wird zu einer Aktion kollabiert
+- Schnelles Tippen (10 Zeichen/s) bleibt unbeeinträchtigt
+- Edge Cases — `windowMs=0`, rückwärtslaufende Uhr, getrennte Instanzen, ungültige Parameter
 
 **Backend** (`tests/server/*.test.js`):
 - `session.test.js` — HMAC-Sign/Verify-Roundtrip, Tampering, Expiry, malformed Input

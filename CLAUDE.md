@@ -29,9 +29,11 @@ index.html        — SPA shell with 4 views: selector, game, profile, admin
 assets/
   styles.css      — theme variables + all UI styles, light + dark
   layout.js       — crossword auto-layout algorithm (browser + node)
+  input-dedupe.js — event dedupe predicate (mobile keyboard double-fire fix)
   engine.js       — game engine: grid render, input, timer, hardcore mode
   auth.js         — API client wrapper (fetch, sendBeacon, makeSaver)
   app.js          — view routing, state, all UI rendering, theme manager
+  theme-init.js   — early dark/light apply for legal pages (CSP-safe extern)
 ```
 
 Views are toggled via hash routing: `#play=<id>`, `#admin`, `#profile`, or none (selector).
@@ -135,6 +137,20 @@ When a save flips a puzzle to `solved=true`:
 4. Toast auto-dismisses after 4.5 s
 
 On first page load, the diff is taken silently to baseline — no toast spam for old unlocks.
+
+---
+
+## Mobile keyboard input
+
+Three quirks of virtual keyboards forced the input pipeline to be more elaborate than a desktop crossword would need:
+
+1. **iOS Safari won't open the keyboard if the focused input is `display:none` or sits outside the viewport.** `.hidden-input` is therefore `position: fixed; top: 0; left: 0; width: 1px; height: 1px; opacity: 0; font-size: 16px`. The 16px font-size is essential — anything smaller triggers iOS auto-zoom-on-focus, after which the keyboard refuses to open.
+
+2. **iOS Safari requires `.focus()` to be called synchronously inside a user-gesture handler.** The original `setTimeout(focusHiddenInput, 0)` in the document-level click handler broke this contract and the keyboard would close again immediately. Now synchronous.
+
+3. **Empty inputs silently drop Backspace.** Mobile keyboards fire `beforeinput` / `input` only when there is content to delete. We keep a sentinel ` ` character in the input at all times and re-set it after every event — so the very first Backspace press fires properly.
+
+4. **Some Android keyboards (Samsung S24 Ultra) fire both `keydown` *and* `beforeinput` for the same Backspace press**, and `document.activeElement` is briefly unreliable during the first interaction. `assets/input-dedupe.js` exports a `createDedupe(windowMs)` predicate keyed on action+value; any identical action within 60 ms is treated as a duplicate. All four entry points (`keydown`, `beforeinput`, `input` fallback, programmatic calls) go through the same gatekeeper. The dedupe module is pure and unit-tested (`tests/input-dedupe.test.js`).
 
 ---
 
@@ -364,11 +380,12 @@ Validation tools:
 
 GitHub Actions (`.github/workflows/test.yml`) runs `npm test` on push to `main` and PRs. The README Tests-Badge points at the workflow.
 
-Tests live in two directories:
-- `tests/layout.test.js` — layout algorithm coverage (27 tests, browser-loadable module via globalThis)
+Tests live in three groups:
+- `tests/layout.test.js` — layout algorithm coverage (30 tests, browser-loadable module via globalThis)
+- `tests/input-dedupe.test.js` — virtual keyboard double-fire regression suite (11 tests, deterministic via injectable timestamp)
 - `tests/server/*.test.js` — backend coverage (34 tests, dynamic `import()` of ES modules into CommonJS test files): session, rate-limit, db (migrations + upsert behavior), achievements (ranks + streaks + computeProfile).
 
-Run all: `npm test`. Run only one suite: `node --test tests/server/session.test.js`.
+Total: 75 tests. Run all: `npm test`. Run only one suite: `node --test tests/server/session.test.js`.
 
 ---
 

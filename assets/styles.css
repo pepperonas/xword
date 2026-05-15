@@ -199,7 +199,7 @@ body {
   background: var(--md-sys-color-background);
   color: var(--md-sys-color-on-surface);
   min-height: 100vh;
-  padding: 24px 16px 80px;
+  padding: 24px 16px 24px;
   overscroll-behavior: none;
   transition: background 0.2s ease;
 }
@@ -812,11 +812,19 @@ a:hover { text-decoration-thickness: 2px; }
 .cell.error .letter { color: var(--md-sys-color-on-error-container); }
 
 .hidden-input {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-  height: 1px;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 1px;
+  height: 1px;
+  opacity: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  caret-color: transparent;
+  font-size: 16px;             /* prevents iOS auto-zoom on focus */
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 /* ============ CURRENT CLUE BAR ============ */
@@ -2039,8 +2047,8 @@ a:hover { text-decoration-thickness: 2px; }
 /* ============ FOOTER ============ */
 .footer {
   text-align: center;
-  margin-top: 48px;
-  padding-top: 24px;
+  margin-top: 32px;
+  padding: 20px 0 8px;
   border-top: 1px solid var(--md-sys-color-outline-variant);
   font-family: var(--md-font-body);
   font-size: 12px;
@@ -2176,6 +2184,19 @@ a:hover { text-decoration-thickness: 2px; }
 }
 .cell.solve-wave {
   animation: solveWave 0.7s cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+/* Word-solve flash — subtle pulse + glow that ripples through the letters
+   of a newly completed word. Staggered per cell from engine.js. */
+@keyframes wordSolvePulse {
+  0%   { transform: scale(1);    box-shadow: 0 0 0 0 rgba(11, 87, 208, 0); }
+  40%  { transform: scale(1.07); box-shadow: 0 0 16px 2px rgba(11, 87, 208, 0.55); }
+  100% { transform: scale(1);    box-shadow: 0 0 0 0 rgba(11, 87, 208, 0); }
+}
+.cell.word-solve-flash {
+  animation: wordSolvePulse 0.55s cubic-bezier(0.2, 0, 0, 1) both;
+  position: relative;
+  z-index: 2;
 }
 
 @keyframes rise {

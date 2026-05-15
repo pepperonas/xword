@@ -33,6 +33,8 @@
       hintCount: 0,
       solved: false,
       elapsedBaseMs: 0, // accumulated time before this session
+      solvedWordKeys: new Set(), // words currently solved — for newly-solved detection
+      bootstrapped: false,       // prevents animations on initial-state restore
     };
     let keydownHandler, clickHandler;
 
@@ -355,7 +357,18 @@
           }
         }
       }
-      state.words.forEach(w => { if (isWordCorrect(w)) solvedWords++; });
+      const newlySolved = [];
+      state.words.forEach(w => {
+        if (isWordCorrect(w)) {
+          solvedWords++;
+          if (!state.solvedWordKeys.has(w.key)) {
+            state.solvedWordKeys.add(w.key);
+            if (state.bootstrapped) newlySolved.push(w);
+          }
+        } else if (state.solvedWordKeys.has(w.key)) {
+          state.solvedWordKeys.delete(w.key);
+        }
+      });
       const pct = totalCells ? Math.round((filledCells / totalCells) * 100) : 0;
       refs.statPercent.textContent = pct;
       refs.statSolved.textContent = solvedWords;
@@ -363,17 +376,60 @@
       refs.statHints.textContent = state.hintCount;
       refs.progressFill.style.right = `${100 - pct}%`;
 
-      if (!state.solved && solvedWords === state.words.length && totalCells > 0) {
+      const willComplete = solvedWords === state.words.length && totalCells > 0;
+
+      // Only flash newly solved words if this is NOT the final win — the
+      // full-puzzle solve-wave already handles all cells visually.
+      if (!willComplete) {
+        newlySolved.forEach(animateWordSolve);
+      }
+
+      if (!state.solved && willComplete) {
         state.solved = true;
         win();
         emitProgress();
       }
     }
 
+    function animateWordSolve(w) {
+      const cells = wordCells(w);
+      cells.forEach((pos, i) => {
+        setTimeout(() => {
+          const cellEl = refs.root.querySelector(`.cell[data-r="${pos.r}"][data-c="${pos.c}"]`);
+          if (!cellEl) return;
+          cellEl.classList.remove('word-solve-flash');
+          void cellEl.offsetWidth;
+          cellEl.classList.add('word-solve-flash');
+          setTimeout(() => cellEl.classList.remove('word-solve-flash'), 600);
+        }, i * 55);
+      });
+    }
+
+    // Non-breaking space. Kept in the hidden input at all times so that
+    // mobile virtual keyboards fire input/beforeinput events on Backspace
+    // (an empty input has nothing to "delete" → iOS silently swallows the
+    // key, which is why the first backspace press appears to do nothing).
+    const SENTINEL = ' ';
+
+    function resetSentinel() {
+      const inp = refs.hiddenInput;
+      if (inp.value !== SENTINEL) inp.value = SENTINEL;
+      try { inp.setSelectionRange(SENTINEL.length, SENTINEL.length); } catch (e) {}
+    }
+
     function focusHiddenInput() {
       const inp = refs.hiddenInput;
       inp.focus({ preventScroll: true });
-      inp.value = '';
+      resetSentinel();
+    }
+
+    // Dedupe duplicate event-source firings (see assets/input-dedupe.js).
+    const isFreshAction = global.XwordInputDedupe.createDedupe(60);
+    function dispatchAction(kind, value) {
+      const key = kind + ':' + (value || '');
+      if (!isFreshAction(key)) return;
+      if (kind === 'delete') deleteLetter();
+      else if (kind === 'type') typeLetter(value);
     }
 
     function moveActive(dr, dc) {
@@ -552,19 +608,46 @@
 
     function setupKeyboard() {
       const inp = refs.hiddenInput;
+      // beforeinput exposes inputType, the only reliable signal for
+      // "user pressed Backspace" on iOS virtual keyboards.
+      inp.addEventListener('beforeinput', (e) => {
+        if (e.inputType === 'deleteContentBackward' ||
+            e.inputType === 'deleteContentForward'  ||
+            e.inputType === 'deleteWordBackward'    ||
+            e.inputType === 'deleteByCut') {
+          e.preventDefault();
+          dispatchAction('delete');
+          resetSentinel();
+          return;
+        }
+        if (e.inputType && e.inputType.startsWith('insert') && e.data) {
+          for (const ch of e.data) {
+            if (/^[a-zA-ZäöüÄÖÜß]$/.test(ch)) dispatchAction('type', ch);
+          }
+          e.preventDefault();
+          resetSentinel();
+        }
+      });
+      // Fallback for browsers without beforeinput (rare nowadays).
       inp.addEventListener('input', (e) => {
         const v = e.target.value;
-        if (v.length > 0) {
+        if (v.length > SENTINEL.length) {
           const ch = v[v.length - 1];
-          if (/^[a-zA-ZäöüÄÖÜß]$/.test(ch)) typeLetter(ch);
-          e.target.value = '';
+          if (/^[a-zA-ZäöüÄÖÜß]$/.test(ch)) dispatchAction('type', ch);
+        } else if (v.length < SENTINEL.length) {
+          dispatchAction('delete');
         }
+        resetSentinel();
       });
 
       keydownHandler = (e) => {
         if (e.target.tagName === 'BUTTON' && (e.key === 'Enter' || e.key === ' ')) return;
         const k = e.key;
-        if (k === 'Backspace') { e.preventDefault(); deleteLetter(); return; }
+        if (k === 'Backspace') {
+          e.preventDefault();
+          dispatchAction('delete');
+          return;
+        }
         if (k === 'Delete') {
           e.preventDefault();
           if (state.active) { state.grid[state.active.row][state.active.col].letter = ''; paint(); }
@@ -624,12 +707,18 @@
           }
           return;
         }
-        if (/^[a-zA-ZäöüÄÖÜß]$/.test(k)) { e.preventDefault(); typeLetter(k); }
+        if (/^[a-zA-ZäöüÄÖÜß]$/.test(k)) {
+          e.preventDefault();
+          dispatchAction('type', k);
+        }
       };
 
+      // Re-focus the hidden input on any tap inside the grid or clue list.
+      // Must be synchronous — setTimeout breaks iOS Safari's user-gesture
+      // requirement and the virtual keyboard then refuses to open.
       clickHandler = (e) => {
         if (e.target.closest('.grid') || e.target.closest('.clue-item')) {
-          setTimeout(focusHiddenInput, 0);
+          focusHiddenInput();
         }
       };
 
@@ -863,6 +952,9 @@
     if (first) activateWord(first.key);
     startTimer();
     paint();
+    // First paint has populated solvedWordKeys from any restored state.
+    // From here on, newly solved words trigger the flash animation.
+    state.bootstrapped = true;
 
     return { destroy };
   }
