@@ -1,60 +1,21 @@
 /**
- * SQLite schema + statement preparation.
+ * SQLite database access — schema is created and migrated via `migrations.js`.
+ * This module only prepares statements once the schema is in place.
  */
 import Database from 'better-sqlite3';
 import { mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
-
-const SCHEMA = [
-  `CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    google_sub TEXT UNIQUE NOT NULL,
-    email TEXT NOT NULL,
-    name TEXT,
-    picture TEXT,
-    created_at INTEGER NOT NULL,
-    last_seen_at INTEGER NOT NULL
-  )`,
-  `CREATE TABLE IF NOT EXISTS progress (
-    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    puzzle_id TEXT NOT NULL,
-    grid_state TEXT NOT NULL,
-    hinted_cells TEXT NOT NULL,
-    hint_count INTEGER NOT NULL DEFAULT 0,
-    elapsed_ms INTEGER NOT NULL DEFAULT 0,
-    solved INTEGER NOT NULL DEFAULT 0,
-    solved_at INTEGER,
-    updated_at INTEGER NOT NULL,
-    percent INTEGER NOT NULL DEFAULT 0,
-    hardcore INTEGER NOT NULL DEFAULT 0,
-    live_validate INTEGER NOT NULL DEFAULT 0,
-    PRIMARY KEY (user_id, puzzle_id)
-  )`,
-  `CREATE INDEX IF NOT EXISTS idx_progress_user ON progress(user_id)`,
-];
-
-// In-place migrations for older DBs that pre-date the columns above.
-function migrateProgress(db) {
-  const cols = db.prepare('PRAGMA table_info(progress)').all().map(r => r.name);
-  const missing = (name, sql) => {
-    if (!cols.includes(name)) db.prepare(sql).run();
-  };
-  missing('percent',            'ALTER TABLE progress ADD COLUMN percent INTEGER NOT NULL DEFAULT 0');
-  missing('hardcore',           'ALTER TABLE progress ADD COLUMN hardcore INTEGER NOT NULL DEFAULT 0');
-  missing('live_validate',      'ALTER TABLE progress ADD COLUMN live_validate INTEGER NOT NULL DEFAULT 0');
-  // Captured ONCE at first solve — preserves the mode at the moment of victory.
-  missing('solved_in_hardcore', 'ALTER TABLE progress ADD COLUMN solved_in_hardcore INTEGER');
-  missing('solved_no_hints',    'ALTER TABLE progress ADD COLUMN solved_no_hints INTEGER');
-}
+import { runMigrations } from './migrations.js';
 
 export function openDb(path) {
-  mkdirSync(dirname(path), { recursive: true });
+  // ':memory:' is a valid path — skip mkdir for it.
+  if (path !== ':memory:') mkdirSync(dirname(path), { recursive: true });
   const db = new Database(path);
   db.pragma('journal_mode = WAL');
   db.pragma('foreign_keys = ON');
 
-  for (const stmt of SCHEMA) db.prepare(stmt).run();
-  migrateProgress(db);
+  const applied = runMigrations(db);
+  if (applied.length) console.log('[db] applied migrations: ' + applied.join(', '));
 
   return {
     raw: db,
@@ -92,7 +53,6 @@ export function openDb(path) {
         percent = excluded.percent,
         hardcore = excluded.hardcore,
         live_validate = excluded.live_validate,
-        -- Capture solve-time state once; never overwrite.
         solved_in_hardcore = COALESCE(progress.solved_in_hardcore, excluded.solved_in_hardcore),
         solved_no_hints    = COALESCE(progress.solved_no_hints,    excluded.solved_no_hints)
     `),
@@ -104,6 +64,26 @@ export function openDb(path) {
     listProgress: db.prepare(`
       SELECT puzzle_id, hint_count, elapsed_ms, solved, solved_at, updated_at, percent
       FROM progress WHERE user_id = ? ORDER BY updated_at DESC
+    `),
+
+    /* ---------- Leaderboard ---------- */
+    leaderboardForPuzzle: db.prepare(`
+      SELECT u.id AS user_id, u.name, u.picture,
+             p.elapsed_ms, p.hint_count, p.solved_at, p.solved_in_hardcore
+      FROM progress p
+      JOIN users u ON u.id = p.user_id
+      WHERE p.puzzle_id = ? AND p.solved = 1
+      ORDER BY p.elapsed_ms ASC, p.solved_at ASC
+      LIMIT 50
+    `),
+
+    /* ---------- Profile / achievements ---------- */
+    listSolved: db.prepare(`
+      SELECT puzzle_id, elapsed_ms, hint_count, solved_at,
+             solved_in_hardcore, solved_no_hints
+      FROM progress
+      WHERE user_id = ? AND solved = 1
+      ORDER BY solved_at ASC
     `),
 
     /* ---------- Admin queries ---------- */
@@ -136,26 +116,6 @@ export function openDb(path) {
       ORDER BY p.updated_at DESC
       LIMIT 100
     `),
-    /* ---------- Leaderboard ---------- */
-    leaderboardForPuzzle: db.prepare(`
-      SELECT u.id AS user_id, u.name, u.picture,
-             p.elapsed_ms, p.hint_count, p.solved_at, p.solved_in_hardcore
-      FROM progress p
-      JOIN users u ON u.id = p.user_id
-      WHERE p.puzzle_id = ? AND p.solved = 1
-      ORDER BY p.elapsed_ms ASC, p.solved_at ASC
-      LIMIT 50
-    `),
-
-    /* ---------- Profile / achievements ---------- */
-    listSolved: db.prepare(`
-      SELECT puzzle_id, elapsed_ms, hint_count, solved_at,
-             solved_in_hardcore, solved_no_hints
-      FROM progress
-      WHERE user_id = ? AND solved = 1
-      ORDER BY solved_at ASC
-    `),
-
     adminPuzzleStats: db.prepare(`
       SELECT puzzle_id,
              COUNT(*) AS attempts,

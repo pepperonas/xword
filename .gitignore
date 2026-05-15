@@ -8,3 +8,4 @@ node_modules/
 /server/data/
 /.playwright-mcp/
 /version.json
+/dist/

@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node --test tests/",
     "serve": "python3 -m http.server 8000",
-    "version:bump": "bash scripts/bump-version.sh"
+    "version:bump": "bash scripts/bump-version.sh",
+    "build": "bash scripts/build.sh"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -15,5 +16,8 @@
     "type": "git",
     "url": "https://github.com/pepperonas/xword.git"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "esbuild": "^0.28.0"
+  }
 }

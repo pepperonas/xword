@@ -187,6 +187,9 @@ npm run serve                  # or: python3 -m http.server 8000
 # Generate version.json from the current Git state
 npm run version:bump
 
+# Build production-minified assets into dist/ (esbuild). ~45% smaller, ~33% less on-wire.
+npm run build
+
 # Bake auto-layout into a words-only JSON (deterministic positions afterward)
 node -e "
 require('./assets/layout.js');
@@ -219,11 +222,17 @@ rsync -avz --exclude='node_modules' --exclude='data' --exclude='.env' \
   ./ root@69.62.121.168:/opt/xword-api/
 ssh root@69.62.121.168 'systemctl restart xword-api && systemctl is-active xword-api'
 
-# Frontend (most deploys). Bump version + tests first.
+# Frontend production deploy (recommended): build into dist/, rsync dist/.
 cd /Users/martin/claude/xword
-npm run version:bump && npm test && rsync -avz --delete \
+npm test && npm run build && rsync -avz --delete dist/ \
+  root@69.62.121.168:/var/www/xword.celox.io/
+ssh root@69.62.121.168 'chown -R root:root /var/www/xword.celox.io && chmod -R u=rwX,go=rX /var/www/xword.celox.io'
+
+# Frontend quick deploy (unminified, useful for iteration):
+cd /Users/martin/claude/xword
+npm run version:bump && rsync -avz --delete \
   --exclude='.git' --exclude='.gitignore' --exclude='.github' --exclude='generator' \
-  --exclude='tests' --exclude='CLAUDE.md' --exclude='package.json' \
+  --exclude='tests' --exclude='CLAUDE.md' --exclude='package.json' --exclude='dist' \
   --exclude='package-lock.json' --exclude='scripts' --exclude='server' \
   --exclude='node_modules' --exclude='.DS_Store' --exclude='.playwright-mcp' \
   ./ root@69.62.121.168:/var/www/xword.celox.io/
