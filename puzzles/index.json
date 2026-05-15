@@ -89,6 +89,36 @@
       "description": "Gebirge, Flüsse, Wüsten, Inseln — Geographie für Atlas-Fans.",
       "wordCount": 30,
       "size": 23
+    },
+    {
+      "id": "architektur-hard-01",
+      "file": "architektur-hard-01.json",
+      "title": "Stein gewordene Ideen",
+      "theme": "architektur",
+      "difficulty": "hard",
+      "description": "Stile, Bauwerke, Architekten — von Vitruv bis Hadid.",
+      "wordCount": 29,
+      "size": 22
+    },
+    {
+      "id": "sport-hard-01",
+      "file": "sport-hard-01.json",
+      "title": "Schweiß & Strategie",
+      "theme": "sport",
+      "difficulty": "hard",
+      "description": "Sportarten, Olympia, Legenden — vom Marathon bis zur Schachpartie.",
+      "wordCount": 30,
+      "size": 23
+    },
+    {
+      "id": "musik-hard-01",
+      "file": "musik-hard-01.json",
+      "title": "Tonleitern & Maestri",
+      "theme": "musik",
+      "difficulty": "hard",
+      "description": "Komponisten, Werke, Instrumente — von der Fuge bis zur Spätromantik.",
+      "wordCount": 30,
+      "size": 22
     }
   ]
 }

@@ -1,0 +1,213 @@
+{
+  "id": "architektur-hard-01",
+  "title": "Stein gewordene Ideen",
+  "theme": "architektur",
+  "difficulty": "hard",
+  "description": "Stile, Bauwerke, Architekten — von Vitruv bis Hadid.",
+  "words": [
+    {
+      "answer": "ROSETTE",
+      "clue": "Rundes, oft mit Maßwerk gegliedertes Fenster gotischer Kirchen",
+      "row": 7,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "PILASTER",
+      "clue": "Flach in eine Wand eingelassene Halbsäule",
+      "row": 11,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "VERSAILLES",
+      "clue": "Schloss des Sonnenkönigs bei Paris",
+      "row": 7,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "EIFFELTURM",
+      "clue": "Pariser Wahrzeichen aus Schmiedeeisen, 1889 eröffnet",
+      "row": 3,
+      "col": 14,
+      "direction": "down"
+    },
+    {
+      "answer": "GIEBEL",
+      "clue": "Dreieckige Wandfläche am Dachende",
+      "row": 15,
+      "col": 8,
+      "direction": "across"
+    },
+    {
+      "answer": "KOLONNADE",
+      "clue": "Reihe von Säulen mit darüberliegendem Gebälk",
+      "row": 8,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "ROTUNDE",
+      "clue": "Auf rundem Grundriss errichtetes Bauwerk",
+      "row": 4,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "METOPE",
+      "clue": "Reliefplatte im dorischen Fries",
+      "row": 12,
+      "col": 14,
+      "direction": "across"
+    },
+    {
+      "answer": "WRIGHT",
+      "clue": "US-Architekt von 'Fallingwater'",
+      "row": 7,
+      "col": 16,
+      "direction": "down"
+    },
+    {
+      "answer": "KAPITELL",
+      "clue": "Verzierter Kopf einer Säule",
+      "row": 13,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "JUGENDSTIL",
+      "clue": "Geschwungene Linien um 1900",
+      "row": 9,
+      "col": 19,
+      "direction": "down"
+    },
+    {
+      "answer": "PARTHENON",
+      "clue": "Athena-Tempel auf der Akropolis",
+      "row": 4,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "PYRAMIDE",
+      "clue": "Ägyptisches Königsgrab geometrischer Form",
+      "row": 17,
+      "col": 14,
+      "direction": "across"
+    },
+    {
+      "answer": "GROPIUS",
+      "clue": "Gründer des Bauhauses in Weimar",
+      "row": 15,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "PALLADIO",
+      "clue": "Renaissance-Meister aus Vicenza — Villa Rotonda",
+      "row": 14,
+      "col": 14,
+      "direction": "across"
+    },
+    {
+      "answer": "ARKADE",
+      "clue": "Reihe von Bögen, oft entlang einer Wand",
+      "row": 10,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "KUPPEL",
+      "clue": "Halbrunde Decke — krönt das Pantheon",
+      "row": 18,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "AALTO",
+      "clue": "Finnischer Pionier des Funktionalismus — auch ein Möbel-Klassiker trägt seinen Namen",
+      "row": 6,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "ZIKKURAT",
+      "clue": "Mesopotamischer Stufentempel",
+      "row": 20,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "ARTDECO",
+      "clue": "Geometrisch-eleganter Stil der 1920er",
+      "row": 0,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "VITRUV",
+      "clue": "Römischer Theoretiker — drei Bücher 'De architectura'",
+      "row": 2,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "FASSADE",
+      "clue": "Schauseite eines Gebäudes",
+      "row": 5,
+      "col": 14,
+      "direction": "across"
+    },
+    {
+      "answer": "LOGGIA",
+      "clue": "Offene Bogenhalle — beliebt in italienischen Palazzi",
+      "row": 0,
+      "col": 18,
+      "direction": "down"
+    },
+    {
+      "answer": "GAUDI",
+      "clue": "Schöpfer der unvollendeten Sagrada Família",
+      "row": 7,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "OBELISK",
+      "clue": "Hoher, spitz zulaufender Steinpfeiler",
+      "row": 0,
+      "col": 15,
+      "direction": "across"
+    },
+    {
+      "answer": "ATRIUM",
+      "clue": "Lichter Innenhof — schon im römischen Haus",
+      "row": 13,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "HADID",
+      "clue": "Britisch-irakische Stararchitektin der fließenden Formen",
+      "row": 16,
+      "col": 17,
+      "direction": "down"
+    },
+    {
+      "answer": "ROMANIK",
+      "clue": "Mittelalterlicher Stil der Rundbögen",
+      "row": 19,
+      "col": 12,
+      "direction": "across"
+    },
+    {
+      "answer": "MODERNE",
+      "clue": "Stilepoche des 20. Jahrhunderts — weniger ist mehr",
+      "row": 15,
+      "col": 0,
+      "direction": "across"
+    }
+  ],
+  "size": 22
+}

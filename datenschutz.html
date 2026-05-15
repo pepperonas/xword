@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Datenschutzerklärung — Kreuzworträtsel</title>
+<meta name="description" content="Datenschutzerklärung für xword.celox.io — welche Daten werden bei Google-Login und Spielstand-Speicherung verarbeitet.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700;9..144,900&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="app">
+  <header class="masthead">
+    <div class="eyebrow">
+      <span>Rechtliches</span>
+      <span class="dot"></span>
+      <span>DSGVO</span>
+    </div>
+    <h1>Datenschutzerklärung</h1>
+    <p class="subtitle">— Was wir verarbeiten, warum, und wie lange —</p>
+  </header>
+
+  <div class="back-bar">
+    <a class="back-link" href="/">← Zur Bibliothek</a>
+  </div>
+
+  <main class="legal">
+
+    <section>
+      <h2>1. Verantwortlicher</h2>
+      <p>
+        Martin Pfeffer<br>
+        celox.io — IT-Dienstleistungen<br>
+        Flughafenstraße 24, 12053 Berlin<br>
+        E-Mail: <a href="mailto:martin.pfeffer@celox.io">martin.pfeffer@celox.io</a><br>
+        Telefon: +49 151 590 824 65
+      </p>
+    </section>
+
+    <section>
+      <h2>2. Übersicht der Verarbeitungen</h2>
+      <p>
+        <strong>Ohne Anmeldung</strong> erhebt diese Anwendung <strong>keine</strong> personenbezogenen Daten. Es werden keine Cookies gesetzt, kein Tracking durchgeführt, keine Drittanbieter eingebunden.
+      </p>
+      <p>
+        <strong>Mit Anmeldung über Google</strong> werden die in Abschnitt 4 beschriebenen Daten verarbeitet, um den Spielstand pro Nutzer zu speichern und beim erneuten Login wiederherzustellen.
+      </p>
+    </section>
+
+    <section>
+      <h2>3. Hosting &amp; Server-Logs</h2>
+      <p>
+        Die Anwendung wird auf einem virtuellen Server (VPS, Standort Deutschland) gehostet. Beim Aufruf jeder Seite werden in den Server-Logs folgende Daten automatisch erfasst:
+      </p>
+      <ul>
+        <li>IP-Adresse (gekürzt nach 24 Stunden)</li>
+        <li>Datum und Uhrzeit der Anfrage</li>
+        <li>Aufgerufene URL und Statuscode</li>
+        <li>Browsertyp und Betriebssystem (User-Agent)</li>
+        <li>Referrer-URL (falls vom Browser übermittelt)</li>
+      </ul>
+      <p>
+        Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem stabilen, sicheren Betrieb). Speicherdauer: <strong>14 Tage</strong>, danach automatische Löschung.
+      </p>
+    </section>
+
+    <section>
+      <h2>4. Google-Login (OAuth 2.0)</h2>
+      <p>
+        Die Anmeldung erfolgt über den OAuth-2.0-Authorization-Code-Flow bei Google. Sie werden zu Google weitergeleitet und entscheiden dort, welche Daten Sie an diese Anwendung freigeben.
+      </p>
+      <p>
+        Nach erfolgreicher Anmeldung speichern wir die folgenden, von Google bereitgestellten Informationen in unserer Datenbank:
+      </p>
+      <ul>
+        <li><strong>Google-Subject-ID</strong> (eindeutiger anonymer Identifier)</li>
+        <li><strong>E-Mail-Adresse</strong></li>
+        <li><strong>Anzeigename</strong> (sofern bereitgestellt)</li>
+        <li><strong>URL des Profilbilds</strong> (sofern bereitgestellt)</li>
+        <li>Zeitstempel der Erst- und Letzt-Anmeldung</li>
+      </ul>
+      <p>
+        Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Durchführung des Spielbetriebs einschließlich der Spielstand-Speicherung) sowie Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO.
+      </p>
+      <p>
+        <strong>Drittland-Übermittlung:</strong> Während des Login-Prozesses werden Daten an Google LLC (USA) übermittelt. Google legt offen, dass dabei eine Verarbeitung in den USA stattfindet. Es bestehen Standardvertragsklauseln gemäß Art. 46 DSGVO. Weitere Informationen:
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">policies.google.com/privacy</a>.
+      </p>
+    </section>
+
+    <section>
+      <h2>5. Session-Cookie</h2>
+      <p>
+        Nach erfolgreicher Anmeldung setzen wir ein einziges, technisch erforderliches Cookie:
+      </p>
+      <ul>
+        <li><strong>Name:</strong> <code>xword_session</code></li>
+        <li><strong>Inhalt:</strong> HMAC-signiertes Token mit Ihrer User-ID und Ablaufzeit</li>
+        <li><strong>Eigenschaften:</strong> HttpOnly, Secure, SameSite=Lax</li>
+        <li><strong>Lebensdauer:</strong> 30 Tage</li>
+      </ul>
+      <p>
+        Das Cookie enthält keine Tracking-Informationen und wird nicht an Dritte weitergegeben. Rechtsgrundlage: § 25 Abs. 2 Nr. 2 TDDDG (für die Erbringung des Dienstes unbedingt erforderlich).
+      </p>
+      <p>
+        Zusätzlich wird während des Login-Vorgangs ein kurzlebiger <code>xword_oauth_state</code>-Cookie zur Absicherung gegen CSRF gesetzt; dieser wird nach Abschluss des Logins gelöscht.
+      </p>
+    </section>
+
+    <section>
+      <h2>6. Spielstand-Daten</h2>
+      <p>
+        Pro Nutzer und Rätsel speichern wir:
+      </p>
+      <ul>
+        <li>Aktuell eingegebene Buchstaben (Grid-State)</li>
+        <li>Genutzte Hinweis-Felder</li>
+        <li>Anzahl der angefragten Hinweise</li>
+        <li>Verstrichene Spielzeit (in Millisekunden)</li>
+        <li>Lösungsstatus (gelöst / nicht gelöst) und Lösungszeitpunkt</li>
+        <li>Spielmodi-Einstellungen (Hardcore- und Live-Validierungs-Status)</li>
+      </ul>
+      <p>
+        Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO. Speicherdauer: bis zur Löschung Ihres Kontos oder bis Sie die Spielstände in den Einstellungen selbst zurücksetzen.
+      </p>
+    </section>
+
+    <section>
+      <h2>7. Auftragsverarbeitung / Empfänger</h2>
+      <p>
+        Wir setzen außer Google (Login) keine externen Dienstleister ein. Es findet kein Werbe-Tracking, keine Profilbildung und keine Weitergabe an Dritte statt.
+      </p>
+    </section>
+
+    <section>
+      <h2>8. Ihre Rechte</h2>
+      <p>Sie haben jederzeit das Recht auf:</p>
+      <ul>
+        <li><strong>Auskunft</strong> über Ihre gespeicherten Daten (Art. 15 DSGVO)</li>
+        <li><strong>Berichtigung</strong> unrichtiger Daten (Art. 16 DSGVO)</li>
+        <li><strong>Löschung</strong> Ihrer Daten (Art. 17 DSGVO)</li>
+        <li><strong>Einschränkung der Verarbeitung</strong> (Art. 18 DSGVO)</li>
+        <li><strong>Datenübertragbarkeit</strong> (Art. 20 DSGVO)</li>
+        <li><strong>Widerspruch</strong> gegen die Verarbeitung (Art. 21 DSGVO)</li>
+        <li><strong>Beschwerde</strong> bei einer Aufsichtsbehörde (Art. 77 DSGVO)</li>
+      </ul>
+      <p>
+        Sie können Ihre Spielstände und Ihr Konto jederzeit selbst in den Einstellungen (Klick auf Ihren Avatar → „Einstellungen") unwiderruflich löschen. Bei einem Konto-Lösch-Vorgang werden sowohl der User-Datensatz als auch alle zugehörigen Spielstände aus der Datenbank entfernt.
+      </p>
+      <p>
+        Zuständige Aufsichtsbehörde: Berliner Beauftragte für Datenschutz und Informationsfreiheit, Friedrichstr. 219, 10969 Berlin.
+      </p>
+    </section>
+
+    <section>
+      <h2>9. SSL/TLS-Verschlüsselung</h2>
+      <p>
+        Diese Anwendung nutzt durchgehend HTTPS (TLS 1.3) mit Zertifikaten von Let's Encrypt. Sie erkennen die verschlüsselte Verbindung am Schloss-Symbol in Ihrer Browserzeile.
+      </p>
+    </section>
+
+    <section>
+      <h2>10. Stand</h2>
+      <p>Diese Datenschutzerklärung wurde zuletzt aktualisiert: 2026-05-15.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a href="/">Bibliothek</a> · <a href="/impressum.html">Impressum</a> · <a href="/datenschutz.html">Datenschutz</a>
+  </footer>
+</div>
+</body>
+</html>

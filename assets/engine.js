@@ -709,6 +709,24 @@
       // Reflect any initial state in the toggle UI
       refs.liveToggle.classList.toggle('on', state.liveValidate);
       if (refs.hardcoreToggle) refs.hardcoreToggle.classList.toggle('on', state.hardcore);
+
+      // Delegate clicks on the surrounding label/row to the switch itself.
+      // Native <label for="X"> only delegates to form controls — our switches
+      // are <div>s, so we have to wire it ourselves.
+      bindToggleRow(refs.liveToggle);
+      bindToggleRow(refs.hardcoreToggle);
+    }
+
+    function bindToggleRow(switchEl) {
+      if (!switchEl) return;
+      const row = switchEl.closest('.toggle-row');
+      if (!row || row.dataset.bound === '1') return;
+      row.dataset.bound = '1';
+      row.style.cursor = 'pointer';
+      row.addEventListener('click', (e) => {
+        if (e.target === switchEl || switchEl.contains(e.target)) return;
+        switchEl.click();
+      });
       $$('.clues-tab').forEach(tab => {
         tab.onclick = () => setActiveTab(tab.dataset.dir);
       });

@@ -31,7 +31,7 @@
 [![Maintained](https://img.shields.io/badge/Maintained-yes-2d6e4e.svg?style=for-the-badge&labelColor=1a1a1a)](https://github.com/pepperonas/xword/commits/main)
 
 <!-- Puzzle catalog -->
-[![Puzzles total (9)](https://img.shields.io/badge/Puzzles_total-9-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
+[![Puzzles total (12)](https://img.shields.io/badge/Puzzles_total-12-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
 [![Tech (2)](https://img.shields.io/badge/Tech-2-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
 [![Allgemein (2)](https://img.shields.io/badge/Allgemein-2-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
 [![Klassik (1)](https://img.shields.io/badge/Klassik-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
@@ -39,6 +39,9 @@
 [![Wissenschaft (1)](https://img.shields.io/badge/Wissenschaft-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
 [![Kunst (1)](https://img.shields.io/badge/Kunst-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
 [![Geographie (1)](https://img.shields.io/badge/Geographie-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
+[![Architektur (1)](https://img.shields.io/badge/Architektur-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
+[![Sport (1)](https://img.shields.io/badge/Sport-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
+[![Musik (1)](https://img.shields.io/badge/Musik-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
 
 <!-- Repo metadata -->
 [![Code size](https://img.shields.io/github/languages/code-size/pepperonas/xword?style=for-the-badge&labelColor=1a1a1a&color=c8a96a)](https://github.com/pepperonas/xword)

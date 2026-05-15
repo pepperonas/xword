@@ -1,0 +1,220 @@
+{
+  "id": "sport-hard-01",
+  "title": "Schweiß & Strategie",
+  "theme": "sport",
+  "difficulty": "hard",
+  "description": "Sportarten, Olympia, Legenden — vom Marathon bis zur Schachpartie.",
+  "words": [
+    {
+      "answer": "MEDAILLE",
+      "clue": "Auszeichnung in Gold, Silber oder Bronze",
+      "row": 10,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "BASKETBALL",
+      "clue": "Sport mit Korb in 3,05 Meter Höhe",
+      "row": 3,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "POKAL",
+      "clue": "Sieger-Trophäe, oft aus Silber",
+      "row": 6,
+      "col": 14,
+      "direction": "down"
+    },
+    {
+      "answer": "MARATHON",
+      "clue": "42,195 km Langstreckenlauf",
+      "row": 10,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "KARATE",
+      "clue": "Japanischer Kampfsport — 'leere Hand'",
+      "row": 5,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "FUSSBALL",
+      "clue": "Mannschaftssport mit elf Spielern pro Seite",
+      "row": 13,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "TRAINER",
+      "clue": "Bestimmt Aufstellung und Taktik",
+      "row": 5,
+      "col": 16,
+      "direction": "down"
+    },
+    {
+      "answer": "STADION",
+      "clue": "Sportstätte mit Tribünen und Spielfeld",
+      "row": 5,
+      "col": 15,
+      "direction": "across"
+    },
+    {
+      "answer": "SCHACH",
+      "clue": "Strategiespiel mit 64 Feldern",
+      "row": 15,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "STAFFEL",
+      "clue": "Lauf mit Stabübergabe — vier Sprinter",
+      "row": 9,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "VOLLEYBALL",
+      "clue": "Netz-Sport — sechs Spieler, drei Berührungen",
+      "row": 4,
+      "col": 20,
+      "direction": "down"
+    },
+    {
+      "answer": "BIATHLON",
+      "clue": "Wintersport — Skilanglauf kombiniert mit Schießen",
+      "row": 13,
+      "col": 15,
+      "direction": "across"
+    },
+    {
+      "answer": "OLYMPIA",
+      "clue": "Weltgrößte Sportveranstaltung — alle vier Jahre",
+      "row": 6,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "ZEHNKAMPF",
+      "clue": "Königsdisziplin der Leichtathletik",
+      "row": 17,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "SPEER",
+      "clue": "Wurfgerät aus der Antike — heute Olympia-Sportgerät",
+      "row": 15,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "BOXEN",
+      "clue": "Kampfsport mit Lederhandschuhen — drei oder zwölf Runden",
+      "row": 3,
+      "col": 12,
+      "direction": "across"
+    },
+    {
+      "answer": "TORWART",
+      "clue": "Trägt ein anderes Trikot und darf die Hände benutzen",
+      "row": 8,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "BOLT",
+      "clue": "Jamaikanischer Sprint-Weltrekordhalter",
+      "row": 13,
+      "col": 15,
+      "direction": "down"
+    },
+    {
+      "answer": "TENNIS",
+      "clue": "Wimbledon-Sport — Punkte heißen 'Love', 15, 30, 40",
+      "row": 8,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "BECKENBAUER",
+      "clue": "'Kaiser' und 1990 deutscher WM-Trainer",
+      "row": 8,
+      "col": 22,
+      "direction": "down"
+    },
+    {
+      "answer": "HOCKEY",
+      "clue": "Sport mit Stock — auf Eis oder Rasen",
+      "row": 13,
+      "col": 19,
+      "direction": "down"
+    },
+    {
+      "answer": "ABSEITS",
+      "clue": "Stellungsfehler im Fußball",
+      "row": 13,
+      "col": 17,
+      "direction": "down"
+    },
+    {
+      "answer": "FEDERER",
+      "clue": "Schweizer Tennis-Maestro mit 20 Grand-Slam-Titeln",
+      "row": 3,
+      "col": 18,
+      "direction": "down"
+    },
+    {
+      "answer": "FECHTEN",
+      "clue": "Olympische Disziplin mit Florett, Säbel oder Degen",
+      "row": 10,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "ELFMETER",
+      "clue": "Strafstoß vom Punkt vor dem Tor",
+      "row": 6,
+      "col": 1,
+      "direction": "down"
+    },
+    {
+      "answer": "DISKUS",
+      "clue": "Antike Wurfscheibe — heute Leichtathletik-Disziplin",
+      "row": 19,
+      "col": 12,
+      "direction": "across"
+    },
+    {
+      "answer": "RUGBY",
+      "clue": "Britischer Mannschaftssport mit eiförmigem Ball",
+      "row": 2,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "JUDO",
+      "clue": "'Sanfter Weg' aus Japan — Wurf- und Bodentechniken",
+      "row": 0,
+      "col": 13,
+      "direction": "down"
+    },
+    {
+      "answer": "PELE",
+      "clue": "Brasilianischer Fußball-König mit drei WM-Titeln",
+      "row": 0,
+      "col": 15,
+      "direction": "down"
+    },
+    {
+      "answer": "HOCHSPRUNG",
+      "clue": "Leichtathletik mit Latte — Fosbury-Flop",
+      "row": 2,
+      "col": 0,
+      "direction": "across"
+    }
+  ],
+  "size": 23
+}

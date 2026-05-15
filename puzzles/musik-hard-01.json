@@ -1,0 +1,220 @@
+{
+  "id": "musik-hard-01",
+  "title": "Tonleitern & Maestri",
+  "theme": "musik",
+  "difficulty": "hard",
+  "description": "Komponisten, Werke, Instrumente — von der Fuge bis zur Spätromantik.",
+  "words": [
+    {
+      "answer": "DEBUSSY",
+      "clue": "Französischer Impressionist — 'Clair de Lune'",
+      "row": 13,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "KONTRAPUNKT",
+      "clue": "Kompositionstechnik mit gleichberechtigten Stimmen",
+      "row": 6,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "VIVALDI",
+      "clue": "Venezianer der 'Vier Jahreszeiten'",
+      "row": 11,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "KONZERT",
+      "clue": "Komposition für Solist und Orchester",
+      "row": 15,
+      "col": 10,
+      "direction": "across"
+    },
+    {
+      "answer": "OUVERTUERE",
+      "clue": "Eröffnungsstück einer Oper oder eines Oratoriums",
+      "row": 9,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "CELLO",
+      "clue": "Großes Streichinstrument, zwischen den Knien gespielt",
+      "row": 14,
+      "col": 14,
+      "direction": "down"
+    },
+    {
+      "answer": "KLARINETTE",
+      "clue": "Holzblasinstrument mit einfachem Rohrblatt",
+      "row": 8,
+      "col": 16,
+      "direction": "down"
+    },
+    {
+      "answer": "TROMPETE",
+      "clue": "Helles Blechblasinstrument mit drei Ventilen",
+      "row": 7,
+      "col": 8,
+      "direction": "across"
+    },
+    {
+      "answer": "SONATE",
+      "clue": "Werk mit Exposition, Durchführung und Reprise",
+      "row": 13,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "SCHUBERT",
+      "clue": "Wiener Liedmeister — 'Forellenquintett'",
+      "row": 16,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "VIOLINE",
+      "clue": "Geige mit vier in Quinten gestimmten Saiten",
+      "row": 18,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "MAHLER",
+      "clue": "Spätromantiker mit gewaltigen Sinfonien — 'Lied von der Erde'",
+      "row": 10,
+      "col": 15,
+      "direction": "across"
+    },
+    {
+      "answer": "SINFONIE",
+      "clue": "Mehrsätzige Orchesterkomposition",
+      "row": 5,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "ORGEL",
+      "clue": "Pfeifeninstrument — 'Königin der Instrumente'",
+      "row": 12,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "HARMONIE",
+      "clue": "Wohlklang abgestimmter Töne — Lehre der Akkorde",
+      "row": 8,
+      "col": 20,
+      "direction": "down"
+    },
+    {
+      "answer": "BRAHMS",
+      "clue": "Hamburger Spätromantiker, vier Sinfonien, Wiegenlied",
+      "row": 11,
+      "col": 3,
+      "direction": "down"
+    },
+    {
+      "answer": "MELODIE",
+      "clue": "Aufeinander folgende Töne als musikalischer Gedanke",
+      "row": 15,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "KLAVIER",
+      "clue": "88-Tasten-Instrument",
+      "row": 9,
+      "col": 18,
+      "direction": "down"
+    },
+    {
+      "answer": "ARIE",
+      "clue": "Sologesang in der Oper, oft virtuos",
+      "row": 4,
+      "col": 13,
+      "direction": "down"
+    },
+    {
+      "answer": "MOZART",
+      "clue": "Wunderkind aus Salzburg, früh verstorben",
+      "row": 2,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "WAGNER",
+      "clue": "Bayreuther Opernreformator des 'Ring der Nibelungen'",
+      "row": 21,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "CHOPIN",
+      "clue": "Polnischer Klavier-Poet — Nocturnes und Mazurken",
+      "row": 6,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "BACH",
+      "clue": "Thomaskantor aus Leipzig, Meister des Kontrapunkts",
+      "row": 14,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "BEETHOVEN",
+      "clue": "Bonner Komponist der 'Neunten' und 'Ode an die Freude'",
+      "row": 3,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "DIRIGENT",
+      "clue": "Leitet ein Orchester mit Taktstock",
+      "row": 5,
+      "col": 11,
+      "direction": "across"
+    },
+    {
+      "answer": "KANTATE",
+      "clue": "Mehrsätziges Werk für Stimmen und Instrumente",
+      "row": 13,
+      "col": 1,
+      "direction": "down"
+    },
+    {
+      "answer": "VERDI",
+      "clue": "Italienischer Opernkomponist von Aida und Rigoletto",
+      "row": 19,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "HAYDN",
+      "clue": "Wiener Klassiker — gilt als 'Vater der Sinfonie'",
+      "row": 6,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "REQUIEM",
+      "clue": "Totenmesse — Mozart starb über seinem",
+      "row": 0,
+      "col": 16,
+      "direction": "down"
+    },
+    {
+      "answer": "FUGE",
+      "clue": "Streng kontrapunktische Form mit thematischer Imitation",
+      "row": 0,
+      "col": 10,
+      "direction": "down"
+    }
+  ],
+  "size": 22
+}
