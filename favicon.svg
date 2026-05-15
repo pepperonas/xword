@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Black "grid lines" via the background showing through 1px gaps -->
+  <rect width="32" height="32" fill="#1a1a1a"/>
+
+  <!-- Row 0 -->
+  <rect x="0"  y="0"  width="7" height="7" fill="#faf7f0"/>
+  <rect x="8"  y="0"  width="7" height="7" fill="#faf7f0"/>
+  <!-- (16-22, 0-6): BLACK BLOCK -->
+  <rect x="24" y="0"  width="7" height="7" fill="#faf7f0"/>
+
+  <!-- Row 1 -->
+  <rect x="0"  y="8"  width="7" height="7" fill="#faf7f0"/>
+  <rect x="8"  y="8"  width="7" height="7" fill="#c8a96a"/>
+  <rect x="16" y="8"  width="7" height="7" fill="#faf7f0"/>
+  <rect x="24" y="8"  width="7" height="7" fill="#faf7f0"/>
+
+  <!-- Row 2 -->
+  <rect x="0"  y="16" width="7" height="7" fill="#faf7f0"/>
+  <rect x="8"  y="16" width="7" height="7" fill="#faf7f0"/>
+  <rect x="16" y="16" width="7" height="7" fill="#faf7f0"/>
+  <!-- (24-30, 16-22): BLACK BLOCK -->
+
+  <!-- Row 3 -->
+  <!-- (0-6, 24-30): BLACK BLOCK -->
+  <rect x="8"  y="24" width="7" height="7" fill="#faf7f0"/>
+  <rect x="16" y="24" width="7" height="7" fill="#faf7f0"/>
+  <rect x="24" y="24" width="7" height="7" fill="#faf7f0"/>
+</svg>
