@@ -31,8 +31,35 @@
       timerInterval: null,
       hintCount: 0,
       solved: false,
+      elapsedBaseMs: 0, // accumulated time before this session
     };
     let keydownHandler, clickHandler;
+
+    function emitProgress() {
+      if (!callbacks.onProgressChange) return;
+      const cells = {};
+      const hinted = [];
+      for (let r = 0; r < state.size; r++) {
+        for (let c = 0; c < state.size; c++) {
+          const cell = state.grid[r][c];
+          if (cell.isBlock) continue;
+          if (cell.letter) cells[r + ',' + c] = cell.letter;
+          if (cell.hinted) hinted.push(r + ',' + c);
+        }
+      }
+      callbacks.onProgressChange({
+        grid_state: cells,
+        hinted_cells: hinted,
+        hint_count: state.hintCount,
+        elapsed_ms: currentElapsedMs(),
+        solved: state.solved,
+      });
+    }
+
+    function currentElapsedMs() {
+      const live = state.startTime ? (Date.now() - state.startTime) : 0;
+      return state.elapsedBaseMs + live;
+    }
 
     function buildGrid() {
       const g = [];
@@ -77,6 +104,29 @@
 
       state.words.forEach(w => { w.num = numMap[w.key] || (w.idx + 1); });
       state.grid = g;
+
+      // Apply initial state (from server-side saved progress, if any)
+      if (callbacks.initialState && typeof callbacks.initialState === 'object') {
+        const init = callbacks.initialState;
+        if (init.grid_state && typeof init.grid_state === 'object') {
+          for (const k in init.grid_state) {
+            const [r, c] = k.split(',').map(Number);
+            if (Number.isFinite(r) && Number.isFinite(c) && state.grid[r] && state.grid[r][c] && !state.grid[r][c].isBlock) {
+              state.grid[r][c].letter = String(init.grid_state[k] || '').toUpperCase();
+            }
+          }
+        }
+        if (Array.isArray(init.hinted_cells)) {
+          for (const k of init.hinted_cells) {
+            const [r, c] = String(k).split(',').map(Number);
+            if (Number.isFinite(r) && Number.isFinite(c) && state.grid[r] && state.grid[r][c] && !state.grid[r][c].isBlock) {
+              state.grid[r][c].hinted = true;
+            }
+          }
+        }
+        if (typeof init.hint_count === 'number') state.hintCount = init.hint_count;
+        if (typeof init.elapsed_ms === 'number') state.elapsedBaseMs = init.elapsed_ms;
+      }
     }
 
     function renderGrid() {
@@ -257,6 +307,7 @@
       if (!state.solved && solvedWords === state.words.length && totalCells > 0) {
         state.solved = true;
         win();
+        emitProgress();
       }
     }
 
@@ -357,6 +408,7 @@
       if (state.liveValidate) liveCheckCell(row, col);
       nextCellInWord();
       paint();
+      emitProgress();
     }
 
     function deleteLetter() {
@@ -372,6 +424,7 @@
         state.grid[a.row][a.col].letter = '';
         paint();
       }
+      emitProgress();
     }
 
     function liveCheckCell(r, c) {
@@ -521,6 +574,7 @@
       state.grid[pick.r][pick.c].hinted = true;
       state.hintCount++;
       paint();
+      emitProgress();
     }
 
     function actionReveal() {
@@ -547,17 +601,19 @@
       }
       state.hintCount = 0;
       state.solved = false;
+      state.elapsedBaseMs = 0;
       state.startTime = Date.now();
       refs.overlay.classList.remove('show');
       paint();
+      emitProgress();
     }
 
     function startTimer() {
       state.startTime = Date.now();
       if (state.timerInterval) clearInterval(state.timerInterval);
+      refs.statTime.textContent = formatTime(currentElapsedMs());
       state.timerInterval = setInterval(() => {
-        const t = Date.now() - state.startTime;
-        refs.statTime.textContent = formatTime(t);
+        refs.statTime.textContent = formatTime(currentElapsedMs());
       }, 1000);
     }
     function formatTime(ms) {

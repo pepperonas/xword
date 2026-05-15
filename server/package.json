@@ -1,0 +1,20 @@
+{
+  "name": "xword-api",
+  "version": "1.0.0",
+  "description": "Backend for xword.celox.io: Google OAuth + per-user progress storage",
+  "private": true,
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.7.0",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.21.1"
+  }
+}

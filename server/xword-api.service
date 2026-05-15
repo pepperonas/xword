@@ -1,0 +1,29 @@
+[Unit]
+Description=xword-api (Google OAuth + per-user progress storage)
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/xword-api
+EnvironmentFile=/opt/xword-api/.env
+ExecStart=/usr/bin/node server.js
+Restart=on-failure
+RestartSec=5s
+
+# Hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+ReadWritePaths=/opt/xword-api/data
+
+# Logs go to journald
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=xword-api
+
+[Install]
+WantedBy=multi-user.target
