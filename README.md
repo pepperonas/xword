@@ -13,13 +13,14 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/pepperonas/xword?style=for-the-badge&logo=git&color=c8a96a&labelColor=1a1a1a)](https://github.com/pepperonas/xword/commits/main)
 
 <!-- License & tech stack -->
-[![License: MIT](https://img.shields.io/badge/License-MIT-c8a96a.svg?style=for-the-badge&labelColor=1a1a1a)](LICENSE)
-[![Made with Vanilla JS](https://img.shields.io/badge/Vanilla-JS-f7df1e.svg?style=for-the-badge&logo=javascript&logoColor=black&labelColor=1a1a1a)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white&labelColor=1a1a1a)](https://developer.mozilla.org/en-US/docs/Web/HTML)
-[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white&labelColor=1a1a1a)](https://developer.mozilla.org/en-US/docs/Web/CSS)
-[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white&labelColor=1a1a1a)](https://nodejs.org)
-[![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white&labelColor=1a1a1a)](https://sqlite.org)
-[![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white&labelColor=1a1a1a)](https://expressjs.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-0B57D0.svg?style=for-the-badge&labelColor=111318)](LICENSE)
+[![Material Design 3](https://img.shields.io/badge/Material_Design-3-0B57D0?style=for-the-badge&logo=materialdesign&logoColor=white&labelColor=111318)](https://m3.material.io/)
+[![Made with Vanilla JS](https://img.shields.io/badge/Vanilla-JS-f7df1e.svg?style=for-the-badge&logo=javascript&logoColor=black&labelColor=111318)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white&labelColor=111318)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white&labelColor=111318)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white&labelColor=111318)](https://nodejs.org)
+[![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white&labelColor=111318)](https://sqlite.org)
+[![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white&labelColor=111318)](https://expressjs.com)
 
 <!-- AI -->
 [![Powered by Claude](https://img.shields.io/badge/Powered_by-Claude-6b4ea0?style=for-the-badge&logo=anthropic&logoColor=white&labelColor=1a1a1a)](https://www.anthropic.com/)
@@ -61,12 +62,13 @@
 
 ## ✨ Features
 
-- 🧩 **12 kuratierte Rätsel** in drei Schwierigkeiten und zehn Themen — von Tech über Allgemeinwissen bis Klassische Bildung, Mythologie, Wissenschaft, Kunst, Geographie, Architektur, Sport und Musik
-- 🤖 **Auto-Layout-Algorithmus** — du lieferst Wörter + Hinweise, der Algorithmus baut das Gitter (Standard-Kreuzwort-Regeln, multi-crossing-bevorzugend)
-- 🪶 **Editorialer Zeitungsstil** — Fraunces-Display-Schrift, JetBrains-Mono-UI, papierweißer Hintergrund mit Goldakzenten
+- 🎨 **Material Design 3** — komplette M3-Implementation mit Color-Roles, Type-Scale, Shape-System und Tonal-Surfaces. Source-Color **#0B57D0** (Deep Indigo Blue). Beide Modi voll spezifiziert.
+- 🌗 **Dark Mode** mit **maximaler Lesbarkeit** — Letter Cells bleiben hell wie ein Papier auf dunklem Tisch, aktive Zelle in sattem Blau für unmissverständlichen Cursor-Kontrast
+- 🧩 **15 kuratierte Rätsel** in drei Schwierigkeiten und 13 Themen — von Tech über Allgemeinwissen bis Klassische Bildung, Mythologie, Wissenschaft, Kunst, Geographie, Architektur, Sport, Musik, Geschichte, Film und Natur
+- 🤖 **Auto-Layout-Algorithmus** — du lieferst Wörter + Hinweise, der Algorithmus baut das Gitter (Standard-Kreuzwort-Regeln, multi-crossing-bevorzugend, gleichgerichtete Wort-Überlappung verhindert)
 - 🔐 **Google-Login** (optional) — OAuth 2.0 mit serverseitigem Auth-Code-Flow, HttpOnly-Session-Cookies
 - 💾 **Spielstand-Sync** pro Nutzer — jeder Tastenanschlag wird live gesichert, `sendBeacon`-Fallback beim Tab-Close
-- 🌗 **Dark Mode** — Hell / Dunkel / System-Auto, persistiert in localStorage
+- 🧠 **Smarter Cursor** — Wort-Auswahl springt zur ersten leeren Zelle, Tippen + Backspace überspringen korrekte Kreuzungsbuchstaben
 - 📱 **PWA / Offline-Mode** — Web-App-Manifest + Service Worker, „Zum Home-Bildschirm" funktioniert
 - ⚡ **Hardcore-Modus** — keine Highlights für korrekte Wörter, keine Live-Validierung, mutually exclusive zum Live-Modus
 - 🏆 **Erfolgssystem** — 12 Erfolge in Bronze/Silber/Gold, Toast-Benachrichtigungen
@@ -78,6 +80,27 @@
 - 🖨 **Print-View** — `Cmd+P` druckt sauberes A4 mit Leer-Gitter + nummerierten Hinweisen
 - 📤 **Share-Button** — Web Share API + Zwischenablage-Fallback
 - 🔢 **Auto-Versionierung** — `git rev-list --count HEAD` als Versionsnummer in der Masthead-Eyebrow
+
+## 🎨 Design-System
+
+Der M3-Stack:
+
+| Token | Light | Dark |
+|---|---|---|
+| **Primary** | `#0B57D0` Deep Blue | `#ADC6FF` Light Blue |
+| **On Primary** | `#FFFFFF` | `#002E69` |
+| **Background** | `#FAF9FD` | `#111318` |
+| **Letter Cell (xword-spezifisch)** | `#FFFFFF` | `#ECECEF` (hell — bewusst nicht invertiert für Lesbarkeit) |
+| **Block Cell** | `#1A1B21` | `#050608` |
+| **Active Cell** | `#0B57D0` | `#0B57D0` (gleicher Tieffarbig-Pop in beiden Modi) |
+| **Active Word** | `#D8E2FF` | `#C8DBFF` |
+
+**Typografie**:
+- Display: **Roboto Serif** (variable opsz / wght, für H1 + Hinweis-Texte)
+- Body / UI: **Roboto Flex** (variable wght 300–700)
+- Mono: **Roboto Mono** (Stats, Code)
+
+**Shape**: 4 / 8 / 12 / 16 / 28 / full · **Elevation**: M3 Spec mit Dual-Layer-Shadows.
 
 ---
 
