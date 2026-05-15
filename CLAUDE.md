@@ -4,11 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project: xword
 
-A self-contained crossword puzzle framework with AI-powered puzzle generation.
+A self-contained crossword puzzle framework with AI-powered puzzle generation, Google login, per-user progress, and an admin panel.
 
 - **Browser game**: Static SPA (`index.html` + `assets/`) — no build step, no framework.
 - **Puzzle data**: One JSON file per puzzle in `puzzles/`, indexed by `puzzles/index.json`.
+- **Backend** (`server/`): Express + better-sqlite3, Google OAuth, per-user progress, admin endpoints. systemd-managed on the VPS at `/opt/xword-api/`, listens on 127.0.0.1:4242, nginx proxies `/api/`.
 - **Generator CLI**: `generator/generate.js` calls the Claude API and writes puzzle JSON files.
+- **Versioning**: `scripts/bump-version.sh` reads `git rev-list --count HEAD` and writes `version.json`. The frontend fetches it on init and shows "Ver. N" in the masthead. Run before each deploy. `version.json` is gitignored.
 
 ## Architecture
 
@@ -103,3 +105,14 @@ node --check generator/generate.js
 - Answers are uppercase A-Z only, no spaces/punctuation. Umlauts get spelled out (`ä`→`AE`).
 - Never use `innerHTML` with interpolated user/data content — use `replaceChildren()` + `createElement()`. (A security hook enforces this.)
 - The engine is stateless across puzzles — `destroy()` cleans up event listeners and the timer; `app.js` always destroys the previous game before starting a new one.
+
+## Admin / settings
+
+- Frontend dropdown shows "Einstellungen" for any logged-in user and "★ Admin" only when `/api/auth/me` returns `is_admin: true`.
+- Admin status is decided server-side from `ADMIN_EMAILS` env (comma-separated, default `martinpaush@gmail.com`). Never trust client claims.
+- Admin endpoints (`/api/admin/*`) all go through `requireAdmin` middleware and are read-only by design.
+- Settings modal can `DELETE /api/progress` (reset all own progress) and `DELETE /api/auth/me` (delete own account).
+
+## CI
+
+GitHub Actions (`.github/workflows/test.yml`) runs `npm test` on push to main and on PRs. The README's Tests-Badge points at this workflow.

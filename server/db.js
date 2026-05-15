@@ -90,5 +90,48 @@ export function openDb(path) {
       SELECT puzzle_id, hint_count, elapsed_ms, solved, solved_at, updated_at, percent
       FROM progress WHERE user_id = ? ORDER BY updated_at DESC
     `),
+
+    /* ---------- Admin queries ---------- */
+    adminListUsers: db.prepare(`
+      SELECT u.id, u.email, u.name, u.picture, u.created_at, u.last_seen_at,
+             COUNT(p.puzzle_id) AS puzzles_attempted,
+             COALESCE(SUM(p.solved), 0) AS puzzles_solved,
+             COALESCE(SUM(p.elapsed_ms), 0) AS total_time_ms,
+             COALESCE(SUM(p.hint_count), 0) AS total_hints
+      FROM users u
+      LEFT JOIN progress p ON p.user_id = u.id
+      GROUP BY u.id
+      ORDER BY u.last_seen_at DESC
+    `),
+    adminGlobalStats: db.prepare(`
+      SELECT
+        (SELECT COUNT(*) FROM users) AS total_users,
+        (SELECT COUNT(*) FROM progress) AS total_progress,
+        (SELECT COUNT(*) FROM progress WHERE solved = 1) AS total_solved,
+        (SELECT COALESCE(SUM(elapsed_ms), 0) FROM progress) AS total_time_ms,
+        (SELECT COALESCE(SUM(hint_count), 0) FROM progress) AS total_hints,
+        (SELECT COUNT(*) FROM users WHERE last_seen_at > ?) AS active_users_7d
+    `),
+    adminRecentActivity: db.prepare(`
+      SELECT p.user_id, p.puzzle_id, p.percent, p.solved, p.elapsed_ms,
+             p.hint_count, p.updated_at,
+             u.email, u.name, u.picture
+      FROM progress p
+      JOIN users u ON u.id = p.user_id
+      ORDER BY p.updated_at DESC
+      LIMIT 100
+    `),
+    adminPuzzleStats: db.prepare(`
+      SELECT puzzle_id,
+             COUNT(*) AS attempts,
+             COALESCE(SUM(solved), 0) AS solves,
+             ROUND(AVG(elapsed_ms)) AS avg_time_ms,
+             ROUND(AVG(percent)) AS avg_percent,
+             ROUND(AVG(hint_count), 1) AS avg_hints,
+             MIN(CASE WHEN solved = 1 THEN elapsed_ms END) AS best_time_ms
+      FROM progress
+      GROUP BY puzzle_id
+      ORDER BY attempts DESC
+    `),
   };
 }

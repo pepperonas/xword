@@ -16,11 +16,21 @@
   const refs = {
     viewSelector: document.getElementById('view-selector'),
     viewGame: document.getElementById('view-game'),
+    viewAdmin: document.getElementById('view-admin'),
     filterBar: document.getElementById('filterBar'),
     puzzleSections: document.getElementById('puzzleSections'),
     btnBack: document.getElementById('btnBack'),
+    btnAdminBack: document.getElementById('btnAdminBack'),
+    adminTabs: document.getElementById('adminTabs'),
+    adminContent: document.getElementById('adminContent'),
     userBarSelector: document.getElementById('userBarSelector'),
     userBarGame: document.getElementById('userBarGame'),
+    userBarAdmin: document.getElementById('userBarAdmin'),
+    settingsOverlay: document.getElementById('settingsOverlay'),
+    settingsClose: document.getElementById('settingsClose'),
+    settingsAccount: document.getElementById('settingsAccount'),
+    settingsResetProgress: document.getElementById('settingsResetProgress'),
+    settingsDeleteAccount: document.getElementById('settingsDeleteAccount'),
     gameTitle: document.getElementById('gameTitle'),
     gameDescription: document.getElementById('gameDescription'),
     gameTheme: document.getElementById('gameTheme'),
@@ -67,6 +77,7 @@
     currentPuzzleId: null,
     syncIndicator: null,           // DOM element shown while saving
     progressMap: {},               // puzzle_id -> { percent, solved, hint_count, elapsed_ms, ... }
+    adminTab: 'users',
   };
 
   function el(tag, className, text) {
@@ -81,6 +92,16 @@
     const res = await fetch('puzzles/index.json');
     if (!res.ok) throw new Error('Manifest konnte nicht geladen werden: ' + res.status);
     return await res.json();
+  }
+
+  async function loadVersion() {
+    try {
+      const res = await fetch('version.json', { cache: 'no-store' });
+      if (!res.ok) return null;
+      return await res.json();
+    } catch {
+      return null;
+    }
   }
 
   async function loadPuzzle(file) {
@@ -139,12 +160,39 @@
       syncRow.className = 'user-menu-row';
       syncRow.textContent = '✓ Fortschritt wird gespeichert';
       menu.appendChild(syncRow);
+
+      const settingsBtn = document.createElement('button');
+      settingsBtn.textContent = 'Einstellungen';
+      settingsBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menu.classList.remove('open');
+        openSettings();
+      });
+      menu.appendChild(settingsBtn);
+
+      if (state.user.is_admin) {
+        const adminBtn = document.createElement('button');
+        adminBtn.className = 'menu-admin';
+        adminBtn.textContent = '★ Admin';
+        adminBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          menu.classList.remove('open');
+          navigateToAdmin();
+        });
+        menu.appendChild(adminBtn);
+      }
+
+      const divider = document.createElement('div');
+      divider.className = 'user-menu-row divider';
+      menu.appendChild(divider);
+
       const logoutBtn = document.createElement('button');
       logoutBtn.textContent = 'Abmelden';
       logoutBtn.addEventListener('click', async () => {
         await window.XwordAuth.logout();
         state.user = null;
         renderAllUserBars();
+        navigateToSelector();
       });
       menu.appendChild(logoutBtn);
       wrap.appendChild(menu);
@@ -169,6 +217,257 @@
   function renderAllUserBars() {
     renderUserBar(refs.userBarSelector);
     renderUserBar(refs.userBarGame);
+    if (refs.userBarAdmin) renderUserBar(refs.userBarAdmin);
+  }
+
+  /* ---------- Settings modal ---------- */
+  function openSettings() {
+    if (!state.user) return;
+    refs.settingsAccount.replaceChildren();
+    const avatar = el('span', 'settings-account-avatar');
+    if (state.user.picture) avatar.style.backgroundImage = 'url(' + JSON.stringify(state.user.picture) + ')';
+    const text = el('div', 'settings-account-text');
+    text.appendChild(el('span', 'name', state.user.name || state.user.email));
+    text.appendChild(document.createTextNode(state.user.email));
+    refs.settingsAccount.appendChild(avatar);
+    refs.settingsAccount.appendChild(text);
+    refs.settingsOverlay.classList.add('show');
+  }
+  function closeSettings() { refs.settingsOverlay.classList.remove('show'); }
+
+  /* ---------- Admin view ---------- */
+  function navigateToAdmin() { window.location.hash = 'admin'; }
+  function showAdmin() {
+    if (state.currentGame) {
+      state.currentGame.destroy();
+      state.currentGame = null;
+    }
+    refs.viewSelector.classList.remove('active');
+    refs.viewGame.classList.remove('active');
+    refs.viewAdmin.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    renderUserBar(refs.userBarAdmin);
+    setAdminTab(state.adminTab || 'users');
+  }
+  function setAdminTab(tab) {
+    state.adminTab = tab;
+    $$All(refs.adminTabs, '.admin-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+    refs.adminContent.replaceChildren(el('div', 'admin-loading', 'Lade Daten…'));
+    renderAdminTab(tab);
+  }
+
+  function $$All(root, sel) { return root ? root.querySelectorAll(sel) : []; }
+
+  function formatDuration(ms) {
+    const total = Math.floor((ms || 0) / 1000);
+    if (total < 60) return total + 's';
+    const m = Math.floor(total / 60);
+    if (m < 60) return m + ' Min';
+    const h = Math.floor(m / 60);
+    return h + 'h ' + (m % 60) + 'm';
+  }
+  function formatTimestamp(unixSeconds) {
+    if (!unixSeconds) return '—';
+    const d = new Date(unixSeconds * 1000);
+    return d.toLocaleString('de-DE', { dateStyle: 'short', timeStyle: 'short' });
+  }
+  function formatBytes(n) {
+    if (!n) return '0 B';
+    const units = ['B', 'KB', 'MB', 'GB'];
+    let i = 0, v = n;
+    while (v >= 1024 && i < units.length - 1) { v /= 1024; i++; }
+    return v.toFixed(1) + ' ' + units[i];
+  }
+
+  async function renderAdminTab(tab) {
+    const root = refs.adminContent;
+    root.replaceChildren(el('div', 'admin-loading', 'Lade Daten…'));
+    if (tab === 'users') {
+      const data = await window.XwordAuth.adminFetch('users');
+      if (!data) return root.replaceChildren(el('div', 'admin-error', 'Daten konnten nicht geladen werden.'));
+      root.replaceChildren(buildUsersTable(data.items));
+    } else if (tab === 'activity') {
+      const data = await window.XwordAuth.adminFetch('activity');
+      if (!data) return root.replaceChildren(el('div', 'admin-error', 'Daten konnten nicht geladen werden.'));
+      root.replaceChildren(buildActivityTable(data.items));
+    } else if (tab === 'puzzles') {
+      const [puzzles, stats] = await Promise.all([
+        window.XwordAuth.adminFetch('puzzles'),
+        window.XwordAuth.adminFetch('stats'),
+      ]);
+      if (!puzzles || !stats) return root.replaceChildren(el('div', 'admin-error', 'Daten konnten nicht geladen werden.'));
+      root.replaceChildren(buildPuzzleStats(puzzles.items, stats));
+    } else if (tab === 'system') {
+      const [system, stats] = await Promise.all([
+        window.XwordAuth.adminFetch('system'),
+        window.XwordAuth.adminFetch('stats'),
+      ]);
+      if (!system || !stats) return root.replaceChildren(el('div', 'admin-error', 'Daten konnten nicht geladen werden.'));
+      root.replaceChildren(buildSystemView(system, stats));
+    }
+  }
+
+  function buildUsersTable(items) {
+    const wrap = el('div', 'admin-table-wrap');
+    if (!items.length) { wrap.appendChild(el('div', 'admin-loading', 'Noch keine Spieler registriert.')); return wrap; }
+    const table = document.createElement('table');
+    table.className = 'admin-table';
+    const thead = document.createElement('thead');
+    thead.innerHTML = '';
+    const trh = document.createElement('tr');
+    ['Spieler', 'Versucht', 'Gelöst', 'Spielzeit', 'Hints', 'Erst gesehen', 'Zuletzt aktiv'].forEach(h => {
+      const th = document.createElement('th'); th.textContent = h; trh.appendChild(th);
+    });
+    thead.appendChild(trh); table.appendChild(thead);
+    const tbody = document.createElement('tbody');
+    for (const u of items) {
+      const tr = document.createElement('tr');
+      const td0 = document.createElement('td');
+      const ucell = el('div', 'user-cell');
+      const av = el('span', 'user-cell-avatar');
+      if (u.picture) av.style.backgroundImage = 'url(' + JSON.stringify(u.picture) + ')';
+      ucell.appendChild(av);
+      const namebox = document.createElement('div');
+      namebox.appendChild(el('span', 'name', u.name || u.email));
+      namebox.appendChild(el('span', 'small', u.email));
+      ucell.appendChild(namebox);
+      td0.appendChild(ucell); tr.appendChild(td0);
+      tr.appendChild(el('td', null, String(u.puzzles_attempted)));
+      tr.appendChild(el('td', null, String(u.puzzles_solved)));
+      tr.appendChild(el('td', null, formatDuration(u.total_time_ms)));
+      tr.appendChild(el('td', null, String(u.total_hints)));
+      tr.appendChild(el('td', null, formatTimestamp(u.created_at)));
+      tr.appendChild(el('td', null, formatTimestamp(u.last_seen_at)));
+      tbody.appendChild(tr);
+    }
+    table.appendChild(tbody);
+    wrap.appendChild(table);
+    return wrap;
+  }
+
+  function puzzleTitle(id) {
+    if (!state.manifest) return id;
+    const p = state.manifest.puzzles.find(x => x.id === id);
+    return p ? p.title : id;
+  }
+
+  function buildActivityTable(items) {
+    const wrap = el('div', 'admin-table-wrap');
+    if (!items.length) { wrap.appendChild(el('div', 'admin-loading', 'Noch keine Aktivität.')); return wrap; }
+    const table = document.createElement('table');
+    table.className = 'admin-table';
+    const thead = document.createElement('thead');
+    const trh = document.createElement('tr');
+    ['Spieler', 'Rätsel', 'Fortschritt', 'Zeit', 'Hints', 'Status', 'Aktualisiert'].forEach(h => {
+      const th = document.createElement('th'); th.textContent = h; trh.appendChild(th);
+    });
+    thead.appendChild(trh); table.appendChild(thead);
+    const tbody = document.createElement('tbody');
+    for (const a of items) {
+      const tr = document.createElement('tr');
+      const td0 = document.createElement('td');
+      const ucell = el('div', 'user-cell');
+      const av = el('span', 'user-cell-avatar');
+      if (a.picture) av.style.backgroundImage = 'url(' + JSON.stringify(a.picture) + ')';
+      ucell.appendChild(av);
+      const namebox = document.createElement('div');
+      namebox.appendChild(el('span', 'name', a.name || a.email));
+      namebox.appendChild(el('span', 'small', a.email));
+      ucell.appendChild(namebox);
+      td0.appendChild(ucell); tr.appendChild(td0);
+      tr.appendChild(el('td', null, puzzleTitle(a.puzzle_id)));
+      tr.appendChild(el('td', null, a.percent + '%'));
+      tr.appendChild(el('td', null, formatDuration(a.elapsed_ms)));
+      tr.appendChild(el('td', null, String(a.hint_count)));
+      const tdStatus = document.createElement('td');
+      if (a.solved) {
+        const b = el('span', 'solved-badge', '✓ Gelöst');
+        tdStatus.appendChild(b);
+      } else {
+        tdStatus.textContent = '—';
+      }
+      tr.appendChild(tdStatus);
+      tr.appendChild(el('td', null, formatTimestamp(a.updated_at)));
+      tbody.appendChild(tr);
+    }
+    table.appendChild(tbody);
+    wrap.appendChild(table);
+    return wrap;
+  }
+
+  function buildPuzzleStats(items, stats) {
+    const root = document.createDocumentFragment();
+    const grid = el('div', 'admin-stat-grid');
+    grid.appendChild(buildStatCell('Aktive Rätsel', state.manifest ? state.manifest.puzzles.length : '—'));
+    grid.appendChild(buildStatCell('Versuche gesamt', stats.total_progress));
+    grid.appendChild(buildStatCell('Lösungen', stats.total_solved));
+    grid.appendChild(buildStatCell('Solve-Rate', stats.total_progress ? Math.round(100 * stats.total_solved / stats.total_progress) + '%' : '—'));
+    root.appendChild(grid);
+
+    const wrap = el('div', 'admin-table-wrap');
+    const table = document.createElement('table');
+    table.className = 'admin-table';
+    const thead = document.createElement('thead');
+    const trh = document.createElement('tr');
+    ['Rätsel', 'Versuche', 'Gelöst', 'Ø Fortschritt', 'Ø Zeit', 'Ø Hints', 'Beste Zeit'].forEach(h => {
+      const th = document.createElement('th'); th.textContent = h; trh.appendChild(th);
+    });
+    thead.appendChild(trh); table.appendChild(thead);
+    const tbody = document.createElement('tbody');
+    for (const p of items) {
+      const tr = document.createElement('tr');
+      tr.appendChild(el('td', null, puzzleTitle(p.puzzle_id)));
+      tr.appendChild(el('td', null, String(p.attempts)));
+      tr.appendChild(el('td', null, String(p.solves)));
+      tr.appendChild(el('td', null, (p.avg_percent || 0) + '%'));
+      tr.appendChild(el('td', null, formatDuration(p.avg_time_ms)));
+      tr.appendChild(el('td', null, String(p.avg_hints)));
+      tr.appendChild(el('td', null, p.best_time_ms ? formatDuration(p.best_time_ms) : '—'));
+      tbody.appendChild(tr);
+    }
+    table.appendChild(tbody);
+    wrap.appendChild(table);
+    root.appendChild(wrap);
+    return root;
+  }
+
+  function buildStatCell(label, value, sub) {
+    const cell = el('div', 'admin-stat-cell');
+    cell.appendChild(el('div', 'admin-stat-label', label));
+    const v = el('div', 'admin-stat-value');
+    v.appendChild(document.createTextNode(String(value)));
+    if (sub) v.appendChild(el('span', 'sub', sub));
+    cell.appendChild(v);
+    return cell;
+  }
+
+  function buildSystemView(system, stats) {
+    const root = document.createDocumentFragment();
+    const grid = el('div', 'admin-stat-grid');
+    grid.appendChild(buildStatCell('User', stats.total_users));
+    grid.appendChild(buildStatCell('Aktiv (7 Tage)', stats.active_users_7d));
+    grid.appendChild(buildStatCell('Uptime', formatDuration(system.uptime_seconds * 1000)));
+    grid.appendChild(buildStatCell('Speicher', system.memory_mb + ' MB'));
+    grid.appendChild(buildStatCell('DB-Größe', formatBytes(system.db_size_bytes)));
+    grid.appendChild(buildStatCell('Node', system.node_version));
+    root.appendChild(grid);
+
+    const section = el('div', 'admin-section');
+    section.appendChild(el('h3', null, 'Details'));
+    const kv = el('div', 'admin-key-value');
+    const addKV = (k, v) => {
+      const row = el('div', 'admin-key-value-row');
+      row.appendChild(el('span', 'k', k));
+      row.appendChild(el('span', 'v', v));
+      kv.appendChild(row);
+    };
+    addKV('Boot Time', formatTimestamp(Math.floor(system.boot_time / 1000)));
+    addKV('Admin-Emails', system.admin_emails.join(', '));
+    addKV('Spielzeit gesamt', formatDuration(stats.total_time_ms));
+    addKV('Hints gesamt', String(stats.total_hints));
+    section.appendChild(kv);
+    root.appendChild(section);
+    return root;
   }
 
   function showSyncIndicator(status) {
@@ -188,8 +487,13 @@
   function renderFilters() {
     refs.filterBar.replaceChildren();
     const themes = ['all', ...new Set(state.manifest.puzzles.map(p => p.theme))];
+    const totalCount = state.manifest.puzzles.length;
     themes.forEach(theme => {
-      const chip = el('button', 'filter-chip', theme === 'all' ? 'Alle' : theme);
+      const label = theme === 'all' ? 'Alle' : theme;
+      const count = theme === 'all' ? totalCount : state.manifest.puzzles.filter(p => p.theme === theme).length;
+      const chip = el('button', 'filter-chip');
+      chip.appendChild(document.createTextNode(label));
+      chip.appendChild(el('span', 'filter-chip-count', ' (' + count + ')'));
       if (theme === state.activeFilter) chip.classList.add('active');
       chip.addEventListener('click', () => {
         state.activeFilter = theme;
@@ -370,6 +674,7 @@
     }
     state.currentPuzzleId = null;
     refs.viewGame.classList.remove('active');
+    if (refs.viewAdmin) refs.viewAdmin.classList.remove('active');
     refs.viewSelector.classList.add('active');
     refs.overlay.classList.remove('show');
     // Refresh progress map so cards reflect latest state from the just-left game
@@ -389,6 +694,14 @@
 
   function onHashChange() {
     const hash = window.location.hash.replace(/^#/, '');
+    if (hash === 'admin') {
+      if (state.user && state.user.is_admin) {
+        showAdmin();
+      } else {
+        window.location.hash = '';
+      }
+      return;
+    }
     const m = hash.match(/^play=(.+)$/);
     if (m) {
       const id = m[1];
@@ -403,13 +716,20 @@
 
   /* ---------- Init ---------- */
   async function init() {
-    // Fetch user + manifest in parallel
-    const [user, manifest] = await Promise.all([
+    // Fetch user + manifest + version in parallel
+    const [user, manifest, version] = await Promise.all([
       window.XwordAuth.fetchMe(),
       loadManifest().catch(err => { console.error(err); return null; }),
+      loadVersion(),
     ]);
     state.user = user;
     state.manifest = manifest;
+
+    const versionEl = document.getElementById('appVersion');
+    if (versionEl) {
+      versionEl.textContent = version && version.version ? 'Ver. ' + version.version : 'Ver. dev';
+      if (version && version.commit) versionEl.title = version.commit + ' · ' + version.date;
+    }
 
     renderAllUserBars();
 
@@ -429,6 +749,47 @@
     renderFilters();
     renderPuzzleList();
     refs.btnBack.addEventListener('click', () => navigateToSelector());
+    if (refs.btnAdminBack) refs.btnAdminBack.addEventListener('click', () => navigateToSelector());
+
+    // Admin tabs
+    if (refs.adminTabs) {
+      refs.adminTabs.querySelectorAll('.admin-tab').forEach(t => {
+        t.addEventListener('click', () => setAdminTab(t.dataset.tab));
+      });
+    }
+
+    // Settings modal handlers
+    refs.settingsClose.addEventListener('click', closeSettings);
+    refs.settingsOverlay.addEventListener('click', (e) => {
+      if (e.target === refs.settingsOverlay) closeSettings();
+    });
+    refs.settingsResetProgress.addEventListener('click', async () => {
+      if (!confirm('Wirklich ALLE Spielstände unwiderruflich zurücksetzen?')) return;
+      const ok = await window.XwordAuth.resetAllProgress();
+      if (ok) {
+        state.progressMap = {};
+        renderPuzzleList();
+        closeSettings();
+        alert('Spielstände gelöscht.');
+      } else {
+        alert('Fehler beim Löschen.');
+      }
+    });
+    refs.settingsDeleteAccount.addEventListener('click', async () => {
+      if (!confirm('Konto + alle Daten unwiderruflich löschen?\nDieser Schritt kann nicht rückgängig gemacht werden.')) return;
+      const ok = await window.XwordAuth.deleteAccount();
+      if (ok) {
+        state.user = null;
+        state.progressMap = {};
+        renderAllUserBars();
+        renderPuzzleList();
+        closeSettings();
+        alert('Konto gelöscht.');
+      } else {
+        alert('Fehler beim Löschen.');
+      }
+    });
+
     window.addEventListener('hashchange', onHashChange);
 
     // Flush pending save via sendBeacon when the tab is about to be hidden/closed.

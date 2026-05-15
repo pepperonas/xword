@@ -18,6 +18,8 @@
 <meta property="og:description" content="Klassische Kreuzworträtsel im editorialen Zeitungsstil. Tech, Allgemeinwissen, Klassische Bildung. Mit KI-gestützter Rätselgenerierung.">
 <meta property="og:url" content="https://xword.celox.io/">
 <meta property="og:image" content="https://xword.celox.io/xword.png">
+<meta property="og:image:secure_url" content="https://xword.celox.io/xword.png">
+<meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1024">
 <meta property="og:image:height" content="540">
 <meta property="og:image:alt" content="Kreuzworträtsel — Eine kuratierte Sammlung">
@@ -42,7 +44,7 @@
     <div class="user-bar" id="userBarSelector"></div>
     <header class="masthead">
       <div class="eyebrow">
-        <span>Vol. I</span>
+        <span id="appVersion">Ver. —</span>
         <span class="dot"></span>
         <span>Bibliothek</span>
         <span class="dot"></span>
@@ -151,6 +153,60 @@
 
     <footer class="footer">© 2026 · Kreuzworträtsel Framework</footer>
   </section>
+
+  <!-- =========== ADMIN VIEW =========== -->
+  <section class="view" id="view-admin">
+    <div class="user-bar" id="userBarAdmin"></div>
+    <header class="masthead">
+      <div class="eyebrow">
+        <span>Admin</span>
+        <span class="dot"></span>
+        <span>Verwaltung</span>
+      </div>
+      <h1>Cockpit</h1>
+      <p class="subtitle">— Nutzungsdaten, Spielstände, System —</p>
+    </header>
+
+    <div class="back-bar">
+      <button class="back-link" id="btnAdminBack">← Zur Bibliothek</button>
+    </div>
+
+    <div class="admin-tabs" id="adminTabs">
+      <button class="admin-tab active" data-tab="users">User</button>
+      <button class="admin-tab" data-tab="activity">Aktivität</button>
+      <button class="admin-tab" data-tab="puzzles">Rätsel-Stats</button>
+      <button class="admin-tab" data-tab="system">System</button>
+    </div>
+
+    <div class="admin-content" id="adminContent">
+      <div class="admin-loading">Lade Daten…</div>
+    </div>
+
+    <footer class="footer">© 2026 · Kreuzworträtsel Framework</footer>
+  </section>
+
+  <!-- Einstellungen-Modal -->
+  <div class="overlay" id="settingsOverlay">
+    <div class="settings-card">
+      <div class="settings-head">
+        <h2>Einstellungen</h2>
+        <button class="settings-close" id="settingsClose" aria-label="Schließen">×</button>
+      </div>
+      <div class="settings-section">
+        <div class="settings-label">Account</div>
+        <div class="settings-account" id="settingsAccount"></div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-label">Daten</div>
+        <button class="btn" id="settingsResetProgress">
+          <span class="ico">⟲</span>Alle Spielstände zurücksetzen
+        </button>
+        <button class="btn btn-danger" id="settingsDeleteAccount">
+          <span class="ico">✕</span>Konto unwiderruflich löschen
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- Win Overlay -->
   <div class="overlay" id="overlay">

@@ -7,3 +7,4 @@ node_modules/
 /server/package-lock.json
 /server/data/
 /.playwright-mcp/
+/version.json

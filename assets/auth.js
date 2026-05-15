@@ -129,6 +129,31 @@
     }
   }
 
+  async function resetAllProgress() {
+    try {
+      const res = await fetch(API + '/progress', { method: 'DELETE', credentials: 'same-origin' });
+      return res.ok;
+    } catch { return false; }
+  }
+
+  async function deleteAccount() {
+    try {
+      const res = await fetch(API + '/auth/me', { method: 'DELETE', credentials: 'same-origin' });
+      return res.ok;
+    } catch { return false; }
+  }
+
+  async function adminFetch(path) {
+    try {
+      const res = await fetch(API + '/admin/' + path, { credentials: 'same-origin' });
+      if (!res.ok) throw new Error('admin/' + path + ' ' + res.status);
+      return await res.json();
+    } catch (e) {
+      console.warn('Admin fetch failed:', e);
+      return null;
+    }
+  }
+
   global.XwordAuth = {
     fetchMe,
     startLogin,
@@ -137,5 +162,8 @@
     saveProgress,
     listProgress,
     makeSaver,
+    resetAllProgress,
+    deleteAccount,
+    adminFetch,
   };
 })(typeof window !== 'undefined' ? window : globalThis);

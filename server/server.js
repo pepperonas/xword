@@ -15,7 +15,7 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import { randomBytes } from 'node:crypto';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, statSync } from 'node:fs';
 import { openDb } from './db.js';
 import { sign, verify } from './session.js';
 
@@ -45,6 +45,13 @@ const SESSION_COOKIE = process.env.SESSION_COOKIE || 'xword_session';
 const SESSION_TTL = parseInt(process.env.SESSION_TTL || '2592000', 10);
 const STATE_COOKIE = 'xword_oauth_state';
 const STATE_TTL = 600; // 10 minutes
+const ADMIN_EMAILS = new Set(
+  (process.env.ADMIN_EMAILS || 'martinpaush@gmail.com')
+    .split(',')
+    .map(e => e.trim().toLowerCase())
+    .filter(Boolean)
+);
+const BOOT_TIME = Date.now();
 
 function required(name) {
   const v = process.env[name];
@@ -71,6 +78,17 @@ function requireUser(req, res, next) {
   if (!user) return res.status(401).json({ error: 'user_gone' });
   req.user = user;
   next();
+}
+
+function isAdmin(user) {
+  return user && user.email && ADMIN_EMAILS.has(user.email.toLowerCase());
+}
+
+function requireAdmin(req, res, next) {
+  requireUser(req, res, () => {
+    if (!isAdmin(req.user)) return res.status(403).json({ error: 'forbidden' });
+    next();
+  });
 }
 
 function cookieOpts(maxAgeSeconds) {
@@ -170,6 +188,7 @@ app.get('/api/auth/me', requireUser, (req, res) => {
     email: req.user.email,
     name: req.user.name,
     picture: req.user.picture,
+    is_admin: isAdmin(req.user),
   });
 });
 
@@ -227,6 +246,51 @@ const saveProgressHandler = (req, res) => {
 };
 app.put('/api/progress/:puzzleId', requireUser, saveProgressHandler);
 app.post('/api/progress/:puzzleId', requireUser, saveProgressHandler);
+
+/* ------- Settings (own account) ------- */
+app.delete('/api/progress', requireUser, (req, res) => {
+  const info = db.raw.prepare('DELETE FROM progress WHERE user_id = ?').run(req.user.id);
+  res.json({ ok: true, deleted: info.changes });
+});
+
+app.delete('/api/auth/me', requireUser, (req, res) => {
+  db.raw.prepare('DELETE FROM users WHERE id = ?').run(req.user.id);
+  res.clearCookie(SESSION_COOKIE, { path: '/' });
+  res.json({ ok: true });
+});
+
+/* ------- Admin endpoints (read-only) ------- */
+app.get('/api/admin/users', requireAdmin, (req, res) => {
+  res.json({ items: db.adminListUsers.all() });
+});
+
+app.get('/api/admin/stats', requireAdmin, (req, res) => {
+  const sevenDaysAgo = Math.floor(Date.now() / 1000) - 7 * 24 * 3600;
+  res.json(db.adminGlobalStats.get(sevenDaysAgo));
+});
+
+app.get('/api/admin/activity', requireAdmin, (req, res) => {
+  res.json({ items: db.adminRecentActivity.all() });
+});
+
+app.get('/api/admin/puzzles', requireAdmin, (req, res) => {
+  res.json({ items: db.adminPuzzleStats.all() });
+});
+
+app.get('/api/admin/system', requireAdmin, (req, res) => {
+  let dbSize = 0;
+  try {
+    dbSize = statSync(process.env.DB_PATH || './data/xword.db').size;
+  } catch {}
+  res.json({
+    node_version: process.version,
+    uptime_seconds: Math.floor((Date.now() - BOOT_TIME) / 1000),
+    boot_time: BOOT_TIME,
+    db_size_bytes: dbSize,
+    memory_mb: Math.round(process.memoryUsage().rss / 1024 / 1024),
+    admin_emails: [...ADMIN_EMAILS],
+  });
+});
 
 /* ------- Health ------- */
 app.get('/api/health', (req, res) => {

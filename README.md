@@ -25,10 +25,20 @@
 [![Claude Code](https://img.shields.io/badge/Built_with-Claude_Code-c8a96a?style=for-the-badge&logoColor=white&labelColor=1a1a1a)](https://claude.com/claude-code)
 
 <!-- Quality -->
+[![Tests](https://github.com/pepperonas/xword/actions/workflows/test.yml/badge.svg)](https://github.com/pepperonas/xword/actions/workflows/test.yml)
 [![No Dependencies (frontend)](https://img.shields.io/badge/Frontend-Zero_Dependencies-2d6e4e?style=for-the-badge&labelColor=1a1a1a)](#)
-[![Tests](https://img.shields.io/badge/Tests-20%2F20_passing-2d6e4e?style=for-the-badge&labelColor=1a1a1a)](tests/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-2d6e4e.svg?style=for-the-badge&labelColor=1a1a1a)](https://github.com/pepperonas/xword/pulls)
 [![Maintained](https://img.shields.io/badge/Maintained-yes-2d6e4e.svg?style=for-the-badge&labelColor=1a1a1a)](https://github.com/pepperonas/xword/commits/main)
+
+<!-- Puzzle catalog -->
+[![Puzzles total (9)](https://img.shields.io/badge/Puzzles_total-9-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
+[![Tech (2)](https://img.shields.io/badge/Tech-2-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
+[![Allgemein (2)](https://img.shields.io/badge/Allgemein-2-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
+[![Klassik (1)](https://img.shields.io/badge/Klassik-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
+[![Mythologie (1)](https://img.shields.io/badge/Mythologie-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
+[![Wissenschaft (1)](https://img.shields.io/badge/Wissenschaft-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
+[![Kunst (1)](https://img.shields.io/badge/Kunst-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
+[![Geographie (1)](https://img.shields.io/badge/Geographie-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
 
 <!-- Repo metadata -->
 [![Code size](https://img.shields.io/github/languages/code-size/pepperonas/xword?style=for-the-badge&labelColor=1a1a1a&color=c8a96a)](https://github.com/pepperonas/xword)
@@ -63,10 +73,24 @@ npm run serve                  # oder: python3 -m http.server 8000
 open http://localhost:8000/
 
 # 3. Tests ausführen (optional)
-npm test                       # 20 Unit-Tests für Layout-Algorithmus
+npm test                       # Unit-Tests für Layout-Algorithmus
+
+# 4. Versionsnummer aktualisieren (vor Deploy)
+npm run version:bump           # erzeugt version.json aus git rev-list
 ```
 
 Es erscheint der Auswahlbildschirm mit allen Rätseln aus `puzzles/`.
+
+## Features
+
+- **Editorialer Zeitungs-Stil** mit Fraunces-Display-Schrift, JetBrains-Mono-UI
+- **Auto-Layout-Algorithmus**: liefere nur Wörter + Hinweise, der Algorithmus baut das Gitter
+- **9 Rätsel** in 4 Kategorien (easy/medium/hard, sieben Themen)
+- **Google Login** (optional) — Spielstände werden serverseitig pro User gespeichert
+- **Hardcore-Modus** — keine Highlights, keine Live-Validierung
+- **Live-Save** mit `sendBeacon`-Fallback beim Tab-Schließen
+- **Admin-Panel** (für autorisierte E-Mails): User, Aktivität, Rätsel-Stats, System
+- **Versionierung** automatisch aus Git-Commit-Count
 
 > **Warum ein Server?** Die App lädt die JSON-Manifeste per `fetch()`.
 > Direkt per `file://` blockieren Browser solche Requests aus Sicherheitsgründen.
@@ -75,18 +99,29 @@ Es erscheint der Auswahlbildschirm mit allen Rätseln aus `puzzles/`.
 
 ```
 xword/
-├── index.html              SPA-Shell (Auswahl + Spiel)
-├── package.json            Scripts: test, serve
+├── index.html              SPA-Shell (Auswahl / Spiel / Admin)
+├── package.json            Scripts: test, serve, version:bump
+├── version.json            (gitignored) git-rev-count → Ver. N
 ├── assets/
 │   ├── styles.css          Komplettes Theme
 │   ├── layout.js           Auto-Layout-Algorithmus (browser + node)
-│   ├── engine.js           Spiel-Engine (Grid, Eingabe, Stats)
-│   └── app.js              View-Routing, Manifest-Loader
+│   ├── engine.js           Spiel-Engine (Grid, Eingabe, Stats, Hardcore)
+│   ├── auth.js             Login-Wrapper, immediate-Save, sendBeacon-Flush
+│   └── app.js              View-Routing, Settings, Admin-Panel
 ├── puzzles/
 │   ├── index.json          Manifest (welche Rätsel existieren)
 │   └── *.json              Einzelne Rätsel
 ├── tests/
 │   └── layout.test.js      Unit-Tests (node:test, keine Deps)
+├── server/
+│   ├── server.js           Express + Google OAuth + Progress + Admin
+│   ├── db.js               SQLite-Schema + Queries
+│   ├── session.js          HMAC-signed cookies
+│   └── xword-api.service   systemd unit
+├── scripts/
+│   └── bump-version.sh     git rev-list → version.json
+├── .github/workflows/
+│   └── test.yml            GitHub Actions: npm test on push + PR
 └── generator/
     ├── generate.js         CLI: Claude → Wörter → Layout → JSON
     ├── package.json
