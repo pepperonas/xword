@@ -58,18 +58,75 @@
     }
   }
 
-  /** Debounced saver factory — keyed by puzzleId so different puzzles don't cancel each other.
-   *  Returned function: (puzzleId, payload, onSaved?) — onSaved fires with bool success after the actual save. */
-  function makeDebouncedSaver(delayMs = 1500) {
-    const timers = {};
-    return function (puzzleId, payload, onSaved) {
-      if (timers[puzzleId]) clearTimeout(timers[puzzleId]);
-      timers[puzzleId] = setTimeout(async () => {
-        timers[puzzleId] = null;
+  /**
+   * Immediate saver with a tiny coalescing window (60ms) to swallow keystroke bursts.
+   * Tracks the most recent payload per puzzleId so flushPending() can sendBeacon
+   * the final state on tab close.
+   */
+  function makeSaver(minIntervalMs = 60) {
+    const pending = {};   // puzzleId -> latest payload (in-flight or queued)
+    const inFlight = {};  // puzzleId -> bool
+    const timers = {};    // puzzleId -> timer id
+
+    async function flushOne(puzzleId, onSaved) {
+      if (inFlight[puzzleId]) return;            // a save is already running; it will pick up the latest payload
+      const payload = pending[puzzleId];
+      if (!payload) return;
+      inFlight[puzzleId] = true;
+      try {
         const ok = await saveProgress(puzzleId, payload);
         if (typeof onSaved === 'function') onSaved(ok);
-      }, delayMs);
-    };
+        // If a newer payload landed during the request, save it next.
+        if (pending[puzzleId] && pending[puzzleId] !== payload) {
+          // schedule another flush with the latest
+          inFlight[puzzleId] = false;
+          setTimeout(() => flushOne(puzzleId, onSaved), 0);
+          return;
+        }
+        delete pending[puzzleId];
+      } catch (e) {
+        if (typeof onSaved === 'function') onSaved(false);
+      } finally {
+        inFlight[puzzleId] = false;
+      }
+    }
+
+    function save(puzzleId, payload, onSaved) {
+      pending[puzzleId] = payload;
+      if (timers[puzzleId]) clearTimeout(timers[puzzleId]);
+      timers[puzzleId] = setTimeout(() => {
+        timers[puzzleId] = null;
+        flushOne(puzzleId, onSaved);
+      }, minIntervalMs);
+    }
+
+    /** Synchronous fire-and-forget send for `pagehide` — won't be aborted by tab close. */
+    function flushBeacon(puzzleId) {
+      const payload = pending[puzzleId];
+      if (!payload) return false;
+      if (!navigator.sendBeacon) return false;
+      try {
+        const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
+        return navigator.sendBeacon(API + '/progress/' + encodeURIComponent(puzzleId), blob);
+      } catch {
+        return false;
+      }
+    }
+
+    return { save, flushBeacon };
+  }
+
+  async function listProgress() {
+    try {
+      const res = await fetch(API + '/progress', { credentials: 'same-origin' });
+      if (res.status === 401) return null;
+      if (!res.ok) throw new Error('list ' + res.status);
+      const data = await res.json();
+      return data.items || [];
+    } catch (e) {
+      console.warn('Progress list failed:', e);
+      return null;
+    }
   }
 
   global.XwordAuth = {
@@ -78,6 +135,7 @@
     logout,
     getProgress,
     saveProgress,
-    makeDebouncedSaver,
+    listProgress,
+    makeSaver,
   };
 })(typeof window !== 'undefined' ? window : globalThis);

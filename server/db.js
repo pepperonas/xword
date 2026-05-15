@@ -25,10 +25,24 @@ const SCHEMA = [
     solved INTEGER NOT NULL DEFAULT 0,
     solved_at INTEGER,
     updated_at INTEGER NOT NULL,
+    percent INTEGER NOT NULL DEFAULT 0,
+    hardcore INTEGER NOT NULL DEFAULT 0,
+    live_validate INTEGER NOT NULL DEFAULT 0,
     PRIMARY KEY (user_id, puzzle_id)
   )`,
   `CREATE INDEX IF NOT EXISTS idx_progress_user ON progress(user_id)`,
 ];
+
+// In-place migrations for older DBs that pre-date the columns above.
+function migrateProgress(db) {
+  const cols = db.prepare('PRAGMA table_info(progress)').all().map(r => r.name);
+  const missing = (name, sql) => {
+    if (!cols.includes(name)) db.prepare(sql).run();
+  };
+  missing('percent',       'ALTER TABLE progress ADD COLUMN percent INTEGER NOT NULL DEFAULT 0');
+  missing('hardcore',      'ALTER TABLE progress ADD COLUMN hardcore INTEGER NOT NULL DEFAULT 0');
+  missing('live_validate', 'ALTER TABLE progress ADD COLUMN live_validate INTEGER NOT NULL DEFAULT 0');
+}
 
 export function openDb(path) {
   mkdirSync(dirname(path), { recursive: true });
@@ -37,6 +51,7 @@ export function openDb(path) {
   db.pragma('foreign_keys = ON');
 
   for (const stmt of SCHEMA) db.prepare(stmt).run();
+  migrateProgress(db);
 
   return {
     raw: db,
@@ -52,8 +67,8 @@ export function openDb(path) {
     `),
     getUserById: db.prepare(`SELECT id, google_sub, email, name, picture FROM users WHERE id = ?`),
     upsertProgress: db.prepare(`
-      INSERT INTO progress (user_id, puzzle_id, grid_state, hinted_cells, hint_count, elapsed_ms, solved, solved_at, updated_at)
-      VALUES (@user_id, @puzzle_id, @grid_state, @hinted_cells, @hint_count, @elapsed_ms, @solved, @solved_at, @now)
+      INSERT INTO progress (user_id, puzzle_id, grid_state, hinted_cells, hint_count, elapsed_ms, solved, solved_at, updated_at, percent, hardcore, live_validate)
+      VALUES (@user_id, @puzzle_id, @grid_state, @hinted_cells, @hint_count, @elapsed_ms, @solved, @solved_at, @now, @percent, @hardcore, @live_validate)
       ON CONFLICT(user_id, puzzle_id) DO UPDATE SET
         grid_state = excluded.grid_state,
         hinted_cells = excluded.hinted_cells,
@@ -61,14 +76,18 @@ export function openDb(path) {
         elapsed_ms = excluded.elapsed_ms,
         solved = excluded.solved,
         solved_at = COALESCE(progress.solved_at, excluded.solved_at),
-        updated_at = excluded.updated_at
+        updated_at = excluded.updated_at,
+        percent = excluded.percent,
+        hardcore = excluded.hardcore,
+        live_validate = excluded.live_validate
     `),
     getProgress: db.prepare(`
-      SELECT puzzle_id, grid_state, hinted_cells, hint_count, elapsed_ms, solved, solved_at, updated_at
+      SELECT puzzle_id, grid_state, hinted_cells, hint_count, elapsed_ms, solved, solved_at, updated_at,
+             percent, hardcore, live_validate
       FROM progress WHERE user_id = ? AND puzzle_id = ?
     `),
     listProgress: db.prepare(`
-      SELECT puzzle_id, hint_count, elapsed_ms, solved, solved_at, updated_at
+      SELECT puzzle_id, hint_count, elapsed_ms, solved, solved_at, updated_at, percent
       FROM progress WHERE user_id = ? ORDER BY updated_at DESC
     `),
   };

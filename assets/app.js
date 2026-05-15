@@ -40,6 +40,7 @@
     btnPlayAgain: document.getElementById('btnPlayAgain'),
     btnBackFromWin: document.getElementById('btnBackFromWin'),
     liveToggle: document.getElementById('liveToggle'),
+    hardcoreToggle: document.getElementById('hardcoreToggle'),
     statPercent: document.getElementById('statPercent'),
     statSolved: document.getElementById('statSolved'),
     statTotal: document.getElementById('statTotal'),
@@ -62,9 +63,10 @@
     activeFilter: 'all',
     currentGame: null,
     user: null,                    // {id, email, name, picture} or null
-    saveProgress: null,            // debounced saver from XwordAuth
+    saver: null,                   // { save, flushBeacon } from XwordAuth.makeSaver()
     currentPuzzleId: null,
     syncIndicator: null,           // DOM element shown while saving
+    progressMap: {},               // puzzle_id -> { percent, solved, hint_count, elapsed_ms, ... }
   };
 
   function el(tag, className, text) {
@@ -237,12 +239,49 @@
     card.appendChild(el('h3', null, p.title));
     card.appendChild(el('p', null, p.description || ''));
 
+    // Progress (only if logged in AND user has touched this puzzle)
+    const prog = state.progressMap[p.id];
+    if (prog) {
+      const wrap = el('div', 'puzzle-card-progress');
+      const bar = el('div', 'puzzle-card-progress-bar' + (prog.solved ? ' solved' : ''));
+      const fill = document.createElement('span');
+      if (!prog.solved) fill.style.right = (100 - (prog.percent || 0)) + '%';
+      bar.appendChild(fill);
+      const label = el('div', 'puzzle-card-progress-label' + (prog.solved ? ' solved' : ''));
+      if (prog.solved) {
+        label.appendChild(el('span', null, '✓ Gelöst'));
+        label.appendChild(el('span', null, formatHms(prog.elapsed_ms || 0)));
+      } else {
+        label.appendChild(el('span', null, (prog.percent || 0) + '% gelöst'));
+        label.appendChild(el('span', null, formatHms(prog.elapsed_ms || 0)));
+      }
+      wrap.appendChild(bar);
+      wrap.appendChild(label);
+      card.appendChild(wrap);
+    }
+
     const foot = el('div', 'puzzle-card-foot');
     foot.appendChild(el('span', null, `${p.wordCount || '—'} Wörter`));
     foot.appendChild(el('span', null, p.size ? `${p.size} × ${p.size}` : '—'));
     card.appendChild(foot);
 
     return card;
+  }
+
+  function formatHms(ms) {
+    const total = Math.floor(ms / 1000);
+    const m = String(Math.floor(total / 60)).padStart(2, '0');
+    const s = String(total % 60).padStart(2, '0');
+    return `${m}:${s}`;
+  }
+
+  async function refreshProgressMap() {
+    if (!state.user) { state.progressMap = {}; return; }
+    const items = await window.XwordAuth.listProgress();
+    state.progressMap = {};
+    if (items) {
+      for (const it of items) state.progressMap[it.puzzle_id] = it;
+    }
   }
 
   /* ---------- Game view ---------- */
@@ -302,10 +341,10 @@
     // Wire engine with progress callback (only when logged in)
     const callbacks = { onBack: () => navigateToSelector() };
     if (state.user) {
-      const debouncedSaver = window.XwordAuth.makeDebouncedSaver(1500);
+      state.saver = window.XwordAuth.makeSaver();
       callbacks.onProgressChange = (payload) => {
         showSyncIndicator('saving');
-        debouncedSaver(puzzleMeta.id, payload, () => showSyncIndicator('saved'));
+        state.saver.save(puzzleMeta.id, payload, () => showSyncIndicator('saved'));
       };
       callbacks.initialState = initialState;
     }
@@ -324,14 +363,20 @@
     return max + 1;
   }
 
-  function showSelector() {
+  async function showSelector() {
     if (state.currentGame) {
       state.currentGame.destroy();
       state.currentGame = null;
     }
+    state.currentPuzzleId = null;
     refs.viewGame.classList.remove('active');
     refs.viewSelector.classList.add('active');
     refs.overlay.classList.remove('show');
+    // Refresh progress map so cards reflect latest state from the just-left game
+    if (state.user) {
+      await refreshProgressMap();
+      renderPuzzleList();
+    }
   }
 
   /* ---------- Routing ---------- */
@@ -377,10 +422,27 @@
       );
       return;
     }
+
+    // Pre-load progress so cards show percentages on first paint
+    if (state.user) await refreshProgressMap();
+
     renderFilters();
     renderPuzzleList();
     refs.btnBack.addEventListener('click', () => navigateToSelector());
     window.addEventListener('hashchange', onHashChange);
+
+    // Flush pending save via sendBeacon when the tab is about to be hidden/closed.
+    // `pagehide` is more reliable than `beforeunload` on iOS/Safari.
+    const flushOnHide = () => {
+      if (state.saver && state.currentPuzzleId) {
+        state.saver.flushBeacon(state.currentPuzzleId);
+      }
+    };
+    window.addEventListener('pagehide', flushOnHide);
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden') flushOnHide();
+    });
+
     onHashChange();
   }
 

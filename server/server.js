@@ -191,11 +191,17 @@ app.get('/api/progress/:puzzleId', requireUser, (req, res) => {
     solved: !!row.solved,
     solved_at: row.solved_at,
     updated_at: row.updated_at,
+    percent: row.percent,
+    hardcore: !!row.hardcore,
+    live_validate: !!row.live_validate,
   });
 });
 
-app.put('/api/progress/:puzzleId', requireUser, (req, res) => {
-  const { grid_state, hinted_cells, hint_count, elapsed_ms, solved } = req.body || {};
+// Both PUT (fetch) and POST (sendBeacon) are accepted. Beacon sends a Blob
+// with content-type application/json, which Express body-parser handles
+// transparently — so the handler is identical.
+const saveProgressHandler = (req, res) => {
+  const { grid_state, hinted_cells, hint_count, elapsed_ms, solved, percent, hardcore, live_validate } = req.body || {};
   if (!grid_state || typeof grid_state !== 'object') {
     return res.status(400).json({ error: 'invalid_grid_state' });
   }
@@ -212,10 +218,15 @@ app.put('/api/progress/:puzzleId', requireUser, (req, res) => {
     elapsed_ms: Math.max(0, parseInt(elapsed_ms || 0, 10)),
     solved: solved ? 1 : 0,
     solved_at: solved ? now : null,
+    percent: Math.max(0, Math.min(100, parseInt(percent || 0, 10))),
+    hardcore: hardcore ? 1 : 0,
+    live_validate: live_validate ? 1 : 0,
     now,
   });
   res.json({ ok: true, updated_at: now });
-});
+};
+app.put('/api/progress/:puzzleId', requireUser, saveProgressHandler);
+app.post('/api/progress/:puzzleId', requireUser, saveProgressHandler);
 
 /* ------- Health ------- */
 app.get('/api/health', (req, res) => {

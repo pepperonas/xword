@@ -27,6 +27,7 @@
       words: [],
       active: null,
       liveValidate: false,
+      hardcore: false,
       startTime: null,
       timerInterval: null,
       hintCount: 0,
@@ -39,11 +40,17 @@
       if (!callbacks.onProgressChange) return;
       const cells = {};
       const hinted = [];
+      let totalCells = 0;
+      let filledCells = 0;
       for (let r = 0; r < state.size; r++) {
         for (let c = 0; c < state.size; c++) {
           const cell = state.grid[r][c];
           if (cell.isBlock) continue;
-          if (cell.letter) cells[r + ',' + c] = cell.letter;
+          totalCells++;
+          if (cell.letter) {
+            cells[r + ',' + c] = cell.letter;
+            filledCells++;
+          }
           if (cell.hinted) hinted.push(r + ',' + c);
         }
       }
@@ -53,6 +60,9 @@
         hint_count: state.hintCount,
         elapsed_ms: currentElapsedMs(),
         solved: state.solved,
+        percent: totalCells > 0 ? Math.round((filledCells / totalCells) * 100) : 0,
+        hardcore: state.hardcore,
+        live_validate: state.liveValidate,
       });
     }
 
@@ -126,6 +136,10 @@
         }
         if (typeof init.hint_count === 'number') state.hintCount = init.hint_count;
         if (typeof init.elapsed_ms === 'number') state.elapsedBaseMs = init.elapsed_ms;
+        if (init.hardcore) state.hardcore = true;
+        if (init.live_validate) state.liveValidate = true;
+        // Mutually exclusive — hardcore wins if both somehow set
+        if (state.hardcore) state.liveValidate = false;
       }
     }
 
@@ -233,15 +247,18 @@
       }
 
       const solvedCells = new Set();
-      state.words.forEach(w => {
-        if (isWordCorrect(w)) {
-          for (let i = 0; i < w.answer.length; i++) {
-            const r = w.direction === 'across' ? w.row : w.row + i;
-            const c = w.direction === 'across' ? w.col + i : w.col;
-            solvedCells.add(`${r},${c}`);
+      // Hardcore mode hides the correct-word highlight entirely
+      if (!state.hardcore) {
+        state.words.forEach(w => {
+          if (isWordCorrect(w)) {
+            for (let i = 0; i < w.answer.length; i++) {
+              const r = w.direction === 'across' ? w.row : w.row + i;
+              const c = w.direction === 'across' ? w.col + i : w.col;
+              solvedCells.add(`${r},${c}`);
+            }
           }
-        }
-      });
+        });
+      }
 
       $$('.cell').forEach(cellEl => {
         const r = +cellEl.dataset.r, c = +cellEl.dataset.c;
@@ -259,7 +276,8 @@
       $$('.clue-item').forEach(item => {
         item.classList.toggle('active', !!(a && item.dataset.key === a.wordId));
         const w = state.words.find(x => x.key === item.dataset.key);
-        item.classList.toggle('solved', !!(w && isWordCorrect(w)));
+        const showSolved = !state.hardcore && w && isWordCorrect(w);
+        item.classList.toggle('solved', !!showSolved);
       });
 
       if (a) {
@@ -662,11 +680,35 @@
       };
       refs.liveToggle.onclick = () => {
         state.liveValidate = !state.liveValidate;
+        if (state.liveValidate && state.hardcore) {
+          state.hardcore = false;
+          refs.hardcoreToggle && refs.hardcoreToggle.classList.remove('on');
+        }
         refs.liveToggle.classList.toggle('on', state.liveValidate);
+        paint();
+        emitProgress();
       };
       refs.liveToggle.onkeydown = (e) => {
         if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); refs.liveToggle.click(); }
       };
+      if (refs.hardcoreToggle) {
+        refs.hardcoreToggle.onclick = () => {
+          state.hardcore = !state.hardcore;
+          if (state.hardcore && state.liveValidate) {
+            state.liveValidate = false;
+            refs.liveToggle.classList.remove('on');
+          }
+          refs.hardcoreToggle.classList.toggle('on', state.hardcore);
+          paint();
+          emitProgress();
+        };
+        refs.hardcoreToggle.onkeydown = (e) => {
+          if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); refs.hardcoreToggle.click(); }
+        };
+      }
+      // Reflect any initial state in the toggle UI
+      refs.liveToggle.classList.toggle('on', state.liveValidate);
+      if (refs.hardcoreToggle) refs.hardcoreToggle.classList.toggle('on', state.hardcore);
       $$('.clues-tab').forEach(tab => {
         tab.onclick = () => setActiveTab(tab.dataset.dir);
       });
