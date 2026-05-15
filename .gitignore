@@ -4,7 +4,6 @@ node_modules/
 .env
 .env.local
 /generator/package-lock.json
-/server/package-lock.json
 /server/data/
 /.playwright-mcp/
 /version.json
