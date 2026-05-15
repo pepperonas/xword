@@ -1,0 +1,220 @@
+{
+  "id": "mythologie-hard-01",
+  "title": "Götter, Helden, Ungeheuer",
+  "theme": "mythologie",
+  "difficulty": "hard",
+  "description": "Antike Mythologie — vom Olymp bis zur Unterwelt. Für Bildungsbürger.",
+  "words": [
+    {
+      "answer": "MINOTAURUS",
+      "clue": "Stiermensch im kretischen Labyrinth",
+      "row": 9,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "ZEUS",
+      "clue": "Göttervater auf dem Olymp, Donnergott",
+      "row": 7,
+      "col": 13,
+      "direction": "down"
+    },
+    {
+      "answer": "APOLLON",
+      "clue": "Gott des Lichts, der Künste und der Weissagung",
+      "row": 7,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "APHRODITE",
+      "clue": "Liebesgöttin, dem Meeresschaum entstiegen",
+      "row": 12,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "ACHILLES",
+      "clue": "Trojanischer Held mit verwundbarer Ferse",
+      "row": 2,
+      "col": 16,
+      "direction": "down"
+    },
+    {
+      "answer": "CHARON",
+      "clue": "Fährmann der Toten über den Styx",
+      "row": 11,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "PEGASUS",
+      "clue": "Geflügeltes Pferd, dem Blut Medusas entsprungen",
+      "row": 11,
+      "col": 14,
+      "direction": "down"
+    },
+    {
+      "answer": "EROS",
+      "clue": "Geflügelter Liebesgott mit Pfeil und Bogen",
+      "row": 8,
+      "col": 16,
+      "direction": "across"
+    },
+    {
+      "answer": "HERAKLES",
+      "clue": "Held der zwölf Aufgaben",
+      "row": 14,
+      "col": 11,
+      "direction": "across"
+    },
+    {
+      "answer": "HERMES",
+      "clue": "Götterbote mit geflügelten Sandalen",
+      "row": 10,
+      "col": 17,
+      "direction": "down"
+    },
+    {
+      "answer": "ORPHEUS",
+      "clue": "Sänger, der seine Eurydike aus dem Hades holte",
+      "row": 4,
+      "col": 13,
+      "direction": "across"
+    },
+    {
+      "answer": "ZYKLOP",
+      "clue": "Einäugiger Riese — Polyphem war einer",
+      "row": 0,
+      "col": 13,
+      "direction": "down"
+    },
+    {
+      "answer": "ATLAS",
+      "clue": "Titan, der das Himmelsgewölbe trägt",
+      "row": 7,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "OLYMP",
+      "clue": "Berg der Götter im Norden Griechenlands",
+      "row": 5,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "MEDUSA",
+      "clue": "Gorgone mit Schlangenhaar — versteinerte mit ihrem Blick",
+      "row": 2,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "ITHAKA",
+      "clue": "Heimatinsel des Odysseus",
+      "row": 2,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "ARES",
+      "clue": "Brutaler Gott des Krieges",
+      "row": 12,
+      "col": 16,
+      "direction": "across"
+    },
+    {
+      "answer": "DIONYSOS",
+      "clue": "Gott des Weines und der Ekstase",
+      "row": 16,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "NARZISS",
+      "clue": "Jüngling, der sich in sein Spiegelbild verliebte",
+      "row": 6,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "ODYSSEUS",
+      "clue": "Listenreicher König von Ithaka",
+      "row": 1,
+      "col": 19,
+      "direction": "down"
+    },
+    {
+      "answer": "HYDRA",
+      "clue": "Vielköpfige Wasserschlange von Lerna",
+      "row": 14,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "ARTEMIS",
+      "clue": "Jagdgöttin mit Bogen — Schwester Apollons",
+      "row": 1,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "ATHENE",
+      "clue": "Göttin der Weisheit, aus Zeus' Kopf geboren",
+      "row": 6,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "PANDORA",
+      "clue": "Erste Frau — öffnete die unheilvolle Büchse",
+      "row": 10,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "SPHINX",
+      "clue": "Rätselstellendes Mischwesen vor Theben",
+      "row": 17,
+      "col": 14,
+      "direction": "across"
+    },
+    {
+      "answer": "STYX",
+      "clue": "Fluss der Unterwelt",
+      "row": 16,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "HADES",
+      "clue": "Düsterer Herrscher der Unterwelt",
+      "row": 14,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "TROJA",
+      "clue": "Belagerte Stadt der Ilias",
+      "row": 8,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "POSEIDON",
+      "clue": "Meeresgott mit dem Dreizack",
+      "row": 18,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "HERA",
+      "clue": "Eifersüchtige Gattin und Schwester des Zeus",
+      "row": 10,
+      "col": 17,
+      "direction": "across"
+    }
+  ],
+  "size": 21
+}

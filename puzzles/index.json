@@ -49,6 +49,26 @@
       "description": "Philosophen, Dichter, Epochen — wer schwitzt, der weiß. Für Geübte.",
       "wordCount": 30,
       "size": 24
+    },
+    {
+      "id": "mythologie-hard-01",
+      "file": "mythologie-hard-01.json",
+      "title": "Götter, Helden, Ungeheuer",
+      "theme": "mythologie",
+      "difficulty": "hard",
+      "description": "Antike Mythologie — vom Olymp bis zur Unterwelt. Für Bildungsbürger.",
+      "wordCount": 30,
+      "size": 21
+    },
+    {
+      "id": "wissenschaft-hard-01",
+      "file": "wissenschaft-hard-01.json",
+      "title": "Vom Atom bis zur Galaxie",
+      "theme": "wissenschaft",
+      "difficulty": "hard",
+      "description": "Physik, Chemie, Biologie — von Quark bis Quasar. Wissen aus dem Studium.",
+      "wordCount": 30,
+      "size": 23
     }
   ]
 }

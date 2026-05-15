@@ -282,11 +282,13 @@ describe('layout — crossing density', () => {
 
 describe('shipped puzzles re-layout cleanly', () => {
   const cases = [
-    ['tech-easy-01.json',        10],
-    ['tech-medium-01.json',      19],
-    ['allgemein-easy-01.json',   14],
-    ['allgemein-medium-01.json', 14],
-    ['klassik-hard-01.json',     28],
+    ['tech-easy-01.json',         10],
+    ['tech-medium-01.json',       19],
+    ['allgemein-easy-01.json',    14],
+    ['allgemein-medium-01.json',  14],
+    ['klassik-hard-01.json',      28],
+    ['mythologie-hard-01.json',   28],
+    ['wissenschaft-hard-01.json', 28],
   ];
 
   for (const [file, minPlaced] of cases) {

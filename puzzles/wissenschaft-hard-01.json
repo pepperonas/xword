@@ -1,0 +1,220 @@
+{
+  "id": "wissenschaft-hard-01",
+  "title": "Vom Atom bis zur Galaxie",
+  "theme": "wissenschaft",
+  "difficulty": "hard",
+  "description": "Physik, Chemie, Biologie — von Quark bis Quasar. Wissen aus dem Studium.",
+  "words": [
+    {
+      "answer": "ATOM",
+      "clue": "Kleinster Baustein eines chemischen Elements",
+      "row": 11,
+      "col": 10,
+      "direction": "across"
+    },
+    {
+      "answer": "ION",
+      "clue": "Elektrisch geladenes Atom oder Molekül",
+      "row": 10,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "ASTEROID",
+      "clue": "Kleinkörper zwischen Mars und Jupiter",
+      "row": 11,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "PROTON",
+      "clue": "Positiv geladenes Kernteilchen",
+      "row": 15,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "RELATIVITAET",
+      "clue": "Einsteins Theorie, die Raum und Zeit verbindet",
+      "row": 17,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "SUPERNOVA",
+      "clue": "Spektakuläre Explosion eines massereichen Sterns",
+      "row": 13,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "WASSERSTOFF",
+      "clue": "Häufigstes Element im Universum — Symbol H",
+      "row": 10,
+      "col": 16,
+      "direction": "down"
+    },
+    {
+      "answer": "EVOLUTION",
+      "clue": "Anpassung der Arten über Generationen",
+      "row": 4,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "KATALYSATOR",
+      "clue": "Beschleunigt eine Reaktion ohne selbst verbraucht zu werden",
+      "row": 9,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "OXIDATION",
+      "clue": "Elektronenabgabe einer Substanz",
+      "row": 5,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "MOLEKUEL",
+      "clue": "Verbund aus mindestens zwei Atomen",
+      "row": 7,
+      "col": 10,
+      "direction": "across"
+    },
+    {
+      "answer": "MITOSE",
+      "clue": "Zellteilung unter Erhalt der Chromosomenzahl",
+      "row": 2,
+      "col": 16,
+      "direction": "down"
+    },
+    {
+      "answer": "PLASMA",
+      "clue": "Vierter Aggregatzustand — ionisiertes Gas",
+      "row": 13,
+      "col": 13,
+      "direction": "across"
+    },
+    {
+      "answer": "HELIUM",
+      "clue": "Zweitleichtestes Element — füllt Ballons",
+      "row": 2,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "MEIOSE",
+      "clue": "Reifeteilung der Keimzellen",
+      "row": 3,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "ENZYM",
+      "clue": "Biologischer Katalysator",
+      "row": 2,
+      "col": 12,
+      "direction": "across"
+    },
+    {
+      "answer": "GALAXIE",
+      "clue": "Großes Sternensystem — wir leben in einer",
+      "row": 11,
+      "col": 15,
+      "direction": "across"
+    },
+    {
+      "answer": "NEUTRON",
+      "clue": "Neutrales Kernteilchen, leicht schwerer als das Proton",
+      "row": 5,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "PHOTOSYNTHESE",
+      "clue": "Zucker aus CO₂ und Wasser unter Lichteinfluss",
+      "row": 1,
+      "col": 21,
+      "direction": "down"
+    },
+    {
+      "answer": "ENTROPIE",
+      "clue": "Maß der Unordnung in der Thermodynamik",
+      "row": 11,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "ELEKTRON",
+      "clue": "Negativ geladenes Elementarteilchen",
+      "row": 4,
+      "col": 12,
+      "direction": "across"
+    },
+    {
+      "answer": "CHLOR",
+      "clue": "Gelbgrünes Halogen mit stechendem Geruch",
+      "row": 15,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "URAN",
+      "clue": "Radioaktives Schwermetall — Brennstoff in Kernkraftwerken",
+      "row": 8,
+      "col": 18,
+      "direction": "across"
+    },
+    {
+      "answer": "NATRIUM",
+      "clue": "Weiches Alkalimetall — Element Na",
+      "row": 14,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "URKNALL",
+      "clue": "Beginn des Universums vor 13,8 Milliarden Jahren",
+      "row": 13,
+      "col": 3,
+      "direction": "down"
+    },
+    {
+      "answer": "PHOTON",
+      "clue": "Lichtteilchen — masseloses Boson",
+      "row": 0,
+      "col": 18,
+      "direction": "down"
+    },
+    {
+      "answer": "NEUTRINO",
+      "clue": "Fast masseloses Teilchen, durchdringt fast alle Materie",
+      "row": 5,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "RIBOSOM",
+      "clue": "Zellorganell der Proteinsynthese",
+      "row": 15,
+      "col": 16,
+      "direction": "across"
+    },
+    {
+      "answer": "QUARK",
+      "clue": "Elementarbaustein der Hadronen (up, down, strange ...)",
+      "row": 7,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "KOMET",
+      "clue": "Schweifgestirn aus Eis und Staub",
+      "row": 1,
+      "col": 5,
+      "direction": "down"
+    }
+  ],
+  "size": 23
+}
