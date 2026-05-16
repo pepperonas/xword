@@ -2002,17 +2002,37 @@ a:hover { text-decoration-thickness: 2px; }
 .xdialog-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 8px;
-  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
 }
 .xdialog-actions .btn {
-  min-width: 96px;
+  flex: 0 0 auto;
+  min-width: 112px;
+  margin: 0;            /* neutralise stacked-form margins (.btn-danger) */
+  padding: 10px 18px;
+  border-radius: 999px; /* M3 full-pill action button */
 }
-@media (max-width: 420px) {
-  .xdialog-actions {
-    flex-direction: column-reverse;
-  }
-  .xdialog-actions .btn { width: 100%; }
+/* Scope-overrides for .btn-danger inside the dialog actions row —
+   the global .btn-danger is full-width for the Settings drawer,
+   which we don't want in a horizontal action bar. */
+.xdialog-actions .btn-danger {
+  width: auto;
+  background: var(--md-sys-color-error);
+  color: var(--md-sys-color-on-error);
+}
+.xdialog-actions .btn-danger:hover {
+  background: color-mix(in srgb, var(--md-sys-color-on-error) 8%, var(--md-sys-color-error));
+}
+.xdialog-actions .xdialog-btn-cancel {
+  background: transparent;
+  color: var(--md-sys-color-primary);
+  border: 1px solid var(--md-sys-color-outline);
+}
+.xdialog-actions .xdialog-btn-cancel:hover {
+  background: color-mix(in srgb, var(--md-sys-color-primary) 8%, transparent);
+}
+@media (max-width: 380px) {
+  .xdialog-actions .btn { min-width: 0; flex: 1 1 0; }
 }
 
 /* ============ TOAST ============ */
