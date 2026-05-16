@@ -424,6 +424,20 @@ Achievements that need cross-theme coverage (`Bücherwurm`, `Polyglott`, `Biblio
 
 ---
 
+## Clue-quality guardrails (especially "1-Mio-Niveau")
+
+A 2026-05-16 content review of the recent ultra-hard batch surfaced three error classes that are easy to slip into when writing many obscure clues at once. Watch for them whenever generating new content, manually or via the generator:
+
+1. **Date + place + actor triplets must be consistent.** If a clue names a year *and* a place *and* a person, every leg must match the historical record. The review caught `PINEL — 1793 Salpêtrière`; Pinel's chain-breaking happened at **Bicêtre** in 1793, Salpêtrière was 1795 after his move. When in doubt, drop one anchor instead of guessing.
+
+2. **Use the established lemma form for the answer, not a colloquialism or invented German variant.** The review caught `STRIGEL` — Duden lists *Striegel* only as a horse comb; the architectural term is *Strigilis* (Latin) / *Strigillierung* (German). At 1-Mio-Niveau the player expects a textbook headword.
+
+3. **Number prefixes in clues must denote something.** The review caught `4-WM-Finalist 1954` for PUSKAS — Hungary was Vize-Weltmeister 1954, the "4" mapped to nothing. Drop nonsense numeric prefixes; "WM-Finalist 1954" suffices.
+
+Pre-commit check for any new ultra-hard puzzle: re-read each clue and ask (a) does every named year/place/person triplet check out, (b) is the answer the form a reference work would use, (c) does every number in the clue refer to something concrete.
+
+---
+
 ## Adding a new theme template for the generator
 
 Two files:
