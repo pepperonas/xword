@@ -269,6 +269,36 @@
       "description": "Religionsgeschichte auf 1-Mio-Niveau — Konzile, Häresien, Orden, Riten aus zwei Jahrtausenden.",
       "wordCount": 14,
       "size": 17
+    },
+    {
+      "id": "medizin-hard-01",
+      "file": "medizin-hard-01.json",
+      "title": "Im Operationssaal",
+      "theme": "medizin",
+      "difficulty": "hard",
+      "description": "Medizingeschichte auf 1-Mio-Niveau — Pioniere, Erstbeschreibungen, Instrumente, Lehrsätze.",
+      "wordCount": 14,
+      "size": 16
+    },
+    {
+      "id": "astronomie-hard-01",
+      "file": "astronomie-hard-01.json",
+      "title": "Vom Sternenhimmel",
+      "theme": "astronomie",
+      "difficulty": "hard",
+      "description": "Astronomie auf 1-Mio-Niveau — Beobachter, Konstanten, Sternbilder, Phänomene aus drei Jahrtausenden.",
+      "wordCount": 14,
+      "size": 16
+    },
+    {
+      "id": "sport-hard-02",
+      "file": "sport-hard-02.json",
+      "title": "Aus den Trainingstagebüchern",
+      "theme": "sport",
+      "difficulty": "hard",
+      "description": "Sportgeschichte auf 1-Mio-Niveau — Olympia-Legenden, Weltrekorde, Anekdoten aus 120 Jahren Wettkampf.",
+      "wordCount": 14,
+      "size": 16
     }
   ]
 }

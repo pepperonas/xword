@@ -309,6 +309,9 @@ describe('shipped puzzles re-layout cleanly', () => {
     ['film-hard-02.json',         13],
     ['architektur-hard-02.json',  13],
     ['religion-hard-01.json',     13],
+    ['medizin-hard-01.json',      13],
+    ['astronomie-hard-01.json',   13],
+    ['sport-hard-02.json',        13],
   ];
 
   for (const [file, minPlaced] of cases) {

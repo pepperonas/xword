@@ -1,0 +1,108 @@
+{
+  "id": "sport-hard-02",
+  "title": "Aus den Trainingstagebüchern",
+  "theme": "sport",
+  "difficulty": "hard",
+  "description": "Sportgeschichte auf 1-Mio-Niveau — Olympia-Legenden, Weltrekorde, Anekdoten aus 120 Jahren Wettkampf.",
+  "words": [
+    {
+      "answer": "FANGIO",
+      "clue": "Argentinier, 5-facher Formel-1-Weltmeister (1951, 1954 bis 1957)",
+      "row": 5,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "BUBKA",
+      "clue": "Sergei, Ukrainer, 35-facher Stabhochsprung-Weltrekordler",
+      "row": 1,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "BANNISTER",
+      "clue": "Roger, lief am 6. Mai 1954 die erste Sub-4-Minuten-Meile in Oxford",
+      "row": 1,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "HEIDEN",
+      "clue": "Eric, US-Eisschnellläufer, 5 Goldmedaillen bei Olympia 1980 Lake Placid",
+      "row": 8,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "NURMI",
+      "clue": "Paavo, finn. 'Flying Finn', 9 Olympia-Goldmedaillen 1920 bis 1928",
+      "row": 3,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "THORPE",
+      "clue": "US-Allrounder, Olympiasieger 1912 in Stockholm im Fünf- und Zehnkampf",
+      "row": 7,
+      "col": 3,
+      "direction": "down"
+    },
+    {
+      "answer": "COMANECI",
+      "clue": "Nadia, erste perfekte Turn-Note 10,0 (Stufenbarren, Montreal 1976)",
+      "row": 1,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "WEISSMULLER",
+      "clue": "Johnny, US-Schwimmer (5 Olympia-Gold) und Tarzan-Darsteller ab 1932",
+      "row": 12,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "PUSKAS",
+      "clue": "Ferenc, 'Galoppierender Major' der Magyaren, 4-WM-Finalist 1954",
+      "row": 10,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "LATYNINA",
+      "clue": "Larissa, sowj. Turnerin mit 18 Olympia-Medaillen (1956 bis 1964)",
+      "row": 14,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "MERCKX",
+      "clue": "Belg. 'Kannibale', gewann fünfmal die Tour de France (1969 bis 1974)",
+      "row": 6,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "WITT",
+      "clue": "Katarina, Olympia-Eiskunstläuferin DDR, gold 1984 und 1988",
+      "row": 7,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "ZATOPEK",
+      "clue": "Tschech. Langstreckler, gewann 1952 in Helsinki 5000 m, 10000 m und Marathon",
+      "row": 0,
+      "col": 13,
+      "direction": "down"
+    },
+    {
+      "answer": "SPITZ",
+      "clue": "Mark, gewann 1972 in München 7 Schwimm-Goldmedaillen",
+      "row": 5,
+      "col": 1,
+      "direction": "down"
+    }
+  ],
+  "size": 16
+}

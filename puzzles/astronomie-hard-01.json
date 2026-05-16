@@ -1,0 +1,108 @@
+{
+  "id": "astronomie-hard-01",
+  "title": "Vom Sternenhimmel",
+  "theme": "astronomie",
+  "difficulty": "hard",
+  "description": "Astronomie auf 1-Mio-Niveau — Beobachter, Konstanten, Sternbilder, Phänomene aus drei Jahrtausenden.",
+  "words": [
+    {
+      "answer": "ALDEBARAN",
+      "clue": "Hauptstern im Sternbild Stier, Alpha Tauri",
+      "row": 3,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "BETELGEUSE",
+      "clue": "Rötlicher Schulterstern im Orion, Alpha Orionis",
+      "row": 6,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "PARALLAXE",
+      "clue": "Scheinbare Sternverschiebung zur Distanzbestimmung über die Erdbahn",
+      "row": 8,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "LEMAITRE",
+      "clue": "Belg. Priester und Physiker, formulierte 1927 die Urknall-Hypothese",
+      "row": 5,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "NUTATION",
+      "clue": "Periodische Schwankung der Erdachse mit 18,6-Jahre-Hauptperiode",
+      "row": 11,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "HERSCHEL",
+      "clue": "Wilhelm, entdeckte 1781 den Planeten Uranus",
+      "row": 4,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "HUBBLE",
+      "clue": "Edwin, entdeckte 1929 die nach ihm benannte Galaxien-Fluchtgesetzmäßigkeit",
+      "row": 3,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "ARECIBO",
+      "clue": "Radioteleskop in Puerto Rico mit 305 m Schüssel, 2020 kollabiert",
+      "row": 12,
+      "col": 8,
+      "direction": "across"
+    },
+    {
+      "answer": "AKRUX",
+      "clue": "Hellster Stern im Sternbild Kreuz des Südens, Alpha Crucis",
+      "row": 8,
+      "col": 1,
+      "direction": "down"
+    },
+    {
+      "answer": "HALLEY",
+      "clue": "Engländer, sagte 1705 die Wiederkehr seines Kometen für 1758 voraus",
+      "row": 10,
+      "col": 3,
+      "direction": "down"
+    },
+    {
+      "answer": "BESSEL",
+      "clue": "Königsberger, maß 1838 erstmals die Parallaxe eines Fixsterns (61 Cygni)",
+      "row": 14,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "BRAHE",
+      "clue": "Dän. Astronom des 16. Jh., beobachtete 1572 die nach ihm benannte Supernova",
+      "row": 3,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "HIPPARCHOS",
+      "clue": "Antiker griech. Astronom, erstellte um 130 v. Chr. den ersten Sternkatalog",
+      "row": 4,
+      "col": 14,
+      "direction": "down"
+    },
+    {
+      "answer": "PAYNE",
+      "clue": "Cecilia, wies 1925 nach, dass Sterne hauptsächlich aus Wasserstoff bestehen",
+      "row": 0,
+      "col": 1,
+      "direction": "down"
+    }
+  ],
+  "size": 16
+}

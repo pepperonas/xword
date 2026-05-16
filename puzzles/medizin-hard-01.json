@@ -1,0 +1,108 @@
+{
+  "id": "medizin-hard-01",
+  "title": "Im Operationssaal",
+  "theme": "medizin",
+  "difficulty": "hard",
+  "description": "Medizingeschichte auf 1-Mio-Niveau — Pioniere, Erstbeschreibungen, Instrumente, Lehrsätze.",
+  "words": [
+    {
+      "answer": "VESALIUS",
+      "clue": "Niederländ. Anatom des 16. Jh., 'De Humani Corporis Fabrica' (1543)",
+      "row": 4,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "SEMMELWEIS",
+      "clue": "Wiener Geburtshelfer, der 1847 die Händedesinfektion mit Chlorkalk einführte",
+      "row": 8,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "SALVARSAN",
+      "clue": "Paul Ehrlichs Präparat 606, 1909 erstes Mittel gegen Syphilis",
+      "row": 6,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "MORGAGNI",
+      "clue": "Ital. Pathologe des 18. Jh., 'De sedibus et causis morborum' (1761)",
+      "row": 8,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "AVICENNA",
+      "clue": "Pers. Universalgelehrter um 1000, Verfasser des 'Kanon der Medizin'",
+      "row": 4,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "ROENTGEN",
+      "clue": "Würzburger Physiker, entdeckte 1895 die nach ihm benannten Strahlen",
+      "row": 13,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "FLEMING",
+      "clue": "Schotte, entdeckte 1928 zufällig die Hemmwirkung des Schimmelpilzes Penicillium",
+      "row": 11,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "LAENNEC",
+      "clue": "Franz. Arzt, erfand 1816 das Stethoskop für die Lungenauskultation",
+      "row": 0,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "LISTER",
+      "clue": "Engl. Chirurg, führte 1867 die Karbol-Antisepsis ein",
+      "row": 7,
+      "col": 11,
+      "direction": "down"
+    },
+    {
+      "answer": "PARACELSUS",
+      "clue": "Schweiz. Renaissance-Arzt, bürgerlich Theophrastus Bombast von Hohenheim",
+      "row": 3,
+      "col": 14,
+      "direction": "down"
+    },
+    {
+      "answer": "HARVEY",
+      "clue": "Engl. Arzt, beschrieb 1628 den Blutkreislauf in 'De motu cordis'",
+      "row": 2,
+      "col": 8,
+      "direction": "across"
+    },
+    {
+      "answer": "VIRCHOW",
+      "clue": "Berl. Pathologe, formulierte 'Omnis cellula e cellula' (1855)",
+      "row": 15,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "PINEL",
+      "clue": "Franz. Psychiater, befreite 1793 die Geisteskranken der Salpêtrière von Ketten",
+      "row": 2,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "BANTING",
+      "clue": "Kanadier, isolierte 1921 mit Best erstmals Insulin",
+      "row": 3,
+      "col": 0,
+      "direction": "across"
+    }
+  ],
+  "size": 16
+}
