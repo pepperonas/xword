@@ -64,7 +64,8 @@
 
 - 🎨 **Material Design 3** — komplette M3-Implementation mit Color-Roles, Type-Scale, Shape-System und Tonal-Surfaces. Source-Color **#0B57D0** (Deep Indigo Blue). Beide Modi voll spezifiziert.
 - ✨ **Dezente Animationen** — M3-State-Layer auf Buttons/Chips, Letter-Type-In Pop, Hint-Drop, sliding Tab-Underline, sanfter Sync-Pulse, Cell-Hover-Tint, Wort-Solve-Flash (staggered Pulse durchs frisch korrekte Wort)
-- 💬 **Custom-Dialoge statt System-Popups** — `Xdialog.alert/confirm` ersetzen native Browser-Dialoge, voll M3-themed in beiden Modi, mit destruktiv-fokussiertem Cancel-Button und Keyboard-Shortcuts (Esc, Enter)
+- 💬 **Custom-Dialoge statt System-Popups** — `Xdialog.alert/confirm/show` ersetzen native Browser-Dialoge, voll M3-themed in beiden Modi, mit destruktiv-fokussiertem Cancel-Button und Keyboard-Shortcuts (Esc, Enter)
+- 📱 **App teilen via QR-Code** — Im User-Dropdown öffnet „App teilen" einen Dialog mit scanbarem QR-Code auf die Landing Page, kopierbare URL und Web-Share-API-Button (Mobile)
 - ⌨️ **Mobile-Keyboard-fest** — iOS-Safari + Samsung-S24-Ultra-Kompatibilität: synchroner Focus im User-Gesture, Sentinel-Char gegen leeren Backspace, 60-ms-Action-Dedupe gegen Doppelevents
 - 🌗 **Dark Mode** mit **maximaler Lesbarkeit** — Letter Cells bleiben hell wie ein Papier auf dunklem Tisch, aktive Zelle in sattem Blau für unmissverständlichen Cursor-Kontrast
 - 🧩 **30 kuratierte Rätsel** in drei Schwierigkeiten und 18 Themen — von Tech, Allgemeinwissen und Klassischer Bildung über Mythologie, Wissenschaft, Kunst, Geographie, Architektur, Sport, Musik, Geschichte, Film und Natur bis Philosophie, Religion, Literatur, Medizin und Astronomie. **15 davon im Eminenz-Tier** — Daten, Werke, Schauplätze, wie man sie nur aus dem Quellenstudium kennt
@@ -81,7 +82,7 @@
 - 👤 **Profil-Seite** — Rang, XP-Balken, Erfolge, persönliche Statistiken
 - ⚙️ **Admin-Panel** für autorisierte E-Mails — User-Verwaltung, Aktivität, Rätsel-Stats, System
 - 🖨 **Print-View** — `Cmd+P` druckt sauberes A4 mit Leer-Gitter + nummerierten Hinweisen
-- 📤 **Share-Button** — Web Share API + Zwischenablage-Fallback
+- 📤 **Share-Button im Win-Overlay** — Web Share API + Zwischenablage-Fallback nach gelöstem Rätsel
 - 🔢 **Auto-Versionierung** — `git rev-list --count HEAD` als Versionsnummer in der Masthead-Eyebrow
 - 🔎 **SEO-optimiert** — strukturierte Daten (JSON-LD `@graph` mit WebSite + WebApplication/Game + Person), `robots.txt` mit expliziter AI-Crawler-Allowlist, `sitemap.xml`, Canonical-Tags + Hreflang, dual `theme-color` per Color-Scheme, vollständige OG- + Twitter-Card-Tags
 
@@ -169,7 +170,8 @@ xword/
 │   ├── styles.css              Light + Dark Theme, alle UI-Komponenten
 │   ├── layout.js               Auto-Layout-Algorithmus (browser + node)
 │   ├── input-dedupe.js         60-ms-Action-Dedupe für Mobile-Keyboard-Doppelevents
-│   ├── dialog.js               Xdialog.alert / Xdialog.confirm (M3-themed)
+│   ├── qrcode.js               Vendored MIT QR-Generator (Kazuhiko Arase) für „App teilen"
+│   ├── dialog.js               Xdialog.alert / Xdialog.confirm / Xdialog.show (M3-themed)
 │   ├── engine.js               Spiel-Engine: Grid, Eingabe, Hardcore, Timer
 │   ├── auth.js                 API-Wrapper, sendBeacon, makeSaver
 │   ├── app.js                  View-Routing, State, Theme-Manager, alle UI-Renderings
