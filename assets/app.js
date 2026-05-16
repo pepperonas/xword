@@ -750,7 +750,9 @@
         refs.btnShareWin.appendChild(document.createTextNode('Teilen'));
       }, 1800);
     } catch (e) {
-      alert('Konnte nicht in die Zwischenablage kopieren.\n\n' + text);
+      window.Xdialog.alert('Konnte nicht in die Zwischenablage kopieren.\n\n' + text, {
+        title: 'Teilen fehlgeschlagen',
+      });
     }
   }
 
@@ -900,7 +902,9 @@
     try {
       raw = await loadPuzzle(puzzleMeta.file);
     } catch (err) {
-      alert('Fehler beim Laden des Rätsels:\n' + err.message);
+      await window.Xdialog.alert('Fehler beim Laden des Rätsels:\n' + err.message, {
+        title: 'Rätsel nicht geladen',
+      });
       return;
     }
 
@@ -1124,29 +1128,37 @@
       if (e.target === refs.settingsOverlay) closeSettings();
     });
     refs.settingsResetProgress.addEventListener('click', async () => {
-      if (!confirm('Wirklich ALLE Spielstände unwiderruflich zurücksetzen?')) return;
-      const ok = await window.XwordAuth.resetAllProgress();
-      if (ok) {
+      const ok = await window.Xdialog.confirm(
+        'Wirklich ALLE Spielstände unwiderruflich zurücksetzen?',
+        { title: 'Spielstände zurücksetzen', okLabel: 'Zurücksetzen', destructive: true }
+      );
+      if (!ok) return;
+      const success = await window.XwordAuth.resetAllProgress();
+      if (success) {
         state.progressMap = {};
         renderPuzzleList();
         closeSettings();
-        alert('Spielstände gelöscht.');
+        await window.Xdialog.alert('Spielstände gelöscht.', { title: 'Erledigt' });
       } else {
-        alert('Fehler beim Löschen.');
+        await window.Xdialog.alert('Fehler beim Löschen.', { title: 'Fehler' });
       }
     });
     refs.settingsDeleteAccount.addEventListener('click', async () => {
-      if (!confirm('Konto + alle Daten unwiderruflich löschen?\nDieser Schritt kann nicht rückgängig gemacht werden.')) return;
-      const ok = await window.XwordAuth.deleteAccount();
-      if (ok) {
+      const ok = await window.Xdialog.confirm(
+        'Konto + alle Daten unwiderruflich löschen?\nDieser Schritt kann nicht rückgängig gemacht werden.',
+        { title: 'Konto löschen', okLabel: 'Endgültig löschen', destructive: true }
+      );
+      if (!ok) return;
+      const success = await window.XwordAuth.deleteAccount();
+      if (success) {
         state.user = null;
         state.progressMap = {};
         renderAllUserBars();
         renderPuzzleList();
         closeSettings();
-        alert('Konto gelöscht.');
+        await window.Xdialog.alert('Konto gelöscht.', { title: 'Erledigt' });
       } else {
-        alert('Fehler beim Löschen.');
+        await window.Xdialog.alert('Fehler beim Löschen.', { title: 'Fehler' });
       }
     });
 

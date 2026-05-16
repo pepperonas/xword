@@ -30,6 +30,7 @@ assets/
   styles.css      — theme variables + all UI styles, light + dark
   layout.js       — crossword auto-layout algorithm (browser + node)
   input-dedupe.js — event dedupe predicate (mobile keyboard double-fire fix)
+  dialog.js       — Xdialog.alert / Xdialog.confirm (M3-themed, Promise-based)
   engine.js       — game engine: grid render, input, timer, hardcore mode
   auth.js         — API client wrapper (fetch, sendBeacon, makeSaver)
   app.js          — view routing, state, all UI rendering, theme manager

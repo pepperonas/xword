@@ -9,7 +9,7 @@
  *
  * Bump the version when shipping app-shell changes so old caches are purged.
  */
-const VERSION = 'xword-v4';
+const VERSION = 'xword-v5';
 const SHELL_CACHE = VERSION + '-shell';
 const PUZZLE_CACHE = VERSION + '-puzzles';
 const FONTS_CACHE = VERSION + '-fonts';
@@ -24,6 +24,7 @@ const APP_SHELL = [
   '/assets/styles.css',
   '/assets/layout.js',
   '/assets/input-dedupe.js',
+  '/assets/dialog.js',
   '/assets/engine.js',
   '/assets/auth.js',
   '/assets/app.js',

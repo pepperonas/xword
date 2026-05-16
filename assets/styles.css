@@ -1961,6 +1961,60 @@ a:hover { text-decoration-thickness: 2px; }
   margin-top: 6px;
 }
 
+/* ============ CUSTOM DIALOG (replaces native alert/confirm) ============
+   Uses the existing .overlay backdrop. The card itself styles via M3
+   tokens so light + dark themes both work without any extra rules.   */
+.xdialog-overlay {
+  z-index: 200; /* above .settings-card overlay if both ever open */
+}
+.xdialog-card {
+  background: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-shape-lg);
+  padding: 24px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: var(--md-elev-5);
+  transform: scale(0.92);
+  opacity: 0;
+  transition: transform 0.22s cubic-bezier(0.2, 0, 0, 1),
+              opacity   0.22s ease-out;
+  font-family: var(--md-font-body);
+}
+.overlay.show .xdialog-card { transform: scale(1); opacity: 1; }
+.xdialog-title {
+  font-family: var(--md-font-display);
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--md-sys-color-on-surface);
+  margin-bottom: 10px;
+}
+.xdialog-message {
+  font-family: var(--md-font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--md-sys-color-on-surface-variant);
+  margin-bottom: 22px;
+}
+.xdialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.xdialog-actions .btn {
+  min-width: 96px;
+}
+@media (max-width: 420px) {
+  .xdialog-actions {
+    flex-direction: column-reverse;
+  }
+  .xdialog-actions .btn { width: 100%; }
+}
+
 /* ============ TOAST ============ */
 .toast-container {
   position: fixed;

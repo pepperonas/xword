@@ -782,8 +782,12 @@
       emitProgress();
     }
 
-    function actionReveal() {
-      if (!confirm('Möchtest du wirklich die komplette Lösung anzeigen? Das beendet das Rätsel.')) return;
+    async function actionReveal() {
+      const ok = await global.Xdialog.confirm(
+        'Möchtest du wirklich die komplette Lösung anzeigen? Das beendet das Rätsel.',
+        { title: 'Lösung anzeigen', okLabel: 'Anzeigen', destructive: true }
+      );
+      if (!ok) return;
       for (let r = 0; r < state.size; r++) {
         for (let c = 0; c < state.size; c++) {
           const cell = state.grid[r][c];
@@ -796,8 +800,12 @@
       paint();
     }
 
-    function actionReset() {
-      if (!confirm('Möchtest du das Rätsel zurücksetzen? Aller Fortschritt geht verloren.')) return;
+    async function actionReset() {
+      const ok = await global.Xdialog.confirm(
+        'Möchtest du das Rätsel zurücksetzen? Aller Fortschritt geht verloren.',
+        { title: 'Rätsel zurücksetzen', okLabel: 'Zurücksetzen', destructive: true }
+      );
+      if (!ok) return;
       for (let r = 0; r < state.size; r++) {
         for (let c = 0; c < state.size; c++) {
           const cell = state.grid[r][c];
