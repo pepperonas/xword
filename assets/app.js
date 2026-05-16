@@ -224,6 +224,15 @@
       });
       menu.appendChild(settingsBtn);
 
+      const shareBtn = document.createElement('button');
+      shareBtn.textContent = 'App teilen';
+      shareBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menu.classList.remove('open');
+        openShareDialog();
+      });
+      menu.appendChild(shareBtn);
+
       if (state.user.is_admin) {
         const adminBtn = document.createElement('button');
         adminBtn.className = 'menu-admin';
@@ -293,6 +302,104 @@
     refs.settingsOverlay.classList.add('show');
   }
   function closeSettings() { refs.settingsOverlay.classList.remove('show'); }
+
+  /* ---------- Share dialog ---------- */
+  const SHARE_URL = 'https://xword.celox.io/';
+
+  function buildShareBody() {
+    const body = document.createElement('div');
+    body.className = 'qr-share';
+
+    // QR — SVG output from window.qrcode (Kazuhiko Arase lib).
+    const canvas = document.createElement('div');
+    canvas.className = 'qr-share-canvas';
+    try {
+      const qr = window.qrcode(0, 'M');
+      qr.addData(SHARE_URL);
+      qr.make();
+      // 4px cell, 0px native margin (the .qr-share-canvas padding plays
+      // that role with a controlled background)
+      canvas.innerHTML = qr.createSvgTag({ cellSize: 4, margin: 0, scalable: true });
+      const svg = canvas.querySelector('svg');
+      if (svg) {
+        svg.removeAttribute('width');
+        svg.removeAttribute('height');
+        svg.setAttribute('shape-rendering', 'crispEdges');
+      }
+    } catch (e) {
+      canvas.textContent = 'QR-Code konnte nicht erzeugt werden';
+    }
+    body.appendChild(canvas);
+
+    const url = document.createElement('div');
+    url.className = 'qr-share-url';
+    url.textContent = SHARE_URL;
+    body.appendChild(url);
+
+    const buttons = document.createElement('div');
+    buttons.className = 'qr-share-buttons';
+
+    const copyBtn = document.createElement('button');
+    copyBtn.className = 'btn';
+    copyBtn.type = 'button';
+    copyBtn.textContent = 'Link kopieren';
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(SHARE_URL);
+        flashShareToast(body, 'Link kopiert');
+      } catch (e) {
+        flashShareToast(body, 'Kopieren fehlgeschlagen');
+      }
+    });
+    buttons.appendChild(copyBtn);
+
+    // Native share — only on browsers that expose the Web Share API.
+    if (typeof navigator.share === 'function') {
+      const shareBtn = document.createElement('button');
+      shareBtn.className = 'btn primary';
+      shareBtn.type = 'button';
+      shareBtn.textContent = 'Teilen…';
+      shareBtn.addEventListener('click', async () => {
+        try {
+          await navigator.share({
+            title: 'Kreuzworträtsel',
+            text: 'Online-Kreuzworträtsel mit 30 Rätseln und Tagespuzzle',
+            url: SHARE_URL,
+          });
+        } catch (e) { /* user cancelled or share unavailable */ }
+      });
+      buttons.appendChild(shareBtn);
+    }
+
+    body.appendChild(buttons);
+    return body;
+  }
+
+  function flashShareToast(container, msg) {
+    const existing = container.querySelector('.qr-share-toast');
+    if (existing) existing.remove();
+    const toast = document.createElement('div');
+    toast.className = 'qr-share-toast';
+    toast.textContent = msg;
+    container.appendChild(toast);
+    requestAnimationFrame(() => toast.classList.add('show'));
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => { if (toast.parentNode) toast.remove(); }, 250);
+    }, 1700);
+  }
+
+  function openShareDialog() {
+    if (typeof window.qrcode !== 'function') {
+      window.Xdialog.alert('QR-Code-Bibliothek nicht geladen.', { title: 'Teilen' });
+      return;
+    }
+    window.Xdialog.show({
+      title: 'Kreuzworträtsel teilen',
+      body: buildShareBody(),
+      closeLabel: 'Fertig',
+    });
+  }
 
   /* ---------- Admin view ---------- */
   function navigateToAdmin() { window.location.hash = 'admin'; }

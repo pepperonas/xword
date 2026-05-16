@@ -124,8 +124,81 @@
     });
   }
 
+  /**
+   * Custom-content variant. Renders a card with the given title and
+   * arbitrary body DOM. Caller controls actions completely.
+   *
+   * opts = {
+   *   title:    string,
+   *   body:     HTMLElement,    // appended verbatim into the card
+   *   onClose?: () => void,     // called when dialog closes via any path
+   *   closeLabel?: string,      // default 'Schließen' — primary close button
+   * }
+   *
+   * Returns a control object: { close() }.
+   */
+  function showCustom(opts) {
+    opts = opts || {};
+    const title = opts.title || '';
+    const closeLabel = opts.closeLabel || 'Schließen';
+
+    const overlay = el('div', 'overlay xdialog-overlay');
+    const card = el('div', 'xdialog-card xdialog-card-custom');
+    card.setAttribute('role', 'dialog');
+    card.setAttribute('aria-modal', 'true');
+    card.setAttribute('aria-labelledby', 'xdialog-title');
+
+    const titleEl = el('h3', 'xdialog-title');
+    titleEl.id = 'xdialog-title';
+    titleEl.textContent = title;
+
+    card.appendChild(titleEl);
+    if (opts.body) card.appendChild(opts.body);
+
+    const actions = el('div', 'xdialog-actions');
+    const okBtn = el('button', 'btn primary xdialog-btn-ok');
+    okBtn.type = 'button';
+    okBtn.textContent = closeLabel;
+    actions.appendChild(okBtn);
+    card.appendChild(actions);
+
+    overlay.appendChild(card);
+    document.body.appendChild(overlay);
+
+    const prevFocus = document.activeElement;
+    let keyHandler;
+    let closed = false;
+
+    function close() {
+      if (closed) return;
+      closed = true;
+      document.removeEventListener('keydown', keyHandler, true);
+      overlay.classList.remove('show');
+      setTimeout(() => { if (overlay.parentNode) overlay.parentNode.removeChild(overlay); }, 220);
+      try { if (prevFocus && prevFocus.focus) prevFocus.focus({ preventScroll: true }); } catch (e) {}
+      if (typeof opts.onClose === 'function') opts.onClose();
+    }
+
+    okBtn.addEventListener('click', close);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+
+    keyHandler = (e) => {
+      if (e.key === 'Escape') { e.preventDefault(); close(); }
+      else if (e.key === 'Enter' && document.activeElement === okBtn) { e.preventDefault(); close(); }
+    };
+    document.addEventListener('keydown', keyHandler, true);
+
+    requestAnimationFrame(() => {
+      overlay.classList.add('show');
+      try { okBtn.focus({ preventScroll: true }); } catch (e) {}
+    });
+
+    return { close };
+  }
+
   global.Xdialog = {
     alert: (message, opts) => show('alert', message, opts),
     confirm: (message, opts) => show('confirm', message, opts),
+    show: showCustom,
   };
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -2037,6 +2037,67 @@ a:hover { text-decoration-thickness: 2px; }
   .xdialog-actions .btn { min-width: 0; flex: 1 1 0; }
 }
 
+/* ---- Share dialog content ---- */
+.qr-share {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin: 4px 0 22px;
+}
+.qr-share-canvas {
+  background: #FFFFFF;            /* QR must always be light for scanners */
+  padding: 12px;
+  border-radius: var(--md-shape-md);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  display: flex;                  /* host the SVG cleanly */
+  align-items: center;
+  justify-content: center;
+}
+.qr-share-canvas svg {
+  display: block;
+  width: 220px;
+  height: 220px;
+}
+.qr-share-url {
+  font-family: var(--md-font-mono);
+  font-size: 13px;
+  color: var(--md-sys-color-on-surface);
+  word-break: break-all;
+  text-align: center;
+  padding: 8px 12px;
+  background: var(--md-sys-color-surface-container);
+  border-radius: var(--md-shape-sm);
+  width: 100%;
+}
+.qr-share-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+.qr-share-buttons .btn { flex: 1 1 auto; min-width: 140px; }
+.qr-share-toast {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  background: var(--md-sys-color-inverse-surface, var(--md-sys-color-on-surface));
+  color: var(--md-sys-color-inverse-on-surface, var(--md-sys-color-surface));
+  font-family: var(--md-font-body);
+  font-size: 13px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s, transform 0.22s;
+}
+.qr-share-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 /* ============ TOAST ============ */
 .toast-container {
   position: fixed;

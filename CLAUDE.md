@@ -30,7 +30,8 @@ assets/
   styles.css      — theme variables + all UI styles, light + dark
   layout.js       — crossword auto-layout algorithm (browser + node)
   input-dedupe.js — event dedupe predicate (mobile keyboard double-fire fix)
-  dialog.js       — Xdialog.alert / Xdialog.confirm (M3-themed, Promise-based)
+  qrcode.js       — Kazuhiko Arase's MIT QR generator (vendored, ~21 KB minified)
+  dialog.js       — Xdialog.alert / Xdialog.confirm / Xdialog.show (M3-themed)
   engine.js       — game engine: grid render, input, timer, hardcore mode
   auth.js         — API client wrapper (fetch, sendBeacon, makeSaver)
   app.js          — view routing, state, all UI rendering, theme manager
@@ -171,7 +172,7 @@ The frontend fetches it on init and shows "Ver. N" in the masthead eyebrow. `ver
 ## PWA / offline
 
 - `manifest.webmanifest`: `display: standalone`, theme/background colors, icons (svg + png).
-- `sw.js` (cache version `xword-v6`, bump when shipping app-shell changes — especially CSS, since stale-while-revalidate will otherwise serve last-cached styles.css for one more reload):
+- `sw.js` (cache version `xword-v7`, bump when shipping app-shell changes — especially CSS, since stale-while-revalidate will otherwise serve last-cached styles.css for one more reload):
   - App shell → stale-while-revalidate (`SHELL_CACHE`)
   - Puzzle JSONs → network-first, cache fallback (`PUZZLE_CACHE`)
   - Google Fonts → cache-first opaque (`FONTS_CACHE`)
@@ -371,16 +372,28 @@ All three render their card via M3 surface tokens (`surface-container-high`
 extra rules. The backdrop is `--md-sys-color-scrim` with `backdrop-filter: blur(8px)`.
 
 **Custom dialogs (no native browser alert/confirm)**: `assets/dialog.js`
-exposes `Xdialog.alert(message, opts?)` and `Xdialog.confirm(message,
-opts?)`, both Promise-based, all rendered with M3 surface tokens so
-light and dark themes both work. Options: `{ title?, okLabel?,
-cancelLabel?, destructive? }`. Destructive confirms focus the cancel
-button initially so an accidental Enter does not commit. Esc cancels,
-backdrop click cancels, Enter confirms unless focus is on Cancel.
-Action row is horizontal (M3 pill buttons, 40 px height, min-width 96 px);
-outlined cancel + filled primary, or filled `--md-sys-color-error` for
-destructive. All nine former call-sites of native `alert`/`confirm`
-route through this module.
+exposes three Promise-based factories, all rendered with M3 surface
+tokens so light and dark themes both work:
+
+- `Xdialog.alert(message, opts?)` — single OK button
+- `Xdialog.confirm(message, opts?)` — Cancel + OK (destructive option)
+- `Xdialog.show({ title, body, closeLabel?, onClose? })` — custom DOM
+  body for things like the QR share dialog. Returns `{ close() }`.
+
+Options on alert/confirm: `{ title?, okLabel?, cancelLabel?,
+destructive? }`. Destructive confirms focus the cancel button initially
+so an accidental Enter does not commit. Esc cancels, backdrop click
+cancels, Enter confirms unless focus is on Cancel. Action row is
+horizontal (M3 pill buttons, 40 px height, min-width 96 px); outlined
+cancel + filled primary, or filled `--md-sys-color-error` for
+destructive.
+
+**Share dialog** (`openShareDialog` in `app.js`): triggered from the
+user-dropdown "App teilen" entry. Builds an SVG QR code via
+`window.qrcode` (vendored Kazuhiko Arase library) targeting
+`https://xword.celox.io/`, plus a "Link kopieren" button and — on
+browsers that expose `navigator.share` — a native-share button.
+QR canvas stays light-bg in both themes (scanner reliability).
 
 **Button class conventions**: `.btn-danger` is **colour-only**
 (error-container tonal background) — it does not impose width or
