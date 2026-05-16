@@ -239,6 +239,36 @@
       "description": "Weltliteratur auf 1-Mio-Niveau — Moderne, Nobelpreise, Romane, die nur die Leser kennen.",
       "wordCount": 14,
       "size": 14
+    },
+    {
+      "id": "film-hard-02",
+      "file": "film-hard-02.json",
+      "title": "Schnittraum-Sagen",
+      "theme": "film",
+      "difficulty": "hard",
+      "description": "Filmgeschichte auf 1-Mio-Niveau — Stummfilm-Pioniere, Autorenkino, Goldene Palme abseits des Mainstreams.",
+      "wordCount": 14,
+      "size": 16
+    },
+    {
+      "id": "architektur-hard-02",
+      "file": "architektur-hard-02.json",
+      "title": "Hinter den Säulen",
+      "theme": "architektur",
+      "difficulty": "hard",
+      "description": "Architektur auf 1-Mio-Niveau — Pioniere, Stile, Detailbegriffe aus zweitausend Jahren Bauen.",
+      "wordCount": 14,
+      "size": 16
+    },
+    {
+      "id": "religion-hard-01",
+      "file": "religion-hard-01.json",
+      "title": "Aus den Konzilsakten",
+      "theme": "religion",
+      "difficulty": "hard",
+      "description": "Religionsgeschichte auf 1-Mio-Niveau — Konzile, Häresien, Orden, Riten aus zwei Jahrtausenden.",
+      "wordCount": 14,
+      "size": 17
     }
   ]
 }

@@ -1,0 +1,108 @@
+{
+  "id": "religion-hard-01",
+  "title": "Aus den Konzilsakten",
+  "theme": "religion",
+  "difficulty": "hard",
+  "description": "Religionsgeschichte auf 1-Mio-Niveau — Konzile, Häresien, Orden, Riten aus zwei Jahrtausenden.",
+  "words": [
+    {
+      "answer": "MONOPHYSIT",
+      "clue": "Vertreter der nur einen, göttlichen Natur Christi (Eutyches)",
+      "row": 1,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "GREGORIANIK",
+      "clue": "Liturgischer Choral der Westkirche, nach Papst Gregor I. benannt",
+      "row": 4,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "ZISTERZIENSER",
+      "clue": "Reformorden des 12. Jh., entstanden in Cîteaux in Burgund",
+      "row": 0,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "ARIANISMUS",
+      "clue": "Lehre des alexandrin. Presbyters Arius, in Nikaia 325 verworfen",
+      "row": 1,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "BENEDIKTINER",
+      "clue": "Ältester abendländischer Mönchsorden, gegründet um 529 in Monte Cassino",
+      "row": 2,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "KOPTEN",
+      "clue": "Christen Ägyptens, eigenständige Kirche seit Chalkedon 451",
+      "row": 9,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "CHALKEDON",
+      "clue": "Konzilsort 451, formulierte die Zwei-Naturen-Lehre Christi",
+      "row": 0,
+      "col": 14,
+      "direction": "down"
+    },
+    {
+      "answer": "SUFISMUS",
+      "clue": "Mystischer Zweig des Islam, bekannt für die Rumi-Drehtänze in Konya",
+      "row": 1,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "AVIGNON",
+      "clue": "Päpstlicher Residenzort 1309 bis 1377, 'Babylonische Gefangenschaft'",
+      "row": 1,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "NIKAIA",
+      "clue": "Bithynische Stadt, in der 325 das erste ökumenische Konzil tagte",
+      "row": 10,
+      "col": 11,
+      "direction": "across"
+    },
+    {
+      "answer": "TALMUD",
+      "clue": "Babylonisch oder palästinisch — rabbinische Auslegung der Mischna",
+      "row": 9,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "BOGOMILEN",
+      "clue": "Mittelalterl. dualist. Sekte des 10. Jh. in Bulgarien",
+      "row": 6,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "PARSI",
+      "clue": "Anhänger des zoroastrischen Glaubens in Indien, geflohen ab 7. Jh.",
+      "row": 3,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "TANTRA",
+      "clue": "Esoter. Tradition im Hinduismus und Mahayana-Buddhismus mit Yantras",
+      "row": 13,
+      "col": 8,
+      "direction": "across"
+    }
+  ],
+  "size": 17
+}

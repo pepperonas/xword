@@ -1,0 +1,108 @@
+{
+  "id": "film-hard-02",
+  "title": "Schnittraum-Sagen",
+  "theme": "film",
+  "difficulty": "hard",
+  "description": "Filmgeschichte auf 1-Mio-Niveau — Stummfilm-Pioniere, Autorenkino, Goldene Palme abseits des Mainstreams.",
+  "words": [
+    {
+      "answer": "OZU",
+      "clue": "Japan. Regisseur mit Tatami-Kameraperspektive, 'Tokyo Story' (1953)",
+      "row": 7,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "BRESSON",
+      "clue": "Franz. Regisseur des asketischen Stils, 'Pickpocket' (1959)",
+      "row": 2,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "GODARD",
+      "clue": "Nouvelle-Vague-Mitbegründer, 'Außer Atem' (1960)",
+      "row": 3,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "DREYER",
+      "clue": "Däne, Regisseur von 'Die Passion der Jeanne d'Arc' (1928)",
+      "row": 3,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "EISENSTEIN",
+      "clue": "Sowj. Montagetheoretiker, 'Panzerkreuzer Potemkin' (1925)",
+      "row": 5,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "FELLINI",
+      "clue": "Italiener, 'La dolce vita' (1960) mit Anita Ekberg im Trevi-Brunnen",
+      "row": 4,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "MIZOGUCHI",
+      "clue": "Japan. Klassiker, 'Ugetsu' (1953)",
+      "row": 10,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "MURNAU",
+      "clue": "Dt. Stummfilm-Regisseur von 'Nosferatu' (1922)",
+      "row": 9,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "TARKOWSKI",
+      "clue": "Russ. Regisseur von 'Stalker' (1979) und 'Solaris' (1972)",
+      "row": 13,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "RIEFENSTAHL",
+      "clue": "Dt. Regisseurin von 'Triumph des Willens' (1935)",
+      "row": 0,
+      "col": 11,
+      "direction": "down"
+    },
+    {
+      "answer": "BUNUEL",
+      "clue": "Span. Surrealist, 'Der diskrete Charme der Bourgeoisie' (1972)",
+      "row": 2,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "BERGMAN",
+      "clue": "Schwede, 'Das siebente Siegel' (1957) mit Schachpartie gegen den Tod",
+      "row": 0,
+      "col": 0,
+      "direction": "down"
+    },
+    {
+      "answer": "MELIES",
+      "clue": "Franz. Trickfilmpionier, 'Die Reise zum Mond' (1902)",
+      "row": 10,
+      "col": 1,
+      "direction": "down"
+    },
+    {
+      "answer": "ANTONIONI",
+      "clue": "Italiener, 'Blow-Up' (1966), Goldene Palme 1967",
+      "row": 5,
+      "col": 13,
+      "direction": "down"
+    }
+  ],
+  "size": 16
+}

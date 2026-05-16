@@ -1,0 +1,108 @@
+{
+  "id": "architektur-hard-02",
+  "title": "Hinter den Säulen",
+  "theme": "architektur",
+  "difficulty": "hard",
+  "description": "Architektur auf 1-Mio-Niveau — Pioniere, Stile, Detailbegriffe aus zweitausend Jahren Bauen.",
+  "words": [
+    {
+      "answer": "BORROMINI",
+      "clue": "Röm. Barockmeister, Rivale Berninis, San Carlino alle Quattro Fontane",
+      "row": 9,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "NIEMEYER",
+      "clue": "Brasilianer, Entwerfer der Hauptstadt Brasília (1956 bis 1960)",
+      "row": 6,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "BRUNELLESCHI",
+      "clue": "Florentiner, vollendete 1436 die Domkuppel von Santa Maria del Fiore",
+      "row": 12,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "PANTHEON",
+      "clue": "Hadrians röm. Tempel mit 43-m-Kuppel und zentralem Okulus",
+      "row": 2,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "TYMPANON",
+      "clue": "Dreieckiges Giebelfeld eines klassischen Tempels",
+      "row": 6,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "VOLUTE",
+      "clue": "Spiralförmiges Schneckenornament am ionischen Kapitell",
+      "row": 2,
+      "col": 0,
+      "direction": "down"
+    },
+    {
+      "answer": "PALAZZO",
+      "clue": "Italienische Bezeichnung für Stadtpalast der Renaissance",
+      "row": 0,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "TRIGLYPH",
+      "clue": "Dreischlitziges Schmuckelement zwischen Metopen am dorischen Fries",
+      "row": 8,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "STRIGEL",
+      "clue": "Streifige Rillenverzierung an antiken Sarkophagen und Säulen",
+      "row": 5,
+      "col": 8,
+      "direction": "across"
+    },
+    {
+      "answer": "TADAO",
+      "clue": "Vorname Andos, japan. Pritzker-Preisträger 1995, Beton-Minimalismus",
+      "row": 3,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "ZIBORIUM",
+      "clue": "Säulenbaldachin über christlichen Altären, oft mit Kuppel",
+      "row": 0,
+      "col": 11,
+      "direction": "down"
+    },
+    {
+      "answer": "MIES",
+      "clue": "Van der Rohe, Verfasser des Diktums 'Less is more', Barcelona-Pavillon 1929",
+      "row": 11,
+      "col": 11,
+      "direction": "down"
+    },
+    {
+      "answer": "ZAHA",
+      "clue": "Vorname Hadids, irakisch-britische Pritzker-Preisträgerin 2004",
+      "row": 15,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "ENTASIS",
+      "clue": "Geringe Wölbung des Säulenschafts zur optischen Korrektur",
+      "row": 5,
+      "col": 13,
+      "direction": "down"
+    }
+  ],
+  "size": 16
+}
