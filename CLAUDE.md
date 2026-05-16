@@ -170,12 +170,13 @@ The frontend fetches it on init and shows "Ver. N" in the masthead eyebrow. `ver
 ## PWA / offline
 
 - `manifest.webmanifest`: `display: standalone`, theme/background colors, icons (svg + png).
-- `sw.js` (cache version `xword-v3`, bump when shipping app-shell changes):
+- `sw.js` (cache version `xword-v5`, bump when shipping app-shell changes):
   - App shell → stale-while-revalidate (`SHELL_CACHE`)
   - Puzzle JSONs → network-first, cache fallback (`PUZZLE_CACHE`)
   - Google Fonts → cache-first opaque (`FONTS_CACHE`)
   - `/api/*` → **never cached** (auth-sensitive)
 - Registered only on `https:` to avoid local-dev confusion.
+- **Auto-reload on upgrade**: `app.js` snapshots the SW controller at boot and listens for `controllerchange`. If the page was already controlled and a new SW takes over (because the cache version got bumped), the page reloads exactly once so the in-memory JS gets replaced with the freshly cached version. First-time visitors (no previous controller) are not reloaded.
 
 ---
 
@@ -344,6 +345,20 @@ Outlined is loaded for future icon swaps.
 - Cell hover tint (mouse-only via `(hover: hover) and (pointer: fine)`)
 - Tab underline slides via `scaleX` between Horizontal/Vertikal
 - `.sync-indicator.saving` pulses opacity 1↔0.55 at 1.2s
+- Word-solve flash: gentle scale + glow pulse, staggered per cell when
+  a word goes from incorrect → correct (engine.js, suppressed on the
+  final word so the big solve-wave / win confetti carries that moment)
+
+**Custom dialogs (no native browser alert/confirm)**: `assets/dialog.js`
+exposes `Xdialog.alert(message, opts?)` and `Xdialog.confirm(message,
+opts?)`, both Promise-based, all rendered with M3 surface tokens so
+light and dark themes both work. Options: `{ title?, okLabel?,
+cancelLabel?, destructive? }`. Destructive confirms focus the cancel
+button initially so an accidental Enter does not commit. Esc cancels,
+backdrop click cancels, Enter confirms unless focus is on Cancel.
+Action row is horizontal (M3 pill buttons); outlined cancel + filled
+primary or filled error for destructive. All nine former call-sites
+of native `alert`/`confirm` route through this module.
 
 ---
 
