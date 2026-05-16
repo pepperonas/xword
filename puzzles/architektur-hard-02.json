@@ -6,6 +6,13 @@
   "description": "Architektur auf 1-Mio-Niveau — Pioniere, Stile, Detailbegriffe aus zweitausend Jahren Bauen.",
   "words": [
     {
+      "answer": "STRIGILIS",
+      "clue": "S-förmige Rillenverzierung an antiken Sarkophagen (lat. Striegel)",
+      "row": 4,
+      "col": 8,
+      "direction": "down"
+    },
+    {
       "answer": "BORROMINI",
       "clue": "Röm. Barockmeister, Rivale Berninis, San Carlino alle Quattro Fontane",
       "row": 9,
@@ -15,9 +22,9 @@
     {
       "answer": "NIEMEYER",
       "clue": "Brasilianer, Entwerfer der Hauptstadt Brasília (1956 bis 1960)",
-      "row": 6,
+      "row": 7,
       "col": 7,
-      "direction": "down"
+      "direction": "across"
     },
     {
       "answer": "BRUNELLESCHI",
@@ -27,31 +34,17 @@
       "direction": "across"
     },
     {
-      "answer": "PANTHEON",
-      "clue": "Hadrians röm. Tempel mit 43-m-Kuppel und zentralem Okulus",
-      "row": 2,
-      "col": 9,
+      "answer": "ZIBORIUM",
+      "clue": "Säulenbaldachin über christlichen Altären, oft mit Kuppel",
+      "row": 0,
+      "col": 10,
       "direction": "down"
     },
     {
       "answer": "TYMPANON",
       "clue": "Dreieckiges Giebelfeld eines klassischen Tempels",
-      "row": 6,
-      "col": 0,
-      "direction": "across"
-    },
-    {
-      "answer": "VOLUTE",
-      "clue": "Spiralförmiges Schneckenornament am ionischen Kapitell",
-      "row": 2,
-      "col": 0,
-      "direction": "down"
-    },
-    {
-      "answer": "PALAZZO",
-      "clue": "Italienische Bezeichnung für Stadtpalast der Renaissance",
-      "row": 0,
-      "col": 6,
+      "row": 3,
+      "col": 3,
       "direction": "down"
     },
     {
@@ -62,46 +55,53 @@
       "direction": "down"
     },
     {
-      "answer": "STRIGEL",
-      "clue": "Streifige Rillenverzierung an antiken Sarkophagen und Säulen",
-      "row": 5,
-      "col": 8,
-      "direction": "across"
-    },
-    {
-      "answer": "TADAO",
-      "clue": "Vorname Andos, japan. Pritzker-Preisträger 1995, Beton-Minimalismus",
-      "row": 3,
-      "col": 4,
-      "direction": "down"
-    },
-    {
-      "answer": "ZIBORIUM",
-      "clue": "Säulenbaldachin über christlichen Altären, oft mit Kuppel",
-      "row": 0,
-      "col": 11,
-      "direction": "down"
-    },
-    {
-      "answer": "MIES",
-      "clue": "Van der Rohe, Verfasser des Diktums 'Less is more', Barcelona-Pavillon 1929",
-      "row": 11,
-      "col": 11,
-      "direction": "down"
-    },
-    {
-      "answer": "ZAHA",
-      "clue": "Vorname Hadids, irakisch-britische Pritzker-Preisträgerin 2004",
-      "row": 15,
-      "col": 3,
+      "answer": "PALAZZO",
+      "clue": "Italienische Bezeichnung für Stadtpalast der Renaissance",
+      "row": 14,
+      "col": 5,
       "direction": "across"
     },
     {
       "answer": "ENTASIS",
       "clue": "Geringe Wölbung des Säulenschafts zur optischen Korrektur",
-      "row": 5,
+      "row": 7,
       "col": 13,
       "direction": "down"
+    },
+    {
+      "answer": "MIES",
+      "clue": "Van der Rohe, Verfasser des Diktums 'Less is more', Barcelona-Pavillon 1929",
+      "row": 5,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "PANTHEON",
+      "clue": "Hadrians röm. Tempel mit 43-m-Kuppel und zentralem Okulus",
+      "row": 3,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "VOLUTE",
+      "clue": "Spiralförmiges Schneckenornament am ionischen Kapitell",
+      "row": 3,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "ZAHA",
+      "clue": "Vorname Hadids, irakisch-britische Pritzker-Preisträgerin 2004",
+      "row": 10,
+      "col": 12,
+      "direction": "across"
+    },
+    {
+      "answer": "TADAO",
+      "clue": "Vorname Andos, japan. Pritzker-Preisträger 1995, Beton-Minimalismus",
+      "row": 7,
+      "col": 0,
+      "direction": "across"
     }
   ],
   "size": 16
