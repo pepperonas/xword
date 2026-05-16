@@ -156,7 +156,7 @@
       "title": "Eminenz der Lettern",
       "theme": "literatur",
       "difficulty": "hard",
-      "description": "Weltliteratur auf 1-Mio-Niveau — Daten, Werke, Schulen aus drei Jahrtausenden.",
+      "description": "Weltliteratur für Bibliotheksbesitzer — Daten, Werke, Schulen aus drei Jahrtausenden.",
       "wordCount": 14,
       "size": 15
     },
@@ -166,7 +166,7 @@
       "title": "Aus den Schattenarchiven",
       "theme": "geschichte",
       "difficulty": "hard",
-      "description": "Geschichte auf 1-Mio-Niveau — Daten, Schlachten, Vertragsorte, die niemand zufällig kennt.",
+      "description": "Daten, Schlachten, Vertragsorte, die niemand zufällig kennt — Geschichte für Quellen-Leser.",
       "wordCount": 14,
       "size": 19
     },
@@ -176,7 +176,7 @@
       "title": "Aus den Notizbüchern",
       "theme": "wissenschaft",
       "difficulty": "hard",
-      "description": "Wissenschaft auf 1-Mio-Niveau — Konstanten, Pioniere, Anekdoten, die nur Spezialisten kennen.",
+      "description": "Was im Laborbuch steht — Konstanten, Pioniere, Anekdoten, die nur Spezialisten kennen.",
       "wordCount": 14,
       "size": 17
     },
@@ -186,7 +186,7 @@
       "title": "Aus den Schulgängen",
       "theme": "philosophie",
       "difficulty": "hard",
-      "description": "Philosophie auf 1-Mio-Niveau — Schulen, Werke, Anekdoten aus zwei Jahrtausenden Denken.",
+      "description": "Philosophie für Eingeweihte — Schulen, Werke, Anekdoten aus zwei Jahrtausenden Denken.",
       "wordCount": 14,
       "size": 18
     },
@@ -196,7 +196,7 @@
       "title": "Pinselgeflüster",
       "theme": "kunst",
       "difficulty": "hard",
-      "description": "Kunstgeschichte auf 1-Mio-Niveau — abseits der Postkartenmotive.",
+      "description": "Kunstgeschichte abseits der Postkartenmotive — Werke, Werkstätten, Wendepunkte.",
       "wordCount": 14,
       "size": 18
     },
@@ -206,7 +206,7 @@
       "title": "Aus den Partituren",
       "theme": "musik",
       "difficulty": "hard",
-      "description": "Musikgeschichte auf 1-Mio-Niveau — Komponisten, Werke, Anekdoten aus tausend Jahren Notation.",
+      "description": "Musik aus den Notenarchiven — Komponisten, Werke, Anekdoten aus tausend Jahren Notation.",
       "wordCount": 14,
       "size": 17
     },
@@ -216,7 +216,7 @@
       "title": "Vom Ende der Welt",
       "theme": "geographie",
       "difficulty": "hard",
-      "description": "Geographie auf 1-Mio-Niveau — Karawanenstädte, Polkappen-Halbinseln, Wüsten-Salzpfannen.",
+      "description": "Geographie für Atlas-Liebhaber — Karawanenstädte, Polkappen-Halbinseln, Wüsten-Salzpfannen.",
       "wordCount": 14,
       "size": 17
     },
@@ -226,7 +226,7 @@
       "title": "Götter der anderen Welten",
       "theme": "mythologie",
       "difficulty": "hard",
-      "description": "Mythologie auf 1-Mio-Niveau — abseits des Olymps: Ägypten, Mesopotamien, Edda, Veda.",
+      "description": "Mythologie abseits des Olymps — Ägypten, Mesopotamien, Edda, Veda.",
       "wordCount": 14,
       "size": 15
     },
@@ -236,7 +236,7 @@
       "title": "Verborgene Klassiker",
       "theme": "literatur",
       "difficulty": "hard",
-      "description": "Weltliteratur auf 1-Mio-Niveau — Moderne, Nobelpreise, Romane, die nur die Leser kennen.",
+      "description": "Weltliteratur für Stammleser — Moderne, Nobelpreise, Romane, die nur die Leser kennen.",
       "wordCount": 14,
       "size": 14
     },
@@ -246,7 +246,7 @@
       "title": "Schnittraum-Sagen",
       "theme": "film",
       "difficulty": "hard",
-      "description": "Filmgeschichte auf 1-Mio-Niveau — Stummfilm-Pioniere, Autorenkino, Goldene Palme abseits des Mainstreams.",
+      "description": "Filmgeschichte fernab des Multiplex — Stummfilm-Pioniere, Autorenkino, Goldene Palme.",
       "wordCount": 14,
       "size": 16
     },
@@ -256,7 +256,7 @@
       "title": "Hinter den Säulen",
       "theme": "architektur",
       "difficulty": "hard",
-      "description": "Architektur auf 1-Mio-Niveau — Pioniere, Stile, Detailbegriffe aus zweitausend Jahren Bauen.",
+      "description": "Architektur in Detailtiefe — Pioniere, Stile, Fachbegriffe aus zweitausend Jahren Bauen.",
       "wordCount": 14,
       "size": 16
     },
@@ -266,7 +266,7 @@
       "title": "Aus den Konzilsakten",
       "theme": "religion",
       "difficulty": "hard",
-      "description": "Religionsgeschichte auf 1-Mio-Niveau — Konzile, Häresien, Orden, Riten aus zwei Jahrtausenden.",
+      "description": "Religionsgeschichte aus der Konzilskanzlei — Häresien, Orden, Riten aus zwei Jahrtausenden.",
       "wordCount": 14,
       "size": 17
     },
@@ -276,7 +276,7 @@
       "title": "Im Operationssaal",
       "theme": "medizin",
       "difficulty": "hard",
-      "description": "Medizingeschichte auf 1-Mio-Niveau — Pioniere, Erstbeschreibungen, Instrumente, Lehrsätze.",
+      "description": "Medizingeschichte für Anatomie-Kenner — Pioniere, Erstbeschreibungen, Instrumente, Lehrsätze.",
       "wordCount": 14,
       "size": 16
     },
@@ -286,7 +286,7 @@
       "title": "Vom Sternenhimmel",
       "theme": "astronomie",
       "difficulty": "hard",
-      "description": "Astronomie auf 1-Mio-Niveau — Beobachter, Konstanten, Sternbilder, Phänomene aus drei Jahrtausenden.",
+      "description": "Sternkarten und Konstanten — Beobachter, Sternbilder, Phänomene aus drei Jahrtausenden.",
       "wordCount": 14,
       "size": 16
     },
@@ -296,7 +296,7 @@
       "title": "Aus den Trainingstagebüchern",
       "theme": "sport",
       "difficulty": "hard",
-      "description": "Sportgeschichte auf 1-Mio-Niveau — Olympia-Legenden, Weltrekorde, Anekdoten aus 120 Jahren Wettkampf.",
+      "description": "Sportgeschichte abseits des Stammtischs — Olympia-Legenden, Weltrekorde, Anekdoten aus 120 Jahren Wettkampf.",
       "wordCount": 14,
       "size": 16
     }

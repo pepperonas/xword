@@ -67,7 +67,7 @@
 - 💬 **Custom-Dialoge statt System-Popups** — `Xdialog.alert/confirm` ersetzen native Browser-Dialoge, voll M3-themed in beiden Modi, mit destruktiv-fokussiertem Cancel-Button und Keyboard-Shortcuts (Esc, Enter)
 - ⌨️ **Mobile-Keyboard-fest** — iOS-Safari + Samsung-S24-Ultra-Kompatibilität: synchroner Focus im User-Gesture, Sentinel-Char gegen leeren Backspace, 60-ms-Action-Dedupe gegen Doppelevents
 - 🌗 **Dark Mode** mit **maximaler Lesbarkeit** — Letter Cells bleiben hell wie ein Papier auf dunklem Tisch, aktive Zelle in sattem Blau für unmissverständlichen Cursor-Kontrast
-- 🧩 **30 kuratierte Rätsel** in drei Schwierigkeiten und 18 Themen — von Tech, Allgemeinwissen und Klassischer Bildung über Mythologie, Wissenschaft, Kunst, Geographie, Architektur, Sport, Musik, Geschichte, Film und Natur bis Philosophie, Religion, Literatur, Medizin und Astronomie. **15 davon auf 1-Mio-Niveau** — Cluing wie die Top-Frage bei „Wer wird Millionär"
+- 🧩 **30 kuratierte Rätsel** in drei Schwierigkeiten und 18 Themen — von Tech, Allgemeinwissen und Klassischer Bildung über Mythologie, Wissenschaft, Kunst, Geographie, Architektur, Sport, Musik, Geschichte, Film und Natur bis Philosophie, Religion, Literatur, Medizin und Astronomie. **15 davon im Eminenz-Tier** — Daten, Werke, Schauplätze, wie man sie nur aus dem Quellenstudium kennt
 - 🤖 **Auto-Layout-Algorithmus** — du lieferst Wörter + Hinweise, der Algorithmus baut das Gitter (Standard-Kreuzwort-Regeln, multi-crossing-bevorzugend, gleichgerichtete Wort-Überlappung verhindert)
 - 🔐 **Google-Login** (optional) — OAuth 2.0 mit serverseitigem Auth-Code-Flow, HttpOnly-Session-Cookies
 - 💾 **Spielstand-Sync** pro Nutzer — jeder Tastenanschlag wird live gesichert, `sendBeacon`-Fallback beim Tab-Close
