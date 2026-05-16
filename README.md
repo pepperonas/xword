@@ -63,7 +63,9 @@
 ## ✨ Features
 
 - 🎨 **Material Design 3** — komplette M3-Implementation mit Color-Roles, Type-Scale, Shape-System und Tonal-Surfaces. Source-Color **#0B57D0** (Deep Indigo Blue). Beide Modi voll spezifiziert.
-- ✨ **Dezente Animationen** — M3-State-Layer auf Buttons/Chips, Letter-Type-In Pop, Hint-Drop, sliding Tab-Underline, sanfter Sync-Pulse, Cell-Hover-Tint
+- ✨ **Dezente Animationen** — M3-State-Layer auf Buttons/Chips, Letter-Type-In Pop, Hint-Drop, sliding Tab-Underline, sanfter Sync-Pulse, Cell-Hover-Tint, Wort-Solve-Flash (staggered Pulse durchs frisch korrekte Wort)
+- 💬 **Custom-Dialoge statt System-Popups** — `Xdialog.alert/confirm` ersetzen native Browser-Dialoge, voll M3-themed in beiden Modi, mit destruktiv-fokussiertem Cancel-Button und Keyboard-Shortcuts (Esc, Enter)
+- ⌨️ **Mobile-Keyboard-fest** — iOS-Safari + Samsung-S24-Ultra-Kompatibilität: synchroner Focus im User-Gesture, Sentinel-Char gegen leeren Backspace, 60-ms-Action-Dedupe gegen Doppelevents
 - 🌗 **Dark Mode** mit **maximaler Lesbarkeit** — Letter Cells bleiben hell wie ein Papier auf dunklem Tisch, aktive Zelle in sattem Blau für unmissverständlichen Cursor-Kontrast
 - 🧩 **30 kuratierte Rätsel** in drei Schwierigkeiten und 18 Themen — von Tech, Allgemeinwissen und Klassischer Bildung über Mythologie, Wissenschaft, Kunst, Geographie, Architektur, Sport, Musik, Geschichte, Film und Natur bis Philosophie, Religion, Literatur, Medizin und Astronomie. **15 davon auf 1-Mio-Niveau** — Cluing wie die Top-Frage bei „Wer wird Millionär"
 - 🤖 **Auto-Layout-Algorithmus** — du lieferst Wörter + Hinweise, der Algorithmus baut das Gitter (Standard-Kreuzwort-Regeln, multi-crossing-bevorzugend, gleichgerichtete Wort-Überlappung verhindert)
@@ -122,10 +124,14 @@ cd xword
 npm run serve                  # python3 -m http.server 8000
 open http://localhost:8000/
 
-# Tests ausführen
+# Tests ausführen (Backend-Suites brauchen better-sqlite3 → einmalig im server/ installieren)
+cd server && npm install && cd ..
 npm test                       # node --test tests/
 
-# Versionsnummer aktualisieren (für Anzeige in der Masthead)
+# Production-Build erzeugen (dist/, minified ~45% kleiner)
+npm run build
+
+# Versionsnummer aktualisieren (führt build.sh ohnehin als ersten Schritt aus)
 npm run version:bump
 ```
 
@@ -162,9 +168,12 @@ xword/
 ├── assets/
 │   ├── styles.css              Light + Dark Theme, alle UI-Komponenten
 │   ├── layout.js               Auto-Layout-Algorithmus (browser + node)
+│   ├── input-dedupe.js         60-ms-Action-Dedupe für Mobile-Keyboard-Doppelevents
+│   ├── dialog.js               Xdialog.alert / Xdialog.confirm (M3-themed)
 │   ├── engine.js               Spiel-Engine: Grid, Eingabe, Hardcore, Timer
 │   ├── auth.js                 API-Wrapper, sendBeacon, makeSaver
-│   └── app.js                  View-Routing, State, Theme-Manager, alle UI-Renderings
+│   ├── app.js                  View-Routing, State, Theme-Manager, alle UI-Renderings
+│   └── theme-init.js           Early-Theme-Apply für Impressum/Datenschutz (CSP-safe extern)
 │
 ├── puzzles/
 │   ├── index.json              Manifest: id, theme, difficulty, wordCount, size
@@ -172,7 +181,7 @@ xword/
 │   └── musik-hard-01.json      Pro Rätsel ein JSON mit Wörtern + Hinweisen + Layout
 │
 ├── tests/
-│   ├── layout.test.js          30 Tests für den Layout-Algorithmus
+│   ├── layout.test.js          45 Tests für den Layout-Algorithmus (inkl. Regression je Puzzle)
 │   ├── input-dedupe.test.js    11 Tests für den Mobile-Keyboard-Dedupe
 │   └── server/                 34 Tests für Backend (session, db, rate-limit, achievements)
 │
@@ -289,14 +298,20 @@ Das Skript ruft Claude (`claude-opus-4-7`), parst die Antwort, validiert, layout
 
 Score: `crossings² × 500 + crossings × 50 − distance_to_center` — Mehrfach-Kreuzungen schlagen Einzelkreuzungen quadratisch.
 
-Bis zu ~80–120 randomisierte Durchläufe; der kompakteste Versuch mit den meisten platzierten Wörtern gewinnt.
+Bis zu **80** randomisierte Durchläufe (Default, via `opts.tries` erhöhbar — die Layout-Regression-Tests benutzen 200 für Headroom); der kompakteste Versuch mit den meisten platzierten Wörtern gewinnt.
 
 ---
 
 ## 🧪 Tests
 
 ```bash
-npm test
+# Einmalig: better-sqlite3 fürs Backend-Suite installieren
+cd server && npm install && cd ..
+
+npm test                             # alle 90 Tests
+node --test tests/layout.test.js     # nur Layout
+node --test tests/input-dedupe.test.js   # nur Dedupe
+node --test tests/server/            # nur Backend
 ```
 
 **90 Unit-Tests** (45 Layout + 11 Input-Dedupe + 34 Backend):

@@ -44,11 +44,12 @@ Views are toggled via hash routing: `#play=<id>`, `#admin`, `#profile`, or none 
 ```
 server/
   server.js              — Express app, routes, env loading
-  db.js                  — SQLite schema + prepared statements + migrations
+  db.js                  — SQLite schema + prepared statements + migrations entrypoint
+  migrations.js          — declarative migration framework (additive ALTER TABLE)
   session.js             — HMAC-signed cookie helpers
   rate-limit.js          — per-IP fixed-window counter middleware
   manifest.js            — TTL-cached read of puzzles/index.json
-  achievements.js        — rank tiers + achievement defs + computeProfile
+  achievements.js        — rank tiers + achievement defs + computeProfile + computeStreak + dailyPuzzle
   scripts/backup.sh      — daily SQLite snapshot (gzip, 14-day rotation)
   xword-api.service      — systemd unit for the backend
   xword-backup.service   — oneshot for the backup script
@@ -114,7 +115,7 @@ The algorithm in `assets/layout.js` enforces standard crossword rules:
 
 Scoring (`scoreCandidate`): `crossings² × 500 + crossings × 50 − distance_to_center` — multi-crossing placements are quadratically preferred.
 
-`attemptLayout` runs up to ~80–120 randomised passes with different seed orderings; if some words can't be placed, the best partial layout wins.
+`attemptLayout` runs up to **80** randomised passes by default (`opts.tries`, can be raised — the layout regression tests pass `{ tries: 200 }` for headroom). Later passes shuffle word order more aggressively and try alternative seed words from the top-K longest. If some words can't be placed, the best partial layout wins.
 
 ---
 
@@ -160,10 +161,10 @@ Three quirks of virtual keyboards forced the input pipeline to be more elaborate
 `scripts/bump-version.sh` reads `git rev-list --count HEAD` and writes `version.json`:
 
 ```json
-{ "version": 15, "commit": "fa1fa2f", "date": "2026-05-15" }
+{ "version": 43, "commit": "011824f", "date": "2026-05-16" }
 ```
 
-The frontend fetches it on init and shows "Ver. N" in the masthead eyebrow. `version.json` is gitignored — always regenerated on deploy. The hover-title shows commit hash + date for debugging.
+The frontend fetches it on init and shows "Ver. N" in the masthead eyebrow. `version.json` is gitignored — always regenerated on deploy (the build script runs `bump-version.sh` first). The hover-title shows commit hash + date for debugging.
 
 ---
 
@@ -196,13 +197,19 @@ The frontend fetches it on init and shows "Ver. N" in the masthead eyebrow. `ver
 ## Development commands
 
 ```bash
-# Run tests (no deps — uses node:test built into Node ≥ 18)
+# Run tests (no root deps, but the server suites need better-sqlite3 from server/)
 npm test                       # or: node --test tests/
+cd server && npm install       # one-time, so the db.test.js / upsert.test.js suites can import server/db.js
+
+# Run only one suite
+node --test tests/layout.test.js
+node --test tests/input-dedupe.test.js
+node --test tests/server/
 
 # Run the SPA locally (required — fetch() needs http:// not file://)
 npm run serve                  # or: python3 -m http.server 8000
 
-# Generate version.json from the current Git state
+# Generate version.json from the current Git state (build script does this for you)
 npm run version:bump
 
 # Build production-minified assets into dist/ (esbuild). ~45% smaller, ~33% less on-wire.
@@ -219,11 +226,12 @@ p.words = r.words.map(w => ({ answer: w.answer, clue: w.clue, row: w.row, col: w
 fs.writeFileSync('./puzzles/<name>.json', JSON.stringify(p, null, 2));
 "
 
-# Generate a new puzzle via Claude API
+# Generate a new puzzle via Claude API (needs ANTHROPIC_API_KEY env)
+export ANTHROPIC_API_KEY=sk-ant-…
 cd generator && npm install
 node generate.js --theme tech --difficulty medium --words 16
 
-# Dry-run the generator without an API key (uses stub word list)
+# Dry-run the generator without an API key (uses a stub word list)
 node generator/generate.js --theme tech --difficulty easy --words 10 --dry --output /tmp/test.json
 ```
 
@@ -349,6 +357,19 @@ Outlined is loaded for future icon swaps.
   a word goes from incorrect → correct (engine.js, suppressed on the
   final word so the big solve-wave / win confetti carries that moment)
 
+**Overlays — three classes share the `.overlay` backdrop**:
+1. **Win overlay** (`#overlay > .win-card`) — shown via `engine.win()` when the
+   final word completes, after the staggered solve-wave + confetti.
+2. **Settings overlay** (`#settingsOverlay > .settings-card`) — toggled by the
+   user menu; theme switcher, reset-progress, delete-account.
+3. **Custom dialogs** (`.xdialog-overlay > .xdialog-card`) — dynamically
+   created by `Xdialog.alert/confirm`, see below. Z-index 200 so they sit
+   above the Settings overlay if both ever stack.
+
+All three render their card via M3 surface tokens (`surface-container-high`
++ outline-variant + on-surface*), so light and dark themes work without any
+extra rules. The backdrop is `--md-sys-color-scrim` with `backdrop-filter: blur(8px)`.
+
 **Custom dialogs (no native browser alert/confirm)**: `assets/dialog.js`
 exposes `Xdialog.alert(message, opts?)` and `Xdialog.confirm(message,
 opts?)`, both Promise-based, all rendered with M3 surface tokens so
@@ -444,7 +465,9 @@ Total: 90 tests. Run all: `npm test`. Run only one suite: `node --test tests/ser
 3. Bake the layout (see Development commands above).
 4. Add an entry to `puzzles/index.json` with `wordCount` + `size`.
 5. Extend the test regression list in `tests/layout.test.js`.
-6. `npm test`, commit, push, rsync.
+6. `npm test`, commit, push, deploy with `npm run build && rsync dist/`.
+
+For hard puzzles tagged as "1-Mio-Niveau", **read the next section** before committing — three concrete clue-quality failure modes that have already bit us once.
 
 Achievements that need cross-theme coverage (`Bücherwurm`, `Polyglott`, `Bibliothekar`) reflect new themes automatically because they read the manifest at request time.
 
