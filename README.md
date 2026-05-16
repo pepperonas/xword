@@ -65,7 +65,7 @@
 - 🎨 **Material Design 3** — komplette M3-Implementation mit Color-Roles, Type-Scale, Shape-System und Tonal-Surfaces. Source-Color **#0B57D0** (Deep Indigo Blue). Beide Modi voll spezifiziert.
 - ✨ **Dezente Animationen** — M3-State-Layer auf Buttons/Chips, Letter-Type-In Pop, Hint-Drop, sliding Tab-Underline, sanfter Sync-Pulse, Cell-Hover-Tint
 - 🌗 **Dark Mode** mit **maximaler Lesbarkeit** — Letter Cells bleiben hell wie ein Papier auf dunklem Tisch, aktive Zelle in sattem Blau für unmissverständlichen Cursor-Kontrast
-- 🧩 **15 kuratierte Rätsel** in drei Schwierigkeiten und 13 Themen — von Tech über Allgemeinwissen bis Klassische Bildung, Mythologie, Wissenschaft, Kunst, Geographie, Architektur, Sport, Musik, Geschichte, Film und Natur
+- 🧩 **30 kuratierte Rätsel** in drei Schwierigkeiten und 18 Themen — von Tech, Allgemeinwissen und Klassischer Bildung über Mythologie, Wissenschaft, Kunst, Geographie, Architektur, Sport, Musik, Geschichte, Film und Natur bis Philosophie, Religion, Literatur, Medizin und Astronomie. **15 davon auf 1-Mio-Niveau** — Cluing wie die Top-Frage bei „Wer wird Millionär"
 - 🤖 **Auto-Layout-Algorithmus** — du lieferst Wörter + Hinweise, der Algorithmus baut das Gitter (Standard-Kreuzwort-Regeln, multi-crossing-bevorzugend, gleichgerichtete Wort-Überlappung verhindert)
 - 🔐 **Google-Login** (optional) — OAuth 2.0 mit serverseitigem Auth-Code-Flow, HttpOnly-Session-Cookies
 - 💾 **Spielstand-Sync** pro Nutzer — jeder Tastenanschlag wird live gesichert, `sendBeacon`-Fallback beim Tab-Close
