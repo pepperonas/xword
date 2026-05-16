@@ -170,7 +170,7 @@ The frontend fetches it on init and shows "Ver. N" in the masthead eyebrow. `ver
 ## PWA / offline
 
 - `manifest.webmanifest`: `display: standalone`, theme/background colors, icons (svg + png).
-- `sw.js` (cache version `xword-v5`, bump when shipping app-shell changes):
+- `sw.js` (cache version `xword-v6`, bump when shipping app-shell changes — especially CSS, since stale-while-revalidate will otherwise serve last-cached styles.css for one more reload):
   - App shell → stale-while-revalidate (`SHELL_CACHE`)
   - Puzzle JSONs → network-first, cache fallback (`PUZZLE_CACHE`)
   - Google Fonts → cache-first opaque (`FONTS_CACHE`)
@@ -356,9 +356,19 @@ light and dark themes both work. Options: `{ title?, okLabel?,
 cancelLabel?, destructive? }`. Destructive confirms focus the cancel
 button initially so an accidental Enter does not commit. Esc cancels,
 backdrop click cancels, Enter confirms unless focus is on Cancel.
-Action row is horizontal (M3 pill buttons); outlined cancel + filled
-primary or filled error for destructive. All nine former call-sites
-of native `alert`/`confirm` route through this module.
+Action row is horizontal (M3 pill buttons, 40 px height, min-width 96 px);
+outlined cancel + filled primary, or filled `--md-sys-color-error` for
+destructive. All nine former call-sites of native `alert`/`confirm`
+route through this module.
+
+**Button class conventions**: `.btn-danger` is **colour-only**
+(error-container tonal background) — it does not impose width or
+margin. Layouts that want stacked, full-width destructive buttons
+(currently only the Settings drawer) opt in via
+`.settings-section > .btn { width: 100%; margin-top: 8px }`. Don't
+bake layout assumptions into colour classes; they will leak into the
+next context that reuses the class (this is exactly how the dialog
+action row first shipped broken on 2026-05-16).
 
 ---
 
