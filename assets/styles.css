@@ -916,12 +916,16 @@ a:hover { text-decoration-thickness: 2px; }
 .btn-danger {
   background: var(--md-sys-color-error-container);
   color: var(--md-sys-color-on-error-container);
-  margin-top: 8px;
-  width: 100%;
 }
 .btn-danger:hover {
   background: color-mix(in srgb, var(--md-sys-color-on-error-container) 8%, var(--md-sys-color-error-container));
 }
+/* Stacked, full-width buttons specific to the Settings drawer. */
+.settings-section > .btn {
+  width: 100%;
+  margin-top: 8px;
+}
+.settings-section > .btn:first-child { margin-top: 0; }
 .btn .ico {
   font-size: 18px;
   line-height: 1;
@@ -2007,16 +2011,14 @@ a:hover { text-decoration-thickness: 2px; }
 }
 .xdialog-actions .btn {
   flex: 0 0 auto;
-  min-width: 112px;
-  margin: 0;            /* neutralise stacked-form margins (.btn-danger) */
-  padding: 10px 18px;
+  min-width: 96px;
+  height: 40px;
+  padding: 0 22px;
   border-radius: 999px; /* M3 full-pill action button */
 }
-/* Scope-overrides for .btn-danger inside the dialog actions row —
-   the global .btn-danger is full-width for the Settings drawer,
-   which we don't want in a horizontal action bar. */
+/* Inside the dialog we want the louder error tone, not the soft
+   error-container the Settings drawer uses. */
 .xdialog-actions .btn-danger {
-  width: auto;
   background: var(--md-sys-color-error);
   color: var(--md-sys-color-on-error);
 }
