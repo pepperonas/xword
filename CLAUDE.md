@@ -68,7 +68,7 @@ Two valid puzzle JSON forms:
 1. **Pre-laid-out**: includes `size` and per-word `row/col/direction` (production)
 2. **Words only**: `[{ answer, clue }]` — `app.js` runs `XwordLayout.layout()` at load time (manual prototypes)
 
-Currently 21 shipped puzzles, 15 themes (tech, allgemein, klassik, mythologie, wissenschaft, kunst, geographie, architektur, sport, musik, geschichte, film, natur, literatur, philosophie), 3 difficulties (easy / medium / hard). Six of the hard puzzles (`literatur-hard-01`, `geschichte-hard-02`, `wissenschaft-hard-02`, `philosophie-hard-01`, `kunst-hard-02`, `musik-hard-02`) are tagged as "1-Mio-Niveau" — clue density at the level of the top prize question on the German "Wer wird Millionär" quiz show.
+Currently 24 shipped puzzles, 15 themes (tech, allgemein, klassik, mythologie, wissenschaft, kunst, geographie, architektur, sport, musik, geschichte, film, natur, literatur, philosophie), 3 difficulties (easy / medium / hard). Nine of the hard puzzles are tagged as "1-Mio-Niveau" — clue density at the level of the top prize question on the German "Wer wird Millionär" quiz show: `literatur-hard-01`, `literatur-hard-02`, `geschichte-hard-02`, `wissenschaft-hard-02`, `philosophie-hard-01`, `kunst-hard-02`, `musik-hard-02`, `geographie-hard-02`, `mythologie-hard-02`.
 
 ---
 
@@ -381,11 +381,11 @@ Validation tools:
 GitHub Actions (`.github/workflows/test.yml`) runs `npm test` on push to `main` and PRs. The README Tests-Badge points at the workflow.
 
 Tests live in three groups:
-- `tests/layout.test.js` — layout algorithm coverage (36 tests, browser-loadable module via globalThis)
+- `tests/layout.test.js` — layout algorithm coverage (39 tests, browser-loadable module via globalThis)
 - `tests/input-dedupe.test.js` — virtual keyboard double-fire regression suite (11 tests, deterministic via injectable timestamp)
 - `tests/server/*.test.js` — backend coverage (34 tests, dynamic `import()` of ES modules into CommonJS test files): session, rate-limit, db (migrations + upsert behavior), achievements (ranks + streaks + computeProfile).
 
-Total: 81 tests. Run all: `npm test`. Run only one suite: `node --test tests/server/session.test.js`.
+Total: 84 tests. Run all: `npm test`. Run only one suite: `node --test tests/server/session.test.js`.
 
 ---
 

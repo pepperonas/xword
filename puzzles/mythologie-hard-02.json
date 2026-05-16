@@ -1,0 +1,108 @@
+{
+  "id": "mythologie-hard-02",
+  "title": "Götter der anderen Welten",
+  "theme": "mythologie",
+  "difficulty": "hard",
+  "description": "Mythologie auf 1-Mio-Niveau — abseits des Olymps: Ägypten, Mesopotamien, Edda, Veda.",
+  "words": [
+    {
+      "answer": "AHURAMAZDA",
+      "clue": "Höchster Gott des Zoroastrismus, Schöpfer aller Guten Dinge",
+      "row": 6,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "AMATERASU",
+      "clue": "Japanische Sonnengöttin des Shintoismus",
+      "row": 0,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "MARDUK",
+      "clue": "Babylonischer Hauptgott, erlegt im Enuma Elisch die Urgöttin Tiamat",
+      "row": 5,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "LOKI",
+      "clue": "Listiger Begleiter Thors in der Edda, Vater des Fenriswolfs",
+      "row": 10,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "HEIMDALL",
+      "clue": "Wachgott der Asenbrücke Bifröst, bläst Gjallarhorn bei Ragnarök",
+      "row": 2,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "FREYJA",
+      "clue": "Vanin-Göttin der Liebe in der Edda, fährt im Katzenwagen",
+      "row": 2,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "ANUBIS",
+      "clue": "Schakalköpfiger Totengott Ägyptens, Wächter der Mumifizierung",
+      "row": 4,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "IDUNN",
+      "clue": "Edda-Göttin der goldenen Äpfel ewiger Jugend",
+      "row": 4,
+      "col": 10,
+      "direction": "across"
+    },
+    {
+      "answer": "THOTH",
+      "clue": "Ibisköpfiger ägypt. Gott der Schrift und Weisheit",
+      "row": 2,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "QUETZALCOATL",
+      "clue": "Aztekische Federschlange, Bringer der Schriftkunst",
+      "row": 0,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "HORUS",
+      "clue": "Falkenköpfiger Himmelsgott Ägyptens, Sohn von Isis und Osiris",
+      "row": 9,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "SHIVA",
+      "clue": "Zerstörer und Tänzer der Trimurti, mit Dreizack und Schlange",
+      "row": 4,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "INANNA",
+      "clue": "Sumerische Göttin der Liebe und des Krieges, akkad. Ischtar",
+      "row": 3,
+      "col": 14,
+      "direction": "down"
+    },
+    {
+      "answer": "VISHNU",
+      "clue": "Bewahrergott der hinduistischen Trimurti, reitet auf Garuda",
+      "row": 6,
+      "col": 0,
+      "direction": "down"
+    }
+  ],
+  "size": 15
+}

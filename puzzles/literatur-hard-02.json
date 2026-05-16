@@ -1,0 +1,108 @@
+{
+  "id": "literatur-hard-02",
+  "title": "Verborgene Klassiker",
+  "theme": "literatur",
+  "difficulty": "hard",
+  "description": "Weltliteratur auf 1-Mio-Niveau — Moderne, Nobelpreise, Romane, die nur die Leser kennen.",
+  "words": [
+    {
+      "answer": "MISHIMA",
+      "clue": "Japaner, vollzog 1970 nach gescheitertem Putsch Seppuku",
+      "row": 7,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "DOEBLIN",
+      "clue": "Verfasser von 'Berlin Alexanderplatz' (1929)",
+      "row": 2,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "BUECHNER",
+      "clue": "Hess. Frühvollendeter, 'Woyzeck' (Fragment) und 'Dantons Tod'",
+      "row": 4,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "KAWABATA",
+      "clue": "Japan. Nobelpreisträger 1968, 'Schneeland' (1948)",
+      "row": 6,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "BACHMANN",
+      "clue": "Ingeborg, 'Malina' (1971), Vorbild des nach ihr benannten Preises",
+      "row": 3,
+      "col": 3,
+      "direction": "down"
+    },
+    {
+      "answer": "BORGES",
+      "clue": "Argentinischer Erzähler, Sammlung 'Ficciones' (1944)",
+      "row": 2,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "HAMSUN",
+      "clue": "Norweger, 'Hunger' (1890), Nobelpreis 1920",
+      "row": 9,
+      "col": 8,
+      "direction": "across"
+    },
+    {
+      "answer": "ANDRIC",
+      "clue": "Bosn. Nobelpreisträger 1961, 'Die Brücke über die Drina'",
+      "row": 10,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "IBSEN",
+      "clue": "Norweger, 'Peer Gynt' (1867), Vater des modernen Dramas",
+      "row": 0,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "PESSOA",
+      "clue": "Portug. Lyriker, schrieb unter Heteronymen wie Alvaro de Campos",
+      "row": 13,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "MUSIL",
+      "clue": "Robert, Verfasser des unvollendeten 'Mann ohne Eigenschaften'",
+      "row": 0,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "BROCH",
+      "clue": "Hermann, 'Die Schlafwandler' (1931 bis 1932) und 'Der Tod des Vergil'",
+      "row": 5,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "LEM",
+      "clue": "Polnischer SF-Autor, dessen 'Solaris' Tarkowski 1972 verfilmte",
+      "row": 6,
+      "col": 11,
+      "direction": "across"
+    },
+    {
+      "answer": "BECKETT",
+      "clue": "Verfasser von 'Warten auf Godot' (1953), Nobelpreis 1969",
+      "row": 5,
+      "col": 0,
+      "direction": "down"
+    }
+  ],
+  "size": 14
+}

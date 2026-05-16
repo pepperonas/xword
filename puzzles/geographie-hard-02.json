@@ -1,0 +1,108 @@
+{
+  "id": "geographie-hard-02",
+  "title": "Vom Ende der Welt",
+  "theme": "geographie",
+  "difficulty": "hard",
+  "description": "Geographie auf 1-Mio-Niveau — Karawanenstädte, Polkappen-Halbinseln, Wüsten-Salzpfannen.",
+  "words": [
+    {
+      "answer": "TAKLAMAKAN",
+      "clue": "Wüste im Tarim-Becken in der chinesischen Region Xinjiang",
+      "row": 4,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "ASTRACHAN",
+      "clue": "Russ. Stadt an der Wolgamündung am Kaspischen Meer",
+      "row": 8,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "SACHALIN",
+      "clue": "Russ. Insel nördlich Hokkaidos, bis 1945 mit Japan geteilt",
+      "row": 10,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "KAMTSCHATKA",
+      "clue": "Sibirische Halbinsel mit den Vulkanen Klutschewskaja und Schiwelutsch",
+      "row": 5,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "NORDKAP",
+      "clue": "Klippe auf der Insel Magerøya in Norwegen, 71 Grad nördl. Breite",
+      "row": 13,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "BAJKAL",
+      "clue": "Tiefster Süßwassersee der Erde (1642 m), im südl. Sibirien",
+      "row": 6,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "TASMANIEN",
+      "clue": "Australische Insel südlich der Bass-Straße",
+      "row": 0,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "KARAKORUM",
+      "clue": "Hochgebirge zwischen Pakistan und China mit dem K2 als Hauptgipfel",
+      "row": 15,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "TIMBUKTU",
+      "clue": "Westafrikan. Karawanen- und Handelsstadt am Niger, UNESCO seit 1988",
+      "row": 3,
+      "col": 8,
+      "direction": "across"
+    },
+    {
+      "answer": "USHUAIA",
+      "clue": "Südlichste Stadt Argentiniens, am Beagle-Kanal in Feuerland",
+      "row": 12,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "VANUATU",
+      "clue": "Südpazifischer Inselstaat, bis 1980 Neue Hebriden",
+      "row": 6,
+      "col": 0,
+      "direction": "down"
+    },
+    {
+      "answer": "HOKKAIDO",
+      "clue": "Nördlichste der vier japanischen Hauptinseln",
+      "row": 9,
+      "col": 11,
+      "direction": "down"
+    },
+    {
+      "answer": "BUKHARA",
+      "clue": "Historische Oasenstadt der Seidenstraße im heutigen Usbekistan",
+      "row": 2,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "ANNAPURNA",
+      "clue": "Himalaya-Achttausender, dessen Erstbesteigung Herzog 1950 gelang",
+      "row": 1,
+      "col": 2,
+      "direction": "across"
+    }
+  ],
+  "size": 17
+}

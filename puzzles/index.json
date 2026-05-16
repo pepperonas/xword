@@ -209,6 +209,36 @@
       "description": "Musikgeschichte auf 1-Mio-Niveau — Komponisten, Werke, Anekdoten aus tausend Jahren Notation.",
       "wordCount": 14,
       "size": 17
+    },
+    {
+      "id": "geographie-hard-02",
+      "file": "geographie-hard-02.json",
+      "title": "Vom Ende der Welt",
+      "theme": "geographie",
+      "difficulty": "hard",
+      "description": "Geographie auf 1-Mio-Niveau — Karawanenstädte, Polkappen-Halbinseln, Wüsten-Salzpfannen.",
+      "wordCount": 14,
+      "size": 17
+    },
+    {
+      "id": "mythologie-hard-02",
+      "file": "mythologie-hard-02.json",
+      "title": "Götter der anderen Welten",
+      "theme": "mythologie",
+      "difficulty": "hard",
+      "description": "Mythologie auf 1-Mio-Niveau — abseits des Olymps: Ägypten, Mesopotamien, Edda, Veda.",
+      "wordCount": 14,
+      "size": 15
+    },
+    {
+      "id": "literatur-hard-02",
+      "file": "literatur-hard-02.json",
+      "title": "Verborgene Klassiker",
+      "theme": "literatur",
+      "difficulty": "hard",
+      "description": "Weltliteratur auf 1-Mio-Niveau — Moderne, Nobelpreise, Romane, die nur die Leser kennen.",
+      "wordCount": 14,
+      "size": 14
     }
   ]
 }
