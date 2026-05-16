@@ -1183,6 +1183,17 @@
 
   // Register service worker for offline play. Skipped on file:// and during dev.
   if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
+    // Remember whether the page was already controlled at boot. If it was,
+    // a controllerchange event later means a new SW has taken over (we
+    // bumped the cache version on the server). Reload once so the user
+    // sees the new JS instead of the old one stuck in memory.
+    const initialController = navigator.serviceWorker.controller;
+    let reloadedForUpdate = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (!initialController || reloadedForUpdate) return;
+      reloadedForUpdate = true;
+      window.location.reload();
+    });
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/sw.js').catch(err => console.warn('SW registration failed:', err));
     });
