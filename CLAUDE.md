@@ -162,7 +162,7 @@ Three quirks of virtual keyboards forced the input pipeline to be more elaborate
 `scripts/bump-version.sh` reads `git rev-list --count HEAD` and writes `version.json`:
 
 ```json
-{ "version": 43, "commit": "011824f", "date": "2026-05-16" }
+{ "version": 49, "commit": "9ec2ad4", "date": "2026-05-19" }
 ```
 
 The frontend fetches it on init and shows "Ver. N" in the masthead eyebrow. `version.json` is gitignored — always regenerated on deploy (the build script runs `bump-version.sh` first). The hover-title shows commit hash + date for debugging.
@@ -456,6 +456,11 @@ Total: 98 tests. Run all: `npm test`. Run only one suite: `node --test tests/ser
 - Never use `innerHTML` with interpolated user/data content — use `replaceChildren()` + `createElement()`. (Build-time security hook enforces this.)
 - The engine is stateless across puzzles — `destroy()` cleans up event listeners and timer; `app.js` always destroys the previous game before starting a new one.
 - Toggles (live-validation, hardcore) are mutually exclusive. The whole `.toggle-row` is clickable (label-delegation is wired in `bindToggleRow`).
+- **Puzzle descriptions** appear on selector cards and as game subtitle. Avoid:
+  - Same lead phrase across puzzles (e.g. "X auf 1-Mio-Niveau" was retired 2026-05-17 — see git history).
+  - Echoing the title verbatim (`title: "Aus den Schattenarchiven"` + `description: "Geschichte aus den Schattenarchiven — …"` reads twice in the UI).
+  - Difficulty-shaming language ("für Profis", "nur für Bildungsbürger") — describe content, not gatekeep audience.
+- **JSON file gotcha**: German typographic quotes `„…"` mix Unicode `U+201E` (opener) with ASCII `"` (closer) — the latter terminates the JSON string prematurely. Use straight `'...'` or escaped `\"...\"` inside clues. The build will fail loudly otherwise.
 
 ---
 
@@ -483,6 +488,33 @@ Total: 98 tests. Run all: `npm test`. Run only one suite: `node --test tests/ser
 For hard puzzles tagged as "1-Mio-Niveau", **read the next section** before committing — three concrete clue-quality failure modes that have already bit us once.
 
 Achievements that need cross-theme coverage (`Bücherwurm`, `Polyglott`, `Bibliothekar`) reflect new themes automatically because they read the manifest at request time.
+
+### Current catalogue (Theme × Difficulty, as of 2026-05-19)
+
+`✓` = one puzzle exists, `✓N` = N puzzles, `—` = gap. Pick gaps with most demand first.
+
+| Theme | Easy | Medium | Hard |
+|---|---|---|---|
+| allgemein | ✓2 | ✓ | — |
+| architektur | — | — | ✓2 |
+| astronomie | — | — | ✓ |
+| film | — | — | ✓2 |
+| geographie | ✓ | — | ✓2 |
+| geschichte | — | ✓ | ✓2 |
+| klassik | — | ✓ | ✓ |
+| kunst | — | — | ✓2 |
+| literatur | — | — | ✓2 |
+| medizin | — | — | ✓ |
+| musik | ✓ | — | ✓2 |
+| mythologie | ✓ | — | ✓2 |
+| natur | ✓ | — | ✓ |
+| philosophie | — | — | ✓ |
+| religion | — | — | ✓ |
+| sport | — | — | ✓2 |
+| tech | ✓ | ✓ | — |
+| wissenschaft | — | ✓ | ✓2 |
+
+Onboarding is still hard-heavy. Biggest gaps to fill for a smoother ramp: **Easy** in geschichte, klassik, kunst, philosophie, sport, wissenschaft — those themes hit straight to Hard.
 
 ---
 
