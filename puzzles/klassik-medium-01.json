@@ -1,0 +1,108 @@
+{
+  "id": "klassik-medium-01",
+  "title": "Klassik zum Einstieg",
+  "theme": "klassik",
+  "difficulty": "medium",
+  "description": "Antike, Epochen, Dichter — die Schulbildung in einem Rätsel.",
+  "words": [
+    {
+      "answer": "ORAKEL",
+      "clue": "Antike Weissagungsstätte, berühmt in Delphi",
+      "row": 8,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "DANTE",
+      "clue": "Italiener mit der Göttlichen Komödie",
+      "row": 7,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "THEATER",
+      "clue": "Antike Aufführungsstätte im Halbrund",
+      "row": 6,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "TRAGOEDIE",
+      "clue": "Ernstes Drama mit unglücklichem Ausgang (UE und OE)",
+      "row": 4,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "LATEIN",
+      "clue": "Sprache der alten Römer",
+      "row": 4,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "BRECHT",
+      "clue": "Verfasser von 'Mutter Courage und ihre Kinder'",
+      "row": 12,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "ZENON",
+      "clue": "Stoiker des 3. Jh. v. Chr.",
+      "row": 0,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "LESSING",
+      "clue": "Aufklärer und Verfasser von 'Nathan der Weise'",
+      "row": 4,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "SPARTA",
+      "clue": "Kriegerische Polis im Peloponnes",
+      "row": 8,
+      "col": 14,
+      "direction": "down"
+    },
+    {
+      "answer": "HERDER",
+      "clue": "Sammler von Volksliedern, Wegbereiter des Sturm und Drang",
+      "row": 12,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "AENEIS",
+      "clue": "Vergils römisches Nationalepos",
+      "row": 2,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "ATHEN",
+      "clue": "Polis des Sokrates",
+      "row": 6,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "MUSEN",
+      "clue": "Neun Töchter der Mnemosyne, Schutzgöttinnen der Künste",
+      "row": 0,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "ILIAS",
+      "clue": "Homers Epos vom Trojanischen Krieg",
+      "row": 7,
+      "col": 0,
+      "direction": "across"
+    }
+  ],
+  "size": 15
+}

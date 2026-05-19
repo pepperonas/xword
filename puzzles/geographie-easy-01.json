@@ -1,0 +1,108 @@
+{
+  "id": "geographie-easy-01",
+  "title": "Die Welt grob umrissen",
+  "theme": "geographie",
+  "difficulty": "easy",
+  "description": "Hauptstädte, Flüsse, Inseln — Geographie aus dem Schulatlas.",
+  "words": [
+    {
+      "answer": "LONDON",
+      "clue": "Hauptstadt Großbritanniens",
+      "row": 7,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "TUNDRA",
+      "clue": "Baumlose Landschaft des hohen Nordens",
+      "row": 4,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "BERLIN",
+      "clue": "Hauptstadt Deutschlands",
+      "row": 2,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "AMAZONAS",
+      "clue": "Strom Südamerikas durch den Regenwald",
+      "row": 3,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "AFRIKA",
+      "clue": "Kontinent, durch den der Nil fließt",
+      "row": 9,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "TOKIO",
+      "clue": "Hauptstadt Japans",
+      "row": 7,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "PARIS",
+      "clue": "Hauptstadt Frankreichs",
+      "row": 10,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "KRETA",
+      "clue": "Größte griechische Insel",
+      "row": 5,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "WIEN",
+      "clue": "Hauptstadt Österreichs",
+      "row": 3,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "MOSKAU",
+      "clue": "Hauptstadt Russlands",
+      "row": 2,
+      "col": 0,
+      "direction": "down"
+    },
+    {
+      "answer": "RUHR",
+      "clue": "Nebenfluss des Rheins, Namensgeber des Reviers",
+      "row": 9,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "ELBE",
+      "clue": "Strom von Tschechien zur Nordsee",
+      "row": 2,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "ROM",
+      "clue": "Hauptstadt Italiens",
+      "row": 4,
+      "col": 8,
+      "direction": "across"
+    },
+    {
+      "answer": "NIL",
+      "clue": "Längster Strom der Erde, mündet in Ägypten",
+      "row": 0,
+      "col": 7,
+      "direction": "down"
+    }
+  ],
+  "size": 13
+}

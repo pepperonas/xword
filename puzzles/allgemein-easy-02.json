@@ -1,0 +1,108 @@
+{
+  "id": "allgemein-easy-02",
+  "title": "Buntes Allerlei",
+  "theme": "allgemein",
+  "difficulty": "easy",
+  "description": "Bekannte Begriffe aus Natur, Alltag und Wissen — fürs entspannte Reinkommen.",
+  "words": [
+    {
+      "answer": "TULPE",
+      "clue": "Frühlingsblume aus Holland",
+      "row": 6,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "BLITZ",
+      "clue": "Elektrische Entladung im Gewitter",
+      "row": 8,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "BIRNE",
+      "clue": "Obst mit dem dicken Bauch unten",
+      "row": 10,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "TIGER",
+      "clue": "Gestreifte Raubkatze",
+      "row": 8,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "ATLAS",
+      "clue": "Buch mit Landkarten",
+      "row": 6,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "HONIG",
+      "clue": "Was die Biene aus Nektar macht",
+      "row": 7,
+      "col": 3,
+      "direction": "down"
+    },
+    {
+      "answer": "ECHO",
+      "clue": "Schall, der von einer Felswand zurückkommt",
+      "row": 7,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "AHORN",
+      "clue": "Baum mit der typischen sieben­zackigen Blattform",
+      "row": 12,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "SONNE",
+      "clue": "Der Stern, um den die Erde kreist",
+      "row": 3,
+      "col": 1,
+      "direction": "down"
+    },
+    {
+      "answer": "LOEWE",
+      "clue": "König der Tiere",
+      "row": 4,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "KAFFEE",
+      "clue": "Schwarzes Morgengetränk aus gerösteten Bohnen",
+      "row": 0,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "KAMEL",
+      "clue": "Wüstentier mit ein oder zwei Höckern",
+      "row": 2,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "KOMET",
+      "clue": "Schweifstern am Himmel",
+      "row": 2,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "SCHACH",
+      "clue": "Königsspiel auf 64 Feldern",
+      "row": 1,
+      "col": 1,
+      "direction": "across"
+    }
+  ],
+  "size": 13
+}

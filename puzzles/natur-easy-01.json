@@ -1,0 +1,108 @@
+{
+  "id": "natur-easy-01",
+  "title": "Tiere & Pflanzen",
+  "theme": "natur",
+  "difficulty": "easy",
+  "description": "Bekannte Lebewesen aus Wald, Meer und Wüste — der freundliche Einstieg.",
+  "words": [
+    {
+      "answer": "KORALLE",
+      "clue": "Kalkbildner im warmen Riff",
+      "row": 2,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "AAL",
+      "clue": "Schlangenförmiger Wanderfisch",
+      "row": 6,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "KIWI",
+      "clue": "Flugunfähiger Vogel Neuseelands",
+      "row": 2,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "KAKTUS",
+      "clue": "Stachelpflanze der Wüste",
+      "row": 5,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "BAMBUS",
+      "clue": "Schnellwachsendes Süßgras, Lieblingsspeise des Pandas",
+      "row": 9,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "LINDE",
+      "clue": "Baum mit duftenden Blüten im Sommer",
+      "row": 7,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "DELFIN",
+      "clue": "Schlauer Meeressäuger mit Schnabel",
+      "row": 7,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "EICHE",
+      "clue": "Mächtiger Baum mit Eicheln",
+      "row": 1,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "LILIE",
+      "clue": "Schlanke Blume, oft weiß, in Vasen beliebt",
+      "row": 9,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "HASE",
+      "clue": "Langohriger Hopser im Feld",
+      "row": 4,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "ROBBE",
+      "clue": "Pelziger Meeressäuger an der Küste",
+      "row": 6,
+      "col": 0,
+      "direction": "down"
+    },
+    {
+      "answer": "ELCH",
+      "clue": "Größter Hirsch des Nordens",
+      "row": 4,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "FUCHS",
+      "clue": "Roter Wald-Räuber, sprichwörtlich schlau",
+      "row": 0,
+      "col": 11,
+      "direction": "down"
+    },
+    {
+      "answer": "ZEDER",
+      "clue": "Großer Nadelbaum aus dem Libanon",
+      "row": 8,
+      "col": 11,
+      "direction": "down"
+    }
+  ],
+  "size": 13
+}

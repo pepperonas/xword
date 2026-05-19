@@ -1,0 +1,108 @@
+{
+  "id": "mythologie-easy-01",
+  "title": "Die griechischen Götter",
+  "theme": "mythologie",
+  "difficulty": "easy",
+  "description": "Wer wohnt auf dem Olymp und wer regiert die Unterwelt — die bekannten Namen.",
+  "words": [
+    {
+      "answer": "IKARUS",
+      "clue": "Junge mit den Wachsflügeln, der zu hoch flog",
+      "row": 0,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "HERMES",
+      "clue": "Götterbote mit Flügelschuhen",
+      "row": 3,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "POSEIDON",
+      "clue": "Meeresgott mit Dreizack",
+      "row": 0,
+      "col": 11,
+      "direction": "down"
+    },
+    {
+      "answer": "ZYKLOP",
+      "clue": "Einäugiger Riese aus der Odyssee",
+      "row": 1,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "DIONYSOS",
+      "clue": "Gott des Weins und der Trauben",
+      "row": 5,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "EROS",
+      "clue": "Liebesgott mit Pfeil und Bogen",
+      "row": 3,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "ATHENE",
+      "clue": "Göttin der Weisheit",
+      "row": 7,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "HADES",
+      "clue": "Gott der Unterwelt",
+      "row": 3,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "TROJA",
+      "clue": "Stadt, die zehn Jahre belagert wurde",
+      "row": 7,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "ZEUS",
+      "clue": "Göttervater auf dem Olymp",
+      "row": 0,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "TITAN",
+      "clue": "Vorgängergeschlecht der olympischen Götter",
+      "row": 11,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "HERA",
+      "clue": "Gattin des Zeus",
+      "row": 0,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "APOLLON",
+      "clue": "Gott der Sonne und der Musen",
+      "row": 9,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "ARES",
+      "clue": "Gott des Krieges",
+      "row": 1,
+      "col": 0,
+      "direction": "across"
+    }
+  ],
+  "size": 13
+}

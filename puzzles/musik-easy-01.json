@@ -1,0 +1,108 @@
+{
+  "id": "musik-easy-01",
+  "title": "Töne & Tasten",
+  "theme": "musik",
+  "difficulty": "easy",
+  "description": "Instrumente, Stilrichtungen, Grundbegriffe — Musik aus der Allgemeinbildung.",
+  "words": [
+    {
+      "answer": "GITARRE",
+      "clue": "Sechssaitige Begleitung",
+      "row": 3,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "KLAVIER",
+      "clue": "Großes Tasteninstrument",
+      "row": 6,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "ROCK",
+      "clue": "Lautes Gitarrengenre der 60er Jahre",
+      "row": 8,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "FLOETE",
+      "clue": "Hohles Blasrohr (Umlaut ausgeschrieben)",
+      "row": 9,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "WALZER",
+      "clue": "Wiener Tanz im Drei-Viertel-Takt",
+      "row": 1,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "TANGO",
+      "clue": "Argentinischer Schreittanz",
+      "row": 3,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "OPER",
+      "clue": "Bühnenstück mit Gesang und Orchester",
+      "row": 9,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "BAND",
+      "clue": "Kleine Musikgruppe",
+      "row": 2,
+      "col": 8,
+      "direction": "across"
+    },
+    {
+      "answer": "LIED",
+      "clue": "Kurzes Vokalwerk mit Strophen",
+      "row": 11,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "CHOR",
+      "clue": "Gruppe gemeinsam singender Stimmen",
+      "row": 8,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "POP",
+      "clue": "Allgegenwärtige moderne Unterhaltungsmusik",
+      "row": 10,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "JAZZ",
+      "clue": "Improvisierte Musik aus New Orleans",
+      "row": 4,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "TAKT",
+      "clue": "Grundeinheit des musikalischen Rhythmus",
+      "row": 0,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "TROMMEL",
+      "clue": "Schlaginstrument mit gespannter Membran",
+      "row": 0,
+      "col": 2,
+      "direction": "across"
+    }
+  ],
+  "size": 13
+}

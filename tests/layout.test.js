@@ -312,6 +312,14 @@ describe('shipped puzzles re-layout cleanly', () => {
     ['medizin-hard-01.json',      13],
     ['astronomie-hard-01.json',   13],
     ['sport-hard-02.json',        13],
+    ['allgemein-easy-02.json',    13],
+    ['mythologie-easy-01.json',   13],
+    ['natur-easy-01.json',        13],
+    ['geographie-easy-01.json',   13],
+    ['musik-easy-01.json',        13],
+    ['klassik-medium-01.json',    13],
+    ['wissenschaft-medium-01.json', 13],
+    ['geschichte-medium-01.json', 13],
   ];
 
   for (const [file, minPlaced] of cases) {

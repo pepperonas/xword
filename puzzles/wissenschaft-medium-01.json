@@ -1,0 +1,108 @@
+{
+  "id": "wissenschaft-medium-01",
+  "title": "Wissen mittlerer Tiefe",
+  "theme": "wissenschaft",
+  "difficulty": "medium",
+  "description": "Naturwissenschaft aus der Oberstufe — Atome, Zellen, Strahlen, Planeten.",
+  "words": [
+    {
+      "answer": "LICHT",
+      "clue": "Elektromagnetische Welle im sichtbaren Bereich",
+      "row": 8,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "VITAMIN",
+      "clue": "Lebenswichtiger Mikrostoff aus der Nahrung",
+      "row": 6,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "ROENTGEN",
+      "clue": "Strahlen, die Knochen sichtbar machen",
+      "row": 12,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "IMPFUNG",
+      "clue": "Schutz vor Krankheit durch geschwächten Erreger",
+      "row": 6,
+      "col": 11,
+      "direction": "down"
+    },
+    {
+      "answer": "MOLEKUEL",
+      "clue": "Verbindung mehrerer Atome (Umlaut ausgeschrieben)",
+      "row": 1,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "BAKTERIUM",
+      "clue": "Einzeller ohne Zellkern",
+      "row": 10,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "PLANET",
+      "clue": "Himmelskörper, der einen Stern umkreist",
+      "row": 3,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "ZELLE",
+      "clue": "Kleinste lebende Einheit eines Organismus",
+      "row": 7,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "ENERGIE",
+      "clue": "Was Arbeit verrichten kann",
+      "row": 1,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "MAGNET",
+      "clue": "Körper mit Nord- und Südpol",
+      "row": 0,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "LASER",
+      "clue": "Verstärktes Licht in nur einer Wellenlänge",
+      "row": 9,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "DNA",
+      "clue": "Erbsubstanz mit Doppelhelix-Struktur",
+      "row": 11,
+      "col": 13,
+      "direction": "down"
+    },
+    {
+      "answer": "VIRUS",
+      "clue": "Genetisches Paket ohne eigenen Stoffwechsel",
+      "row": 13,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "ATOM",
+      "clue": "Kleinster Baustein eines chemischen Elements",
+      "row": 1,
+      "col": 7,
+      "direction": "across"
+    }
+  ],
+  "size": 14
+}

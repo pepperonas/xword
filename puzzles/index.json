@@ -299,6 +299,86 @@
       "description": "Sportgeschichte abseits des Stammtischs — Olympia-Legenden, Weltrekorde, Anekdoten aus 120 Jahren Wettkampf.",
       "wordCount": 14,
       "size": 16
+    },
+    {
+      "id": "allgemein-easy-02",
+      "file": "allgemein-easy-02.json",
+      "title": "Buntes Allerlei",
+      "theme": "allgemein",
+      "difficulty": "easy",
+      "description": "Bekannte Begriffe aus Natur, Alltag und Wissen — fürs entspannte Reinkommen.",
+      "wordCount": 14,
+      "size": 13
+    },
+    {
+      "id": "mythologie-easy-01",
+      "file": "mythologie-easy-01.json",
+      "title": "Die griechischen Götter",
+      "theme": "mythologie",
+      "difficulty": "easy",
+      "description": "Wer wohnt auf dem Olymp und wer regiert die Unterwelt — die bekannten Namen.",
+      "wordCount": 14,
+      "size": 13
+    },
+    {
+      "id": "natur-easy-01",
+      "file": "natur-easy-01.json",
+      "title": "Tiere & Pflanzen",
+      "theme": "natur",
+      "difficulty": "easy",
+      "description": "Bekannte Lebewesen aus Wald, Meer und Wüste — der freundliche Einstieg.",
+      "wordCount": 14,
+      "size": 13
+    },
+    {
+      "id": "geographie-easy-01",
+      "file": "geographie-easy-01.json",
+      "title": "Die Welt grob umrissen",
+      "theme": "geographie",
+      "difficulty": "easy",
+      "description": "Hauptstädte, Flüsse, Inseln — Geographie aus dem Schulatlas.",
+      "wordCount": 14,
+      "size": 13
+    },
+    {
+      "id": "musik-easy-01",
+      "file": "musik-easy-01.json",
+      "title": "Töne & Tasten",
+      "theme": "musik",
+      "difficulty": "easy",
+      "description": "Instrumente, Stilrichtungen, Grundbegriffe — Musik aus der Allgemeinbildung.",
+      "wordCount": 14,
+      "size": 13
+    },
+    {
+      "id": "klassik-medium-01",
+      "file": "klassik-medium-01.json",
+      "title": "Klassik zum Einstieg",
+      "theme": "klassik",
+      "difficulty": "medium",
+      "description": "Antike, Epochen, Dichter — die Schulbildung in einem Rätsel.",
+      "wordCount": 14,
+      "size": 15
+    },
+    {
+      "id": "wissenschaft-medium-01",
+      "file": "wissenschaft-medium-01.json",
+      "title": "Wissen mittlerer Tiefe",
+      "theme": "wissenschaft",
+      "difficulty": "medium",
+      "description": "Naturwissenschaft aus der Oberstufe — Atome, Zellen, Strahlen, Planeten.",
+      "wordCount": 14,
+      "size": 14
+    },
+    {
+      "id": "geschichte-medium-01",
+      "file": "geschichte-medium-01.json",
+      "title": "Geschichte mittlerer Stufe",
+      "theme": "geschichte",
+      "difficulty": "medium",
+      "description": "Persönlichkeiten und Epochen aus dem Schulbuch — vom Mittelalter bis ins 19. Jahrhundert.",
+      "wordCount": 14,
+      "size": 16
     }
   ]
 }

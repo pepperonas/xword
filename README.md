@@ -68,7 +68,7 @@
 - 📱 **App teilen via QR-Code** — Im User-Dropdown öffnet „App teilen" einen Dialog mit scanbarem QR-Code auf die Landing Page, kopierbare URL und Web-Share-API-Button (Mobile)
 - ⌨️ **Mobile-Keyboard-fest** — iOS-Safari + Samsung-S24-Ultra-Kompatibilität: synchroner Focus im User-Gesture, Sentinel-Char gegen leeren Backspace, 60-ms-Action-Dedupe gegen Doppelevents
 - 🌗 **Dark Mode** mit **maximaler Lesbarkeit** — Letter Cells bleiben hell wie ein Papier auf dunklem Tisch, aktive Zelle in sattem Blau für unmissverständlichen Cursor-Kontrast
-- 🧩 **30 kuratierte Rätsel** in drei Schwierigkeiten und 18 Themen — von Tech, Allgemeinwissen und Klassischer Bildung über Mythologie, Wissenschaft, Kunst, Geographie, Architektur, Sport, Musik, Geschichte, Film und Natur bis Philosophie, Religion, Literatur, Medizin und Astronomie. **15 davon im Eminenz-Tier** — Daten, Werke, Schauplätze, wie man sie nur aus dem Quellenstudium kennt
+- 🧩 **38 kuratierte Rätsel** in drei Schwierigkeiten (7 Easy · 5 Medium · 26 Hard) und 18 Themen — von Tech, Allgemeinwissen und Klassischer Bildung über Mythologie, Wissenschaft, Kunst, Geographie, Architektur, Sport, Musik, Geschichte, Film und Natur bis Philosophie, Religion, Literatur, Medizin und Astronomie. **15 davon im Eminenz-Tier** — Daten, Werke, Schauplätze, wie man sie nur aus dem Quellenstudium kennt
 - 🤖 **Auto-Layout-Algorithmus** — du lieferst Wörter + Hinweise, der Algorithmus baut das Gitter (Standard-Kreuzwort-Regeln, multi-crossing-bevorzugend, gleichgerichtete Wort-Überlappung verhindert)
 - 🔐 **Google-Login** (optional) — OAuth 2.0 mit serverseitigem Auth-Code-Flow, HttpOnly-Session-Cookies
 - 💾 **Spielstand-Sync** pro Nutzer — jeder Tastenanschlag wird live gesichert, `sendBeacon`-Fallback beim Tab-Close
@@ -183,7 +183,7 @@ xword/
 │   └── musik-hard-01.json      Pro Rätsel ein JSON mit Wörtern + Hinweisen + Layout
 │
 ├── tests/
-│   ├── layout.test.js          45 Tests für den Layout-Algorithmus (inkl. Regression je Puzzle)
+│   ├── layout.test.js          53 Tests für den Layout-Algorithmus (inkl. Regression je Puzzle)
 │   ├── input-dedupe.test.js    11 Tests für den Mobile-Keyboard-Dedupe
 │   └── server/                 34 Tests für Backend (session, db, rate-limit, achievements)
 │
@@ -316,7 +316,7 @@ node --test tests/input-dedupe.test.js   # nur Dedupe
 node --test tests/server/            # nur Backend
 ```
 
-**90 Unit-Tests** (45 Layout + 11 Input-Dedupe + 34 Backend):
+**98 Unit-Tests** (53 Layout + 11 Input-Dedupe + 34 Backend):
 
 **Layout** (`tests/layout.test.js`):
 - `normaliseAnswer` — Umlaute, Filter, leere Eingaben
