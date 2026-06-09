@@ -1,0 +1,108 @@
+{
+  "id": "geschichte-hard-03",
+  "title": "Aus den Akten des Kalten Krieges",
+  "theme": "geschichte",
+  "difficulty": "hard",
+  "description": "Vom Marshallplan bis zur Perestroika — Schauplätze und Akteure der Blockkonfrontation.",
+  "words": [
+    {
+      "answer": "CHECKPOINT",
+      "clue": "'… Charlie' — alliierter Grenzübergang an der Friedrichstraße",
+      "row": 12,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "GORBATSCHOW",
+      "clue": "Letzter Generalsekretär der KPdSU, Glasnost und Perestroika",
+      "row": 5,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "MARSHALL",
+      "clue": "European Recovery Program, benannt nach Trumans Außenminister",
+      "row": 9,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "HONECKER",
+      "clue": "Erich …, SED-Generalsekretär 1971-1989",
+      "row": 14,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "KUBAKRISE",
+      "clue": "Oktober 1962, sowjetische Mittelstreckenraketen vor Floridas Küste",
+      "row": 2,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "AIRLIFT",
+      "clue": "Berliner Luftbrücke 1948-49 während der sowjetischen Blockade",
+      "row": 6,
+      "col": 13,
+      "direction": "down"
+    },
+    {
+      "answer": "NATO",
+      "clue": "Westliches Militärbündnis, 1949 in Washington gegründet",
+      "row": 6,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "SUEZKRISE",
+      "clue": "1956, Nasser verstaatlicht den Kanal, britisch-französisch-israelische Intervention",
+      "row": 3,
+      "col": 8,
+      "direction": "across"
+    },
+    {
+      "answer": "BREZHNEV",
+      "clue": "Leonid …, KPdSU-Generalsekretär 1964-1982",
+      "row": 0,
+      "col": 11,
+      "direction": "down"
+    },
+    {
+      "answer": "ROSENBERG",
+      "clue": "Julius und Ethel — 1953 in den USA wegen Atomspionage hingerichtet",
+      "row": 2,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "MCCARTHY",
+      "clue": "US-Senator, antikommunistische Anhörungen der frühen 1950er Jahre",
+      "row": 2,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "ULBRICHT",
+      "clue": "Walter …, DDR-Staatsratsvorsitzender bis 1971",
+      "row": 0,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "BERLINMAUER",
+      "clue": "Errichtet ab dem 13. August 1961, gefallen am 9. November 1989",
+      "row": 2,
+      "col": 16,
+      "direction": "down"
+    },
+    {
+      "answer": "STASI",
+      "clue": "DDR-Ministerium für Staatssicherheit unter Erich Mielke",
+      "row": 4,
+      "col": 1,
+      "direction": "across"
+    }
+  ],
+  "size": 17
+}

@@ -1,0 +1,108 @@
+{
+  "id": "kunst-hard-03",
+  "title": "Aus den Galerien der Moderne",
+  "theme": "kunst",
+  "difficulty": "hard",
+  "description": "Kunst des 20. Jahrhunderts — Kubismus, Surrealismus, Abstraktion, Pop Art.",
+  "words": [
+    {
+      "answer": "MALEWITSCH",
+      "clue": "Kasimir …, 'Schwarzes Quadrat auf weißem Grund' 1915",
+      "row": 6,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "BASQUIAT",
+      "clue": "Jean-Michel …, New Yorker Underground der 80er — Kronen und Skelette",
+      "row": 1,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "POLLOCK",
+      "clue": "Jackson …, Drip Painting — Farben aus der Dose auf die Leinwand am Boden",
+      "row": 3,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "BRAQUE",
+      "clue": "Georges …, Mitbegründer des Kubismus an der Seite Picassos",
+      "row": 2,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "BEUYS",
+      "clue": "Joseph …, 'Jeder Mensch ist ein Künstler' — Fettecke und Filzanzug",
+      "row": 0,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "MAGRITTE",
+      "clue": "René …, belgischer Surrealist — 'Dies ist keine Pfeife'",
+      "row": 6,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "BECKMANN",
+      "clue": "Max …, deutscher Expressionist — Triptychon-Maler des 20. Jh.",
+      "row": 13,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "CHAGALL",
+      "clue": "Marc …, weißrussisch-französisch, schwebende Liebende und blaue Geigen",
+      "row": 6,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "MIRO",
+      "clue": "Joan …, katalanischer Surrealist mit organischen Formen und Primärfarben",
+      "row": 4,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "DUCHAMP",
+      "clue": "Marcel …, 'Fountain' — ein signiertes Urinal von 1917 als Ready-made",
+      "row": 10,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "ROTHKO",
+      "clue": "Mark …, Color Field — meditative rechteckige Farbflächen",
+      "row": 11,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "BACON",
+      "clue": "Francis …, verzerrte Porträts — die Schreiende-Papst-Serie",
+      "row": 8,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "MONDRIAN",
+      "clue": "Piet …, Neoplastizismus mit Rot-Gelb-Blau-Rastern",
+      "row": 1,
+      "col": 13,
+      "direction": "down"
+    },
+    {
+      "answer": "KLEE",
+      "clue": "Paul …, Bauhaus-Lehrer — 'Senecio', Twittering Machine",
+      "row": 12,
+      "col": 9,
+      "direction": "across"
+    }
+  ],
+  "size": 14
+}

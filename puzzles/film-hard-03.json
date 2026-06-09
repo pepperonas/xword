@@ -1,0 +1,108 @@
+{
+  "id": "film-hard-03",
+  "title": "Aus den Cahiers du Cinéma",
+  "theme": "film",
+  "difficulty": "hard",
+  "description": "Nouvelle Vague und französisches Autorenkino — Regisseure, Theoretiker, ikonische Werke.",
+  "words": [
+    {
+      "answer": "JETEE",
+      "clue": "'La …' — Chris Markers Fotoroman-Film von 1962",
+      "row": 3,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "TRUFFAUT",
+      "clue": "François …, 'Sie küssten und sie schlugen ihn' 1959",
+      "row": 5,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "MELVILLE",
+      "clue": "Jean-Pierre …, 'Le Samouraï' — stilistischer Pate der Nouvelle Vague",
+      "row": 7,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "RESNAIS",
+      "clue": "Alain …, 'Letztes Jahr in Marienbad' 1961",
+      "row": 2,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "RIVETTE",
+      "clue": "Jacques …, 'Céline und Julie fahren Boot' 1974",
+      "row": 4,
+      "col": 13,
+      "direction": "down"
+    },
+    {
+      "answer": "MOREAU",
+      "clue": "Jeanne …, Schauspielerin in Truffauts 'Jules und Jim'",
+      "row": 1,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "CHABROL",
+      "clue": "Claude …, Krimi-affiner Regisseur der Nouvelle Vague",
+      "row": 2,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "VARDA",
+      "clue": "Agnès …, 'Cléo de 5 à 7' — einzige Frau im Zentrum der Nouvelle Vague",
+      "row": 2,
+      "col": 8,
+      "direction": "across"
+    },
+    {
+      "answer": "ROHMER",
+      "clue": "Eric …, Moralische Erzählungen, 'Meine Nacht bei Maud'",
+      "row": 0,
+      "col": 1,
+      "direction": "down"
+    },
+    {
+      "answer": "MARKER",
+      "clue": "Chris …, Essayist und Dokumentarist neben der Nouvelle Vague",
+      "row": 7,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "BELMONDO",
+      "clue": "Jean-Paul …, Hauptdarsteller in 'Außer Atem'",
+      "row": 11,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "AUTEUR",
+      "clue": "Politique des …s — der Regisseur als alleiniger Schöpfer des Films",
+      "row": 9,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "BAZIN",
+      "clue": "André …, Theoretiker und Mitgründer der Cahiers du Cinéma",
+      "row": 8,
+      "col": 1,
+      "direction": "down"
+    },
+    {
+      "answer": "DEMY",
+      "clue": "Jacques …, 'Die Regenschirme von Cherbourg' 1964",
+      "row": 9,
+      "col": 8,
+      "direction": "down"
+    }
+  ],
+  "size": 14
+}

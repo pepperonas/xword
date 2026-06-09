@@ -459,6 +459,76 @@
       "description": "Genetik und Molekularbiologie — von den Vererbungsgesetzen bis zur Gen-Schere.",
       "wordCount": 14,
       "size": 15
+    },
+    {
+      "id": "mythologie-hard-03",
+      "file": "mythologie-hard-03.json",
+      "title": "Aus den Sagen des Nordens",
+      "theme": "mythologie",
+      "difficulty": "hard",
+      "description": "Edda und germanische Sagen — Asen, Wanen, Weltenbaum, Götterdämmerung.",
+      "wordCount": 14,
+      "size": 15
+    },
+    {
+      "id": "literatur-hard-03",
+      "file": "literatur-hard-03.json",
+      "title": "Aus den Petersburger Salons",
+      "theme": "literatur",
+      "difficulty": "hard",
+      "description": "Russische Literatur des 19. Jahrhunderts — Autoren, Romane, unsterbliche Figuren.",
+      "wordCount": 14,
+      "size": 17
+    },
+    {
+      "id": "geschichte-hard-03",
+      "file": "geschichte-hard-03.json",
+      "title": "Aus den Akten des Kalten Krieges",
+      "theme": "geschichte",
+      "difficulty": "hard",
+      "description": "Vom Marshallplan bis zur Perestroika — Schauplätze und Akteure der Blockkonfrontation.",
+      "wordCount": 14,
+      "size": 17
+    },
+    {
+      "id": "film-hard-03",
+      "file": "film-hard-03.json",
+      "title": "Aus den Cahiers du Cinéma",
+      "theme": "film",
+      "difficulty": "hard",
+      "description": "Nouvelle Vague und französisches Autorenkino — Regisseure, Theoretiker, ikonische Werke.",
+      "wordCount": 14,
+      "size": 14
+    },
+    {
+      "id": "kunst-hard-03",
+      "file": "kunst-hard-03.json",
+      "title": "Aus den Galerien der Moderne",
+      "theme": "kunst",
+      "difficulty": "hard",
+      "description": "Kunst des 20. Jahrhunderts — Kubismus, Surrealismus, Abstraktion, Pop Art.",
+      "wordCount": 14,
+      "size": 14
+    },
+    {
+      "id": "musik-hard-03",
+      "file": "musik-hard-03.json",
+      "title": "Aus den Logenplätzen",
+      "theme": "musik",
+      "difficulty": "hard",
+      "description": "Opernwelt — Komponisten, Werke, Bühnen und Stimmen vom Belcanto bis zum Verismo.",
+      "wordCount": 14,
+      "size": 15
+    },
+    {
+      "id": "astronomie-hard-02",
+      "file": "astronomie-hard-02.json",
+      "title": "Aus dem Observatorium",
+      "theme": "astronomie",
+      "difficulty": "hard",
+      "description": "Sterne, Sternbilder, Galaxien, Phänomene — am Okular und im Bahnplan.",
+      "wordCount": 14,
+      "size": 15
     }
   ]
 }

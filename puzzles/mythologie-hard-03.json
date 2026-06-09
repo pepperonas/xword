@@ -1,0 +1,108 @@
+{
+  "id": "mythologie-hard-03",
+  "title": "Aus den Sagen des Nordens",
+  "theme": "mythologie",
+  "difficulty": "hard",
+  "description": "Edda und germanische Sagen — Asen, Wanen, Weltenbaum, Götterdämmerung.",
+  "words": [
+    {
+      "answer": "WALKUERE",
+      "clue": "Schlachtenjungfrau, bringt gefallene Krieger nach Walhalla",
+      "row": 4,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "BALDUR",
+      "clue": "Lichtgott der Asen, durch einen Mistelpfeil ermordet",
+      "row": 8,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "FENRIR",
+      "clue": "Riesiger Wolf, Sohn Lokis — verschlingt Odin in Ragnarök",
+      "row": 10,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "YGGDRASIL",
+      "clue": "Weltenesche, die alle neun Welten verbindet",
+      "row": 5,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "WALHALLA",
+      "clue": "Halle in Asgard, in die gefallene Krieger einziehen",
+      "row": 0,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "RAGNAROK",
+      "clue": "Götterdämmerung — Untergang der alten Götter im Endkampf",
+      "row": 7,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "SLEIPNIR",
+      "clue": "Odins achtbeiniges Pferd, von Loki geboren",
+      "row": 2,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "ASGARD",
+      "clue": "Wohnsitz der Asen-Götter, durch die Bifröst-Brücke erreichbar",
+      "row": 0,
+      "col": 3,
+      "direction": "down"
+    },
+    {
+      "answer": "BRAGI",
+      "clue": "Asen-Gott der Dichtkunst und Beredsamkeit, Sohn Odins",
+      "row": 9,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "BIFROEST",
+      "clue": "Regenbogenbrücke, die Midgard mit Asgard verbindet",
+      "row": 9,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "FREYR",
+      "clue": "Wanen-Gott der Fruchtbarkeit und des Sonnenscheins, Bruder Freyjas",
+      "row": 9,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "MJOLNIR",
+      "clue": "Thors Kriegshammer, von Zwergen geschmiedet",
+      "row": 1,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "ODIN",
+      "clue": "Einäugiger Anführer der Asen, Allvater",
+      "row": 9,
+      "col": 11,
+      "direction": "down"
+    },
+    {
+      "answer": "THOR",
+      "clue": "Donnergott der Asen, schwingt den Hammer Mjölnir",
+      "row": 9,
+      "col": 14,
+      "direction": "down"
+    }
+  ],
+  "size": 15
+}

@@ -1,0 +1,108 @@
+{
+  "id": "astronomie-hard-02",
+  "title": "Aus dem Observatorium",
+  "theme": "astronomie",
+  "difficulty": "hard",
+  "description": "Sterne, Sternbilder, Galaxien, Phänomene — am Okular und im Bahnplan.",
+  "words": [
+    {
+      "answer": "POLARIS",
+      "clue": "Polarstern an der Spitze des Kleinen Bären",
+      "row": 4,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "KASSIOPEIA",
+      "clue": "Zirkumpolares Sternbild in markanter W-Form",
+      "row": 0,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "ANDROMEDA",
+      "clue": "Mit bloßem Auge sichtbare Spiralgalaxie M31",
+      "row": 0,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "PLEJADEN",
+      "clue": "Offener Sternhaufen im Stier — das 'Siebengestirn'",
+      "row": 0,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "QUASAR",
+      "clue": "Aktiver Galaxienkern — ferne, extrem leuchtkräftige Lichtquelle",
+      "row": 9,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "PERIHEL",
+      "clue": "Sonnennächster Punkt einer Planetenbahn",
+      "row": 6,
+      "col": 8,
+      "direction": "across"
+    },
+    {
+      "answer": "NEBEL",
+      "clue": "Interstellare Wolke aus Gas und Staub",
+      "row": 3,
+      "col": 13,
+      "direction": "down"
+    },
+    {
+      "answer": "ANTARES",
+      "clue": "Roter Überriese im Skorpion — sein 'Herz'",
+      "row": 1,
+      "col": 8,
+      "direction": "across"
+    },
+    {
+      "answer": "SIRIUS",
+      "clue": "Hellster Stern am Nachthimmel, im Großen Hund",
+      "row": 9,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "PARSEC",
+      "clue": "Astronomische Entfernungseinheit, 3,26 Lichtjahre",
+      "row": 11,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "ORION",
+      "clue": "Wintersternbild mit Gürtel aus drei hellen Sternen",
+      "row": 1,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "PULSAR",
+      "clue": "Rotierender Neutronenstern mit gerichteter Strahlung",
+      "row": 8,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "HALEBOPP",
+      "clue": "Komet …, 1996/97 mit bloßem Auge sichtbar",
+      "row": 6,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "APHEL",
+      "clue": "Sonnenfernster Punkt einer Planetenbahn",
+      "row": 12,
+      "col": 1,
+      "direction": "across"
+    }
+  ],
+  "size": 15
+}

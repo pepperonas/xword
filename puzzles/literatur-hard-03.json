@@ -1,0 +1,108 @@
+{
+  "id": "literatur-hard-03",
+  "title": "Aus den Petersburger Salons",
+  "theme": "literatur",
+  "difficulty": "hard",
+  "description": "Russische Literatur des 19. Jahrhunderts — Autoren, Romane, unsterbliche Figuren.",
+  "words": [
+    {
+      "answer": "LERMONTOW",
+      "clue": "Michail J. — 'Ein Held unserer Zeit', wie Puschkin im Duell gefallen",
+      "row": 0,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "KARAMASOW",
+      "clue": "Familie aus Dmitri, Iwan und Aljoscha in Dostojewskis letztem Roman",
+      "row": 3,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "DOSTOJEWSKI",
+      "clue": "Fjodor M. — 'Schuld und Sühne', 'Die Brüder Karamasow'",
+      "row": 7,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "BAZAROW",
+      "clue": "Junger Nihilist in Turgenjews 'Väter und Söhne'",
+      "row": 2,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "IDIOT",
+      "clue": "Dostojewski-Roman um Fürst Myschkin, einen gutherzigen Epileptiker",
+      "row": 0,
+      "col": 13,
+      "direction": "down"
+    },
+    {
+      "answer": "TSCHECHOW",
+      "clue": "Arzt und Dramatiker — 'Die Möwe', 'Drei Schwestern', 'Onkel Wanja'",
+      "row": 6,
+      "col": 14,
+      "direction": "down"
+    },
+    {
+      "answer": "NATASCHA",
+      "clue": "Rostowa — junge Adlige im Zentrum von Tolstojs 'Krieg und Frieden'",
+      "row": 5,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "OBLOMOW",
+      "clue": "Titelheld in Gontscharows Roman über den lethargischen Gutsbesitzer",
+      "row": 13,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "PUSCHKIN",
+      "clue": "Alexander S. — Begründer der modernen russischen Literatur, im Duell gefallen",
+      "row": 1,
+      "col": 16,
+      "direction": "down"
+    },
+    {
+      "answer": "GOGOL",
+      "clue": "Ukrainisch-russischer Satiriker — 'Die toten Seelen', 'Der Mantel'",
+      "row": 0,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "TURGENJEW",
+      "clue": "Iwan S. — 'Väter und Söhne', porträtierte den Nihilisten Bazarow",
+      "row": 10,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "RASKOLNIKOW",
+      "clue": "Student und Doppelmörder in 'Schuld und Sühne'",
+      "row": 3,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "TOLSTOJ",
+      "clue": "Graf Lew Nikolajewitsch — 'Krieg und Frieden', 'Anna Karenina'",
+      "row": 1,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "ONEGIN",
+      "clue": "Titelheld in Puschkins Versroman über den blasierten Adligen",
+      "row": 5,
+      "col": 12,
+      "direction": "down"
+    }
+  ],
+  "size": 17
+}

@@ -71,7 +71,7 @@ Two valid puzzle JSON forms:
 1. **Pre-laid-out**: includes `size` and per-word `row/col/direction` (production)
 2. **Words only**: `[{ answer, clue }]` — `app.js` runs `XwordLayout.layout()` at load time (manual prototypes)
 
-Currently 46 shipped puzzles, 18 themes (tech, allgemein, klassik, mythologie, wissenschaft, kunst, geographie, architektur, sport, musik, geschichte, film, natur, literatur, philosophie, religion, medizin, astronomie), 3 difficulties (easy / medium / hard). Distribution: **7 easy + 5 medium + 34 hard** (8 puzzles added 2026-05-19 to flatten the onboarding curve, which had been 2/2/26 before; 8 MINT/software hard puzzles added 2026-06-09 — `tech-hard-01..05`, `wissenschaft-hard-03..05` — turning tech into a 5-puzzle hard tier with sub-themes Programming Theory / Systems / Algorithms / Crypto / Machine Learning, and giving wissenschaft a Math/Particle/Genetics triple). Fifteen of the hard puzzles are tagged as "1-Mio-Niveau" — clue density at the level of the top prize question on the German "Wer wird Millionär" quiz show: `literatur-hard-01`, `literatur-hard-02`, `geschichte-hard-02`, `wissenschaft-hard-02`, `philosophie-hard-01`, `kunst-hard-02`, `musik-hard-02`, `geographie-hard-02`, `mythologie-hard-02`, `film-hard-02`, `architektur-hard-02`, `religion-hard-01`, `medizin-hard-01`, `astronomie-hard-01`, `sport-hard-02`.
+Currently 53 shipped puzzles, 18 themes (tech, allgemein, klassik, mythologie, wissenschaft, kunst, geographie, architektur, sport, musik, geschichte, film, natur, literatur, philosophie, religion, medizin, astronomie), 3 difficulties (easy / medium / hard). Distribution: **7 easy + 5 medium + 41 hard** (8 puzzles added 2026-05-19 to flatten the onboarding curve, which had been 2/2/26 before; 8 MINT/software hard puzzles added 2026-06-09 — `tech-hard-01..05`, `wissenschaft-hard-03..05` — turning tech into a 5-puzzle hard tier and giving wissenschaft a Math/Particle/Genetics triple; 7 cultural hard puzzles added 2026-06-09 — `mythologie-hard-03` (Edda), `literatur-hard-03` (Russen 19. Jh), `geschichte-hard-03` (Kalter Krieg), `film-hard-03` (Nouvelle Vague), `kunst-hard-03` (Moderne 20. Jh), `musik-hard-03` (Oper), `astronomie-hard-02` (Sternbilder & Phänomene)). Fifteen of the hard puzzles are tagged as "1-Mio-Niveau" — clue density at the level of the top prize question on the German "Wer wird Millionär" quiz show: `literatur-hard-01`, `literatur-hard-02`, `geschichte-hard-02`, `wissenschaft-hard-02`, `philosophie-hard-01`, `kunst-hard-02`, `musik-hard-02`, `geographie-hard-02`, `mythologie-hard-02`, `film-hard-02`, `architektur-hard-02`, `religion-hard-01`, `medizin-hard-01`, `astronomie-hard-01`, `sport-hard-02`.
 
 ---
 
@@ -441,11 +441,11 @@ Validation tools:
 GitHub Actions (`.github/workflows/test.yml`) runs `npm test` on push to `main` and PRs. The README Tests-Badge points at the workflow.
 
 Tests live in three groups:
-- `tests/layout.test.js` — layout algorithm coverage (61 tests, browser-loadable module via globalThis)
+- `tests/layout.test.js` — layout algorithm coverage (68 tests, browser-loadable module via globalThis)
 - `tests/input-dedupe.test.js` — virtual keyboard double-fire regression suite (11 tests, deterministic via injectable timestamp)
 - `tests/server/*.test.js` — backend coverage (34 tests, dynamic `import()` of ES modules into CommonJS test files): session, rate-limit, db (migrations + upsert behavior), achievements (ranks + streaks + computeProfile).
 
-Total: 106 tests. Run all: `npm test`. Run only one suite: `node --test tests/server/session.test.js`.
+Total: 113 tests. Run all: `npm test`. Run only one suite: `node --test tests/server/session.test.js`.
 
 ---
 
@@ -497,16 +497,16 @@ Achievements that need cross-theme coverage (`Bücherwurm`, `Polyglott`, `Biblio
 |---|---|---|---|
 | allgemein | ✓2 | ✓ | — |
 | architektur | — | — | ✓2 |
-| astronomie | — | — | ✓ |
-| film | — | — | ✓2 |
+| astronomie | — | — | ✓2 |
+| film | — | — | ✓3 |
 | geographie | ✓ | — | ✓2 |
-| geschichte | — | ✓ | ✓2 |
+| geschichte | — | ✓ | ✓3 |
 | klassik | — | ✓ | ✓ |
-| kunst | — | — | ✓2 |
-| literatur | — | — | ✓2 |
+| kunst | — | — | ✓3 |
+| literatur | — | — | ✓3 |
 | medizin | — | — | ✓ |
-| musik | ✓ | — | ✓2 |
-| mythologie | ✓ | — | ✓2 |
+| musik | ✓ | — | ✓3 |
+| mythologie | ✓ | — | ✓3 |
 | natur | ✓ | — | ✓ |
 | philosophie | — | — | ✓ |
 | religion | — | — | ✓ |

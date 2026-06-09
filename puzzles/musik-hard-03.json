@@ -1,0 +1,108 @@
+{
+  "id": "musik-hard-03",
+  "title": "Aus den Logenplätzen",
+  "theme": "musik",
+  "difficulty": "hard",
+  "description": "Opernwelt — Komponisten, Werke, Bühnen und Stimmen vom Belcanto bis zum Verismo.",
+  "words": [
+    {
+      "answer": "CARMEN",
+      "clue": "Bizets Andalusien-Oper um eine Zigeunerin und einen Stierkämpfer",
+      "row": 10,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "RIGOLETTO",
+      "clue": "Verdi-Oper über einen buckligen Hofnarren nach Victor Hugo",
+      "row": 5,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "LIBRETTO",
+      "clue": "Textbuch einer Oper",
+      "row": 7,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "STRAUSS",
+      "clue": "Richard …, 'Salome', 'Elektra', 'Der Rosenkavalier'",
+      "row": 5,
+      "col": 8,
+      "direction": "across"
+    },
+    {
+      "answer": "BIZET",
+      "clue": "Georges …, 'Carmen' nach Prosper Mérimée",
+      "row": 12,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "DONIZETTI",
+      "clue": "Gaetano …, 'Lucia di Lammermoor' — Belcanto-Meister",
+      "row": 8,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "BAYREUTH",
+      "clue": "Festspielhaus, ausschließlich für Wagner-Werke errichtet",
+      "row": 0,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "CALLAS",
+      "clue": "Maria …, legendäre Sopranistin des 20. Jahrhunderts",
+      "row": 0,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "MASCAGNI",
+      "clue": "Pietro …, 'Cavalleria rusticana' — Pionier des Verismo",
+      "row": 3,
+      "col": 14,
+      "direction": "down"
+    },
+    {
+      "answer": "PUCCINI",
+      "clue": "Giacomo …, 'La Bohème', 'Tosca', 'Madama Butterfly'",
+      "row": 4,
+      "col": 3,
+      "direction": "down"
+    },
+    {
+      "answer": "AIDA",
+      "clue": "Verdi-Oper, uraufgeführt 1871 in Kairo",
+      "row": 11,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "TURANDOT",
+      "clue": "Puccinis letzte, von Alfano vollendete Oper",
+      "row": 14,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "ROSSINI",
+      "clue": "Gioachino …, 'Der Barbier von Sevilla', 'Wilhelm Tell'",
+      "row": 7,
+      "col": 1,
+      "direction": "down"
+    },
+    {
+      "answer": "SCALA",
+      "clue": "Mailänder Opernhaus 'Teatro alla …'",
+      "row": 6,
+      "col": 2,
+      "direction": "across"
+    }
+  ],
+  "size": 15
+}
