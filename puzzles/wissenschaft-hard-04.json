@@ -1,0 +1,108 @@
+{
+  "id": "wissenschaft-hard-04",
+  "title": "Bosonen & Fermionen",
+  "theme": "wissenschaft",
+  "difficulty": "hard",
+  "description": "Teilchen- und Quantenphysik — Eichbosonen, Spin, Pioniere des 20. Jahrhunderts.",
+  "words": [
+    {
+      "answer": "HIGGS",
+      "clue": "2012 am CERN nachgewiesenes Boson, vermittelt Masse über sein Feld",
+      "row": 5,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "ANTIMATERIE",
+      "clue": "Spiegelbild gewöhnlicher Materie mit entgegengesetzten Quantenzahlen",
+      "row": 2,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "HEISENBERG",
+      "clue": "Deutscher Pionier der Quantenmechanik, Unschärferelation",
+      "row": 2,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "HADRON",
+      "clue": "Aus Quarks zusammengesetztes Teilchen, z. B. Proton oder Neutron",
+      "row": 3,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "GLUON",
+      "clue": "Vermittlerteilchen der starken Wechselwirkung zwischen Quarks",
+      "row": 11,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "DIRAC",
+      "clue": "Britischer Theoretiker, vereinigte Quantenmechanik und spezielle Relativitätstheorie",
+      "row": 7,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "PAULI",
+      "clue": "Österreichischer Physiker, Ausschlussprinzip für Fermionen",
+      "row": 2,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "TUNNELEFFEKT",
+      "clue": "Quantenmechanisches Durchdringen einer klassisch unüberwindbaren Barriere",
+      "row": 9,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "FERMION",
+      "clue": "Teilchen mit halbzahligem Spin, gehorcht dem Ausschlussprinzip",
+      "row": 3,
+      "col": 8,
+      "direction": "across"
+    },
+    {
+      "answer": "POSITRON",
+      "clue": "Antiteilchen des Elektrons, 1932 von Carl D. Anderson entdeckt",
+      "row": 0,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "CERN",
+      "clue": "Forschungszentrum bei Genf mit dem Large Hadron Collider",
+      "row": 1,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "FEYNMAN",
+      "clue": "US-Physiker, formulierte die Quantenelektrodynamik mit grafischen Diagrammen",
+      "row": 0,
+      "col": 14,
+      "direction": "down"
+    },
+    {
+      "answer": "SPIN",
+      "clue": "Quantenmechanischer Eigendrehimpuls eines Teilchens",
+      "row": 11,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "LEPTON",
+      "clue": "Elementarteilchen ohne starke Wechselwirkung, etwa Elektron oder Myon",
+      "row": 6,
+      "col": 0,
+      "direction": "down"
+    }
+  ],
+  "size": 15
+}

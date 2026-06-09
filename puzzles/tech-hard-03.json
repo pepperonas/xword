@@ -1,0 +1,108 @@
+{
+  "id": "tech-hard-03",
+  "title": "Sortieren & Suchen",
+  "theme": "tech",
+  "difficulty": "hard",
+  "description": "Algorithmen, Datenstrukturen, Komplexität — Informatik aus dem Grundstudium.",
+  "words": [
+    {
+      "answer": "QUICKSORT",
+      "clue": "Pivot-basiertes In-Place-Sortierverfahren, 1959 von Hoare entworfen",
+      "row": 0,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "HASHTABLE",
+      "clue": "Schlüssel-Wert-Speicher mit erwarteter O(1)-Zugriffszeit",
+      "row": 5,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "REKURSION",
+      "clue": "Selbstaufruf einer Funktion mit kleinerem Eingabewert",
+      "row": 7,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "QUEUE",
+      "clue": "FIFO-Datenstruktur, Gegenstück zum Stack",
+      "row": 1,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "MERGESORT",
+      "clue": "Stabiles Divide-and-Conquer-Sortierverfahren, 1945 von John von Neumann beschrieben",
+      "row": 1,
+      "col": 13,
+      "direction": "down"
+    },
+    {
+      "answer": "FIBONACCI",
+      "clue": "Folge, in der jede Zahl Summe der beiden vorherigen ist",
+      "row": 3,
+      "col": 11,
+      "direction": "down"
+    },
+    {
+      "answer": "HEAPSORT",
+      "clue": "Auf einem Binärheap basierendes Sortierverfahren, 1964 von J. W. J. Williams",
+      "row": 6,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "AUTOMAT",
+      "clue": "Endliches Berechnungsmodell mit Zuständen und Übergängen",
+      "row": 11,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "TRIE",
+      "clue": "Präfix-Baum zur schnellen Wortsuche",
+      "row": 5,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "KNAPSACK",
+      "clue": "Rucksackproblem — klassisches NP-vollständiges Optimierungsproblem",
+      "row": 3,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "LANDAU",
+      "clue": "Nach Edmund … benanntes Symbol für asymptotisches Wachstum, z. B. O(n²)",
+      "row": 1,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "GRAPH",
+      "clue": "Mathematische Struktur aus Knoten und Kanten",
+      "row": 9,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "HEAP",
+      "clue": "Binärbaum-Datenstruktur einer Prioritätswarteschlange",
+      "row": 5,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "HASH",
+      "clue": "Streuwertfunktion zur Abbildung beliebiger Daten auf feste Länge",
+      "row": 10,
+      "col": 6,
+      "direction": "down"
+    }
+  ],
+  "size": 14
+}

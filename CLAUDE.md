@@ -71,7 +71,7 @@ Two valid puzzle JSON forms:
 1. **Pre-laid-out**: includes `size` and per-word `row/col/direction` (production)
 2. **Words only**: `[{ answer, clue }]` — `app.js` runs `XwordLayout.layout()` at load time (manual prototypes)
 
-Currently 41 shipped puzzles, 18 themes (tech, allgemein, klassik, mythologie, wissenschaft, kunst, geographie, architektur, sport, musik, geschichte, film, natur, literatur, philosophie, religion, medizin, astronomie), 3 difficulties (easy / medium / hard). Distribution: **7 easy + 5 medium + 29 hard** (8 puzzles added 2026-05-19 to flatten the onboarding curve, which had been 2/2/26 before; 3 MINT/software hard puzzles added 2026-06-09 — `tech-hard-01`, `tech-hard-02`, `wissenschaft-hard-03` — closing the long-standing tech-hard gap and adding a pure-mathematics third wissenschaft puzzle). Fifteen of the hard puzzles are tagged as "1-Mio-Niveau" — clue density at the level of the top prize question on the German "Wer wird Millionär" quiz show: `literatur-hard-01`, `literatur-hard-02`, `geschichte-hard-02`, `wissenschaft-hard-02`, `philosophie-hard-01`, `kunst-hard-02`, `musik-hard-02`, `geographie-hard-02`, `mythologie-hard-02`, `film-hard-02`, `architektur-hard-02`, `religion-hard-01`, `medizin-hard-01`, `astronomie-hard-01`, `sport-hard-02`.
+Currently 46 shipped puzzles, 18 themes (tech, allgemein, klassik, mythologie, wissenschaft, kunst, geographie, architektur, sport, musik, geschichte, film, natur, literatur, philosophie, religion, medizin, astronomie), 3 difficulties (easy / medium / hard). Distribution: **7 easy + 5 medium + 34 hard** (8 puzzles added 2026-05-19 to flatten the onboarding curve, which had been 2/2/26 before; 8 MINT/software hard puzzles added 2026-06-09 — `tech-hard-01..05`, `wissenschaft-hard-03..05` — turning tech into a 5-puzzle hard tier with sub-themes Programming Theory / Systems / Algorithms / Crypto / Machine Learning, and giving wissenschaft a Math/Particle/Genetics triple). Fifteen of the hard puzzles are tagged as "1-Mio-Niveau" — clue density at the level of the top prize question on the German "Wer wird Millionär" quiz show: `literatur-hard-01`, `literatur-hard-02`, `geschichte-hard-02`, `wissenschaft-hard-02`, `philosophie-hard-01`, `kunst-hard-02`, `musik-hard-02`, `geographie-hard-02`, `mythologie-hard-02`, `film-hard-02`, `architektur-hard-02`, `religion-hard-01`, `medizin-hard-01`, `astronomie-hard-01`, `sport-hard-02`.
 
 ---
 
@@ -441,11 +441,11 @@ Validation tools:
 GitHub Actions (`.github/workflows/test.yml`) runs `npm test` on push to `main` and PRs. The README Tests-Badge points at the workflow.
 
 Tests live in three groups:
-- `tests/layout.test.js` — layout algorithm coverage (56 tests, browser-loadable module via globalThis)
+- `tests/layout.test.js` — layout algorithm coverage (61 tests, browser-loadable module via globalThis)
 - `tests/input-dedupe.test.js` — virtual keyboard double-fire regression suite (11 tests, deterministic via injectable timestamp)
 - `tests/server/*.test.js` — backend coverage (34 tests, dynamic `import()` of ES modules into CommonJS test files): session, rate-limit, db (migrations + upsert behavior), achievements (ranks + streaks + computeProfile).
 
-Total: 101 tests. Run all: `npm test`. Run only one suite: `node --test tests/server/session.test.js`.
+Total: 106 tests. Run all: `npm test`. Run only one suite: `node --test tests/server/session.test.js`.
 
 ---
 
@@ -511,8 +511,8 @@ Achievements that need cross-theme coverage (`Bücherwurm`, `Polyglott`, `Biblio
 | philosophie | — | — | ✓ |
 | religion | — | — | ✓ |
 | sport | — | — | ✓2 |
-| tech | ✓ | ✓ | ✓2 |
-| wissenschaft | — | ✓ | ✓3 |
+| tech | ✓ | ✓ | ✓5 |
+| wissenschaft | — | ✓ | ✓5 |
 
 Onboarding is still hard-heavy. Biggest gaps to fill for a smoother ramp: **Easy** in geschichte, klassik, kunst, philosophie, sport, wissenschaft — those themes hit straight to Hard.
 

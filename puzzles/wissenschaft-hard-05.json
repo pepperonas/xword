@@ -1,0 +1,108 @@
+{
+  "id": "wissenschaft-hard-05",
+  "title": "Doppelhelix & Allele",
+  "theme": "wissenschaft",
+  "difficulty": "hard",
+  "description": "Genetik und Molekularbiologie — von den Vererbungsgesetzen bis zur Gen-Schere.",
+  "words": [
+    {
+      "answer": "CHROMOSOM",
+      "clue": "DNA-Protein-Komplex im Zellkern, Träger der Erbinformation",
+      "row": 4,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "TRANSLATION",
+      "clue": "Übersetzung der mRNA in eine Aminosäurekette am Ribosom",
+      "row": 10,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "ALLEL",
+      "clue": "Variante eines Gens an einem bestimmten Genort",
+      "row": 10,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "PROTEIN",
+      "clue": "Aus Aminosäuren aufgebauter Polypeptid-Strang",
+      "row": 7,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "NUKLEOTID",
+      "clue": "Baustein der Nukleinsäuren aus Base, Zucker und Phosphat",
+      "row": 4,
+      "col": 3,
+      "direction": "down"
+    },
+    {
+      "answer": "MENDEL",
+      "clue": "Augustinerpater aus Brünn, formulierte die Vererbungsgesetze an Erbsen",
+      "row": 12,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "CRICK",
+      "clue": "Britischer Biophysiker, beschrieb 1953 mit Watson die Doppelhelix",
+      "row": 4,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "POLYMERASE",
+      "clue": "Enzym zur Replikation oder Transkription von Nukleinsäuren",
+      "row": 14,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "CRISPR",
+      "clue": "Ursprünglich bakterielles Abwehrsystem, heute präzise Gen-Schere",
+      "row": 3,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "FRANKLIN",
+      "clue": "Rosalind … — ihre Röntgenbeugungsaufnahme 'Photo 51' enthüllte die DNA-Struktur",
+      "row": 0,
+      "col": 11,
+      "direction": "down"
+    },
+    {
+      "answer": "MUTATION",
+      "clue": "Spontane oder induzierte Veränderung der Erbinformation",
+      "row": 12,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "HELIX",
+      "clue": "Schraubenform — beim DNA-Modell als Doppelstruktur ausgeprägt",
+      "row": 1,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "WATSON",
+      "clue": "US-Biologe, beschrieb 1953 mit Crick die Doppelhelix-Struktur der DNA",
+      "row": 5,
+      "col": 13,
+      "direction": "down"
+    },
+    {
+      "answer": "GENOM",
+      "clue": "Vollständiger Satz der Erbinformation eines Organismus",
+      "row": 8,
+      "col": 0,
+      "direction": "down"
+    }
+  ],
+  "size": 15
+}

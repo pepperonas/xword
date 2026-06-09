@@ -409,6 +409,56 @@
       "description": "Mathematik — Sätze, Vermutungen, große Namen. Aus dem Hauptseminar.",
       "wordCount": 14,
       "size": 15
+    },
+    {
+      "id": "tech-hard-03",
+      "file": "tech-hard-03.json",
+      "title": "Sortieren & Suchen",
+      "theme": "tech",
+      "difficulty": "hard",
+      "description": "Algorithmen, Datenstrukturen, Komplexität — Informatik aus dem Grundstudium.",
+      "wordCount": 14,
+      "size": 14
+    },
+    {
+      "id": "tech-hard-04",
+      "file": "tech-hard-04.json",
+      "title": "Chiffren & Schlüssel",
+      "theme": "tech",
+      "difficulty": "hard",
+      "description": "Kryptographie und Security — von der Skytale bis zur Elliptischen Kurve.",
+      "wordCount": 14,
+      "size": 16
+    },
+    {
+      "id": "tech-hard-05",
+      "file": "tech-hard-05.json",
+      "title": "Neuronen & Gewichte",
+      "theme": "tech",
+      "difficulty": "hard",
+      "description": "Machine Learning und Deep Learning — Konzepte, Architekturen, Frameworks.",
+      "wordCount": 14,
+      "size": 16
+    },
+    {
+      "id": "wissenschaft-hard-04",
+      "file": "wissenschaft-hard-04.json",
+      "title": "Bosonen & Fermionen",
+      "theme": "wissenschaft",
+      "difficulty": "hard",
+      "description": "Teilchen- und Quantenphysik — Eichbosonen, Spin, Pioniere des 20. Jahrhunderts.",
+      "wordCount": 14,
+      "size": 15
+    },
+    {
+      "id": "wissenschaft-hard-05",
+      "file": "wissenschaft-hard-05.json",
+      "title": "Doppelhelix & Allele",
+      "theme": "wissenschaft",
+      "difficulty": "hard",
+      "description": "Genetik und Molekularbiologie — von den Vererbungsgesetzen bis zur Gen-Schere.",
+      "wordCount": 14,
+      "size": 15
     }
   ]
 }

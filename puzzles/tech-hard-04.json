@@ -1,0 +1,108 @@
+{
+  "id": "tech-hard-04",
+  "title": "Chiffren & Schlüssel",
+  "theme": "tech",
+  "difficulty": "hard",
+  "description": "Kryptographie und Security — von der Skytale bis zur Elliptischen Kurve.",
+  "words": [
+    {
+      "answer": "TURING",
+      "clue": "Britischer Mathematiker in Bletchley Park, brach die Enigma mit der Bombe",
+      "row": 5,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "KERBEROS",
+      "clue": "MIT-Authentifizierungsprotokoll mit Ticket Granting Server",
+      "row": 7,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "SIGNATUR",
+      "clue": "Mit dem privaten Schlüssel erzeugt, mit dem öffentlichen verifizierbar",
+      "row": 9,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "KOLLISION",
+      "clue": "Zwei verschiedene Eingaben mit identischem Hashwert",
+      "row": 7,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "ZERTIFIKAT",
+      "clue": "X.509-Dokument einer Public-Key-Infrastruktur",
+      "row": 5,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "ENIGMA",
+      "clue": "Deutsche Rotor-Verschlüsselungsmaschine des 2. Weltkriegs",
+      "row": 11,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "BLOCKCHAIN",
+      "clue": "Verteiltes, fortlaufend verkettetes und manipulationssicheres Hauptbuch",
+      "row": 14,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "BITCOIN",
+      "clue": "Kryptowährung aus Satoshi Nakamotos Whitepaper von 2008",
+      "row": 0,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "ELLIPTISCH",
+      "clue": "Kurve über einem endlichen Körper, Grundlage moderner ECC-Verfahren",
+      "row": 3,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "VIGENERE",
+      "clue": "Polyalphabetische Substitution mit Schlüsselwort, 16. Jh.",
+      "row": 4,
+      "col": 0,
+      "direction": "down"
+    },
+    {
+      "answer": "PHISHING",
+      "clue": "Social-Engineering-Angriff per gefälschter Mail oder Webseite",
+      "row": 1,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "SCYTALE",
+      "clue": "Antikes spartanisches Verschlüsselungsverfahren mit umwickeltem Stab",
+      "row": 2,
+      "col": 13,
+      "direction": "down"
+    },
+    {
+      "answer": "RAINBOW",
+      "clue": "Vorberechnete Tabellen zum effizienten Knacken von Passwort-Hashes",
+      "row": 9,
+      "col": 11,
+      "direction": "down"
+    },
+    {
+      "answer": "NONCE",
+      "clue": "Number used once — Zufallswert zur Einmalverwendung in einem Protokoll",
+      "row": 12,
+      "col": 9,
+      "direction": "across"
+    }
+  ],
+  "size": 16
+}

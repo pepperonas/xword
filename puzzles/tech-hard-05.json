@@ -1,0 +1,108 @@
+{
+  "id": "tech-hard-05",
+  "title": "Neuronen & Gewichte",
+  "theme": "tech",
+  "difficulty": "hard",
+  "description": "Machine Learning und Deep Learning — Konzepte, Architekturen, Frameworks.",
+  "words": [
+    {
+      "answer": "TRANSFORMER",
+      "clue": "Architektur aus 'Attention is all you need', Vaswani et al. 2017",
+      "row": 7,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "ATTENTION",
+      "clue": "Mechanismus zur kontextabhängigen Gewichtung von Eingabe-Tokens",
+      "row": 0,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "EMBEDDING",
+      "clue": "Niedrigdimensionale Vektor-Repräsentation diskreter Eingabewerte",
+      "row": 4,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "GRADIENT",
+      "clue": "Vektor partieller Ableitungen, zeigt Richtung des steilsten Anstiegs",
+      "row": 1,
+      "col": 3,
+      "direction": "down"
+    },
+    {
+      "answer": "NEURON",
+      "clue": "Mathematisches Modell mit gewichteten Eingängen und Aktivierungsfunktion",
+      "row": 11,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "PYTORCH",
+      "clue": "Meta-Framework für Tensoroperationen mit dynamischen Berechnungsgraphen",
+      "row": 3,
+      "col": 1,
+      "direction": "down"
+    },
+    {
+      "answer": "BACKPROP",
+      "clue": "Algorithmus zur Gradientenberechnung in tiefen Netzen via Kettenregel",
+      "row": 0,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "KMEANS",
+      "clue": "Lloyds Clustering-Algorithmus mit fester Anzahl Zentroide",
+      "row": 9,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "OVERFIT",
+      "clue": "Modell lernt Trainingsdaten auswendig statt zu generalisieren",
+      "row": 0,
+      "col": 11,
+      "direction": "down"
+    },
+    {
+      "answer": "BAYES",
+      "clue": "Englischer Geistlicher, sein Theorem regelt das Updaten von Wahrscheinlichkeiten",
+      "row": 2,
+      "col": 8,
+      "direction": "across"
+    },
+    {
+      "answer": "TENSORFLOW",
+      "clue": "Googles ML-Framework, ursprünglich mit statischen Berechnungsgraphen",
+      "row": 14,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "DROPOUT",
+      "clue": "Regularisierungstechnik, deaktiviert zufällig Neuronen beim Training",
+      "row": 9,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "PERCEPTRON",
+      "clue": "Frank Rosenblatts einlagiges Neuronen-Modell von 1957",
+      "row": 3,
+      "col": 15,
+      "direction": "down"
+    },
+    {
+      "answer": "TOKEN",
+      "clue": "Kleinste Verarbeitungseinheit, in die Sprachmodelle Text zerlegen",
+      "row": 8,
+      "col": 11,
+      "direction": "down"
+    }
+  ],
+  "size": 16
+}
