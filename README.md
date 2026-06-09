@@ -34,21 +34,20 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-2d6e4e.svg?style=for-the-badge&labelColor=1a1a1a)](https://github.com/pepperonas/xword/pulls)
 [![Maintained](https://img.shields.io/badge/Maintained-yes-2d6e4e.svg?style=for-the-badge&labelColor=1a1a1a)](https://github.com/pepperonas/xword/commits/main)
 
-<!-- Puzzle catalog -->
-[![Puzzles total (15)](https://img.shields.io/badge/Puzzles_total-15-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
-[![Tech (2)](https://img.shields.io/badge/Tech-2-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
-[![Allgemein (2)](https://img.shields.io/badge/Allgemein-2-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
-[![Klassik (1)](https://img.shields.io/badge/Klassik-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
-[![Mythologie (1)](https://img.shields.io/badge/Mythologie-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
-[![Wissenschaft (1)](https://img.shields.io/badge/Wissenschaft-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
-[![Kunst (1)](https://img.shields.io/badge/Kunst-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
-[![Geographie (1)](https://img.shields.io/badge/Geographie-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
-[![Architektur (1)](https://img.shields.io/badge/Architektur-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
-[![Sport (1)](https://img.shields.io/badge/Sport-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
-[![Musik (1)](https://img.shields.io/badge/Musik-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
-[![Geschichte (1)](https://img.shields.io/badge/Geschichte-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
-[![Film (1)](https://img.shields.io/badge/Film-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
-[![Natur (1)](https://img.shields.io/badge/Natur-1-c8a96a?style=for-the-badge&labelColor=1a1a1a)](puzzles/)
+<!-- Puzzle catalog (dynamic — fed by puzzles/stats.json, regenerated on every build) -->
+[![Puzzles total](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fpepperonas%2Fxword%2Fmain%2Fpuzzles%2Fstats.json&query=%24.total&label=Puzzles&color=c8a96a&style=for-the-badge&labelColor=1a1a1a)](puzzles/)
+[![Themen](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fpepperonas%2Fxword%2Fmain%2Fpuzzles%2Fstats.json&query=%24.themes&label=Themen&color=c8a96a&style=for-the-badge&labelColor=1a1a1a)](puzzles/)
+[![Wörter](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fpepperonas%2Fxword%2Fmain%2Fpuzzles%2Fstats.json&query=%24.wordsTotal&label=W%C3%B6rter&color=c8a96a&style=for-the-badge&labelColor=1a1a1a)](puzzles/)
+[![Easy](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fpepperonas%2Fxword%2Fmain%2Fpuzzles%2Fstats.json&query=%24.byDifficulty.easy&label=Easy&color=2d6e4e&style=for-the-badge&labelColor=1a1a1a)](puzzles/)
+[![Medium](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fpepperonas%2Fxword%2Fmain%2Fpuzzles%2Fstats.json&query=%24.byDifficulty.medium&label=Medium&color=c8a96a&style=for-the-badge&labelColor=1a1a1a)](puzzles/)
+[![Hard](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fpepperonas%2Fxword%2Fmain%2Fpuzzles%2Fstats.json&query=%24.byDifficulty.hard&label=Hard&color=d97757&style=for-the-badge&labelColor=1a1a1a)](puzzles/)
+
+<!-- Repo metrics (dynamic — fed by GitHub API) -->
+[![Code size](https://img.shields.io/github/languages/code-size/pepperonas/xword?style=for-the-badge&labelColor=1a1a1a&color=c8a96a)](https://github.com/pepperonas/xword)
+[![Repo size](https://img.shields.io/github/repo-size/pepperonas/xword?style=for-the-badge&labelColor=1a1a1a&color=c8a96a)](https://github.com/pepperonas/xword)
+[![Top language](https://img.shields.io/github/languages/top/pepperonas/xword?style=for-the-badge&labelColor=1a1a1a&color=f7df1e&logo=javascript&logoColor=black)](https://github.com/pepperonas/xword)
+[![Contributors](https://img.shields.io/github/contributors/pepperonas/xword?style=for-the-badge&labelColor=1a1a1a&color=c8a96a)](https://github.com/pepperonas/xword/graphs/contributors)
+[![Commit activity](https://img.shields.io/github/commit-activity/m/pepperonas/xword?style=for-the-badge&labelColor=1a1a1a&color=c8a96a)](https://github.com/pepperonas/xword/commits/main)
 
 <!-- Misc -->
 [![Made in Germany](https://img.shields.io/badge/Made_in-Germany-000000?style=for-the-badge&labelColor=dd0000)](#)

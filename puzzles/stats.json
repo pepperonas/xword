@@ -1,0 +1,30 @@
+{
+  "total": 53,
+  "themes": 18,
+  "wordsTotal": 921,
+  "byDifficulty": {
+    "easy": 7,
+    "medium": 5,
+    "hard": 41
+  },
+  "byTheme": {
+    "tech": 7,
+    "allgemein": 3,
+    "klassik": 2,
+    "mythologie": 4,
+    "wissenschaft": 6,
+    "kunst": 3,
+    "geographie": 3,
+    "architektur": 2,
+    "sport": 2,
+    "musik": 4,
+    "geschichte": 4,
+    "film": 3,
+    "natur": 2,
+    "literatur": 3,
+    "philosophie": 1,
+    "religion": 1,
+    "medizin": 1,
+    "astronomie": 2
+  }
+}

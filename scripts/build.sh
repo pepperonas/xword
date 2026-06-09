@@ -13,6 +13,9 @@ cd "$(dirname "$0")/.."
 # Generate version.json so dist/ is shippable on its own.
 bash scripts/bump-version.sh
 
+# Regenerate puzzles/stats.json from the manifest (drives README badges).
+node scripts/generate-stats.mjs
+
 DIST=dist
 rm -rf "$DIST"
 mkdir -p "$DIST"

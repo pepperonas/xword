@@ -6,58 +6,86 @@
   "description": "Persönlichkeiten und Epochen aus dem Schulbuch — vom Mittelalter bis ins 19. Jahrhundert.",
   "words": [
     {
-      "answer": "BISMARCK",
-      "clue": "Eiserner Kanzler des Kaiserreichs ab 1871",
-      "row": 3,
+      "answer": "REVOLUTION",
+      "clue": "Was 1789 in Frankreich begann",
+      "row": 4,
       "col": 8,
       "direction": "down"
     },
     {
-      "answer": "REVOLUTION",
-      "clue": "Was 1789 in Frankreich begann",
-      "row": 4,
-      "col": 1,
+      "answer": "GUTENBERG",
+      "clue": "Mainzer, druckte mit beweglichen Lettern",
+      "row": 10,
+      "col": 6,
       "direction": "across"
     },
     {
-      "answer": "OSTGOTEN",
-      "clue": "Germanischer Stamm, gründete im 5. Jh. ein Reich in Italien",
-      "row": 4,
-      "col": 4,
+      "answer": "PYRAMIDE",
+      "clue": "Königsgrabmal der ägyptischen Pharaonen",
+      "row": 3,
+      "col": 12,
       "direction": "down"
     },
     {
       "answer": "KOLUMBUS",
       "clue": "Genuese, landete 1492 in Amerika",
-      "row": 1,
-      "col": 6,
+      "row": 12,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "CAESAR",
+      "clue": "Römer, ermordet an den Iden des März",
+      "row": 4,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "BISMARCK",
+      "clue": "Eiserner Kanzler des Kaiserreichs ab 1871",
+      "row": 0,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "NAPOLEON",
+      "clue": "Korse, ließ sich 1804 in Paris zum Kaiser krönen",
+      "row": 3,
+      "col": 10,
       "direction": "down"
     },
     {
       "answer": "KREUZZUG",
       "clue": "Kriegszug ins Heilige Land im Mittelalter",
-      "row": 10,
-      "col": 8,
-      "direction": "across"
-    },
-    {
-      "answer": "GUTENBERG",
-      "clue": "Mainzer, druckte mit beweglichen Lettern",
-      "row": 0,
-      "col": 10,
-      "direction": "down"
-    },
-    {
-      "answer": "PYRAMIDE",
-      "clue": "Königsgrabmal der ägyptischen Pharaonen",
-      "row": 2,
-      "col": 1,
+      "row": 3,
+      "col": 14,
       "direction": "down"
     },
     {
       "answer": "WIKINGER",
       "clue": "Nordmänner mit Langschiffen ab dem 8. Jh.",
-      "row": 11,
+      "row": 1,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "ANTIKE",
+      "clue": "Epoche der griechisch-römischen Welt vor 500 n. Chr.",
+      "row": 7,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "OSTGOTEN",
+      "clue": "Germanischer Stamm, gründete im 5. Jh. ein Reich in Italien",
+      "row": 5,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "HANSE",
+      "clue": "Norddeutscher Städtebund des Spätmittelalters",
+      "row": 12,
       "col": 0,
       "direction": "across"
     },
@@ -65,44 +93,16 @@
       "answer": "LUTHER",
       "clue": "Reformator mit den 95 Thesen",
       "row": 9,
-      "col": 11,
+      "col": 0,
       "direction": "down"
     },
     {
       "answer": "ROMA",
       "clue": "Lat. Name der Ewigen Stadt am Tiber",
-      "row": 7,
-      "col": 10,
+      "row": 14,
+      "col": 0,
       "direction": "across"
-    },
-    {
-      "answer": "NAPOLEON",
-      "clue": "Korse, ließ sich 1804 in Paris zum Kaiser krönen",
-      "row": 13,
-      "col": 6,
-      "direction": "across"
-    },
-    {
-      "answer": "ANTIKE",
-      "clue": "Epoche der griechisch-römischen Welt vor 500 n. Chr.",
-      "row": 1,
-      "col": 2,
-      "direction": "across"
-    },
-    {
-      "answer": "BAROCK",
-      "clue": "Epoche zwischen Renaissance und Klassizismus",
-      "row": 5,
-      "col": 10,
-      "direction": "across"
-    },
-    {
-      "answer": "CAESAR",
-      "clue": "Römer, ermordet an den Iden des März",
-      "row": 0,
-      "col": 12,
-      "direction": "down"
     }
   ],
-  "size": 16
+  "size": 15
 }

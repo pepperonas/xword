@@ -444,8 +444,9 @@ Tests live in three groups:
 - `tests/layout.test.js` — layout algorithm coverage (68 tests, browser-loadable module via globalThis)
 - `tests/input-dedupe.test.js` — virtual keyboard double-fire regression suite (11 tests, deterministic via injectable timestamp)
 - `tests/server/*.test.js` — backend coverage (34 tests, dynamic `import()` of ES modules into CommonJS test files): session, rate-limit, db (migrations + upsert behavior), achievements (ranks + streaks + computeProfile).
+- `tests/puzzles.test.js` — puzzle-data integrity (71 tests, no external deps): manifest ↔ filesystem consistency, per-puzzle shape (required fields, answer charset, grid bounds, duplicate-answer-within-one-puzzle check), clue-quality scans (answer-substring-in-clue, mixed German-quote pattern, min clue length), cross-puzzle reuse soft-cap (max 2 puzzles per answer), and stats.json freshness against the manifest. Caught real bugs on first run: `EICHE` clue contained "Eicheln" (Buche/BUCHE the same), `BAROCK` appeared in 3 puzzles (cap is 2).
 
-Total: 113 tests. Run all: `npm test`. Run only one suite: `node --test tests/server/session.test.js`.
+Total: 184 tests. Run all: `npm test`. Run only one suite: `node --test tests/server/session.test.js`.
 
 ---
 
@@ -528,7 +529,11 @@ A 2026-05-16 content review of the recent ultra-hard batch surfaced three error 
 
 3. **Number prefixes in clues must denote something.** The review caught `4-WM-Finalist 1954` for PUSKAS — Hungary was Vize-Weltmeister 1954, the "4" mapped to nothing. Drop nonsense numeric prefixes; "WM-Finalist 1954" suffices.
 
-Pre-commit check for any new ultra-hard puzzle: re-read each clue and ask (a) does every named year/place/person triplet check out, (b) is the answer the form a reference work would use, (c) does every number in the clue refer to something concrete.
+4. **The clue must not contain the answer (or its compound form) as a substring.** The 2026-06-09 introduction of `tests/puzzles.test.js` caught `EICHE → "Laubbaum mit Eicheln"` and `BUCHE → "Rinde und Bucheckern"` — derivative forms (Eicheln from Eiche, Bucheckern from Buche) give the answer away the moment the player reads them. Always rewrite around the family stem ("lappige Blätter, Symbol germanischer Stärke" instead of "Eicheln"). The test is case-insensitive and substring-based, so even partial matches inside larger words ("Wahrzeichen" contains EICHE) trigger it — that's intentional; rewrite, don't suppress.
+
+The same test enforces a soft cap of **2 puzzles per answer** across the whole catalog. `BAROCK` initially appeared in three (klassik-hard-01, kunst-hard-01, geschichte-medium-01); the test forced a replacement in the medium-tier (BAROCK → HANSE) because the two hard-tier domain references were content-driven. When a common epoch / concept word is naturally pulled toward many puzzles, retire it from the lowest-stakes one.
+
+Pre-commit check for any new ultra-hard puzzle: re-read each clue and ask (a) does every named year/place/person triplet check out, (b) is the answer the form a reference work would use, (c) does every number in the clue refer to something concrete, (d) is the answer (or any compound form of it) absent from the clue text.
 
 ---
 
