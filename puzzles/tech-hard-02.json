@@ -1,0 +1,108 @@
+{
+  "id": "tech-hard-02",
+  "title": "Aus dem Maschinenraum",
+  "theme": "tech",
+  "difficulty": "hard",
+  "description": "Systems-Internas — Kernel, Netze, Speicher. Aus der Betriebssysteme-Vorlesung.",
+  "words": [
+    {
+      "answer": "SOCKET",
+      "clue": "Berkeley-Abstraktion für einen Netzkommunikations-Endpunkt",
+      "row": 3,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "THREAD",
+      "clue": "Leichtgewichtiger Ausführungsstrang innerhalb eines Prozesses",
+      "row": 7,
+      "col": 4,
+      "direction": "across"
+    },
+    {
+      "answer": "ETHERNET",
+      "clue": "LAN-Standard von Metcalfe, am Xerox PARC entwickelt, später IEEE 802.3",
+      "row": 0,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "PROTOCOL",
+      "clue": "Regelwerk für den Datenaustausch zwischen zwei Endpunkten",
+      "row": 4,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "BUFFER",
+      "clue": "Pufferspeicher zwischen produzierender und konsumierender Komponente",
+      "row": 0,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "INODE",
+      "clue": "Unix-Datenstruktur mit Metadaten und Block-Zeigern einer Datei",
+      "row": 6,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "POINTER",
+      "clue": "Variable, die eine Speicheradresse referenziert",
+      "row": 5,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "SEGFAULT",
+      "clue": "Programmabsturz bei unerlaubtem Speicherzugriff",
+      "row": 10,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "MUTEX",
+      "clue": "Sperre zur Sicherung kritischer Abschnitte",
+      "row": 9,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "DAEMON",
+      "clue": "Im Hintergrund laufender Unix-Dienst",
+      "row": 0,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "STACK",
+      "clue": "LIFO-Speicherbereich für Funktionsaufrufe und lokale Variablen",
+      "row": 9,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "POSIX",
+      "clue": "IEEE-Standard für portable Unix-Schnittstellen",
+      "row": 3,
+      "col": 0,
+      "direction": "down"
+    },
+    {
+      "answer": "FORK",
+      "clue": "Unix-Systemruf zur Erzeugung eines Kindprozesses",
+      "row": 0,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "PACKET",
+      "clue": "Übertragungseinheit auf der Vermittlungsschicht",
+      "row": 1,
+      "col": 8,
+      "direction": "across"
+    }
+  ],
+  "size": 14
+}

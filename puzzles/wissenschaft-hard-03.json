@@ -1,0 +1,108 @@
+{
+  "id": "wissenschaft-hard-03",
+  "title": "Formeln & Beweise",
+  "theme": "wissenschaft",
+  "difficulty": "hard",
+  "description": "Mathematik — Sätze, Vermutungen, große Namen. Aus dem Hauptseminar.",
+  "words": [
+    {
+      "answer": "POINCARE",
+      "clue": "Französischer Mathematiker — Vermutung über 3-Sphären, 2003 von Perelman bewiesen",
+      "row": 6,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "EULER",
+      "clue": "Schweizer Mathematiker des 18. Jh., Konstante e ≈ 2,71828",
+      "row": 2,
+      "col": 9,
+      "direction": "down"
+    },
+    {
+      "answer": "RIEMANN",
+      "clue": "Göttinger Mathematiker — Vermutung von 1859 über die Nullstellen der Zetafunktion",
+      "row": 1,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "TOPOLOGIE",
+      "clue": "Lehre von Eigenschaften geometrischer Objekte unter stetigen Verformungen",
+      "row": 1,
+      "col": 4,
+      "direction": "down"
+    },
+    {
+      "answer": "INTEGRAL",
+      "clue": "Grenzwert von Riemann-Summen — berechnet Flächen unter Kurven",
+      "row": 2,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "AXIOM",
+      "clue": "Unbewiesene Grundannahme einer mathematischen Theorie",
+      "row": 6,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "MATRIX",
+      "clue": "Rechteckiges Zahlenschema mit Zeilen und Spalten, Werkzeug der linearen Algebra",
+      "row": 8,
+      "col": 0,
+      "direction": "across"
+    },
+    {
+      "answer": "GAUSS",
+      "clue": "'Princeps mathematicorum' aus Braunschweig, Normalverteilung trägt seinen Namen",
+      "row": 1,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "HILBERT",
+      "clue": "Göttinger Mathematiker — 1900 in Paris formulierte 23 Probleme",
+      "row": 8,
+      "col": 7,
+      "direction": "across"
+    },
+    {
+      "answer": "FERMAT",
+      "clue": "Toulouser Jurist — sein 'Letzter Satz' wurde 1995 von Wiles bewiesen",
+      "row": 10,
+      "col": 5,
+      "direction": "across"
+    },
+    {
+      "answer": "CANTOR",
+      "clue": "Begründer der Mengenlehre, Diagonalargument für die Überabzählbarkeit der Reellen",
+      "row": 1,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "TENSOR",
+      "clue": "Verallgemeinerter Vektor mit mehreren Indizes, Grundobjekt der Differentialgeometrie",
+      "row": 9,
+      "col": 6,
+      "direction": "down"
+    },
+    {
+      "answer": "GALOIS",
+      "clue": "Mit 20 im Duell gestorbener Begründer der modernen Gruppentheorie",
+      "row": 0,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "PRIMZAHL",
+      "clue": "Natürliche Zahl größer 1, die nur durch 1 und sich selbst teilbar ist",
+      "row": 7,
+      "col": 12,
+      "direction": "down"
+    }
+  ],
+  "size": 15
+}

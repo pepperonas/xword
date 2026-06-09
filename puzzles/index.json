@@ -379,6 +379,36 @@
       "description": "Persönlichkeiten und Epochen aus dem Schulbuch — vom Mittelalter bis ins 19. Jahrhundert.",
       "wordCount": 14,
       "size": 16
+    },
+    {
+      "id": "tech-hard-01",
+      "file": "tech-hard-01.json",
+      "title": "Aus den Quellcode-Archiven",
+      "theme": "tech",
+      "difficulty": "hard",
+      "description": "Sprachen, Pioniere, Konzepte — Programmiersprachen-Theorie aus dem Vordiplom.",
+      "wordCount": 14,
+      "size": 15
+    },
+    {
+      "id": "tech-hard-02",
+      "file": "tech-hard-02.json",
+      "title": "Aus dem Maschinenraum",
+      "theme": "tech",
+      "difficulty": "hard",
+      "description": "Systems-Internas — Kernel, Netze, Speicher. Aus der Betriebssysteme-Vorlesung.",
+      "wordCount": 14,
+      "size": 14
+    },
+    {
+      "id": "wissenschaft-hard-03",
+      "file": "wissenschaft-hard-03.json",
+      "title": "Formeln & Beweise",
+      "theme": "wissenschaft",
+      "difficulty": "hard",
+      "description": "Mathematik — Sätze, Vermutungen, große Namen. Aus dem Hauptseminar.",
+      "wordCount": 14,
+      "size": 15
     }
   ]
 }

@@ -1,0 +1,108 @@
+{
+  "id": "tech-hard-01",
+  "title": "Aus den Quellcode-Archiven",
+  "theme": "tech",
+  "difficulty": "hard",
+  "description": "Sprachen, Pioniere, Konzepte — Programmiersprachen-Theorie aus dem Vordiplom.",
+  "words": [
+    {
+      "answer": "CURRYING",
+      "clue": "Zerlegung einer mehrstelligen Funktion in eine Kette einstelliger Funktionen",
+      "row": 4,
+      "col": 7,
+      "direction": "down"
+    },
+    {
+      "answer": "DIJKSTRA",
+      "clue": "Niederländischer Pionier — Pfad-Algorithmus, Semaphor, 'GOTO Considered Harmful'",
+      "row": 7,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "HASKELL",
+      "clue": "Lazy-evaluierte rein funktionale Sprache, benannt nach dem Logiker Curry",
+      "row": 5,
+      "col": 5,
+      "direction": "down"
+    },
+    {
+      "answer": "ERLANG",
+      "clue": "Bei Ericsson für Telefonvermittlungen entwickelte BEAM-Sprache",
+      "row": 10,
+      "col": 3,
+      "direction": "across"
+    },
+    {
+      "answer": "RITCHIE",
+      "clue": "Bell-Labs-Forscher, Schöpfer der Programmiersprache C",
+      "row": 2,
+      "col": 2,
+      "direction": "down"
+    },
+    {
+      "answer": "KERNEL",
+      "clue": "Innerster Betriebssystemkern mit direktem Hardware-Zugriff",
+      "row": 9,
+      "col": 3,
+      "direction": "down"
+    },
+    {
+      "answer": "PROLOG",
+      "clue": "Logikprogrammiersprache, 1972 in Marseille entwickelt",
+      "row": 2,
+      "col": 1,
+      "direction": "across"
+    },
+    {
+      "answer": "SCHEME",
+      "clue": "Minimaler Lisp-Dialekt, 1975 von Sussman und Steele am MIT",
+      "row": 4,
+      "col": 6,
+      "direction": "across"
+    },
+    {
+      "answer": "SEMAPHORE",
+      "clue": "Synchronisationsprimitive, 1965 von Dijkstra eingeführt",
+      "row": 2,
+      "col": 10,
+      "direction": "down"
+    },
+    {
+      "answer": "CLOSURE",
+      "clue": "Funktion gebunden an die Variablen ihres Definitionskontextes",
+      "row": 14,
+      "col": 2,
+      "direction": "across"
+    },
+    {
+      "answer": "MONAD",
+      "clue": "Strukturkonzept aus der Kategorientheorie zum Verketten von Berechnungen mit Kontext",
+      "row": 8,
+      "col": 9,
+      "direction": "across"
+    },
+    {
+      "answer": "LAMBDA",
+      "clue": "Anonyme Funktion, benannt nach Alonzo Churchs Kalkül von 1936",
+      "row": 7,
+      "col": 12,
+      "direction": "down"
+    },
+    {
+      "answer": "KNUTH",
+      "clue": "Stanford-Informatiker, Autor von 'The Art of Computer Programming'",
+      "row": 0,
+      "col": 8,
+      "direction": "down"
+    },
+    {
+      "answer": "SMALLTALK",
+      "clue": "Reines OOP-System aus dem Xerox PARC, von Alan Kay",
+      "row": 0,
+      "col": 0,
+      "direction": "across"
+    }
+  ],
+  "size": 15
+}
