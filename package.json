@@ -8,6 +8,8 @@
     "serve": "python3 -m http.server 8000",
     "version:bump": "bash scripts/bump-version.sh",
     "stats:bump": "node scripts/generate-stats.mjs",
+    "og:bump": "node scripts/generate-og-images.mjs",
+    "share:bump": "node scripts/generate-share-pages.mjs",
     "build": "bash scripts/build.sh"
   },
   "engines": {
@@ -19,6 +21,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "esbuild": "^0.28.0"
+    "@resvg/resvg-js": "^2.6.2",
+    "esbuild": "^0.28.0",
+    "satori": "^0.26.0"
   }
 }

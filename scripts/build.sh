@@ -16,6 +16,13 @@ bash scripts/bump-version.sh
 # Regenerate puzzles/stats.json from the manifest (drives README badges).
 node scripts/generate-stats.mjs
 
+# Regenerate per-puzzle OG-image PNGs (1200×630) into og/<id>.png.
+# Used by /share/<id>/ static pages for WhatsApp/Twitter/iMessage previews.
+node scripts/generate-og-images.mjs
+
+# Regenerate per-puzzle static share pages with puzzle-specific OG-meta.
+node scripts/generate-share-pages.mjs
+
 DIST=dist
 rm -rf "$DIST"
 mkdir -p "$DIST"

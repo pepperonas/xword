@@ -303,29 +303,60 @@
   }
   function closeSettings() { refs.settingsOverlay.classList.remove('show'); }
 
-  /* ---------- Share dialog ---------- */
-  const SHARE_URL = 'https://xword.celox.io/';
+  /* ---------- Share dialog ----------
+   *
+   * Share target depends on context:
+   *   - inside a puzzle  → https://xword.celox.io/share/<id>/
+   *   - elsewhere        → https://xword.celox.io/
+   *
+   * /share/<id>/ is a tiny static page generated at build time. It carries
+   * puzzle-specific OG/Twitter/JSON-LD meta so social cards render a
+   * custom preview thumbnail (og/<id>.png, 1200×630), then redirects the
+   * user into /#play=<id> in the SPA.
+   */
+  const APP_ORIGIN = 'https://xword.celox.io';
+  const DEFAULT_SHARE_URL = APP_ORIGIN + '/';
+
+  function currentShareTarget() {
+    const id = state.currentPuzzleId;
+    if (!id || !state.manifest) {
+      return { url: DEFAULT_SHARE_URL, title: 'Kreuzworträtsel', text: 'Kreuzworträtsel online — kostenlos & ohne Account' };
+    }
+    const puzzle = state.manifest.puzzles.find((p) => p.id === id);
+    if (!puzzle) return { url: DEFAULT_SHARE_URL, title: 'Kreuzworträtsel', text: 'Kreuzworträtsel online' };
+    return {
+      url: APP_ORIGIN + '/share/' + puzzle.id + '/',
+      title: puzzle.title + ' · Kreuzworträtsel',
+      text: puzzle.title + ' — ' + puzzle.description,
+    };
+  }
 
   function buildShareBody() {
+    const target = currentShareTarget();
     const body = document.createElement('div');
     body.className = 'qr-share';
+    body.dataset.shareUrl = target.url;
 
-    // QR — SVG output from window.qrcode (Kazuhiko Arase lib).
+    // QR — render the Kazuhiko Arase lib's SVG output via DOMParser so we
+    // never assign untrusted markup to innerHTML. The vendored lib only emits
+    // a deterministic <svg> wrapper from data we control, but the parser path
+    // is just as fast and keeps static analysers quiet.
     const canvas = document.createElement('div');
     canvas.className = 'qr-share-canvas';
     try {
       const qr = window.qrcode(0, 'M');
-      qr.addData(SHARE_URL);
+      qr.addData(target.url);
       qr.make();
-      // 4px cell, 0px native margin (the .qr-share-canvas padding plays
-      // that role with a controlled background)
-      canvas.innerHTML = qr.createSvgTag({ cellSize: 4, margin: 0, scalable: true });
-      const svg = canvas.querySelector('svg');
-      if (svg) {
-        svg.removeAttribute('width');
-        svg.removeAttribute('height');
-        svg.setAttribute('shape-rendering', 'crispEdges');
+      const svgMarkup = qr.createSvgTag({ cellSize: 4, margin: 0, scalable: true });
+      const parsed = new DOMParser().parseFromString(svgMarkup, 'image/svg+xml');
+      const svg = parsed.documentElement;
+      if (!svg || svg.nodeName.toLowerCase() !== 'svg') {
+        throw new Error('QR SVG malformed');
       }
+      svg.removeAttribute('width');
+      svg.removeAttribute('height');
+      svg.setAttribute('shape-rendering', 'crispEdges');
+      canvas.appendChild(document.importNode(svg, true));
     } catch (e) {
       canvas.textContent = 'QR-Code konnte nicht erzeugt werden';
     }
@@ -333,7 +364,7 @@
 
     const url = document.createElement('div');
     url.className = 'qr-share-url';
-    url.textContent = SHARE_URL;
+    url.textContent = target.url;
     body.appendChild(url);
 
     const buttons = document.createElement('div');
@@ -345,7 +376,7 @@
     copyBtn.textContent = 'Link kopieren';
     copyBtn.addEventListener('click', async () => {
       try {
-        await navigator.clipboard.writeText(SHARE_URL);
+        await navigator.clipboard.writeText(target.url);
         flashShareToast(body, 'Link kopiert');
       } catch (e) {
         flashShareToast(body, 'Kopieren fehlgeschlagen');
@@ -362,9 +393,9 @@
       shareBtn.addEventListener('click', async () => {
         try {
           await navigator.share({
-            title: 'Kreuzworträtsel',
-            text: 'Online-Kreuzworträtsel mit 30 Rätseln und Tagespuzzle',
-            url: SHARE_URL,
+            title: target.title,
+            text: target.text,
+            url: target.url,
           });
         } catch (e) { /* user cancelled or share unavailable */ }
       });
@@ -836,7 +867,9 @@
     if (!puzzle) return;
     const time = document.getElementById('winTime').textContent;
     const hints = document.getElementById('winHints').textContent;
-    const url = window.location.origin + '/#play=' + puzzle.id;
+    // Share via the per-puzzle static page so social cards render the
+    // dedicated OG image (og/<id>.png). The page redirects humans to the SPA.
+    const url = APP_ORIGIN + '/share/' + puzzle.id + '/';
     const text = '🧩 ' + puzzle.title + ' gelöst in ' + time + ' mit ' + hints + ' Hinweisen.\n' + url;
     // Use Web Share API on mobile/supported browsers
     if (navigator.share) {

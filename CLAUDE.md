@@ -75,6 +75,90 @@ Currently 53 shipped puzzles, 18 themes (tech, allgemein, klassik, mythologie, w
 
 ---
 
+## Per-puzzle share thumbnails (OG-image pipeline)
+
+Sharing a puzzle URL on WhatsApp / Twitter / iMessage / Slack used to show
+the generic landing-page card, because the SPA's hash routing
+(`/#play=<id>`) is invisible to crawlers. Since 2026-06-14 every puzzle
+has its own static share page and a custom-rendered 1200×630 PNG.
+
+### URL shape
+
+| URL | Who reads it | What's there |
+|---|---|---|
+| `https://xword.celox.io/share/<id>/` | Social crawler **and** human | Tiny HTML with puzzle-specific `og:*` + `twitter:*` + `Schema.org/Game` JSON-LD; `<meta http-equiv="refresh">` + `window.location.replace()` push humans straight into `/#play=<id>` |
+| `https://xword.celox.io/og/<id>.png` | Social crawler only | Custom 1200×630 PNG with the puzzle title, theme chip, difficulty chip, description, and a sample-word mini-grid corner |
+
+The Frontend share dialog (and the Win-Overlay share button) now use the
+`/share/<id>/` URL whenever a puzzle is active. On the selector screen
+(no puzzle yet) we still share the root URL.
+
+### Generation pipeline (all build-time, all static output)
+
+```
+scripts/generate-og-images.mjs      → og/<id>.png
+scripts/generate-share-pages.mjs    → share/<id>/index.html
+```
+
+Both are hooked into `scripts/build.sh` and exposed as `npm run
+og:bump` / `share:bump` for ad-hoc regeneration. Inputs are only the
+manifest plus the per-puzzle JSON.
+
+- `og:` uses **satori + @resvg/resvg-js** (dev-deps only — no runtime
+  load on the VPS). Layout follows the brand: dark M3 surface, primary
+  blue + gold accent radial gradients, Inter ExtraBold for the headline,
+  difficulty-coloured chip (`#2d6e4e` easy / `#c8a96a` medium / `#d97757`
+  hard). Sample word is the longest 5-7 letter answer in the puzzle,
+  rendered as crossword cells in the bottom-right corner.
+- `share:` writes ~4 KB HTML per puzzle. Schema.org `Game` JSON-LD
+  carries the localised theme + difficulty as `gameItem` + two
+  `additionalProperty` entries. The HTML body shows a "Wird ins Rätsel
+  weitergeleitet…" fallback with a direct deep-link button for the rare
+  browsers that ignore both `<meta http-equiv="refresh">` and the
+  inline JS redirect.
+
+### Fonts
+
+`scripts/fonts/Inter-{Regular,Bold,ExtraBold}.ttf` are committed
+(~1.2 MB total). They're only needed for the build-time OG renderer,
+never shipped to clients. Inter chosen for clean Latin coverage; the
+runtime app still uses Roboto Serif / Flex / Mono.
+
+### What's committed vs. gitignored
+
+```
+/og/          gitignored  — regenerated every build, ~6.7 MB total
+/share/       gitignored  — regenerated every build, ~420 KB total
+scripts/fonts/   committed  — needed for deterministic builds
+puzzles/stats.json committed — shields.io reads it via raw.githubusercontent.com
+```
+
+### Cache-busting
+
+Social cachers (WhatsApp/Facebook/LinkedIn) cache `og:image` per URL for
+days. If the design changes substantively, append `?v=<n>` to the
+`og:image` content in the share-page template — that's enough to force
+re-scrape on next crawl. Otherwise the `Cache-Control` on the static
+PNG (default-served by nginx) plus the next-day crawl re-fetch handle
+it on their own.
+
+### Gotchas we hit
+
+- **Satori warns `z-index is currently not supported`** — harmless,
+  layered absolute positioning still renders correctly. The two background
+  gradient circles use explicit `position: absolute` + `top/left/right/bottom`
+  and rely on natural document order for stacking.
+- **No emoji glyphs in Inter.** All visual elements (brand square, chips)
+  are CSS shapes, no emojis.
+- **Satori needs `display: flex` on every container with multiple
+  children.** A missing flex on a wrapper crashes the render. The text
+  child of a flex container is wrapped in another `display: flex` div.
+- **Mixed German quotes "„…&quot;" in `og:image:alt`** would round-trip
+  ugly through `escape()`. Use Unicode opener `„` AND Unicode closer `"`,
+  not the ASCII closer. The `tests/share-pages.test.js` test pins this.
+
+---
+
 ## Database schema
 
 SQLite at `/opt/xword-api/data/xword.db`, WAL mode, foreign keys on.
@@ -445,8 +529,9 @@ Tests live in three groups:
 - `tests/input-dedupe.test.js` — virtual keyboard double-fire regression suite (11 tests, deterministic via injectable timestamp)
 - `tests/server/*.test.js` — backend coverage (34 tests, dynamic `import()` of ES modules into CommonJS test files): session, rate-limit, db (migrations + upsert behavior), achievements (ranks + streaks + computeProfile).
 - `tests/puzzles.test.js` — puzzle-data integrity (71 tests, no external deps): manifest ↔ filesystem consistency, per-puzzle shape (required fields, answer charset, grid bounds, duplicate-answer-within-one-puzzle check), clue-quality scans (answer-substring-in-clue, mixed German-quote pattern, min clue length), cross-puzzle reuse soft-cap (max 2 puzzles per answer), and stats.json freshness against the manifest. Caught real bugs on first run: `EICHE` clue contained "Eicheln" (Buche/BUCHE the same), `BAROCK` appeared in 3 puzzles (cap is 2).
+- `tests/share-pages.test.js` — per-puzzle share-page template (9 tests): imports `pageFor()` from `scripts/generate-share-pages.mjs` and renders a synthetic puzzle, asserts every OG / Twitter / canonical / `<meta http-equiv=refresh>` / inline-JS-redirect field is correct and the embedded Schema.org `Game` JSON-LD carries the localised theme + difficulty label. Also pins the German-typographic-quote handling in `og:image:alt`.
 
-Total: 184 tests. Run all: `npm test`. Run only one suite: `node --test tests/server/session.test.js`.
+Total: 193 tests. Run all: `npm test`. Run only one suite: `node --test tests/server/session.test.js`.
 
 ---
 
