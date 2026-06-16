@@ -241,6 +241,67 @@ Three quirks of virtual keyboards forced the input pipeline to be more elaborate
 
 ---
 
+## Mobile layout (2026-06-17)
+
+Tested against iPhone 12/13/14 (390×844) and iPhone SE (320×568).
+The pre-existing `@media (max-width: 700px)` rules covered the board /
+cells / controls but missed several layout traps on the selector and
+game-header surfaces:
+
+**Stats-bar — 2×2 grid below 600 px.** The four-column header
+(`Fortschritt / Wörter / Zeit / Hinweise`) used `repeat(4, 1fr)` plus
+a 28 px display font on `.stat-value`. The grid honoured the
+per-cell min content-width (~95 px), so the row needed >380 px to
+fit four cards. At 320 / 390 viewports the fourth stat (Hinweise)
+was clipped or completely off-screen, and the page picked up a
+horizontal scrollbar.
+Fix: `@media (max-width: 600px) { .stats-bar { grid-template-columns:
+repeat(2, 1fr); } .stat-value { font-size: 22px; } ... }`. Folds to
+2×2, value font shrinks, padding tightens. The labels are short
+enough that even at 320 px nothing wraps.
+
+**Filter chips — 40 px on mobile.** Base height is 32 px (M3
+spec). The same mobile block bumps to `height: 40px; font-size: 13px`
+inside `@media (max-width: 700px)`. Still M3-shaped, just no longer
+asks for a stylus-precision tap.
+
+**Switch hit-area — invisible `::before` overlay.** `.switch` is
+32 px because the M3 Switch spec says so. We don't enlarge the
+visible track; instead, mobile gets a `::before { inset: -8px
+-10px; }` overlay that turns the tappable rect into ~48 px. (`::after`
+is already in use as the knob — don't reach for it.) The whole
+`.toggle-row` also gets `min-height: 48px` for thumb scrubbing along
+the row.
+
+**Scrollbar-gutter — desktop only.** `html { scrollbar-gutter: stable
+}` reserved ~15 px on every device, including ones with overlay
+scrollbars (all touch, recent macOS). On a 320 px viewport that's
+~5 % of horizontal real estate wasted. Now gated:
+```css
+@media (hover: hover) and (pointer: fine) {
+  html { scrollbar-gutter: stable; }
+}
+```
+Only desktop mice (gutter-stealing scrollbars) opt in.
+
+**PWA safe-area-insets.** When installed as a PWA the chrome is
+gone; without inset handling the user-bar can sit under the camera
+island and the footer under the home-indicator gesture area. Body
+padding on mobile now uses `max(16px, env(safe-area-inset-top))`
+etc. on all four sides so installs respect the device shape.
+
+**Things we deliberately did NOT change on mobile:**
+- The on-screen crossword cell sizing — `clamp(14px, 4.2vw, 22px)`
+  has been stable through many real-device tests; touching it risks
+  re-breaking iOS keyboard auto-zoom.
+- The clue-panel layout (`.main` grid switches to single-column at
+  900 px in the existing block) — proven good.
+- The puzzle-card hover-lift was already correctly gated behind
+  `(hover: hover) and (pointer: fine)` so taps don't leave a sticky
+  hover state.
+
+---
+
 ## Versioning
 
 `scripts/bump-version.sh` reads `git rev-list --count HEAD` and writes `version.json`:
