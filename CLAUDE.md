@@ -428,6 +428,25 @@ strongest signal of where the player can type.
 (body, variable wght), Roboto Mono (code/stats). Material Symbols
 Outlined is loaded for future icon swaps.
 
+**Motion system (2026-06-16 craft pass)** — one timing vocabulary,
+reused everywhere. Defined as CSS custom props on `:root`:
+
+- Durations: `--xd-dur-fast 120ms` (hover/press), `--xd-dur-quick 200ms`
+  (focus rings, small state changes), `--xd-dur-base 320ms` (card lifts,
+  panel opens), `--xd-dur-page 480ms` (view transitions, overlay drops).
+- Easings: `--ease-flat` (M3 emphasized, for opacity/color — fades that
+  overshoot read as broken), `--ease-spring` (gentle overshoot+settle,
+  for any spatial move), `--ease-spring-soft` (deeper overshoot for big
+  moves), `--ease-anticipate` (counter-move before main move).
+
+Reach for the next duration up only when the transition spans a bigger
+distance. Don't define new easings ad-hoc — pick one of the four.
+
+**`prefers-reduced-motion: reduce`** strictly clips all animation/
+transition durations to 0.001ms, neutralises `puzzle-card` tilt
+transforms, locks overlay cards at `scale(1)`, and hides the confetti.
+Bake-in, not bolt-on — every new motion must survive this filter.
+
 **Subtle animations**:
 - M3 state-layer on buttons + filter chips (8/10/14% opacity overlays
   on hover/focus/press; +`scale(0.97-0.98)` on press)
@@ -441,6 +460,87 @@ Outlined is loaded for future icon swaps.
 - Word-solve flash: gentle scale + glow pulse, staggered per cell when
   a word goes from incorrect → correct (engine.js, suppressed on the
   final word so the big solve-wave / win confetti carries that moment)
+
+**Signature reactive moment — puzzle-card cursor tilt** (`setupCardTilt`
+in `app.js`). Gated to `(hover: hover) and (pointer: fine)` and
+disabled under reduced motion — touch users do not pay the perf cost.
+
+- One delegated `pointermove` listener on `#puzzleSections`, one shared
+  `requestAnimationFrame` loop. No per-card listeners. Re-renders of
+  the card list need no re-binding.
+- Each tracked card has `cur` / `vel` / `tgt` axis vectors. The frame
+  loop integrates a damped spring (`K=0.18`, `damp=0.78`) so the card
+  overshoots toward the target, then settles. Rigid 1:1 cursor tracking
+  reads as computer-y; inertia + settle sells "object with mass".
+- Output goes into `--tilt-x` / `--tilt-y` CSS vars on the card. The
+  `.puzzle-card` transform composes them with the hover lift as a single
+  3D matrix: `perspective(900px) rotateX(...) rotateY(...) translateY(...)`.
+- Max 4° on either axis — anything more reads as a parlour trick.
+- Settled cards remove themselves from the tracker so the rAF loop
+  shuts down between gestures.
+
+**Directional view transitions** (selector ↔ game ↔ profile ↔ admin)
+use the View Transitions API. `<html data-nav="forward|back">` switches
+which CSS animation runs — `xd-page-out`/`xd-page-in` (forward push)
+vs. `xd-page-out-back`/`xd-page-in-back` (back pull). `popstate` marks
+back automatically. `withViewTransition()` in `app.js` falls back to a
+direct call when the API or reduced-motion says so. On back-nav the
+"rise" entrance animations on `.masthead`, `.puzzle-grid`, etc. are
+suppressed via `html[data-nav="back"]` — the visitor is returning, not
+arriving (blueprint: don't replay entrances on return).
+
+**Scroll restoration** — `history.scrollRestoration = 'manual'` is set
+in the inline `<head>` boot script, so the browser never animates a
+scroll-to-top during hash changes. `navigateToGame()` stashes the
+selector's `scrollY` in `scrollMemory.selector`; coming back the inner
+`showSelector()` resolves, then we restore that position instantly. The
+restore runs INSIDE the view-transition callback so it lands inside the
+new frame — no flicker between transition end and scroll snap.
+
+**Focus model**:
+- Global `*:focus-visible` ring uses the primary token plus a soft
+  4-px halo (`box-shadow` with 22%-alpha primary). Pill-shaped
+  controls (`.btn`, `.filter-chip`, `.user-chip`, `.theme-option`,
+  `.back-link`, `.admin-tab`, `.clues-tab`) override the radius back
+  to `--md-shape-full` so the ring follows the pill.
+- The grid keeps its own focus model — `:focus-visible` is killed on
+  `.cell` and the hidden input. The active-cell ring is the source of
+  truth there.
+- Dialogs / settings / win overlay all return focus to the trigger on
+  close (`prevFocus.focus({ preventScroll: true })`).
+
+**`text-wrap: balance`** applied to every display heading (`.masthead
+h1`, `.win-card h2`, `.settings-head h2`, `.xdialog-title`, profile
+section H2s, `.puzzle-card h3`, `.daily-card h2`, `.rank-banner-name`)
+so titles never end on a widow word. `text-wrap: pretty` on body copy
+(`.masthead .subtitle`, `.puzzle-card p`, `.daily-card .meta`,
+`.empty-state`).
+
+**Touch hover ghost-state fix** — `.puzzle-card:hover` (background
+shift + box-shadow + `--tilt-lift: -3px`) sits inside `@media (hover:
+hover) and (pointer: fine)`. Touch users no longer get a sticky lifted
+card after a tap.
+
+**Robustness — `body.scroll-locked`**: when ANY modal opens (Xdialog,
+settings, win overlay) a refcounted scroll-lock stack adds the class to
+`<body>` (`overflow: hidden`, `touch-action: none`). The page's
+`scrollY` is saved before lock, restored after the last modal closes.
+Stacked modals (settings → confirm) refcount correctly — the body lock
+survives until the outermost modal closes. `scrollbar-gutter: stable
+both-edges` on `<html>` reserves the scrollbar width so the lock toggle
+causes no horizontal jump.
+
+**Focus trap** — `dialog.js` exports a `trapFocus(container, e)` Tab
+handler that cycles through all focusables inside the dialog card.
+Wired into the keydown handler of both `Xdialog.alert/confirm` and
+`Xdialog.show`. The settings overlay has its own equivalent trap inline
+in `app.js` (separate code path because it lives in static HTML, not
+generated by the dialog module).
+
+**Progressive-enhancement marker** — inline `<head>` script adds
+`html.js` synchronously, before styles parse. Utility classes
+`.js-only` / `.no-js-only` are gated by it so no element can ever be
+stranded hidden when JS is off.
 
 **Overlays — three classes share the `.overlay` backdrop**:
 1. **Win overlay** (`#overlay > .win-card`) — shown via `engine.win()` when the
