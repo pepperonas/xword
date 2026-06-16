@@ -608,6 +608,18 @@ a:hover { text-decoration-thickness: 2px; }
   font-weight: 400;
   margin-left: 2px;
 }
+/* Mobile: 4 cards × 28px font overflow narrow viewports (e.g. an iPhone
+   SE 320 viewport, even an iPhone 12 at 390). Fold to 2×2 and shrink
+   the value font; the labels are short enough to fit either way. The
+   stat itself is read at a glance, so a smaller display font does not
+   hurt readability. */
+@media (max-width: 600px) {
+  .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .stat { padding: 12px 10px; }
+  .stat-value { font-size: 22px; }
+  .stat-value .sub { font-size: 12px; }
+  .stat-label { font-size: 10px; margin-bottom: 4px; }
+}
 
 /* ============ PROGRESS BAR ============ */
 .progress-track {
@@ -1322,7 +1334,16 @@ a:hover { text-decoration-thickness: 2px; }
 
 @media (max-width: 480px) {
   .puzzle-grid { grid-template-columns: 1fr; gap: 12px; }
-  body { padding: 16px 12px 60px; }
+  body {
+    /* Honour iPhone notch + home-indicator. When installed as a PWA
+       the chrome is gone and content has to respect these insets, or
+       the user-bar gets covered by the camera island and the footer
+       sits under the swipe gesture area. */
+    padding: max(16px, env(safe-area-inset-top))
+             max(12px, env(safe-area-inset-right))
+             max(60px, calc(env(safe-area-inset-bottom) + 24px))
+             max(12px, env(safe-area-inset-left));
+  }
 }
 
 /* ============ MOBILE TOUCH ============ */
@@ -1337,8 +1358,23 @@ a:hover { text-decoration-thickness: 2px; }
     min-height: 44px;
   }
   .clue-item { padding: 14px 16px; }
-  .filter-chip { padding: 0 14px; font-size: 12px; }
+  /* Filter chips: M3 baseline (32 px) sits below the comfortable thumb
+     target. Touch devices get 40 px + slightly bigger font so they
+     don't read as "tap precisely" affordances. */
+  .filter-chip { height: 40px; padding: 0 14px; font-size: 13px; }
   .back-link, .btn { min-height: 40px; }
+  /* The visible switch is 32 px and that is intentional (M3 Switch
+     spec). What matters is the TAP area — the entire `.toggle-row` is
+     clickable via label delegation, but mobile users tap the switch
+     itself. Inflate the hit area via an invisible ::before overlay
+     (::after is already the knob). */
+  .switch::before {
+    content: '';
+    position: absolute;
+    inset: -8px -10px;
+  }
+  /* Toggle rows: comfortable vertical padding for thumb scrubbing. */
+  .toggle-row { min-height: 48px; }
 }
 
 /* ============ WIN OVERLAY ============ */
@@ -2468,11 +2504,16 @@ html[data-nav="back"] .admin-content {
 }
 
 /* ============ STABLE SCROLLBAR GUTTER ============
-   Reserve gutter on the SCROLLING ROOT (body, since html owns the viewport
-   in our case) — `both-edges` on html was over-eager and could leave the
-   page scrollable past the footer in some browsers. `stable` alone keeps
-   the layout from jumping when scroll-lock toggles. */
-html { scrollbar-gutter: stable; }
+   Reserve gutter on the SCROLLING ROOT only on devices that actually have
+   classic gutter-stealing scrollbars (desktop mice). Touch devices use
+   overlay scrollbars, where reserving a gutter just wastes 15 px of
+   horizontal space we badly need on a 320 px viewport. The `(pointer:
+   coarse)` query is the closest signal for "touch device", and `(hover:
+   none)` doubles the gate so a non-touch laptop with a stylus doesn't
+   also lose the gutter. */
+@media (hover: hover) and (pointer: fine) {
+  html { scrollbar-gutter: stable; }
+}
 
 /* ============ PROGRESSIVE ENHANCEMENT ============
    Set by the inline boot script. Behavior gated on .js never strands a
