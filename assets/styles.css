@@ -2468,10 +2468,11 @@ html[data-nav="back"] .admin-content {
 }
 
 /* ============ STABLE SCROLLBAR GUTTER ============
-   Eliminates the horizontal jump when content height crosses the viewport
-   threshold (selector → game often does this). Also prevents layout
-   thrash when scroll-lock toggles. */
-html { scrollbar-gutter: stable both-edges; }
+   Reserve gutter on the SCROLLING ROOT (body, since html owns the viewport
+   in our case) — `both-edges` on html was over-eager and could leave the
+   page scrollable past the footer in some browsers. `stable` alone keeps
+   the layout from jumping when scroll-lock toggles. */
+html { scrollbar-gutter: stable; }
 
 /* ============ PROGRESSIVE ENHANCEMENT ============
    Set by the inline boot script. Behavior gated on .js never strands a
@@ -2488,39 +2489,68 @@ body.scroll-locked {
   touch-action: none;
 }
 
-/* ============ VIEW TRANSITIONS (selector ↔ game) ============
-   Print-edition page-turn metaphor. Going deeper (selector → game) the new
-   view slides in from the right with a touch of overshoot, the old slides
-   slightly left and fades. Back is the mirror. Reduced motion strips both. */
+/* ============ VIEW TRANSITIONS ============
+   Print-edition page-stack metaphor. Forward (going deeper into a puzzle):
+   the old page recedes — it scales down a touch and fades, as if pushed
+   slightly away from the camera. The new page rises from below with a
+   gentle spring overshoot, like the next sheet being lifted onto the
+   stack. Back is the mirror — the page we were on falls down + fades,
+   the previous one comes back into focus from a slight push-back.
+
+   No horizontal motion: it kept reading as "window switch", not
+   "turning the page". Vertical motion + scale is the editorial-stack
+   feel. ::view-transition-group(root) is set to a fixed transform-origin
+   so both pseudos pivot around the same anchor — otherwise the
+   defaults make the "out" pseudo grow during scale-out.
+
+   The old pseudo lives on top during forward (z-index trick) so the new
+   page appears to RISE BEHIND the old one as it lifts off — exactly the
+   print-stack physical metaphor. */
 @media not (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: var(--xd-dur-page);
+    animation-fill-mode: both;
+    transform-origin: 50% 30%;
+  }
   ::view-transition-old(root) {
-    animation: xd-page-out var(--xd-dur-page) var(--ease-flat) both;
+    animation-name: xd-page-recede;
+    animation-timing-function: var(--ease-flat);
+    z-index: 1;
   }
   ::view-transition-new(root) {
-    animation: xd-page-in var(--xd-dur-page) var(--ease-spring) both;
+    animation-name: xd-page-rise;
+    animation-timing-function: var(--ease-spring);
+    z-index: 0;
   }
-  html[data-nav="back"] ::view-transition-old(root) {
-    animation-name: xd-page-out-back;
+  html[data-nav="back"]::view-transition-old(root) {
+    animation-name: xd-page-fall;
+    z-index: 2; /* old page falls IN FRONT on the way back */
   }
-  html[data-nav="back"] ::view-transition-new(root) {
-    animation-name: xd-page-in-back;
+  html[data-nav="back"]::view-transition-new(root) {
+    animation-name: xd-page-return;
+    z-index: 1;
   }
 }
-@keyframes xd-page-out {
-  from { opacity: 1; transform: translateX(0); }
-  to   { opacity: 0; transform: translateX(-3%); }
+/* Forward — old recedes (push away), new rises from below. */
+@keyframes xd-page-recede {
+  from { opacity: 1; transform: scale(1)    translateY(0); }
+  to   { opacity: 0; transform: scale(1.04) translateY(-2%); }
 }
-@keyframes xd-page-in {
-  from { opacity: 0; transform: translateX(4%); }
-  to   { opacity: 1; transform: translateX(0); }
+@keyframes xd-page-rise {
+  0%   { opacity: 0; transform: scale(0.985) translateY(4%); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: scale(1)     translateY(0); }
 }
-@keyframes xd-page-out-back {
-  from { opacity: 1; transform: translateX(0); }
-  to   { opacity: 0; transform: translateX(3%); }
+/* Back — old falls down + fades, new returns from a slight push-back. */
+@keyframes xd-page-fall {
+  from { opacity: 1; transform: scale(1)    translateY(0); }
+  to   { opacity: 0; transform: scale(0.985) translateY(3%); }
 }
-@keyframes xd-page-in-back {
-  from { opacity: 0; transform: translateX(-4%); }
-  to   { opacity: 1; transform: translateX(0); }
+@keyframes xd-page-return {
+  0%   { opacity: 0; transform: scale(1.025) translateY(-1.5%); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: scale(1)     translateY(0); }
 }
 
 /* ============ PRINT ============ */

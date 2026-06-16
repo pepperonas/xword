@@ -1286,6 +1286,14 @@
       await refreshProgressMap();
       renderPuzzleList();
     }
+    // Safety net: if scroll position lingered past the new content (the
+    // game view is taller than the selector, or a view-transition left
+    // an artifact), clamp it back into range so the user never lands in
+    // empty space below the footer.
+    requestAnimationFrame(() => {
+      const max = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      if (window.scrollY > max) window.scrollTo({ top: max, behavior: 'instant' });
+    });
   }
 
   /* ---------- Routing ---------- *
@@ -1302,7 +1310,10 @@
    *    should land exactly where they left, as if the page was paused.
    */
   const scrollMemory = { selector: 0 };
-  let navDirection = 'forward';
+  // The flag is true while a programmatic hash change is in flight — so
+  // the popstate that Blink/WebKit fire as a side effect of assigning
+  // `location.hash` does NOT override the direction we just set.
+  let programmaticNav = false;
 
   function rememberSelectorScroll() {
     if (refs.viewSelector && refs.viewSelector.classList.contains('active')) {
@@ -1314,34 +1325,43 @@
   }
 
   function navigateToGame(puzzleId) {
-    navDirection = 'forward';
     document.documentElement.setAttribute('data-nav', 'forward');
     rememberSelectorScroll();
+    programmaticNav = true;
     window.location.hash = `play=${puzzleId}`;
   }
   function navigateToSelector() {
-    navDirection = 'back';
     document.documentElement.setAttribute('data-nav', 'back');
+    programmaticNav = true;
     window.location.hash = '';
   }
 
-  // When the user presses the browser back/forward button, popstate fires
-  // before hashchange. Default the direction to 'back' there.
+  // Real browser-back / forward only: when this fires WITHOUT a
+  // programmatic flag, it's the user pressing the back button.
   window.addEventListener('popstate', () => {
-    navDirection = 'back';
+    if (programmaticNav) return;
     document.documentElement.setAttribute('data-nav', 'back');
   });
 
   // View Transitions API wrapper. Gracefully falls back to a direct call.
+  // After the transition finishes, reset data-nav to 'forward' so a manual
+  // URL/hash change (not via our navigateTo* helpers) defaults to the
+  // forward animation instead of inheriting the last back state.
   function withViewTransition(fn) {
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduced || typeof document.startViewTransition !== 'function') {
       return fn();
     }
-    document.startViewTransition(fn);
+    const t = document.startViewTransition(fn);
+    t.finished.finally(() => {
+      document.documentElement.setAttribute('data-nav', 'forward');
+    });
   }
 
   function onHashChange() {
+    // Consume the programmatic flag now — by the time onHashChange runs,
+    // the popstate side effect has already passed.
+    programmaticNav = false;
     const hash = window.location.hash.replace(/^#/, '');
     const wasOnGame = refs.viewGame.classList.contains('active');
     const wasOnSelector = refs.viewSelector.classList.contains('active');
