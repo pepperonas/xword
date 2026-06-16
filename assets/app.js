@@ -1344,18 +1344,19 @@
   });
 
   // View Transitions API wrapper. Gracefully falls back to a direct call.
-  // After the transition finishes, reset data-nav to 'forward' so a manual
-  // URL/hash change (not via our navigateTo* helpers) defaults to the
-  // forward animation instead of inheriting the last back state.
+  // We deliberately do NOT reset data-nav after .finished — that would
+  // flip the attribute from 'back' to 'forward' on the now-visible
+  // selector, which un-applies the `html[data-nav="back"] .puzzle-grid
+  // { animation: none }` rule, restarting the rise entrance animations
+  // and producing a visible "hard refresh" flash. data-nav is set by
+  // navigateToGame/navigateToSelector/popstate on the NEXT navigation;
+  // its lingering value is harmless because no transition is running.
   function withViewTransition(fn) {
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduced || typeof document.startViewTransition !== 'function') {
       return fn();
     }
-    const t = document.startViewTransition(fn);
-    t.finished.finally(() => {
-      document.documentElement.setAttribute('data-nav', 'forward');
-    });
+    document.startViewTransition(fn);
   }
 
   function onHashChange() {
