@@ -256,7 +256,7 @@ The frontend fetches it on init and shows "Ver. N" in the masthead eyebrow. `ver
 ## PWA / offline
 
 - `manifest.webmanifest`: `display: standalone`, theme/background colors, icons (svg + png).
-- `sw.js` (cache version `xword-v7`, bump when shipping app-shell changes — especially CSS, since stale-while-revalidate will otherwise serve last-cached styles.css for one more reload):
+- `sw.js` (cache version `xword-v9`, bump when shipping app-shell changes — especially CSS, since stale-while-revalidate will otherwise serve last-cached styles.css for one more reload):
   - App shell → stale-while-revalidate (`SHELL_CACHE`)
   - Puzzle JSONs → network-first, cache fallback (`PUZZLE_CACHE`)
   - Google Fonts → cache-first opaque (`FONTS_CACHE`)
@@ -480,22 +480,81 @@ disabled under reduced motion — touch users do not pay the perf cost.
   shuts down between gestures.
 
 **Directional view transitions** (selector ↔ game ↔ profile ↔ admin)
-use the View Transitions API. `<html data-nav="forward|back">` switches
-which CSS animation runs — `xd-page-out`/`xd-page-in` (forward push)
-vs. `xd-page-out-back`/`xd-page-in-back` (back pull). `popstate` marks
-back automatically. `withViewTransition()` in `app.js` falls back to a
-direct call when the API or reduced-motion says so. On back-nav the
-"rise" entrance animations on `.masthead`, `.puzzle-grid`, etc. are
-suppressed via `html[data-nav="back"]` — the visitor is returning, not
-arriving (blueprint: don't replay entrances on return).
+use the View Transitions API as a **vertical print-stack metaphor** —
+no horizontal motion, because horizontal slide reads as "window switch"
+not "turning the page".
+
+- Forward (deeper): old page recedes (scale 1 → 1.04, translateY -2%
+  + fade) and stays IN FRONT (`z-index: 1`); the new page rises from
+  below (translateY 4% → 0, scale 0.985 → 1) with spring overshoot
+  BEHIND the old one — the physical print-stack metaphor (the next
+  sheet lifts onto the stack as the previous is pushed away).
+- Back: old falls IN FRONT (scale 1 → 0.985, translateY 3%, z-index
+  2); new returns from slight push-back (scale 1.025 → 1, translateY
+  -1.5% → 0).
+- Common `transform-origin: 50% 30%` on both pseudos keeps them
+  pivoting around the same anchor — otherwise scale-out grows the
+  old pseudo instead of receding it.
+
+`<html data-nav="forward|back">` switches which keyframe set runs.
+Selectors use the direct-pseudo form
+`html[data-nav="back"]::view-transition-old(root)` (no space),
+because some engines don't match the descendant-with-space form for
+view-transition pseudos.
+
+`navigateToGame()` / `navigateToSelector()` set `data-nav` and flip a
+`programmaticNav` flag before changing `location.hash`. The flag is
+needed because **Blink/WebKit fire `popstate` as a side effect of
+`location.hash = …`** — without the flag, my popstate listener would
+treat every programmatic forward nav as a user-back and overwrite
+data-nav back to 'back' a frame later, making every transition run
+the back keyframes. The flag is consumed (`= false`) at the top of
+`onHashChange` so the next real popstate is interpreted correctly.
+
+**Do NOT** reset `data-nav` to `'forward'` in
+`.finished.finally(...)` after a back transition. Doing so un-applies
+the `html[data-nav="back"] .puzzle-grid { animation: none }`
+suppression rule, which restarts the rise entrance animations on the
+now-visible selector — looks like a hard refresh after the
+transition. The lingering 'back' state between transitions is
+harmless because nothing is animating.
+
+On back-nav the "rise" entrance animations on `.masthead`,
+`.puzzle-grid`, etc. are suppressed via `html[data-nav="back"]` — the
+visitor is returning, not arriving (blueprint: don't replay
+entrances on return).
+
+`withViewTransition()` in `app.js` falls back to a direct call when
+the API isn't available or `prefers-reduced-motion: reduce` is on.
 
 **Scroll restoration** — `history.scrollRestoration = 'manual'` is set
-in the inline `<head>` boot script, so the browser never animates a
-scroll-to-top during hash changes. `navigateToGame()` stashes the
-selector's `scrollY` in `scrollMemory.selector`; coming back the inner
-`showSelector()` resolves, then we restore that position instantly. The
-restore runs INSIDE the view-transition callback so it lands inside the
-new frame — no flicker between transition end and scroll snap.
+in `assets/boot.js` (NOT inline — see CSP note below), so the browser
+never animates a scroll-to-top during hash changes and doesn't try to
+restore the previous scroll position itself. Without this, a back-nav
+visibly SNAPS the scroll position right as the view-transition pseudos
+detach, which reads as a hard refresh.
+
+`navigateToGame()` stashes the selector's `scrollY` in
+`scrollMemory.selector`; coming back the inner `showSelector()` resolves,
+then we restore that position instantly. The restore runs INSIDE the
+view-transition callback so it lands inside the new frame — no flicker
+between transition end and scroll snap.
+
+`showSelector()` also has a defensive scroll clamp at the end: if the
+post-render `scrollY` exceeds the new selector's content height (e.g.
+the game view was taller and the browser left scrollY beyond the new
+range), it instantly snaps back into range so the visitor never lands
+in empty space below the footer.
+
+**CSP note** — the deployed CSP is `script-src 'self'` with no
+`unsafe-inline` and no hash. An inline `<script>` in `<head>` is
+**silently blocked** — no visible error in DevTools unless console is
+filtered to "All". Anything that has to run before app.js / styles.css
+parse (currently: `html.js` PE-marker, `scrollRestoration='manual'`,
+the theme-init early dark/light apply on legal pages) lives in an
+external file under `assets/`. If you add another pre-paint setting,
+make a new external file or extend `boot.js` — never reach for inline
+script.
 
 **Focus model**:
 - Global `*:focus-visible` ring uses the primary token plus a soft
@@ -537,10 +596,16 @@ Wired into the keydown handler of both `Xdialog.alert/confirm` and
 in `app.js` (separate code path because it lives in static HTML, not
 generated by the dialog module).
 
-**Progressive-enhancement marker** — inline `<head>` script adds
-`html.js` synchronously, before styles parse. Utility classes
-`.js-only` / `.no-js-only` are gated by it so no element can ever be
-stranded hidden when JS is off.
+**Progressive-enhancement marker** — `assets/boot.js` (loaded from
+`<head>` before `styles.css`) adds `html.js` synchronously, before
+styles parse. Utility classes `.js-only` / `.no-js-only` are gated by
+it so no element can ever be stranded hidden when JS is off. The same
+file also sets `history.scrollRestoration = 'manual'` (see Scroll
+restoration above for why both must run pre-paint). External file,
+not inline, because CSP `script-src 'self'` blocks inline scripts.
+
+`boot.js` is in `APP_SHELL` of `sw.js` — anyone reading this file
+after editing the boot script: bump the SW VERSION constant.
 
 **Overlays — three classes share the `.overlay` backdrop**:
 1. **Win overlay** (`#overlay > .win-card`) — shown via `engine.win()` when the
