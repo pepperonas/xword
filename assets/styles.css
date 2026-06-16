@@ -110,6 +110,20 @@
   --md-elev-3: 0 1px 3px rgba(0,0,0,0.08), 0 4px 8px 3px rgba(0,0,0,0.06);
   --md-elev-4: 0 2px 3px rgba(0,0,0,0.10), 0 6px 10px 4px rgba(0,0,0,0.08);
   --md-elev-5: 0 4px 4px rgba(0,0,0,0.12), 0 8px 12px 6px rgba(0,0,0,0.10);
+
+  /* ----- Motion system — one timing scale, reused everywhere.
+     Anything spatial uses --ease-spring (with a touch of overshoot).
+     Opacity/color uses --ease-flat (no overshoot — fades that overshoot
+     read as broken). Duration tokens are intentionally few; reach for the
+     next one up only when a transition spans a bigger distance. ----- */
+  --xd-dur-fast: 120ms;       /* hover/press feedback — must feel instant */
+  --xd-dur-quick: 200ms;      /* small state changes, focus rings */
+  --xd-dur-base: 320ms;       /* card hover lifts, panel opens */
+  --xd-dur-page: 480ms;       /* view transitions, overlay drops */
+  --ease-flat: cubic-bezier(0.2, 0, 0, 1);                        /* M3 emphasized */
+  --ease-spring: cubic-bezier(0.2, 1.2, 0.3, 1);                  /* gentle overshoot, settle */
+  --ease-spring-soft: cubic-bezier(0.34, 1.56, 0.64, 1);          /* deeper overshoot for big moves */
+  --ease-anticipate: cubic-bezier(0.7, -0.4, 0.4, 1.4);           /* tiny counter-move before the main move */
 }
 
 /* ============ M3 COLOR TOKENS — DARK ============ */
@@ -1178,17 +1192,30 @@ a:hover { text-decoration-thickness: 2px; }
   border-radius: var(--md-shape-md);
   padding: 16px 20px;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+  transition: background var(--xd-dur-base) var(--ease-flat),
+              box-shadow var(--xd-dur-base) var(--ease-flat),
+              transform var(--xd-dur-base) var(--ease-spring);
   display: flex;
   flex-direction: column;
   gap: 10px;
   min-height: 180px;
+  /* The damped cursor tilt (set by app.js on pointer move) writes into
+     these vars; the transform composes them with the lift. */
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --tilt-lift: 0px;
+  transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translateY(var(--tilt-lift));
+  transform-style: preserve-3d;
+  will-change: transform;
 }
-.puzzle-card:hover {
-  background: var(--md-sys-color-surface-container);
-  box-shadow: var(--md-elev-2);
-  transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+  .puzzle-card:hover {
+    background: var(--md-sys-color-surface-container);
+    box-shadow: var(--md-elev-3);
+    --tilt-lift: -3px;
+  }
 }
+.puzzle-card:active { --tilt-lift: -1px; }
 .puzzle-card-head {
   display: flex;
   justify-content: space-between;
@@ -2345,6 +2372,21 @@ a:hover { text-decoration-thickness: 2px; }
 .rank-banner, .admin-content {
   animation: rise 0.5s cubic-bezier(0.2, 0, 0, 1) backwards;
 }
+/* On back-navigation, suppress the entrance animations — the visitor is
+   returning, not arriving. The view-transition slide handles the motion. */
+html[data-nav="back"] .masthead,
+html[data-nav="back"] .stats-bar,
+html[data-nav="back"] .progress-track,
+html[data-nav="back"] .board-wrap,
+html[data-nav="back"] .clues-panel,
+html[data-nav="back"] .board-controls,
+html[data-nav="back"] .puzzle-grid,
+html[data-nav="back"] .filter-bar,
+html[data-nav="back"] .daily-card,
+html[data-nav="back"] .rank-banner,
+html[data-nav="back"] .admin-content {
+  animation: none;
+}
 .stats-bar { animation-delay: 0.05s; }
 .progress-track { animation-delay: 0.1s; }
 .daily-card { animation-delay: 0.05s; }
@@ -2353,6 +2395,133 @@ a:hover { text-decoration-thickness: 2px; }
 .board-wrap { animation-delay: 0.05s; }
 .clues-panel { animation-delay: 0.15s; }
 .board-controls { animation-delay: 0.1s; }
+
+/* ============ FOCUS RING ============
+   One consistent focus ring across every interactive surface. Uses the
+   primary token so it tracks the brand and inverts cleanly in dark mode.
+   Two-layer outline survives over arbitrary backgrounds (card, chip, cell,
+   inverse-surface toast). Hidden when the keyboard isn't the input source. */
+:focus { outline: none; }
+*:focus-visible {
+  outline: 2px solid var(--md-sys-color-primary);
+  outline-offset: 2px;
+  border-radius: var(--md-shape-xs);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--md-sys-color-primary) 22%, transparent);
+}
+/* Pill-shaped controls keep their full radius around the ring. */
+.btn:focus-visible,
+.filter-chip:focus-visible,
+.user-chip:focus-visible,
+.theme-option:focus-visible,
+.back-link:focus-visible,
+.admin-tab:focus-visible,
+.clues-tab:focus-visible {
+  border-radius: var(--md-shape-full);
+}
+/* The grid uses its own focus model (active cell ring); kill the global. */
+.cell:focus-visible,
+.hidden-input:focus-visible { outline: none; box-shadow: none; }
+
+/* ============ TYPOGRAPHIC POLISH ============
+   text-wrap: balance prevents ragged title widows on display headings;
+   text-wrap: pretty handles body copy where balance would slow long blocks. */
+.masthead h1,
+.win-card h2,
+.settings-head h2,
+.xdialog-title,
+.profile-section-head h2,
+.puzzle-card h3,
+.daily-card h2,
+.rank-banner-name {
+  text-wrap: balance;
+}
+.masthead .subtitle,
+.puzzle-card p,
+.daily-card .meta,
+.empty-state {
+  text-wrap: pretty;
+}
+
+/* ============ REDUCED MOTION ============
+   Strict guard: anything physical (transform, parallax, big reveals)
+   gets stripped to a near-instant opacity swap. Color/state-layer
+   feedback survives — it's not motion, it's affordance. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* Cancel transform-based reveals/scales/tilts so nothing is stuck mid-move. */
+  .puzzle-card,
+  .puzzle-card:hover,
+  .puzzle-card[data-tilt] {
+    transform: none !important;
+  }
+  .overlay .win-card,
+  .overlay .settings-card,
+  .overlay .xdialog-card {
+    transform: scale(1) !important;
+  }
+  .confetti { display: none !important; }
+}
+
+/* ============ STABLE SCROLLBAR GUTTER ============
+   Eliminates the horizontal jump when content height crosses the viewport
+   threshold (selector → game often does this). Also prevents layout
+   thrash when scroll-lock toggles. */
+html { scrollbar-gutter: stable both-edges; }
+
+/* ============ PROGRESSIVE ENHANCEMENT ============
+   Set by the inline boot script. Behavior gated on .js never strands a
+   no-JS visitor with a hidden element (we only re-enable JS-only states
+   when JS has actually booted). */
+html.js .no-js-only { display: none !important; }
+html:not(.js) .js-only { display: none !important; }
+
+/* ============ SCROLL LOCK ============
+   Applied to <body> while any modal is open. Keeps the scrollbar
+   reserved (via scrollbar-gutter above) so there's no layout shift. */
+body.scroll-locked {
+  overflow: hidden !important;
+  touch-action: none;
+}
+
+/* ============ VIEW TRANSITIONS (selector ↔ game) ============
+   Print-edition page-turn metaphor. Going deeper (selector → game) the new
+   view slides in from the right with a touch of overshoot, the old slides
+   slightly left and fades. Back is the mirror. Reduced motion strips both. */
+@media not (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root) {
+    animation: xd-page-out var(--xd-dur-page) var(--ease-flat) both;
+  }
+  ::view-transition-new(root) {
+    animation: xd-page-in var(--xd-dur-page) var(--ease-spring) both;
+  }
+  html[data-nav="back"] ::view-transition-old(root) {
+    animation-name: xd-page-out-back;
+  }
+  html[data-nav="back"] ::view-transition-new(root) {
+    animation-name: xd-page-in-back;
+  }
+}
+@keyframes xd-page-out {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(-3%); }
+}
+@keyframes xd-page-in {
+  from { opacity: 0; transform: translateX(4%); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes xd-page-out-back {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(3%); }
+}
+@keyframes xd-page-in-back {
+  from { opacity: 0; transform: translateX(-4%); }
+  to   { opacity: 1; transform: translateX(0); }
+}
 
 /* ============ PRINT ============ */
 @media print {

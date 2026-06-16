@@ -285,6 +285,9 @@
   }
 
   /* ---------- Settings modal ---------- */
+  let settingsKeyHandler = null;
+  let settingsPrevFocus = null;
+  let settingsSavedScroll = 0;
   function openSettings() {
     if (!state.user) return;
     refs.settingsAccount.replaceChildren();
@@ -299,9 +302,42 @@
     document.querySelectorAll('#themeSwitcher .theme-option').forEach(opt => {
       opt.classList.toggle('active', opt.dataset.theme === state.theme);
     });
+    settingsPrevFocus = document.activeElement;
+    settingsSavedScroll = window.scrollY;
+    document.body.classList.add('scroll-locked');
     refs.settingsOverlay.classList.add('show');
+    // Esc closes; Tab cycles inside the settings card.
+    settingsKeyHandler = (e) => {
+      if (e.key === 'Escape') { e.preventDefault(); closeSettings(); return; }
+      if (e.key !== 'Tab') return;
+      const card = refs.settingsOverlay.querySelector('.settings-card');
+      if (!card) return;
+      const items = card.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]):not([type=hidden]), [tabindex]:not([tabindex="-1"])'
+      );
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    };
+    document.addEventListener('keydown', settingsKeyHandler, true);
+    // Focus the close button so Esc/Enter feel obvious.
+    requestAnimationFrame(() => {
+      try { refs.settingsClose.focus({ preventScroll: true }); } catch (_) {}
+    });
   }
-  function closeSettings() { refs.settingsOverlay.classList.remove('show'); }
+  function closeSettings() {
+    refs.settingsOverlay.classList.remove('show');
+    if (settingsKeyHandler) {
+      document.removeEventListener('keydown', settingsKeyHandler, true);
+      settingsKeyHandler = null;
+    }
+    document.body.classList.remove('scroll-locked');
+    window.scrollTo({ top: settingsSavedScroll, behavior: 'instant' });
+    try { if (settingsPrevFocus && settingsPrevFocus.focus) settingsPrevFocus.focus({ preventScroll: true }); } catch (_) {}
+    settingsPrevFocus = null;
+  }
 
   /* ---------- Share dialog ----------
    *
@@ -1005,6 +1041,105 @@
     return `${m}:${s}`;
   }
 
+  /* ---------- Signature reactive moment: damped cursor tilt on cards ----------
+   *
+   * One pointermove listener on the selector container (delegation), one rAF
+   * loop. Each card gets a current and target tilt; current chases target with
+   * a damped spring (overshoots, then settles). Gate strictly to real pointers
+   * — touch users do not pay the perf cost. Honour reduced-motion.
+   *
+   * Why a spring, not 1:1 tracking: rigid follow looks computer-y. The slight
+   * inertia + settle is what makes the surface feel like an object that has
+   * mass instead of a div that knows about your mouse.
+   */
+  function setupCardTilt() {
+    const fineHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!fineHover || reduced) return;
+
+    const TILT_MAX_DEG = 4;       // gentle — never more than 4° on any axis
+    const SPRING_K = 0.18;        // higher = snappier
+    const SPRING_DAMP = 0.78;     // lower = more overshoot
+    const tracked = new Map();    // card → { cur:{x,y}, vel:{x,y}, tgt:{x,y} }
+    let raf = null;
+
+    function ensure(card) {
+      if (tracked.has(card)) return tracked.get(card);
+      const s = { cur: { x: 0, y: 0 }, vel: { x: 0, y: 0 }, tgt: { x: 0, y: 0 } };
+      tracked.set(card, s);
+      return s;
+    }
+
+    function step() {
+      let alive = false;
+      for (const [card, s] of tracked) {
+        const dx = s.tgt.x - s.cur.x;
+        const dy = s.tgt.y - s.cur.y;
+        s.vel.x = (s.vel.x + dx * SPRING_K) * SPRING_DAMP;
+        s.vel.y = (s.vel.y + dy * SPRING_K) * SPRING_DAMP;
+        s.cur.x += s.vel.x;
+        s.cur.y += s.vel.y;
+        // Settle threshold: stop touching the DOM once we're stationary at the target.
+        const settled = Math.abs(dx) < 0.05 && Math.abs(dy) < 0.05 &&
+                        Math.abs(s.vel.x) < 0.05 && Math.abs(s.vel.y) < 0.05;
+        if (settled) {
+          s.cur.x = s.tgt.x; s.cur.y = s.tgt.y;
+          card.style.setProperty('--tilt-x', s.tgt.x.toFixed(2) + 'deg');
+          card.style.setProperty('--tilt-y', s.tgt.y.toFixed(2) + 'deg');
+          if (s.tgt.x === 0 && s.tgt.y === 0) tracked.delete(card);
+        } else {
+          card.style.setProperty('--tilt-x', s.cur.x.toFixed(2) + 'deg');
+          card.style.setProperty('--tilt-y', s.cur.y.toFixed(2) + 'deg');
+          alive = true;
+        }
+      }
+      raf = alive ? requestAnimationFrame(step) : null;
+    }
+    function kick() { if (raf == null) raf = requestAnimationFrame(step); }
+
+    function setTargetFromPoint(card, clientX, clientY) {
+      const r = card.getBoundingClientRect();
+      const cx = (clientX - r.left) / r.width;
+      const cy = (clientY - r.top) / r.height;
+      // y-axis rotation reacts to horizontal cursor, x-axis to vertical.
+      // Negate y so cursor at the right tilts the card *toward* the cursor.
+      const tx = (0.5 - cy) * 2 * TILT_MAX_DEG;
+      const ty = (cx - 0.5) * 2 * TILT_MAX_DEG;
+      const s = ensure(card);
+      s.tgt.x = tx;
+      s.tgt.y = ty;
+      kick();
+    }
+    function resetCard(card) {
+      const s = ensure(card);
+      s.tgt.x = 0;
+      s.tgt.y = 0;
+      kick();
+    }
+
+    // Delegated listeners on the section container. Re-renders of the card
+    // list don't need re-binding.
+    const root = refs.puzzleSections;
+    if (!root) return;
+    root.addEventListener('pointermove', (e) => {
+      if (e.pointerType && e.pointerType !== 'mouse') return;
+      const card = e.target.closest('.puzzle-card');
+      if (!card) return;
+      setTargetFromPoint(card, e.clientX, e.clientY);
+    });
+    root.addEventListener('pointerleave', (e) => {
+      // Reset every tracked card when the whole list loses pointer.
+      for (const card of tracked.keys()) resetCard(card);
+    }, true);
+    root.addEventListener('pointerout', (e) => {
+      const card = e.target.closest('.puzzle-card');
+      if (!card) return;
+      // Only reset if the pointer truly left the card (not just moved to a child).
+      if (card.contains(e.relatedTarget)) return;
+      resetCard(card);
+    });
+  }
+
   function renderDailyCard() {
     if (!refs.dailyCardSlot) return;
     refs.dailyCardSlot.replaceChildren();
@@ -1078,7 +1213,7 @@
     // Show game view
     refs.viewSelector.classList.remove('active');
     refs.viewGame.classList.add('active');
-    refs.overlay.classList.remove('show');
+    if (window.XwordOverlay) window.XwordOverlay.hideWin(refs);
     window.scrollTo({ top: 0, behavior: 'instant' });
     renderUserBar(refs.userBarGame);
 
@@ -1145,7 +1280,7 @@
     if (refs.viewAdmin) refs.viewAdmin.classList.remove('active');
     if (refs.viewProfile) refs.viewProfile.classList.remove('active');
     refs.viewSelector.classList.add('active');
-    refs.overlay.classList.remove('show');
+    if (window.XwordOverlay) window.XwordOverlay.hideWin(refs);
     // Refresh progress map so cards reflect latest state from the just-left game
     if (state.user) {
       await refreshProgressMap();
@@ -1153,30 +1288,72 @@
     }
   }
 
-  /* ---------- Routing ---------- */
+  /* ---------- Routing ---------- *
+   *
+   * Hash routing with two refinements:
+   *
+   * 1. Direction tagging — every navigateToX sets a data attribute on <html>
+   *    so the view-transition CSS knows whether to play the forward animation
+   *    (push) or the back animation (slide-out-right). `popstate` (the user's
+   *    browser-back) defaults to 'back'.
+   *
+   * 2. Scroll restoration — we save the selector's scroll position when leaving
+   *    it and restore it instantly on return. No animated scroll; the visitor
+   *    should land exactly where they left, as if the page was paused.
+   */
+  const scrollMemory = { selector: 0 };
+  let navDirection = 'forward';
+
+  function rememberSelectorScroll() {
+    if (refs.viewSelector && refs.viewSelector.classList.contains('active')) {
+      scrollMemory.selector = window.scrollY;
+    }
+  }
+  function restoreSelectorScroll() {
+    window.scrollTo({ top: scrollMemory.selector || 0, behavior: 'instant' });
+  }
+
   function navigateToGame(puzzleId) {
+    navDirection = 'forward';
+    document.documentElement.setAttribute('data-nav', 'forward');
+    rememberSelectorScroll();
     window.location.hash = `play=${puzzleId}`;
   }
   function navigateToSelector() {
+    navDirection = 'back';
+    document.documentElement.setAttribute('data-nav', 'back');
     window.location.hash = '';
+  }
+
+  // When the user presses the browser back/forward button, popstate fires
+  // before hashchange. Default the direction to 'back' there.
+  window.addEventListener('popstate', () => {
+    navDirection = 'back';
+    document.documentElement.setAttribute('data-nav', 'back');
+  });
+
+  // View Transitions API wrapper. Gracefully falls back to a direct call.
+  function withViewTransition(fn) {
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced || typeof document.startViewTransition !== 'function') {
+      return fn();
+    }
+    document.startViewTransition(fn);
   }
 
   function onHashChange() {
     const hash = window.location.hash.replace(/^#/, '');
+    const wasOnGame = refs.viewGame.classList.contains('active');
+    const wasOnSelector = refs.viewSelector.classList.contains('active');
+
     if (hash === 'admin') {
-      if (state.user && state.user.is_admin) {
-        showAdmin();
-      } else {
-        window.location.hash = '';
-      }
+      if (state.user && state.user.is_admin) withViewTransition(() => showAdmin());
+      else window.location.hash = '';
       return;
     }
     if (hash === 'profile') {
-      if (state.user) {
-        showProfile();
-      } else {
-        window.location.hash = '';
-      }
+      if (state.user) withViewTransition(() => showProfile());
+      else window.location.hash = '';
       return;
     }
     const m = hash.match(/^play=(.+)$/);
@@ -1184,11 +1361,18 @@
       const id = m[1];
       const puzzle = state.manifest.puzzles.find(p => p.id === id);
       if (puzzle) {
-        startGame(puzzle);
+        withViewTransition(() => startGame(puzzle));
         return;
       }
     }
-    showSelector();
+    // Returning to the selector: restore the exact scroll position the user
+    // left at, AFTER the view transition commits the new DOM.
+    const restoreOnReturn = wasOnGame;
+    withViewTransition(() => {
+      showSelector().then(() => {
+        if (restoreOnReturn) restoreSelectorScroll();
+      });
+    });
   }
 
   /* ---------- Init ---------- */
@@ -1241,6 +1425,7 @@
     renderDailyCard();
     renderFilters();
     renderPuzzleList();
+    setupCardTilt();
     refs.btnBack.addEventListener('click', () => navigateToSelector());
     if (refs.btnAdminBack) refs.btnAdminBack.addEventListener('click', () => navigateToSelector());
     if (refs.btnProfileBack) refs.btnProfileBack.addEventListener('click', () => navigateToSelector());

@@ -18,6 +18,25 @@
     return e;
   }
 
+  /* Win overlay open/close — locks body scroll & restores the previous
+     position so the page underneath isn't dragged back to top when the
+     overlay shows up. Idempotent: safe to call hide() when not shown. */
+  let winSavedScroll = 0;
+  function showWinOverlay(refs) {
+    if (refs.overlay.classList.contains('show')) return;
+    winSavedScroll = window.scrollY;
+    document.body.classList.add('scroll-locked');
+    refs.overlay.classList.add('show');
+  }
+  function hideWinOverlay(refs) {
+    if (!refs.overlay.classList.contains('show')) return;
+    refs.overlay.classList.remove('show');
+    document.body.classList.remove('scroll-locked');
+    window.scrollTo({ top: winSavedScroll, behavior: 'instant' });
+  }
+  // Expose for app.js to use on view transitions.
+  global.XwordOverlay = { showWin: showWinOverlay, hideWin: hideWinOverlay };
+
   function createGame(puzzle, refs, callbacks = {}) {
     const $$ = sel => refs.root.querySelectorAll(sel);
 
@@ -816,7 +835,7 @@
       state.solved = false;
       state.elapsedBaseMs = 0;
       state.startTime = Date.now();
-      refs.overlay.classList.remove('show');
+      hideWinOverlay(refs);
       paint();
       emitProgress();
     }
@@ -853,7 +872,7 @@
       });
       const lastDelay = (state.size * 2) * 35;
       setTimeout(() => {
-        refs.overlay.classList.add('show');
+        showWinOverlay(refs);
         launchConfetti();
       }, Math.min(lastDelay + 350, 1400));
     }
@@ -888,7 +907,7 @@
       refs.btnReset.onclick = () => { actionReset(); focusHiddenInput(); };
       refs.btnPlayAgain.onclick = () => actionReset();
       refs.btnBackFromWin.onclick = () => {
-        refs.overlay.classList.remove('show');
+        hideWinOverlay(refs);
         callbacks.onBack && callbacks.onBack();
       };
       refs.liveToggle.onclick = () => {
