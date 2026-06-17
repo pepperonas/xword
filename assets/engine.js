@@ -260,8 +260,19 @@
       paint();
       setActiveTab(word.direction);
       if (scrollIntoView) {
-        const item = refs.root.querySelector(`.clue-item[data-key="${key}"]`);
-        if (item) item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        // On mobile (single-column layout), the clue panel sits below the board.
+        // Pulling the clue into view scrolls the board off-screen, so the user
+        // can't see which cell just got activated. Scroll the active cell into
+        // view instead. On desktop the clue list has its own scroll, so the old
+        // behaviour (keep clicked clue visible) is still right.
+        const isMobile = matchMedia('(max-width: 900px)').matches;
+        if (isMobile) {
+          const cellEl = refs.root.querySelector(`.cell[data-r="${start.r}"][data-c="${start.c}"]`);
+          if (cellEl) cellEl.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        } else {
+          const item = refs.root.querySelector(`.clue-item[data-key="${key}"]`);
+          if (item) item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        }
       }
       focusHiddenInput();
     }

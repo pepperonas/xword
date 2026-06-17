@@ -2350,10 +2350,13 @@ a:hover { text-decoration-thickness: 2px; }
 .cell.correct-flash { animation: pulse 0.4s ease; }
 
 /* Letter type-in — gentle scale-bounce when a letter lands in a cell.
-   Triggered by engine.js adding the .type-in class to .letter for ~200ms. */
+   Triggered by engine.js adding the .type-in class to .letter for ~200ms.
+   No opacity step: backwards-fill from opacity:0 caused a one-frame invisibility
+   gap between paint() (textContent set) and the rAF that applies the class,
+   which on mid-tier mobile reads as "letter disappears and reappears". */
 @keyframes typeIn {
-  0% { transform: scale(0.55); opacity: 0; }
-  60% { transform: scale(1.08); opacity: 1; }
+  0% { transform: scale(0.55); }
+  60% { transform: scale(1.08); }
   100% { transform: scale(1); }
 }
 .cell .letter.type-in {

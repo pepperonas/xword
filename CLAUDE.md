@@ -300,6 +300,17 @@ etc. on all four sides so installs respect the device shape.
   `(hover: hover) and (pointer: fine)` so taps don't leave a sticky
   hover state.
 
+**Clue → active-cell scroll on mobile.** On the single-column layout
+the clue panel sits below the board. Clicking a clue at the bottom
+used to call `clueItem.scrollIntoView()`, which pulled the page DOWN
+to align the just-tapped clue — taking the board off-screen, so the
+user couldn't see which cell their tap had activated. `activateWord`
+now checks `(max-width: 900px)` and, on mobile, calls
+`scrollIntoView({ block: 'center' })` on the new active cell instead.
+Desktop keeps the clue-list-scroll behaviour because the clue list
+has its own scroll container there and the board is always visible
+beside it.
+
 ---
 
 ## Versioning
@@ -317,7 +328,7 @@ The frontend fetches it on init and shows "Ver. N" in the masthead eyebrow. `ver
 ## PWA / offline
 
 - `manifest.webmanifest`: `display: standalone`, theme/background colors, icons (svg + png).
-- `sw.js` (cache version `xword-v9`, bump when shipping app-shell changes — especially CSS, since stale-while-revalidate will otherwise serve last-cached styles.css for one more reload):
+- `sw.js` (cache version `xword-v10`, bump when shipping app-shell changes — especially CSS, since stale-while-revalidate will otherwise serve last-cached styles.css for one more reload):
   - App shell → stale-while-revalidate (`SHELL_CACHE`)
   - Puzzle JSONs → network-first, cache fallback (`PUZZLE_CACHE`)
   - Google Fonts → cache-first opaque (`FONTS_CACHE`)
@@ -512,7 +523,13 @@ Bake-in, not bolt-on — every new motion must survive this filter.
 - M3 state-layer on buttons + filter chips (8/10/14% opacity overlays
   on hover/focus/press; +`scale(0.97-0.98)` on press)
 - Letter `.type-in` (180ms scale-bounce on keystroke; engine.js applies
-  the class via requestAnimationFrame after `paint()`)
+  the class via requestAnimationFrame after `paint()`). **The keyframe
+  is scale-only — NO opacity step.** Earlier versions had `0% { opacity:
+  0 }` with `animation-fill-mode: both`, but the backwards-fill set the
+  letter to opacity 0 for the single frame between `paint()` setting
+  `textContent` and the rAF applying the class. On mid-tier mobile that
+  read as "letter disappears and reappears" right after a keystroke.
+  Bounce alone delivers enough personality.
 - Letter `.hint-drop` (400ms drop+bounce when a hint reveals a letter)
 - Active cell: persistent outer ring + soft glow shadow (no pulse)
 - Cell hover tint (mouse-only via `(hover: hover) and (pointer: fine)`)
