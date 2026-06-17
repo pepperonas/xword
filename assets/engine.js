@@ -55,7 +55,7 @@
       solvedWordKeys: new Set(), // words currently solved — for newly-solved detection
       bootstrapped: false,       // prevents animations on initial-state restore
     };
-    let keydownHandler, clickHandler;
+    let keydownHandler;
 
     function emitProgress() {
       if (!callbacks.onProgressChange) return;
@@ -435,31 +435,37 @@
       });
     }
 
-    // Non-breaking space. Kept in the hidden input at all times so that
-    // mobile virtual keyboards fire input/beforeinput events on Backspace
-    // (an empty input has nothing to "delete" → iOS silently swallows the
-    // key, which is why the first backspace press appears to do nothing).
-    const SENTINEL = ' ';
+    // The hidden input is retained in the DOM for now (tabindex=-1, aria-hidden)
+    // but we no longer focus it. The mobile virtual keyboard is replaced by the
+    // custom on-screen keyboard rendered in `.oskbd`; the desktop hardware
+    // keyboard is captured directly via document.keydown. No `<input>` focus
+    // anywhere means: no autocorrect/predictive-text/dictation interference,
+    // no iOS PWA "keyboard refuses to open" bug, no involuntary focus zoom,
+    // no Samsung-S24 keydown+beforeinput double-fire to dedupe around.
+    function focusHiddenInput() { /* intentional no-op — see comment above */ }
 
-    function resetSentinel() {
-      const inp = refs.hiddenInput;
-      if (inp.value !== SENTINEL) inp.value = SENTINEL;
-      try { inp.setSelectionRange(SENTINEL.length, SENTINEL.length); } catch (e) {}
-    }
-
-    function focusHiddenInput() {
-      const inp = refs.hiddenInput;
-      inp.focus({ preventScroll: true });
-      resetSentinel();
-    }
+    // German umlauts on the answer-side are spelled out (Ä→AE, Ö→OE, Ü→UE,
+    // ß→SS). Hardware-keyboard typists with German muscle memory press Ä;
+    // the expansion table in assets/letter-expand.js maps it to the two
+    // ASCII letters the puzzle actually expects. The on-screen keyboard
+    // doesn't expose umlaut keys (clue legend says to type AE/OE/UE/SS).
+    const { expandLetter } = global.XwordLetterExpand;
 
     // Dedupe duplicate event-source firings (see assets/input-dedupe.js).
+    // Only the document.keydown handler routes through here; the on-screen
+    // keyboard dispatches directly to typeLetter/deleteLetter because it can't
+    // double-fire with another source.
     const isFreshAction = global.XwordInputDedupe.createDedupe(60);
     function dispatchAction(kind, value) {
       const key = kind + ':' + (value || '');
       if (!isFreshAction(key)) return;
-      if (kind === 'delete') deleteLetter();
-      else if (kind === 'type') typeLetter(value);
+      if (kind === 'delete') { deleteLetter(); return; }
+      if (kind === 'type') {
+        // Expand umlauts to ASCII spelling and type each char in sequence.
+        // typeLetter advances the cursor after each, so Ä fills two cells.
+        const expanded = expandLetter(value);
+        for (const L of expanded) typeLetter(L);
+      }
     }
 
     function moveActive(dr, dc) {
@@ -636,41 +642,137 @@
       }
     }
 
+    // QWERTZ layout for the on-screen keyboard. Three rows of letters; umlauts
+    // are typed as AE/OE/UE/SS so they don't get their own keys. Backspace
+    // sits at the right of row 3, matching Wordle / GBoard muscle memory.
+    const OSKBD_ROWS = [
+      ['Q','W','E','R','T','Z','U','I','O','P'],
+      ['A','S','D','F','G','H','J','K','L'],
+      ['Y','X','C','V','B','N','M']
+    ];
+
+    function buildOnScreenKeyboard() {
+      if (!refs.oskbd) return;
+      // Idempotent — keyboard markup is identical across all puzzles, so
+      // building it once per page load is enough. The dataset flag survives
+      // game destroys because we don't tear down the keyboard markup.
+      if (refs.oskbd.dataset.built === '1') {
+        // Markup already there from a previous game; just clear any stuck
+        // .pressed state from an interrupted previous tap.
+        refs.oskbd.querySelectorAll('.oskbd-key.pressed').forEach(k => k.classList.remove('pressed'));
+        return;
+      }
+      refs.oskbd.dataset.built = '1';
+      refs.oskbd.replaceChildren();
+      OSKBD_ROWS.forEach((letters, rowIdx) => {
+        const rowEl = el('div', 'oskbd-row');
+        letters.forEach(L => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'oskbd-key';
+          btn.dataset.key = L;
+          btn.textContent = L;
+          btn.setAttribute('aria-label', 'Buchstabe ' + L);
+          btn.tabIndex = -1;     // not in tab order — pure tap target
+          rowEl.appendChild(btn);
+        });
+        refs.oskbd.appendChild(rowEl);
+        // Append Backspace at the right end of the last (bottom) row.
+        if (rowIdx === OSKBD_ROWS.length - 1) {
+          const back = document.createElement('button');
+          back.type = 'button';
+          back.className = 'oskbd-key oskbd-action';
+          back.dataset.action = 'delete';
+          back.textContent = '⌫';   // ⌫
+          back.setAttribute('aria-label', 'Löschen');
+          back.tabIndex = -1;
+          rowEl.appendChild(back);
+        }
+      });
+    }
+
+    function isModalOpen() {
+      return document.body.classList.contains('scroll-locked');
+    }
+    function isEditableTarget(el) {
+      if (!el || el === refs.hiddenInput) return false;
+      const tag = el.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return true;
+      return !!el.isContentEditable;
+    }
+
+    let pointerDownHandler, pointerReleaseHandler, pasteHandler;
+
     function setupKeyboard() {
-      const inp = refs.hiddenInput;
-      // beforeinput exposes inputType, the only reliable signal for
-      // "user pressed Backspace" on iOS virtual keyboards.
-      inp.addEventListener('beforeinput', (e) => {
-        if (e.inputType === 'deleteContentBackward' ||
-            e.inputType === 'deleteContentForward'  ||
-            e.inputType === 'deleteWordBackward'    ||
-            e.inputType === 'deleteByCut') {
-          e.preventDefault();
-          dispatchAction('delete');
-          resetSentinel();
-          return;
+      // Custom on-screen keyboard for touch devices. The container in
+      // index.html is empty until we populate it here; CSS gates visibility
+      // behind `(pointer: coarse)` so desktops never render it.
+      buildOnScreenKeyboard();
+
+      // Single delegated pointerdown for the whole keyboard. pointerdown
+      // (not click) fires immediately on touch — no 300ms tap-delay, no
+      // synthesised mouse events, no risk of double-tap zoom on the row.
+      pointerDownHandler = (e) => {
+        const key = e.target.closest('.oskbd-key');
+        if (!key) return;
+        // preventDefault stops the browser from converting the touch into
+        // a click + focus shift. Without it, on-screen-keyboard taps would
+        // blur the document and break the scroll-locked-modal guard later.
+        e.preventDefault();
+        key.classList.add('pressed');
+        if (key.dataset.action === 'delete') {
+          deleteLetter();
+        } else if (key.dataset.key) {
+          // On-screen keys are ASCII A–Z, no umlauts — typeLetter directly
+          // bypasses the dispatchAction dedupe (which exists only to
+          // suppress hardware keyboard double-fires).
+          typeLetter(key.dataset.key);
         }
-        if (e.inputType && e.inputType.startsWith('insert') && e.data) {
-          for (const ch of e.data) {
-            if (/^[a-zA-ZäöüÄÖÜß]$/.test(ch)) dispatchAction('type', ch);
+      };
+      // Release the .pressed state on pointerup / cancel / leave so the key
+      // doesn't get stuck looking pressed if the finger slides off.
+      pointerReleaseHandler = (e) => {
+        const key = e.target.closest && e.target.closest('.oskbd-key');
+        if (key) key.classList.remove('pressed');
+      };
+      if (refs.oskbd) {
+        refs.oskbd.addEventListener('pointerdown', pointerDownHandler);
+        refs.oskbd.addEventListener('pointerup', pointerReleaseHandler);
+        refs.oskbd.addEventListener('pointercancel', pointerReleaseHandler);
+        refs.oskbd.addEventListener('pointerleave', pointerReleaseHandler);
+      }
+
+      // Paste support — desktop users sometimes want to drop in a word
+      // they looked up. The hidden input is no longer focused, so paste
+      // events fire on document. typeLetter is called directly so a paste
+      // of "ANNA" produces four letters (the dispatchAction dedupe would
+      // otherwise eat the second N).
+      pasteHandler = (e) => {
+        if (!state.active || isModalOpen() || isEditableTarget(e.target)) return;
+        const text = (e.clipboardData && e.clipboardData.getData('text/plain')) || '';
+        if (!text) return;
+        e.preventDefault();
+        for (const ch of text) {
+          if (/^[a-zA-ZäöüÄÖÜß]$/.test(ch)) {
+            const expanded = expandLetter(ch);
+            for (const L of expanded) typeLetter(L);
           }
-          e.preventDefault();
-          resetSentinel();
         }
-      });
-      // Fallback for browsers without beforeinput (rare nowadays).
-      inp.addEventListener('input', (e) => {
-        const v = e.target.value;
-        if (v.length > SENTINEL.length) {
-          const ch = v[v.length - 1];
-          if (/^[a-zA-ZäöüÄÖÜß]$/.test(ch)) dispatchAction('type', ch);
-        } else if (v.length < SENTINEL.length) {
-          dispatchAction('delete');
-        }
-        resetSentinel();
-      });
+      };
+      document.addEventListener('paste', pasteHandler);
 
       keydownHandler = (e) => {
+        // (1) When any overlay / dialog / settings / win panel is up, the
+        // body gets `.scroll-locked` and we must not steal its key events.
+        if (isModalOpen()) return;
+        // (2) Don't intercept keystrokes meant for some other input on the
+        // page (e.g. admin search). The hidden input is exempt — we never
+        // focus it anyway.
+        if (isEditableTarget(e.target)) return;
+        // (3) Don't fire on modifier combos. Cmd+R / Ctrl+F / Cmd+C etc.
+        // must reach the browser. Shift alone is fine (shift+letter = caps).
+        if (e.ctrlKey || e.metaKey || e.altKey) return;
+        // (4) Existing rule — don't swallow Enter/Space on focused buttons.
         if (e.target.tagName === 'BUTTON' && (e.key === 'Enter' || e.key === ' ')) return;
         const k = e.key;
         if (k === 'Backspace') {
@@ -743,22 +845,20 @@
         }
       };
 
-      // Re-focus the hidden input on any tap inside the grid or clue list.
-      // Must be synchronous — setTimeout breaks iOS Safari's user-gesture
-      // requirement and the virtual keyboard then refuses to open.
-      clickHandler = (e) => {
-        if (e.target.closest('.grid') || e.target.closest('.clue-item')) {
-          focusHiddenInput();
-        }
-      };
-
       document.addEventListener('keydown', keydownHandler);
-      document.addEventListener('click', clickHandler);
     }
 
     function destroyKeyboard() {
       if (keydownHandler) document.removeEventListener('keydown', keydownHandler);
-      if (clickHandler) document.removeEventListener('click', clickHandler);
+      if (pasteHandler) document.removeEventListener('paste', pasteHandler);
+      if (refs.oskbd) {
+        if (pointerDownHandler) refs.oskbd.removeEventListener('pointerdown', pointerDownHandler);
+        if (pointerReleaseHandler) {
+          refs.oskbd.removeEventListener('pointerup', pointerReleaseHandler);
+          refs.oskbd.removeEventListener('pointercancel', pointerReleaseHandler);
+          refs.oskbd.removeEventListener('pointerleave', pointerReleaseHandler);
+        }
+      }
     }
 
     function actionCheck() {

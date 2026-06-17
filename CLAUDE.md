@@ -227,17 +227,172 @@ On first page load, the diff is taken silently to baseline — no toast spam for
 
 ---
 
-## Mobile keyboard input
+## Input pipeline (2026-06-17 redesign)
 
-Three quirks of virtual keyboards forced the input pipeline to be more elaborate than a desktop crossword would need:
+**The hidden-input pattern was retired.** It papered over a stack of
+documented mobile-browser quirks (autocorrect mangling first-two letters,
+iOS PWA "keyboard won't open" bug, predictive-text word insertion, Samsung
+S24 double-fires, 16 px font-size zoom trap, dictation events on
+inserttext) with sentinel characters, beforeinput/input parallel handlers,
+and a dedupe predicate. Every documented word-puzzle app of the same
+class (NYT Wordle / Crossword / Connections, Apple News crossword, LA
+Times) bypasses the mobile virtual keyboard entirely with a DOM-rendered
+custom keyboard. That's now what we do.
 
-1. **iOS Safari won't open the keyboard if the focused input is `display:none` or sits outside the viewport.** `.hidden-input` is therefore `position: fixed; top: 0; left: 0; width: 1px; height: 1px; opacity: 0; font-size: 16px`. The 16px font-size is essential — anything smaller triggers iOS auto-zoom-on-focus, after which the keyboard refuses to open.
+### Two-source architecture, single sink
 
-2. **iOS Safari requires `.focus()` to be called synchronously inside a user-gesture handler.** The original `setTimeout(focusHiddenInput, 0)` in the document-level click handler broke this contract and the keyboard would close again immediately. Now synchronous.
+```
+on-screen keyboard      pointerdown               typeLetter(ch)
+(touch devices) ─────────────────────────────►    deleteLetter()
+                                                       │
+hardware keyboard       document.keydown               │
+(desktop, BT) ─────────► (gated) ──► dispatch ─────────┤
+                                                       │
+hardware paste          document.paste                 │
+(Cmd+V)         ───────► (gated) ──► typeLetter ──────►┘
+```
 
-3. **Empty inputs silently drop Backspace.** Mobile keyboards fire `beforeinput` / `input` only when there is content to delete. We keep a sentinel ` ` character in the input at all times and re-set it after every event — so the very first Backspace press fires properly.
+Both paths call the same engine functions. No more parallel beforeinput
++ input + keydown listeners on a focused hidden input. The hidden input
+remains in the DOM (`tabindex="-1"`, `aria-hidden="true"`) because the
+disk-cost of one element is cheaper than the risk of breaking some
+selector somewhere — but `focusHiddenInput()` is a no-op and the
+element is never focused. The OS virtual keyboard therefore never opens.
 
-4. **Some Android keyboards (Samsung S24 Ultra) fire both `keydown` *and* `beforeinput` for the same Backspace press**, and `document.activeElement` is briefly unreliable during the first interaction. `assets/input-dedupe.js` exports a `createDedupe(windowMs)` predicate keyed on action+value; any identical action within 60 ms is treated as a duplicate. All four entry points (`keydown`, `beforeinput`, `input` fallback, programmatic calls) go through the same gatekeeper. The dedupe module is pure and unit-tested (`tests/input-dedupe.test.js`).
+### The on-screen keyboard
+
+`assets/engine.js → buildOnScreenKeyboard()` populates `#oskbd` with
+three rows of real `<button>` elements:
+
+```
+Q W E R T Z U I O P
+ A S D F G H J K L
+  Y X C V B N M ⌫
+```
+
+QWERTZ (German) layout, A–Z only — umlauts are spelled out (Ä→AE,
+Ö→OE, Ü→UE, ß→SS) per puzzle convention, so dedicated umlaut keys
+would just confuse. Hardware-keyboard typists who press Ä have the
+`assets/letter-expand.js` table that maps the single char to "AE"
+across two cells. Backspace sits at the right of row 3 with an
+error-container tint, matching Wordle / GBoard muscle memory.
+
+CSS gates visibility:
+```css
+@media (pointer: coarse) { .oskbd { display: block; } }
+```
+Desktops with a mouse never render the keyboard. iPad in portrait
+keeps it even when a BT keyboard is attached (primary pointer is
+still coarse). On `(max-width: 360px)` keys shrink to 36 px wide /
+40 px tall so 11 keys fit on a 320 px iPhone SE viewport.
+
+The container reserves `--oskbd-h: 210px` of bottom padding on
+`#view-game` so the puzzle scrolls clear of the keyboard, and
+`scroll-margin-bottom: calc(var(--oskbd-h) + 24px)` on `.cell`
+ensures `cell.scrollIntoView({block:'center'})` from
+`activateWord(_, true)` actually centres above the keyboard, not
+behind it.
+
+### Dispatch: `pointerdown`, not `click`
+
+Touch event → `pointerdown` → `preventDefault()` → directly invoke
+`typeLetter(ch)` or `deleteLetter()`. Reasons:
+- No 300 ms tap-delay, no double-tap zoom.
+- `preventDefault()` blocks the synthesised click + focus shift that
+  would otherwise blur the puzzle and break the modal guard.
+- Single delegated listener on the `.oskbd` container — keys are
+  pure tap targets (`tabindex="-1"`, not in the page's tab order).
+
+A press-state class `.pressed` goes on `pointerdown` and off on
+`pointerup` / `pointercancel` / `pointerleave` so the key doesn't
+stay visually depressed if the finger slides off.
+
+### Hardware-keyboard gates
+
+`document.keydown` now has four short-circuit checks at the top, in
+this order:
+
+1. **Modal-open gate** — `body.scroll-locked` ⇒ skip. Any open dialog
+   / settings / win overlay owns the page; we must not steal its key
+   events. (Old bug: pressing Q while the settings overlay was up
+   typed Q into the puzzle behind it.)
+2. **Editable-target gate** — `e.target` is `INPUT` / `TEXTAREA` /
+   `SELECT` / `[contenteditable]` ⇒ skip. (The hidden input is
+   exempted because we never focus it.)
+3. **Modifier-key gate** — `ctrlKey || metaKey || altKey` ⇒ skip.
+   Cmd+R / Ctrl+F / Cmd+C / Cmd+S etc. reach the browser
+   unmolested. (Old bug: every modifier+letter combination called
+   `typeLetter(letter)` AND `preventDefault()`, breaking every
+   browser shortcut on the page.)
+4. **Button-Enter gate** — existing rule, preserved: don't swallow
+   Enter / Space on focused buttons.
+
+Letters that pass all four gates go through `dispatchAction('type',
+key)`, which umlaut-expands via `expandLetter()` and types each
+ASCII char in sequence.
+
+### Paste support
+
+`document.paste` listener with the same three gates plus a state-active
+check. Reads `clipboardData.getData('text/plain')`, iterates chars,
+calls `typeLetter` directly (NOT `dispatchAction`) so the dedupe can't
+eat consecutive identical letters. Pasting "ANNA" produces four
+letters; the old beforeinput pipeline produced three because
+`dispatchAction('type','N')` fired twice within a tick and the second
+got deduped.
+
+### Umlaut auto-expansion
+
+`assets/letter-expand.js` exposes `XwordLetterExpand.expandLetter(ch)`
+returning a 1- or 2-character uppercase ASCII string:
+
+| input | output |
+|---|---|
+| `A`..`Z` | unchanged, uppercased |
+| `a`..`z` | uppercased |
+| `Ä` / `ä` | `AE` |
+| `Ö` / `ö` | `OE` |
+| `Ü` / `ü` | `UE` |
+| `ẞ` / `ß` | `SS` |
+
+Called from `dispatchAction('type', ch)` and from the paste loop.
+The on-screen keyboard doesn't need it — its keys are already
+ASCII. Module is pure-data / pure-function; 10 unit tests in
+`tests/letter-expand.test.js`.
+
+### Module manifest
+
+```
+assets/letter-expand.js    pure expansion table + function (testable)
+assets/input-dedupe.js     retained but only used by the keydown handler
+assets/engine.js           setupKeyboard / buildOnScreenKeyboard
+                           + keydown gates + paste listener + pointerdown
+```
+
+`assets/boot.js` and `assets/letter-expand.js` are in `APP_SHELL` in
+`sw.js`. Bump the SW VERSION when changing any of these.
+
+### What this fixed at the same time
+
+- **`.type-in` flicker** (`opacity: 0` keyframe) — scale-only now.
+- **Mobile clue → active-cell scroll** — `activateWord(_, true)` under
+  `(max-width: 900px)` scrolls the cell into view, not the clue.
+- **Cmd/Ctrl/Alt letter dispatch** — modifier gate.
+- **Settings-overlay letter leakage** — modal-open gate.
+- **Editable-input letter leakage** — editable-target gate.
+- **Paste double-letter loss** — direct `typeLetter` from paste loop.
+- **`<input>` in tab order** — `tabindex="-1"` + `aria-hidden`.
+- **Umlaut never matches** — `expandLetter()` at both type paths.
+
+### What still exists (intentional)
+
+`assets/input-dedupe.js` and its 11 tests are preserved. The
+predicate is still wrapped around `dispatchAction` from the keydown
+path, in case some exotic BT-keyboard ever does the old `keydown +
+beforeinput` double-fire trick we used to see on the Samsung S24
+Ultra. The paste path and the on-screen keyboard path bypass
+dispatchAction entirely (direct `typeLetter` calls) so the dedupe
+can never eat their consecutive same-letter sequences.
 
 ---
 
@@ -328,7 +483,7 @@ The frontend fetches it on init and shows "Ver. N" in the masthead eyebrow. `ver
 ## PWA / offline
 
 - `manifest.webmanifest`: `display: standalone`, theme/background colors, icons (svg + png).
-- `sw.js` (cache version `xword-v10`, bump when shipping app-shell changes — especially CSS, since stale-while-revalidate will otherwise serve last-cached styles.css for one more reload):
+- `sw.js` (cache version `xword-v11`, bump when shipping app-shell changes — especially CSS, since stale-while-revalidate will otherwise serve last-cached styles.css for one more reload):
   - App shell → stale-while-revalidate (`SHELL_CACHE`)
   - Puzzle JSONs → network-first, cache fallback (`PUZZLE_CACHE`)
   - Google Fonts → cache-first opaque (`FONTS_CACHE`)
@@ -774,7 +929,9 @@ Tests live in three groups:
 - `tests/puzzles.test.js` — puzzle-data integrity (71 tests, no external deps): manifest ↔ filesystem consistency, per-puzzle shape (required fields, answer charset, grid bounds, duplicate-answer-within-one-puzzle check), clue-quality scans (answer-substring-in-clue, mixed German-quote pattern, min clue length), cross-puzzle reuse soft-cap (max 2 puzzles per answer), and stats.json freshness against the manifest. Caught real bugs on first run: `EICHE` clue contained "Eicheln" (Buche/BUCHE the same), `BAROCK` appeared in 3 puzzles (cap is 2).
 - `tests/share-pages.test.js` — per-puzzle share-page template (9 tests): imports `pageFor()` from `scripts/generate-share-pages.mjs` and renders a synthetic puzzle, asserts every OG / Twitter / canonical / `<meta http-equiv=refresh>` / inline-JS-redirect field is correct and the embedded Schema.org `Game` JSON-LD carries the localised theme + difficulty label. Also pins the German-typographic-quote handling in `og:image:alt`.
 
-Total: 193 tests. Run all: `npm test`. Run only one suite: `node --test tests/server/session.test.js`.
+- `tests/letter-expand.test.js` — umlaut expansion (10 tests, no deps): ASCII passthrough, lowercase upper-casing, the Ä/Ö/Ü/ß → AE/OE/UE/SS contract pinned both ways, and the expansion-table key set frozen so anything ever added (e.g., Œ) lights up the test.
+
+Total: 203 tests. Run all: `npm test`. Run only one suite: `node --test tests/server/session.test.js`.
 
 ---
 

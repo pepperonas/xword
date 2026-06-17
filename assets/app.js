@@ -48,6 +48,7 @@
     grid: document.getElementById('grid'),
     boardMeta: document.getElementById('boardMeta'),
     hiddenInput: document.getElementById('hiddenInput'),
+    oskbd: document.getElementById('oskbd'),
     currentBadge: document.getElementById('currentBadge'),
     currentText: document.getElementById('currentText'),
     btnCheck: document.getElementById('btnCheck'),

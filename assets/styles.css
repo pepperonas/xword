@@ -2597,10 +2597,158 @@ body.scroll-locked {
   100% { opacity: 1; transform: scale(1)     translateY(0); }
 }
 
+/* ============ ON-SCREEN KEYBOARD ============
+   Custom QWERTZ keyboard rendered on (pointer: coarse) devices. Replaces
+   the iOS/Android virtual keyboard entirely. See assets/engine.js for the
+   dispatch path; key markup is generated at game-init time so the same DOM
+   container is reused across puzzles.
+
+   Why a custom keyboard at all (research notes, 2026-06-17): mobile virtual
+   keyboards on the web are a documented minefield — autocorrect mangles
+   first-two-letters via `autocapitalize`, iOS PWAs sometimes refuse to
+   open the keyboard, predictive bars insert whole words, Samsung S24
+   double-fires Backspace, fonts <16px trigger involuntary zoom. The
+   industry standard for word puzzles (NYT Wordle/Crossword/Connections,
+   LA Times, Apple News) is a DOM-rendered keyboard with delegated
+   pointerdown handlers + a parallel document.keydown for hardware
+   keyboards. This is that implementation.
+
+   Hidden on (hover: hover) and (pointer: fine) — desktop uses hardware
+   keyboard only. iPad in portrait keeps the on-screen keyboard even with
+   an attached BT keyboard (primary pointer is still coarse). Both input
+   paths flow through engine.js typeLetter/deleteLetter — single source
+   of truth. */
+
+.oskbd {
+  display: none;            /* default off — enabled by the coarse-pointer media query below */
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;              /* above page content, below overlays (overlays use z >= 100) */
+  padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px));
+  background: var(--md-sys-color-surface-container);
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.12);
+  user-select: none;
+  -webkit-user-select: none;
+  /* The keyboard is purely a tap target; suppress the browser's tap-flash
+     + double-tap-zoom heuristic so presses feel instant. */
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.oskbd-row {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+.oskbd-row:last-child { margin-bottom: 0; }
+
+.oskbd-key {
+  flex: 1 1 0;
+  min-width: 0;             /* allow keys to shrink below content size on narrow screens */
+  max-width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--md-shape-sm);
+  background: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
+  font-family: var(--md-font-body);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  position: relative;
+  transition: transform var(--xd-dur-fast) var(--ease-flat),
+              background-color var(--xd-dur-fast) var(--ease-flat);
+  /* M3 state-layer hook: a transparent ::before that goes opaque on press. */
+}
+.oskbd-key::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--md-sys-color-on-surface);
+  opacity: 0;
+  transition: opacity var(--xd-dur-fast) var(--ease-flat);
+  pointer-events: none;
+}
+.oskbd-key.pressed,
+.oskbd-key:active {
+  transform: scale(0.94);
+  background: var(--md-sys-color-surface-container-highest);
+}
+.oskbd-key.pressed::before,
+.oskbd-key:active::before {
+  opacity: 0.12;
+}
+
+/* Backspace key — wider, error-tinted, icon glyph. */
+.oskbd-key.oskbd-action {
+  flex: 1.6 1 0;
+  max-width: 72px;
+  background: var(--md-sys-color-error-container);
+  color: var(--md-sys-color-on-error-container);
+  font-size: 20px;
+}
+.oskbd-key.oskbd-action.pressed,
+.oskbd-key.oskbd-action:active {
+  background: var(--md-sys-color-error);
+  color: var(--md-sys-color-on-error);
+}
+
+/* Disabled state — visually muted, no press feedback. Used when no word
+   is active so the user knows the keyboard isn't going to do anything. */
+.oskbd-key[aria-disabled="true"] {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* Show only on coarse-pointer devices (touchscreens). Desktop / mouse
+   users never see the keyboard — they have a hardware keyboard already
+   and the on-screen one would just steal vertical real estate. */
+@media (pointer: coarse) {
+  .oskbd { display: block; }
+
+  /* Make room for the keyboard at the bottom of the page. The grid +
+     clue area sit inside #view-game which scrolls with the body; the
+     extra padding keeps the footer visible above the keyboard when the
+     user scrolls to the bottom. ~210px = 3 rows × ~44px + paddings +
+     safe area. Set as a CSS var so engine.js can override after measure. */
+  body { --oskbd-h: 210px; }
+  #view-game.active { padding-bottom: var(--oskbd-h); }
+
+  /* When scroll-into-view targets a cell, account for the keyboard so
+     the cell doesn't land BEHIND it. scroll-margin-bottom shifts the
+     "ideal centred position" up by the keyboard height. */
+  .cell { scroll-margin-bottom: calc(var(--oskbd-h) + 24px); }
+}
+
+/* Three-key-rows on smaller phones: shrink the keys a touch so 11-key
+   rows fit without horizontal scroll on a 320px viewport (iPhone SE). */
+@media (max-width: 360px) {
+  .oskbd-key {
+    height: 40px;
+    font-size: 16px;
+    max-width: 36px;
+  }
+  .oskbd-key.oskbd-action { max-width: 60px; font-size: 18px; }
+  body { --oskbd-h: 192px; }
+}
+
+/* Reduced motion: keep the press scale but lose the duration. */
+@media (prefers-reduced-motion: reduce) {
+  .oskbd-key { transition: none !important; }
+  .oskbd-key::before { transition: none !important; }
+}
+
 /* ============ PRINT ============ */
 @media print {
   body { background: #fff !important; padding: 0; }
-  .confetti, .overlay, .toast-container { display: none !important; }
+  .confetti, .overlay, .toast-container, .oskbd { display: none !important; }
   .user-bar, .back-bar, .stats-bar, .progress-track,
   .current-clue, .controls, .toggle-row, .clues-tabs,
   .footer, #view-selector, #view-admin, #view-profile,

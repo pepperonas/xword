@@ -207,7 +207,7 @@
           <span class="board-meta" id="boardMeta">—</span>
         </div>
         <div class="grid" id="grid"></div>
-        <input type="text" class="hidden-input" id="hiddenInput" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" />
+        <input type="text" class="hidden-input" id="hiddenInput" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" tabindex="-1" aria-hidden="true" />
 
         <div class="current-clue">
           <span class="badge" id="currentBadge">—</span>
@@ -251,6 +251,13 @@
         </div>
       </section>
     </main>
+
+    <!-- On-screen keyboard. Rendered only on (pointer: coarse) devices.
+         Real <button> elements per key so VoiceOver / TalkBack speak them
+         naturally; dispatch happens via a single delegated pointerdown
+         on the container. Built once per game view, populated by app.js
+         when the game starts. -->
+    <div class="oskbd" id="oskbd" role="group" aria-label="Bildschirmtastatur"></div>
 
     <footer class="footer">© 2026 · <a href="/impressum.html">Impressum</a> · <a href="/datenschutz.html">Datenschutz</a> · <a href="https://github.com/pepperonas/xword" target="_blank" rel="noopener">GitHub</a></footer>
   </section>
@@ -377,6 +384,7 @@
 
 <script src="assets/layout.js"></script>
 <script src="assets/input-dedupe.js"></script>
+<script src="assets/letter-expand.js"></script>
 <script src="assets/qrcode.js"></script>
 <script src="assets/dialog.js"></script>
 <script src="assets/engine.js"></script>
