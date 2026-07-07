@@ -9,7 +9,7 @@
  *
  * Bump the version when shipping app-shell changes so old caches are purged.
  */
-const VERSION = 'xword-v11';
+const VERSION = 'xword-v12';
 const SHELL_CACHE = VERSION + '-shell';
 const PUZZLE_CACHE = VERSION + '-puzzles';
 const FONTS_CACHE = VERSION + '-fonts';
