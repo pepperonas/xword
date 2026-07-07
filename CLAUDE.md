@@ -483,7 +483,7 @@ The frontend fetches it on init and shows "Ver. N" in the masthead eyebrow. `ver
 ## PWA / offline
 
 - `manifest.webmanifest`: `display: standalone`, theme/background colors, icons (svg + png).
-- `sw.js` (cache version `xword-v11`, bump when shipping app-shell changes — especially CSS, since stale-while-revalidate will otherwise serve last-cached styles.css for one more reload):
+- `sw.js` (cache version `xword-v12`, bump when shipping app-shell changes — especially CSS, since stale-while-revalidate will otherwise serve last-cached styles.css for one more reload):
   - App shell → stale-while-revalidate (`SHELL_CACHE`)
   - Puzzle JSONs → network-first, cache fallback (`PUZZLE_CACHE`)
   - Google Fonts → cache-first opaque (`FONTS_CACHE`)
